@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace Book_Cave.Data.EntityModels
 {
     public class User
@@ -19,9 +22,9 @@ namespace Book_Cave.Data.EntityModels
         public List<int> ShippingAddressesId { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime LastLoggedInDate { get; set; }
-        public bool BookSuggestionsEmai { get; set; }
+        public bool BookSuggestionsEmail { get; set; }
         public bool ActiveStatus { get; set; }
-        public int UserGourp { get; set; }
+        public int UserGroup { get; set; }
         public int TotalReports { get; set; }
         public int TotalBans { get; set; }
     }
