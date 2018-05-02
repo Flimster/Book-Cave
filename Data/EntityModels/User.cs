@@ -12,6 +12,19 @@ namespace Book_Cave.Data.EntityModels
         public int FavoriteBookId { get; set; }
         public int FavoriteAuthorId { get; set; }
         public string Password { get; set; }
+<<<<<<< HEAD
+        // public List<int> OrderHistoryId { get; set; }
+        // public List<int> OwnedBooksId { get; set; }
+        // public List<int> ReadBooksId { get; set; }
+        // public List<int> WishListId { get; set; }
+        // public List<int> ReviewsId { get; set; }
+        // public List<int> PaymentsId { get; set; }
+        // public List<int> BillingAddressesId { get; set; }
+        // public List<int> ShippingAddressesId { get; set; }
+        // public DateTime RegistrationDate { get; set; }
+        // public DateTime LastLoggedInDate { get; set; }
+        public bool BookSuggestionsEmai { get; set; }
+=======
         public List<int> OrderHistoryId { get; set; }
         public List<int> OwnedBooksId { get; set; }
         public List<int> ReadBooksId { get; set; }
@@ -23,6 +36,7 @@ namespace Book_Cave.Data.EntityModels
         public DateTime RegistrationDate { get; set; }
         public DateTime LastLoggedInDate { get; set; }
         public bool BookSuggestionsEmail { get; set; }
+>>>>>>> 60f00a4e01b2855816861a342e0845ebc20f948c
         public bool ActiveStatus { get; set; }
         public int UserGroup { get; set; }
         public int TotalReports { get; set; }
