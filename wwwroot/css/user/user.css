@@ -1,0 +1,26 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+ul{
+	list-style-type: none;
+}
+
+#panel{
+	width: 300px;
+	border-style: solid;
+	border-color: black;
+}
+
+.panel-options{
+	/* border-style: solid;
+	border-color: black;
+	border-width: 2px; */
+	font-size: 30px;
+}
+
+.panel-options:hover{
+	color: red;
+	font-size: 34px;
+}
