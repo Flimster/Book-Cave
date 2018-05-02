@@ -9,16 +9,16 @@ namespace Book_Cave.Data.EntityModels
         public int FavoriteBookId { get; set; }
         public int FavoriteAuthorId { get; set; }
         public string Password { get; set; }
-        public List<int> OrderHistoryId { get; set; }
-        public List<int> OwnedBooksId { get; set; }
-        public List<int> ReadBooksId { get; set; }
-        public List<int> WishListId { get; set; }
-        public List<int> ReviewsId { get; set; }
-        public List<int> PaymentsId { get; set; }
-        public List<int> BillingAddressesId { get; set; }
-        public List<int> ShippingAddressesId { get; set; }
-        public DateTime RegistrationDate { get; set; }
-        public DateTime LastLoggedInDate { get; set; }
+        // public List<int> OrderHistoryId { get; set; }
+        // public List<int> OwnedBooksId { get; set; }
+        // public List<int> ReadBooksId { get; set; }
+        // public List<int> WishListId { get; set; }
+        // public List<int> ReviewsId { get; set; }
+        // public List<int> PaymentsId { get; set; }
+        // public List<int> BillingAddressesId { get; set; }
+        // public List<int> ShippingAddressesId { get; set; }
+        // public DateTime RegistrationDate { get; set; }
+        // public DateTime LastLoggedInDate { get; set; }
         public bool BookSuggestionsEmai { get; set; }
         public bool ActiveStatus { get; set; }
         public int UserGourp { get; set; }
