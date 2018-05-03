@@ -13,7 +13,11 @@ namespace BookCave.Controllers
     {
         public IActionResult Index()
         {
+<<<<<<< HEAD
+            return View();
+=======
             return View(/*FakeDatabase.Books*/);
+>>>>>>> 882bbabbc6a3599016537213b0a81eef237c40e1
         }
 
         public IActionResult About()
