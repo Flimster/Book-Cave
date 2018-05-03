@@ -2,6 +2,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Book_Cave.Models;
 using Book_Cave.Models.ViewModels;
+using Book_Cave.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,8 @@ namespace Book_Cave.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            //private AccountService _AccountService;
+
             if(!ModelState.IsValid)
             {
                 return View();
@@ -42,6 +45,9 @@ namespace Book_Cave.Controllers
             if(result.Succeeded)
             {
                 //User successfully registered
+                //First create the user account and save it to db
+                
+                //_AccountService.InitializeUser(user);
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.Name}"));
                 await _signInManager.SignInAsync(user, false);
 
