@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Book_Cave.Models;
 
-namespace Book_Cave
+namespace BookCave
 {
     public class Startup
     {

@@ -1,0 +1,41 @@
+
+
+
+ALTER TABLE [BookAuthor] DROP CONSTRAINT FK_Author_BookId;
+ALTER TABLE [BookAuthor] DROP CONSTRAINT FK_Author_AuthorId;
+ALTER TABLE [BookLanguage] DROP CONSTRAINT FK_BookLanguage_BookId;
+ALTER TABLE [BookLanguage] DROP CONSTRAINT FK_BookLanguage_LanguageId;
+ALTER TABLE [BookGenre] DROP CONSTRAINT FK_BookGenre_BookId;
+ALTER TABLE [BookGenre] DROP CONSTRAINT FK_BookGenre_GenreId;
+ALTER TABLE [BookReview] DROP CONSTRAINT FK_BookReview_ReviewId;
+ALTER TABLE [BookReview] DROP CONSTRAINT FK_BookReview_bookId;
+ALTER TABLE [Review] DROP CONSTRAINT FK_Review_BookId;
+ALTER TABLE [Review] DROP CONSTRAINT FK_Review_UserId;
+ALTER TABLE [Feedback] DROP CONSTRAINT FK_Feedback_OrderId;
+ALTER TABLE [Feedback] DROP CONSTRAINT FK_Feedback_UserId;
+ALTER TABLE [OrderBooklist] DROP CONSTRAINT FK_OrderBooklist_OrdersId;
+ALTER TABLE [OrderBooklist] DROP CONSTRAINT FK_OrderBooklist_BookId;
+ALTER TABLE [OwnedBook] DROP CONSTRAINT FK_OwnedBook_BookId;
+ALTER TABLE [OwnedBook] DROP CONSTRAINT FK_OwnedBook_UserId;
+ALTER TABLE [UserBilling] DROP CONSTRAINT FK_Billing_OrderId;
+ALTER TABLE [UserBilling] DROP CONSTRAINT FK_Billing_UserId;
+ALTER TABLE [Orders] DROP CONSTRAINT FK_Orders_ShippingAdderssId;
+ALTER TABLE [Orders] DROP CONSTRAINT FK_Orders_BillingAddressId;
+ALTER TABLE [UserCard] DROP CONSTRAINT FK_UserCard_cardDetailsId;
+ALTER TABLE [UserCard] DROP CONSTRAINT FK_UserCard_UserId;
+ALTER TABLE [UserPayment] DROP CONSTRAINT FK_UserPayment_PaymentId;
+ALTER TABLE [UserPayment] DROP CONSTRAINT FK_UserPayment_UserId;
+ALTER TABLE [UserReadBook] DROP CONSTRAINT FK_UserReadBook_BookId;
+ALTER TABLE [UserReadBook] DROP CONSTRAINT FK_UserReadBook_UserId;
+ALTER TABLE [UserReview] DROP CONSTRAINT FK_UserReview_ReviewId;
+ALTER TABLE [UserReview] DROP CONSTRAINT FK_UserReview_UserId;
+ALTER TABLE [UserShipping] DROP CONSTRAINT FK_UserShipping_ShippingId;
+ALTER TABLE [UserShipping] DROP CONSTRAINT FK_UserShipping_UserId;
+ALTER TABLE [Wishlist] DROP CONSTRAINT FK_Wishlist_BookId;
+ALTER TABLE [Wishlist] DROP CONSTRAINT FK_Wishlist_UserId;
+ALTER TABLE [Book] DROP CONSTRAINT FK_Book_Publisher_Id;
+ALTER TABLE [Book] DROP CONSTRAINT FK_Book_FormatId;
+ALTER TABLE [Address] DROP CONSTRAINT FK_Address_CountryId;
+ALTER TABLE [User] DROP CONSTRAINT FK_UserAccount_FavoriteBookId;
+ALTER TABLE [User] DROP CONSTRAINT FK_UserAccount_FavoriteAuthorId;
+ALTER TABLE [Author] DROP CONSTRAINT PK_Author_Id;
