@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Book_cave.Data
+namespace BookCave.Data
 {
     public class DataContext : DbContext
     {
