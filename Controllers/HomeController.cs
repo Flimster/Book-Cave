@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
-using BookList;
+//using BookList;
 
 namespace BookCave.Controllers
 {
@@ -13,7 +13,7 @@ namespace BookCave.Controllers
     {
         public IActionResult Index()
         {
-            return View(FakeDatabase.Books);
+            return View(/*FakeDatabase.Books*/);
         }
 
         public IActionResult About()
