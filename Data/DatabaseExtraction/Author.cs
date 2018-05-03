@@ -1,4 +1,4 @@
-namespace Book_Cave.Data
+namespace Book_Cave.Data.DatabaseExtraction
 {
     public class Author
     {
