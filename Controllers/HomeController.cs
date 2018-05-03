@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using BookCave.Models;
 
 namespace BookCave.Controllers
@@ -12,7 +13,11 @@ namespace BookCave.Controllers
     {
         public IActionResult Index()
         {
+<<<<<<< HEAD
             return View();
+=======
+            return View(/*FakeDatabase.Books*/);
+>>>>>>> 882bbabbc6a3599016537213b0a81eef237c40e1
         }
 
         public IActionResult About()
