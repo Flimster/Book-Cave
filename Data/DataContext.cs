@@ -4,32 +4,32 @@ namespace BookCave.Data
 {
     public class DataContext : DbContext
     {
-        public DbSet<Address> Addresses {get; set;}
-        public DbSet<Author> Authors {get; set;}
-        public DbSet<Book> Books {get; set;}
-        public DbSet<BookAuthor> BookAuthors {get; set;}
-        public DbSet<BookGenre> BookGenres {get; set;}
-        public DbSet<BookLanguage> BookLanguages {get; set;}
-        public DbSet<BookReview> BookReviews {get; set;}
-        public DbSet<CardDetails> CardDetails {get; set;}
-        public DbSet<Country> Countries {get; set;}
-        public DbSet<Feedback> Feedbacks {get; set;}
-        public DbSet<Format> Formats {get; set;}
-        public DbSet<Genre> Genres {get; set;}
-        public DbSet<Language> Languages {get; set;}
-        public DbSet<OrderBooklist> OrderBooklists {get; set;}
+        public DbSet<Address> Address {get; set;}
+       /* public DbSet<Author> Author {get; set;}
+        public DbSet<Book> Book {get; set;}
+        public DbSet<BookAuthor> BookAuthor {get; set;}
+        public DbSet<BookGenre> BookGenre {get; set;}
+        public DbSet<BookLanguage> BookLanguage {get; set;}
+        public DbSet<BookReview> BookReview {get; set;}
+        public DbSet<CardDetails> CardDetails {get; set;}*/
+        public DbSet<Country> Country {get; set;}
+       /* public DbSet<Feedback> Feedback {get; set;}
+        public DbSet<Format> Format {get; set;}
+        public DbSet<Genre> Genre {get; set;}
+        public DbSet<Language> Language {get; set;}
+        public DbSet<OrderBooklist> OrderBooklist {get; set;}
         public DbSet<Orders> Orders {get; set;}
-        public DbSet<OwnedBook> OwnedBooks {get; set;}
-        public DbSet<Publisher> Publishers {get; set;}
-        public DbSet<Review> Reviews {get; set;}
-        public DbSet<UserAccount> UserAccounts {get; set;}
-        public DbSet<UserBilling> UserBillings {get; set;}
-        public DbSet<UserCard> UserCards {get; set;}
-        public DbSet<UserPayment> UserPayments {get; set;}
-        public DbSet<UserReadBook> UserReadBooks {get; set;}
-        public DbSet<UserReview> UserReviews {get; set;}
-        public DbSet<UserShipping> UserShippings {get; set;}
-        public DbSet<Wishlist> Wishlists {get; set;}
+        public DbSet<OwnedBook> OwnedBook {get; set;}
+        public DbSet<Publisher> Publisher {get; set;}
+        public DbSet<Review> Review {get; set;}
+        public DbSet<UserAccount> UserAccount {get; set;}
+        public DbSet<UserBilling> UserBilling {get; set;}
+        public DbSet<UserCard> UserCard {get; set;}
+        public DbSet<UserPayment> UserPayment {get; set;}
+        public DbSet<UserReadBook> UserReadBook {get; set;}
+        public DbSet<UserReview> UserReview {get; set;}
+        public DbSet<UserShipping> UserShipping {get; set;}
+        public DbSet<Wishlist> Wishlist {get; set;}*/
 
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
