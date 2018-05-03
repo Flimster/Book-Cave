@@ -4,15 +4,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Book_Cave.Models;
+using BookCave.Models;
+using BookList;
 
-namespace Book_Cave.Controllers
+namespace BookCave.Controllers
 {
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            return View();
+            return View(FakeDatabase.Books);
         }
 
         public IActionResult About()

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Book_Cave.Data.EntityModels
+namespace BookCave.Data.EntityModels
 {
     public class Order
     {

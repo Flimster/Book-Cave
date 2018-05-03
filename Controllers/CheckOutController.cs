@@ -1,4 +1,4 @@
-namespace Book_Cave.Controllers
+namespace BookCave.Controllers
 {
     public class CheckOutController
     {
