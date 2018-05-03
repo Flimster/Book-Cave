@@ -2,6 +2,8 @@
     ViewData["Title"] = "User Account";
 }
 
+@model BookCave.Models.ViewModels.UserPrivateViewModel
+
 <div id="main-box" class="container">
 	<div  id="panel-box" class="panel panel-default">
 		<div class="panel-heading panel-primary panel-font-heading">Your account</div>
@@ -14,68 +16,85 @@
 	</div>
 	<div id="user-profile" class="user-information-box">
 		<div id="user-image">
-			<img src="~/images/Feels_good_manDELETE.jpg" alt="No javascript man">
+			<img src="@Model.Image" alt="ImageNotFound">
 		</div>
 		<div id="image-seperator"></div>
 		<div class="row">
 			<div class="profile-info col-xs-1">
 				Name
 				<br>
-				Harry Potter	
+				@Model.Name	
 			</div>
 			<div class="profile-info col-xs-1">
 				Email
 				<br>
-				harryP&#64gmail.com
+				@Model.Email
 			</div>
 		</div>
 		<div class="row">
 			<div class="profile-info col-xs-1">
-				Favourite Book
-				<br>
-				Harry and the Chamber of Secrets
+				Favourite Book<br>
+				@Model.FavouriteBook
 				</div>
 			<div class="profile-info col-xs-1">
-				Favourite Author
-				<br>
-				Harry Potter
+				Favourite Author<br>
+				@Model.FavouriteAuthor
 			</div>
 		</div>
 	</div>
 
 	<div id="user-orders" class="user-information-box is-hidden">
-		<!-- This needs a foreach loop when implementing the models -->
-		<div class="row order-border">
-			<div class="row">
-				<div class="col-lg-3"><strong>Order Placed</strong></div>
-				<div class="col-lg-3"><strong>Order ID</strong></div>
-				<div class="col-lg-3"><strong>Order Status</strong></div>
-				<div class="col-lg-3"><strong>Price</strong></div>
+		@foreach(var order in Model.PastOrders)
+		{
+			<div class="row order-border">
+				<div class="row">
+					<div class="col-lg-3"><strong>Order Placed</strong></div>
+					<div class="col-lg-3"><strong>Order ID</strong></div>
+					<div class="col-lg-3"><strong>Order Status</strong></div>
+					<div class="col-lg-3"><strong>Price</strong></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">@order.OrderPlaced</div>
+					<div class="col-lg-3">@order.Id</div>
+					<div class="col-lg-3">@order.OrderStatus</div>
+					<div class="col-lg-3">@order.TotalPrice</div>
+				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-3">21.8.2018</div>
-				<div class="col-lg-3">14321</div>
-				<div class="col-lg-3">Shipped</div>
-				<div class="col-lg-3">$ 99.99</div>
+
+			<div class="row order-border">
+				<div>
+						@foreach(var book in order.BookList)
+						{
+							<p>@book.Title</p>
+							<p>@book.Author</p>
+							<p>@book.Genre</p>
+							<p>@book.Image</p>
+						}
+				</div>
 			</div>
-		</div>
-		<div class="row order-border">
-			<div>
-				<img src="~/images/Feels_good_manDELETE.jpg" alt="Noooo" class="order-image">
-			</div>
-			<div>
-				<img src="~/images/Feels_good_manDELETE.jpg" alt="Noooo" class="order-image">				
-			</div>
-		</div>
-		<!-- Loop ends here -->
+		}
 	</div>
 
 	<div id="user-wish-list" class="user-information-box is-hidden">
-		This is his wish list
+		@foreach(var book in Model.WishList)
+		{
+			<hr>
+			<p>@book.Title</p>
+			<p>@book.Author</p>
+			<p>@book.Genre</p>
+			<p>$@book.Price</p>
+		}
 	</div>
 
 	<div id="user-bookshelf" class="user-information-box is-hidden">
-		This is his bookshelf
+		@foreach(var book in Model.WishList)
+		{
+			<hr>
+			<p>@book.Title</p>
+			<p>@book.Author</p>
+			<p>@book.Genre</p>
+			<p>$@book.Price</p>
+		}
 	</div>
 
 	<div id="user-settings" class="user-information-box is-hidden">
