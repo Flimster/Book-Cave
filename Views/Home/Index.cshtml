@@ -1,17 +1,24 @@
-﻿@model List<BookCave.Models.ViewModel.Book>
+﻿@model List<BookCave.Models.ViewModels.BookViewModel>
+
+<head>
+  <link rel="stylesheet" href="~/css/Home/index.css">
+</head>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-
-<ul>
-  @foreach(var book in Model)
-  {
-    <li>
-      Title: @book.Title, 
-      Author: @book.Author, 
-      Genre: @book.Genre
-    </li>
-  }
-</ul>
+<div class="row1 col-sm-10 col-sm-offset-1">
+<div class="col-sm-1"></div>
+    @foreach(var book in Model)
+    {
+      <div class="book-item col-sm-2">
+        <div class="item-img">
+            <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><img src=@book.Image alt=@book.Title></a>
+        </div>
+          <p class="title">@book.Title</p>
+          @book.Author <br/> 
+          @book.Genre
+      </div>
+    }
+</div>
