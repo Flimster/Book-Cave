@@ -93,7 +93,7 @@ CREATE TABLE [Book]
 )
 
 
-CREATE TABLE [dbo].[User]
+CREATE TABLE [dbo].[UserAccount]
 (
 	[Id] INT NOT NULL IDENTITY, 
     [Image] TEXT NULL, 
@@ -115,6 +115,22 @@ CREATE TABLE [dbo].[User]
 	CONSTRAINT FK_UserAccount_FavoriteAuthorId FOREIGN KEY (FavoriteAuthorId) REFERENCES Author(Id),
 )
 
+CREATE TABLE [Review]
+(
+	[Id] INT NOT NULL IDENTITY, 
+    [BookId] INT NOT NULL, 
+    [UserId] INT NOT NULL, 
+    [Text] TEXT NULL, 
+    [Rating] FLOAT NOT NULL,
+    [Date] DATETIME NOT NULL,
+    [PositiveScore] INT NOT NULL DEFAULT 0, 
+    [NegativeScore] INT NOT NULL DEFAULT 0 
+    
+	CONSTRAINT PK_Review_Id PRIMARY KEY (Id),
+	CONSTRAINT FK_Review_UserId FOREIGN KEY (UserId) REFERENCES [UserAccount](Id),
+	CONSTRAINT FK_Review_BookId FOREIGN KEY (BookId) REFERENCES Book(Id)
+)
+
 CREATE TABLE [dbo].[Wishlist]
 (
 	[Id] INT NOT NULL IDENTITY, 
@@ -123,7 +139,7 @@ CREATE TABLE [dbo].[Wishlist]
 
 	CONSTRAINT PK_Wishlist_Id PRIMARY KEY (Id),
 	CONSTRAINT FK_Wishlist_BookId FOREIGN KEY ([BooksId]) REFERENCES Book(Id),
-	CONSTRAINT FK_Wishlist_UserId FOREIGN KEY ([UserId]) REFERENCES [User](Id)
+	CONSTRAINT FK_Wishlist_UserId FOREIGN KEY ([UserId]) REFERENCES [UserAccount](Id)
 )
 
 CREATE TABLE [dbo].[UserShipping]
@@ -133,7 +149,7 @@ CREATE TABLE [dbo].[UserShipping]
     [ShippingId] INT NOT NULL
 
 	CONSTRAINT PK_UserShipping_Id PRIMARY KEY (Id),
-	CONSTRAINT FK_UserShipping_UserId FOREIGN KEY ([UserId]) REFERENCES [User](Id),
+	CONSTRAINT FK_UserShipping_UserId FOREIGN KEY ([UserId]) REFERENCES [UserAccount](Id),
 	CONSTRAINT FK_UserShipping_ShippingId FOREIGN KEY ([ShippingId]) REFERENCES [Address](Id)
 )
 
@@ -144,7 +160,7 @@ CREATE TABLE [dbo].[UserReview]
     [ReviewId] INT NOT NULL
 
 	CONSTRAINT PK_UserReview_Id PRIMARY KEY (Id),
-	CONSTRAINT FK_UserReview_UserId FOREIGN KEY ([UserId]) REFERENCES [User](Id),
+	CONSTRAINT FK_UserReview_UserId FOREIGN KEY ([UserId]) REFERENCES [UserAccount](Id),
 	CONSTRAINT FK_UserReview_ReviewId FOREIGN KEY ([ReviewId]) REFERENCES Review(Id)
 )
 
@@ -155,7 +171,7 @@ CREATE TABLE [dbo].[UserReadBook]
     [BookId] INT NOT NULL
 
 	CONSTRAINT PK_UserReadBook_Id PRIMARY KEY (Id),
-	CONSTRAINT FK_UserReadBook_UserId FOREIGN KEY ([UserId]) REFERENCES [User](Id),
+	CONSTRAINT FK_UserReadBook_UserId FOREIGN KEY ([UserId]) REFERENCES [UserAccount](Id),
 	CONSTRAINT FK_UserReadBook_BookId FOREIGN KEY ([BookId]) REFERENCES Book(Id)
 )
 
@@ -166,7 +182,7 @@ CREATE TABLE [dbo].[UserPayment]
     [CardId] INT NOT NULL
 
 	CONSTRAINT PK_UserPayment_Id PRIMARY KEY (Id),
-	CONSTRAINT FK_UserPayment_UserId FOREIGN KEY ([UserId]) REFERENCES [User](Id),
+	CONSTRAINT FK_UserPayment_UserId FOREIGN KEY ([UserId]) REFERENCES [UserAccount](Id),
 	CONSTRAINT FK_UserPayment_PaymentId FOREIGN KEY ([CardId]) REFERENCES CardDetails(Id)
 )
 
@@ -177,7 +193,7 @@ CREATE TABLE [dbo].[UserCard]
     [CardDetailsId] INT NOT NULL
 
 	CONSTRAINT PK_UserCard_Id PRIMARY KEY (Id),
-	CONSTRAINT FK_UserCard_UserId FOREIGN KEY (UserId) REFERENCES [User](Id),
+	CONSTRAINT FK_UserCard_UserId FOREIGN KEY (UserId) REFERENCES [UserAccount](Id),
 	CONSTRAINT FK_UserCard_cardDetailsId FOREIGN KEY (CardDetailsId) REFERENCES CardDetails(Id)
 )
 
@@ -205,7 +221,7 @@ CREATE TABLE [dbo].[UserBilling]
     [AddressId] INT NOT NULL,
 
 	CONSTRAINT PK_Billing_Id PRIMARY KEY (Id),
-	CONSTRAINT FK_Billing_UserId FOREIGN KEY (UserId) REFERENCES [User](Id),
+	CONSTRAINT FK_Billing_UserId FOREIGN KEY (UserId) REFERENCES [UserAccount](Id),
 	CONSTRAINT FK_Billing_OrderId FOREIGN KEY (AddressId) REFERENCES Orders(Id)
 )
 
@@ -216,7 +232,7 @@ CREATE TABLE [dbo].[OwnedBook]
     [BookId] INT NOT NULL,
 	
 	CONSTRAINT PK_OwnedBook_Id PRIMARY KEY (Id),
-	CONSTRAINT FK_OwnedBook_UserId FOREIGN KEY (UserId) REFERENCES [User](Id),
+	CONSTRAINT FK_OwnedBook_UserId FOREIGN KEY (UserId) REFERENCES [UserAccount](Id),
 	CONSTRAINT FK_OwnedBook_BookId FOREIGN KEY (BookId) REFERENCES Book(Id)
 )
 
@@ -243,25 +259,11 @@ CREATE TABLE [dbo].[Feedback]
     [Date] DATETIME NOT NULL,
 
 	CONSTRAINT PK_Feedback_Id PRIMARY KEY (Id),
-	CONSTRAINT FK_Feedback_UserId FOREIGN KEY (UserId) REFERENCES [User](Id),
+	CONSTRAINT FK_Feedback_UserId FOREIGN KEY (UserId) REFERENCES [UserAccount](Id),
 	CONSTRAINT FK_Feedback_OrderId FOREIGN KEY (OrderId) REFERENCES Orders(Id)
 )
 
-CREATE TABLE [Review]
-(
-	[Id] INT NOT NULL IDENTITY, 
-    [BookId] INT NOT NULL, 
-    [UserId] INT NOT NULL, 
-    [Text] TEXT NULL, 
-    [Rating] FLOAT NOT NULL,
-    [Date] DATETIME NOT NULL,
-    [PositiveScore] INT NOT NULL DEFAULT 0, 
-    [NegativeScore] INT NOT NULL DEFAULT 0 
-    
-	CONSTRAINT PK_Review_Id PRIMARY KEY (Id),
-	CONSTRAINT FK_Review_UserId FOREIGN KEY (UserId) REFERENCES [User](Id),
-	CONSTRAINT FK_Review_BookId FOREIGN KEY (BookId) REFERENCES Book(Id)
-)
+
 
 CREATE TABLE [BookReview]
 (

@@ -5,6 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BookCave.Models;
+<<<<<<< HEAD
+=======
+//using BookList;
+>>>>>>> sqlConnection
 
 namespace BookCave.Controllers
 {
@@ -12,8 +16,12 @@ namespace BookCave.Controllers
     {
         public IActionResult Index()
         {
+<<<<<<< HEAD
             var list = FakeDatabase.Books.Take(5).ToList();
             return View(list);
+=======
+            return View(/*FakeDatabase.Books*/);
+>>>>>>> sqlConnection
         }
 
         public IActionResult About()
