@@ -1,0 +1,60 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+#main-box {
+	position: relative;
+	display: inline-block;
+}
+
+#panel-box {
+	float: left;
+	width: 250px;
+}
+
+.panel-font-heading {
+	font-size: 24px;
+}
+
+.panel-content {
+	border-top-style: solid;
+	border-color: black;
+	font-size: 24px;
+}
+
+.panel-selected {
+	color: red;
+	background-color: grey;
+}
+
+.user-information-box {
+	border-style: solid;
+	border-color: black;
+	width: 800px;
+	height: 600px;
+	float: left;
+	margin-left: 3px;
+}
+
+#user-profile {}
+
+#user-orders {
+	display: none;
+}
+
+#user-wish-list {
+	display: none;
+}
+
+#user-bookshelf {
+	display: none;
+}
+
+#user-settings {
+	display: none;
+}
+
+#user-payment-shipping {
+	display: none;
+}
