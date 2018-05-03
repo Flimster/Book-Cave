@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Book_Cave.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()
