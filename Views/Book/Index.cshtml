@@ -1,5 +1,36 @@
 @model BookCave.Models.ViewModels.BookViewModel
 
+<head>
+  <link rel="stylesheet" href="~/css/Book/BookDetails.css">
+</head>
+
+<div class="book-item col-sm-10 col-sm-offset-1">
+  
+  <div class="book-img col-sm-3">
+    <img src=@Model.Image alt=@Model.Title>
+  </div>
+  
+  <div class="book-details col-sm-6">
+    <h3>@Model.Title</h3>
+    <p>Author: @Model.Author</p>
+    <p>Genre: @Model.Genre</p>
+  </div>
+  
+  <div class="book-checkout col-sm-3">
+    <h3>Check out</h3>
+    <button class="btn btn-primary">Add to cart</button>
+  </div>
+</div>
+
+<br/>
+
+<div class="book-description col-sm-10 col-sm-offset-1">
+  <h3>Description</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi magnam temporibus odio, sed dicta eaque dolore eveniet perferendis doloribus impedit saepe neque cumque quod eligendi tempora itaque beatae recusandae voluptatibus!</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, optio natus reprehenderit dolorum blanditiis temporibus autem culpa obcaecati quam esse dicta velit aliquid earum reiciendis eligendi iste veniam vero praesentium.</p>
+</div>
+
+<!--
 <div class="container">
   <div class="col-lg-offset-1">
     <h3>@Model.Title</h3>
@@ -17,4 +48,4 @@
     <img src=@Model.Image alt=Model.Title>
   </div>
   
-</div>
+</div> -->
