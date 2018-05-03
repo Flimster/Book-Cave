@@ -13,48 +13,73 @@
 	width: 250px;
 }
 
-.panel-font-heading {
-	font-size: 24px;
-}
-
-.panel-content {
-	border-top-style: solid;
-	border-color: black;
-	font-size: 24px;
-}
-
-.panel-selected {
-	color: red;
-	background-color: grey;
+.panel-selected{
+	color: rgb(67, 67, 129);
+	background-color:#d9edf7;
+	font-weight: bold;
+	font-size: 16px;
 }
 
 .user-information-box {
 	border-style: solid;
 	border-color: black;
+	border-width: 1px;
 	width: 800px;
 	height: 600px;
 	float: left;
-	margin-left: 3px;
+	margin-left: 25px;
 }
 
 #user-profile {}
 
+#user-image img {
+	border-style: solid;
+	border-color: red;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 200px;
+	max-height: 200px; 
+	border-radius: 30px;
+}
+
+#image-seperator {
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
+}
+
+.profile-info{
+	width: 400px;
+	height: 200px;
+	display: inline-block;
+	margin-left: 10px;
+}
+
 #user-orders {
-	display: none;
+	padding: 100px 75px 100px 75px;
 }
 
-#user-wish-list {
-	display: none;
+.order-border{
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
 }
 
-#user-bookshelf {
-	display: none;
+.order-image{
+	margin: 15px 0px 15px 0px;
+	height: 160px;
+	width: 160px;
 }
 
-#user-settings {
-	display: none;
-}
+#user-wish-list {}
 
-#user-payment-shipping {
+#user-bookshelf {}
+
+#user-settings {}
+
+#user-payment-shipping {}
+
+.is-hidden {
 	display: none;
 }

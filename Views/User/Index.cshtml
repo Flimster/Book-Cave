@@ -2,38 +2,88 @@
     ViewData["Title"] = "User Account";
 }
 
-<div id="main-box">
+<div id="main-box" class="container">
 	<div  id="panel-box" class="panel panel-default">
-		<div class="panel-heading panel-primary panel-font-heading">Panel heading</div>
-		<div class="panel-body panel-content panel-selected">Profile</div>
-		<div class="panel-body panel-content">Orders</div>
-		<div class="panel-body panel-content">Wish list</div>
-		<div class="panel-body panel-content">Bookshelf</div>
-		<div class="panel-body panel-content">Settings</div>
-		<div class="panel-body panel-content">Payment and shipping</div>
+		<div class="panel-heading panel-primary panel-font-heading">Your account</div>
+		<div id="panel-profile" class="panel-body panel-selected">Profile</div>
+		<div id="panel-orders" class="panel-body">Orders</div>
+		<div id="panel-wish-list" class="panel-body">Wish list</div>
+		<div id="panel-bookshelf" class="panel-body">Bookshelf</div>
+		<div id="panel-settings" class="panel-body">Settings</div>
+		<div id="panel-payment-shipping" class="panel-body">Payment and shipping</div>
 	</div>
 	<div id="user-profile" class="user-information-box">
-		This is the user profile
+		<div id="user-image">
+			<img src="~/images/Feels_good_manDELETE.jpg" alt="No javascript man">
+		</div>
+		<div id="image-seperator"></div>
+		<div class="row">
+			<div class="profile-info col-xs-1">
+				Name
+				<br>
+				Harry Potter	
+			</div>
+			<div class="profile-info col-xs-1">
+				Email
+				<br>
+				harryP&#64gmail.com
+			</div>
+		</div>
+		<div class="row">
+			<div class="profile-info col-xs-1">
+				Favourite Book
+				<br>
+				Harry and the Chamber of Secrets
+				</div>
+			<div class="profile-info col-xs-1">
+				Favourite Author
+				<br>
+				Harry Potter
+			</div>
+		</div>
 	</div>
 
-	<div id="user-orders" class="user-information-box">
-		This is his past orders
+	<div id="user-orders" class="user-information-box is-hidden">
+		<!-- This needs a foreach loop when implementing the models -->
+		<div class="row order-border">
+			<div class="row">
+				<div class="col-lg-3"><strong>Order Placed</strong></div>
+				<div class="col-lg-3"><strong>Order ID</strong></div>
+				<div class="col-lg-3"><strong>Order Status</strong></div>
+				<div class="col-lg-3"><strong>Price</strong></div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3">21.8.2018</div>
+				<div class="col-lg-3">14321</div>
+				<div class="col-lg-3">Shipped</div>
+				<div class="col-lg-3">$ 99.99</div>
+			</div>
+		</div>
+		<div class="row order-border">
+			<div>
+				<img src="~/images/Feels_good_manDELETE.jpg" alt="Noooo" class="order-image">
+			</div>
+			<div>
+				<img src="~/images/Feels_good_manDELETE.jpg" alt="Noooo" class="order-image">				
+			</div>
+		</div>
+		<!-- Loop ends here -->
 	</div>
 
-	<div id="user-wish-list" class="user-information-box">
+	<div id="user-wish-list" class="user-information-box is-hidden">
 		This is his wish list
 	</div>
 
-	<div id="user-bookshelf" class="user-information-box">
+	<div id="user-bookshelf" class="user-information-box is-hidden">
 		This is his bookshelf
 	</div>
 
-	<div id="user-settings" class="user-information-box">
+	<div id="user-settings" class="user-information-box is-hidden">
 		These are his settings
 	</div>
 
-	<div id="user-payment-shipping" class="user-information-box">
+	<div id="user-payment-shipping" class="user-information-box is-hidden">
 		This here is is his
 	</div>
-	<p id="test">afdsadfsads</p>
+	
 </div>
