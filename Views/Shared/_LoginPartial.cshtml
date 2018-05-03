@@ -2,10 +2,10 @@
 @using System.Security.Claims
 @using Book_Cave.Models
 
-@Inject SignInManager<ApplicationUser> SignInManager
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
-    var claim = ((ClaimsIdentity) user.Identity).Claim.FirstOrDefault(c => c.Type == "Name")?.Value;
+    var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
 }
 
 @if (SignInManager.IsSignedIn(User))
