@@ -38,16 +38,7 @@
 
             <div class="col-sm-1 nav-height-control">
                 <li id="account-pos">
-                    <a href="#" class="dropdown-toggle sett1" data-toggle="dropdown">Account</a>
-
-                    <ul class="dropdown-menu mega-dropdown-menu col-sm-2">
-                        <li>
-                            <ul>
-                                @await Html.PartialAsync("_LoginPartial")
-                            </ul>
-                        </li>
-                    </ul>
-
+                    @await Html.PartialAsync("_LoginPartial")
                 </li>
             </div>
         </div>
@@ -163,6 +154,7 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/nav.js" asp-append-version="true"></script>
+        <script src="~/js/loginPopup.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -179,6 +171,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
         <script src="~/js/nav.js" asp-append-version="true"></script>
+        <script src="~/js/loginPopup.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)

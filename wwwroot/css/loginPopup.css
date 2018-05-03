@@ -1,0 +1,44 @@
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+#loginPopup {
+    visibility: hidden;
+    background-color: #fffffffe;
+    color: grey;
+    text-align: center;
+    border-radius: 6px;
+    position: fixed;
+    
+    top: 30%;
+    left: 35%;
+    width:60em;
+    height:36em;
+    margin-top: -9em;
+    margin-left: -15em;
+}
+
+/* Toggle this class - hide and show the popup */
+.ShowOrHidePopup {
+    visibility: visible !important;
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}

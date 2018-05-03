@@ -2,33 +2,68 @@
 @using System.Security.Claims
 @using Book_Cave.Models
 
+<head>
+    <link rel="stylesheet" href="~/css/loginPopup.css" type="text/css">
+    <link rel="stylesheet" href="~/css/accountShortcutPanel.css" type="text/css">
+</head>
+
 @inject SignInManager<ApplicationUser> SignInManager
 
 @{
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;
 }
 
+
+
+
+
+
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-action="LogOut" asp-controller="Account" method="post">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <button class="btn btn-link navbar-btn navbar-link">@claim</button>
-            </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
-            </li>
-        </ul>
-    </form>
+    <p>Account</p>
+    <div id="accShortPanel">
+        <form asp-action="LogOut" asp-controller="Account" method="post">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <button class="btn btn-link navbar-btn navbar-link">@claim</button>
+                </li>
+                <li>
+                    <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+                </li>
+            </ul>
+        </form>
+    </div>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a asp-are="" asp-controller="Account" asp-action="Register" style="color: black">Register</a>
-        </li>
-        <li>
-            <a asp-are="" asp-controller="Account" asp-action="Login" style="color: black">Log in</a>
-        </li>
-    </ul>
+    <div id="login">Log in</div>
+
+        <div class="popuptext" id="loginPopup">
+            @model Book_Cave.Models.ViewModels.LoginViewModel
+
+            <h1>Login</h1>
+
+            <form asp-action="Login" asp-controller="Account" class="form-horizontal">
+                <div class="form-group">
+                    <input type="email" asp-for="Email" class="form-control" placeholder="Enter email..">
+                </div>
+                <div class="form-group">
+                    <input type="password" asp-for="Password" class="form-control" placeholder="Enter password">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" asp-for="RememberMe"> Remember me
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default" value="Login">
+                </div>
+            </form>
+
+        <a asp-area="" asp-controller="Account" asp-action="Register" style="color: black">Register</a>
+
+    </div>
 }
+
+
+
