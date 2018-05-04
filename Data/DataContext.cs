@@ -5,15 +5,15 @@ namespace BookCave.Data
     public class DataContext : DbContext
     {
         public DbSet<Address> Address {get; set;}
-       /* public DbSet<Author> Author {get; set;}
+        public DbSet<Author> Author {get; set;}
         public DbSet<Book> Book {get; set;}
         public DbSet<BookAuthor> BookAuthor {get; set;}
         public DbSet<BookGenre> BookGenre {get; set;}
         public DbSet<BookLanguage> BookLanguage {get; set;}
         public DbSet<BookReview> BookReview {get; set;}
-        public DbSet<CardDetails> CardDetails {get; set;}*/
+        public DbSet<CardDetails> CardDetails {get; set;}
         public DbSet<Country> Country {get; set;}
-       /* public DbSet<Feedback> Feedback {get; set;}
+        public DbSet<Feedback> Feedback {get; set;}
         public DbSet<Format> Format {get; set;}
         public DbSet<Genre> Genre {get; set;}
         public DbSet<Language> Language {get; set;}
@@ -29,7 +29,7 @@ namespace BookCave.Data
         public DbSet<UserReadBook> UserReadBook {get; set;}
         public DbSet<UserReview> UserReview {get; set;}
         public DbSet<UserShipping> UserShipping {get; set;}
-        public DbSet<Wishlist> Wishlist {get; set;}*/
+        public DbSet<Wishlist> Wishlist {get; set;}
 
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
