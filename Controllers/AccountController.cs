@@ -5,7 +5,7 @@ using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookCave.Controllers
+namespace BookCave.Data.EntityModels
 {
     public class AccountController : Controller
     {

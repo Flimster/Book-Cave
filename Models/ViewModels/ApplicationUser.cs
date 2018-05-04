@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace BookCave.Models
+namespace BookCave.Models.ViewModels
 {
     public class ApplicationUser : IdentityUser
     {

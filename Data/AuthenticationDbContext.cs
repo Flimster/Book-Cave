@@ -5,7 +5,7 @@ using BookCave.Data.EntityModels;
 
 namespace BookCave.Data
 {
-    public class AuthenticationDbContext : IdentityDbContext<ApplicationUser>
+    public class AuthenticationDbContext : IdentityDbContext<AspNetUsers>
     {
         public AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options) : base(options) {}
 
