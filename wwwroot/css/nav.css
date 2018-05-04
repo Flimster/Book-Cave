@@ -154,7 +154,7 @@ nav div div button {
   background-color: #8e948e;
 }
 
-div form input {
+div > form > input {
   margin: 10px 15px;
   width: 100%;
   height: 40px;
