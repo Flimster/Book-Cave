@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using BookCave.Models;
 using BookCave.Models.ViewModels;
 using BookCave.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,6 @@ namespace BookCave.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            //private AccountService _AccountService;
 
             if(!ModelState.IsValid)
             {
@@ -45,9 +45,6 @@ namespace BookCave.Controllers
             if(result.Succeeded)
             {
                 //User successfully registered
-                //First create the user account and save it to db
-                
-                //_AccountService.InitializeUser(user);
                 await _userManager.AddClaimAsync(user, new Claim("Name", $"{model.Name}"));
                 await _signInManager.SignInAsync(user, false);
 
@@ -63,9 +60,9 @@ namespace BookCave.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogIn(LoginViewModel model)
         {
-            if (model == null) { return BadRequest("Model is null"); }
             if(!ModelState.IsValid)
             {
                 return View();
@@ -84,12 +81,34 @@ namespace BookCave.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        [HttpPost]
+
+
+        public async Task<ActionResult> ResetPassword(ForgotPasswordViewModel model)   //TODO: Connect db and test
+        {
+
+            if(ModelState.IsValid)
+            {
+                var user = await _userManager.FindByNameAsync(model.Email);
+                if(user == null)
+                {
+                    return View("Index", "Home");
+                }
+                /* 
+                string code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new {userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await _userManager.SendEmailAsync(user.Id, "ResetPassword", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                */
+            }
+            return View("Index", "Home");
         }
     }
 }
