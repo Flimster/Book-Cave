@@ -4,48 +4,65 @@
   <link rel="stylesheet" href="~/css/Book/BookDetails.css">
 </head>
 
-<div class="book-item col-sm-10 col-sm-offset-1">
+<div class="book-item col-sm-8 col-sm-offset-1">
   
-  <div class="book-img col-sm-3">
+  <div class="book-img col-sm-4">
     <img src=@Model.Image alt=@Model.Title>
   </div>
   
-  <div class="book-details col-sm-6">
+  <div class="book-details col-sm-8">
     <h3>@Model.Title</h3>
     <p>Author: @Model.Author</p>
     <p>Genre: @Model.Genre</p>
-  </div>
-  
-  <div class="book-checkout col-sm-3">
-    <h3>Check out</h3>
-    <button class="btn btn-primary">Add to cart</button>
+
+    <div class="book-descriptions">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi magnam temporibus odio, sed dicta eaque dolore eveniet perferendis doloribus impedit saepe neque cumque quod eligendi tempora itaque beatae recusandae voluptatibus!</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, optio natus reprehenderit dolorum blanditiis temporibus autem culpa obcaecati quam esse dicta velit aliquid earum reiciendis eligendi iste veniam vero praesentium.</p>
+    </div>
   </div>
 </div>
 
-<br/>
+<div class="book-checkout col-sm-2">
+    <h3>$@Model.Price</h3>
+    <hr>
+    <button class="btn btn-primary btn-fluid">Add to cart</button>
+    <button class="btn">Add to Wish list</button>
+  </div>
 
-<div class="book-description col-sm-10 col-sm-offset-1">
-  <h3>Description</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi magnam temporibus odio, sed dicta eaque dolore eveniet perferendis doloribus impedit saepe neque cumque quod eligendi tempora itaque beatae recusandae voluptatibus!</p>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, optio natus reprehenderit dolorum blanditiis temporibus autem culpa obcaecati quam esse dicta velit aliquid earum reiciendis eligendi iste veniam vero praesentium.</p>
+<div class="book-moreDetails col-sm-10 col-sm-offset-1">
+  <h3>More details</h3>
+  <ul>
+    <li>ISBN10: </li>
+    <li>ISBN13: </li>
+    <li>Language: </li>
+    <li>Publisher: </li>
+    <li>Country: </li>
+  </ul>
 </div>
 
-<!--
-<div class="container">
-  <div class="col-lg-offset-1">
-    <h3>@Model.Title</h3>
-  </div>
-  <br>
+<div class="book-all-reviews col-sm-10 col-sm-offset-1">
+    <div class="col-sm-10">
+      <h3>Reviews</h3>
+    </div>
+    <div class="col-sm-2">
+      <button class="btn">Write review</button>
+    </div>
 
-  <div class="col-lg-3 col-lg-offset-1">
-    <b>Genre: </b>
-    @Model.Genre <br>
-    <b>Author: </b>
-    @Model.Author <br>
-  </div>
+    <div class="book-review col-sm-12">
+      <hr>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro quaerat placeat eius, corporis nesciunt magnam quod. Magnam repudiandae saepe eveniet libero beatae voluptate minima magni. Corrupti neque animi repellendus error?
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi asperiores culpa possimus dolores harum nulla natus repudiandae, error nisi! Aspernatur numquam iste sed non quis enim vitae rerum quia labore!
+      </div>
+    </div>
 
-  <div class="col-lg-4"> 
-    <img src=@Model.Image alt=Model.Title>
-  </div>
+    <div class="book-review col-sm-12">
+      <hr>
+      <div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro quaerat placeat eius, corporis nesciunt magnam quod. Magnam repudiandae saepe eveniet libero beatae voluptate minima magni. Corrupti neque animi repellendus error?
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi asperiores culpa possimus dolores harum nulla natus repudiandae, error nisi! Aspernatur numquam iste sed non quis enim vitae rerum quia labore!
+      </div>
+    </div>
+    
   
-</div> -->
+</div>
