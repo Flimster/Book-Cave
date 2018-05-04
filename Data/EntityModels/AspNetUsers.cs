@@ -1,25 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookCave.Data.EntityModels
 {
-    public class User
+    public class AspNetUsers : IdentityUser
     {
-        public int Id { get; set; }
         public string Image { get; set; }
         public string Name { get; set; }
-        public string Email { get; set; }
+        [ForeignKey("FavoriteBook")]
         public int FavoriteBookId { get; set; }
+        public virtual Book FavoriteBook { get; set; }
+        [ForeignKey("FavoriteAuthor")]
         public int FavoriteAuthorId { get; set; }
+        public virtual Author FavoriteAuthor { get; set; }
         public string Password { get; set; }
-        public List<int> OrderHistoryId { get; set; }
-        public List<int> OwnedBooksId { get; set; }
-        public List<int> ReadBooksId { get; set; }
-        public List<int> WishListId { get; set; }
-        public List<int> ReviewsId { get; set; }
-        public List<int> PaymentsId { get; set; }
-        public List<int> BillingAddressesId { get; set; }
-        public List<int> ShippingAddressesId { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime LastLoggedInDate { get; set; }
         public bool BookSuggestionsEmail { get; set; }

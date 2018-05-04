@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookCave.Data.EntityModels
 {
@@ -6,16 +7,12 @@ namespace BookCave.Data.EntityModels
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }
-		public List<Author> AuthorId { get; set; }
-		public Author Author {get; set;}
-		public List<Genre> GenreId { get; set; }
-		public Genre Genre { get; set; }
 		public string CoverPhoto { get; set; }
 		public int PageCount { get; set; }
+		[ForeignKey("Publisher")]
 		public int PublisherId { get; set; }
+		public virtual Publisher Publisher {get; set;}
 		public int ReleaseYear { get; set; }
-		public List<Language> LanguageId { get; set; }
-		public Language Language {get; set;}
 		public double Price { get; set; }
 		public string Description { get; set; }
 		public double Rating { get; set; }       //////////// Rating Rating
@@ -23,7 +20,17 @@ namespace BookCave.Data.EntityModels
 		public int ISBN13 { get; set; }
 		public int StockCount { get; set; }
 		public bool Visibility { get; set; }
-		public Format BookFormat { get; set; }
-		public Format Format { get; set; }
+		[ForeignKey("BookFormat")]
+		public int BookFormatId { get; set; }
+		public virtual Formats BookFormat { get; set; }
+
+		#region NavigationProperties
+		public List<Author> AuthorId { get; set; }
+		//public Author Author {get; set;}
+		public List<Genre> GenreId { get; set; }
+		//public Genre Genre { get; set; }
+		public List<Language> LanguageId { get; set; }
+		//public Language Language {get; set;}
+		#endregion
 	}
 }
