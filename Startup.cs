@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BookCave.Models;
 using BookCave.Data.EntityModels;
+using BookCave.Models.ViewModels;
 
 namespace BookCave
 {
