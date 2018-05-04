@@ -13,6 +13,9 @@ $("#panel-profile").on("click", function(){
 	currentInformation.toggleClass("is-hidden");
 	$("#user-profile").toggleClass("is-hidden");
 	currentInformation = $("#user-profile");
+	$.get("User/GetProfile", function(data, status){
+		
+	});
 });
 
 $("#panel-orders").on("click", function(){
