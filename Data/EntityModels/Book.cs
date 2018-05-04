@@ -22,7 +22,7 @@ namespace BookCave.Data.EntityModels
 		public bool Visibility { get; set; }
 		[ForeignKey("BookFormat")]
 		public int BookFormatId { get; set; }
-		public virtual Format BookFormat { get; set; }
+		public virtual Formats BookFormat { get; set; }
 
 		#region NavigationProperties
 		public List<Author> AuthorId { get; set; }

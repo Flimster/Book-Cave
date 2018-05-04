@@ -6,13 +6,13 @@ namespace BookCave.Data
     {
         public DbSet<BillingAddress> BillingAddress {get; set;}
         public DbSet<ShippingAddress> ShippingAddress {get;set;}
-        public DbSet<AspNetUsers> AspNetUsers {get;set;}
+       // public DbSet<AspNetUsers> AspNetUsers {get;set;}
         public DbSet<Author> Author {get; set;}
         public DbSet<Book> Book {get; set;}
         public DbSet<CardDetails> CardDetails {get; set;}
         public DbSet<Country> Country {get; set;}
         public DbSet<Feedback> Feedback {get; set;}
-        public DbSet<Format> Format {get; set;}
+        public DbSet<Formats> Formats {get; set;}
         public DbSet<Genre> Genre {get; set;}
         public DbSet<Language> Language {get; set;}
         public DbSet<Publisher> Publisher {get; set;}
