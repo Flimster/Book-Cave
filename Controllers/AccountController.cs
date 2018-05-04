@@ -1,11 +1,11 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Book_Cave.Models;
-using Book_Cave.Models.ViewModels;
+using BookCave.Models;
+using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Book_Cave.Controllers
+namespace BookCave.Controllers
 {
     public class AccountController : Controller
     {

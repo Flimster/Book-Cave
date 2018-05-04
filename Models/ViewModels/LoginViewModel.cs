@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Book_Cave.Models.ViewModels
+namespace BookCave.Models.ViewModels
 {
     public class LoginViewModel
     {

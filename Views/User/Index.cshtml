@@ -2,8 +2,6 @@
     ViewData["Title"] = "User Account";
 }
 
-@model BookCave.Models.ViewModels.UserPrivateViewModel
-
 <div id="main-box" class="container">
 	<div  id="panel-box" class="panel panel-default">
 		<div class="panel-heading panel-primary panel-font-heading">Your account</div>
@@ -16,93 +14,32 @@
 	</div>
 	<div id="user-profile" class="user-information-box">
 		<div id="user-image">
-			<img src="@Model.Image" alt="ImageNotFound">
+			<img src="no-source" alt="ImageNotFound">
 		</div>
 		<div id="image-seperator"></div>
 		<div class="row">
 			<div class="profile-info col-xs-1">
 				Name
 				<br>
-				@Model.Name	
+				Harry	
 			</div>
 			<div class="profile-info col-xs-1">
 				Email
 				<br>
-				@Model.Email
+				someeemail
 			</div>
 		</div>
 		<div class="row">
 			<div class="profile-info col-xs-1">
 				Favourite Book<br>
-				@Model.FavouriteBook
+				Harry Potter and the chamber of secrets
 				</div>
 			<div class="profile-info col-xs-1">
 				Favourite Author<br>
-				@Model.FavouriteAuthor
+				Jk Rowling
 			</div>
 		</div>
 	</div>
 
-	<div id="user-orders" class="user-information-box is-hidden">
-		@foreach(var order in Model.PastOrders)
-		{
-			<div class="row order-border">
-				<div class="row">
-					<div class="col-lg-3"><strong>Order Placed</strong></div>
-					<div class="col-lg-3"><strong>Order ID</strong></div>
-					<div class="col-lg-3"><strong>Order Status</strong></div>
-					<div class="col-lg-3"><strong>Price</strong></div>
-				</div>
-				<div class="row">
-					<div class="col-lg-3">@order.OrderPlaced</div>
-					<div class="col-lg-3">@order.Id</div>
-					<div class="col-lg-3">@order.OrderStatus</div>
-					<div class="col-lg-3">@order.TotalPrice</div>
-				</div>
-			</div>
-
-			<div class="row order-border">
-				<div>
-						@foreach(var book in order.BookList)
-						{
-							<p>@book.Title</p>
-							<p>@book.Author</p>
-							<p>@book.Genre</p>
-							<p>@book.Image</p>
-						}
-				</div>
-			</div>
-		}
-	</div>
-
-	<div id="user-wish-list" class="user-information-box is-hidden">
-		@foreach(var book in Model.WishList)
-		{
-			<hr>
-			<p>@book.Title</p>
-			<p>@book.Author</p>
-			<p>@book.Genre</p>
-			<p>$@book.Price</p>
-		}
-	</div>
-
-	<div id="user-bookshelf" class="user-information-box is-hidden">
-		@foreach(var book in Model.WishList)
-		{
-			<hr>
-			<p>@book.Title</p>
-			<p>@book.Author</p>
-			<p>@book.Genre</p>
-			<p>$@book.Price</p>
-		}
-	</div>
-
-	<div id="user-settings" class="user-information-box is-hidden">
-		These are his settings
-	</div>
-
-	<div id="user-payment-shipping" class="user-information-box is-hidden">
-		This here is is his
-	</div>
 	
 </div>
