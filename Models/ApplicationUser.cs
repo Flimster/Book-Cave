@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace Book_Cave.Models
+namespace BookCave.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        
     }
 }

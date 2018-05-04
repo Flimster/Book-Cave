@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Book_Cave.Data.DatabaseExtraction;
+using BookCave.Data.DatabaseExtraction;
 namespace BookCave.Data
 {
     public class DataContext : DbContext

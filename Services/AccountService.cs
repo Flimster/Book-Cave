@@ -1,8 +1,8 @@
 using System;
-using Book_Cave.Data.DatabaseExtraction;
-using Book_Cave.Models;
+using BookCave.Data.DatabaseExtraction;
+using BookCave.Models;
 
-namespace Book_Cave.Services
+namespace BookCave.Services
 {
     public class AccountService
     {

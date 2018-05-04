@@ -16,7 +16,6 @@ namespace BookCave.Data.EntityModels
         public List<int> OwnedBooksId { get; set; }
         public List<int> ReadBooksId { get; set; }
         public List<int> WishListId { get; set; }
-        public List<int> ReviewsId { get; set; }
         public List<int> PaymentsId { get; set; }
         public List<int> BillingAddressesId { get; set; }
         public List<int> ShippingAddressesId { get; set; }
@@ -27,5 +26,11 @@ namespace BookCave.Data.EntityModels
         public int UserGroup { get; set; }
         public int TotalReports { get; set; }
         public int TotalBans { get; set; }
+
+        #region NavigationProperties
+
+        public List<Review> Reviews { get; set; }
+
+        #endregion
     }
 }
