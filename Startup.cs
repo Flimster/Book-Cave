@@ -25,6 +25,7 @@ namespace BookCave
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Basic authentication settings
             services.AddDbContext<AuthenticationDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection")));
 
@@ -47,6 +48,18 @@ namespace BookCave
                 options.SlidingExpiration = true;
             });
 
+
+            //Login with google
+ /*           services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["669047178298-avbd5c7tefsqrmum3vvaf9hdq1ok0j9q.apps.googleusercontent.com"];
+                googleOptions.ClientSecret = Configuration["akhv71BSyEIqTmA6qOm5uKu7"];
+            });
+*/
             services.AddMvc();
         }
 
