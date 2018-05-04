@@ -13,8 +13,8 @@ namespace BookCave.Controllers
     {
         public IActionResult Index()
         {
-            return View(FakeDatabase.Books);
-            //return View();
+            var Books = FakeDatabase.Books.Take(5).ToList();
+            return View(Books);
         }
 
         public IActionResult About()

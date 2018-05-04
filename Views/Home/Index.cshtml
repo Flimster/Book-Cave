@@ -8,20 +8,23 @@
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="row1 col-sm-10 col-sm-offset-1">
-<div class="col-sm-1"></div>
+
     @if(Model != null)
     {
-    @foreach(var book in Model)
-    {
-      <div class="book-item col-sm-2">
-        <div class="item-img">
-            <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><img src=@book.Image alt=@book.Title></a>
+      <div class="col-sm-12 border border-bottom"><h3 class="BookListTitle">Best sellers</h3></div>
+      <hr>
+      foreach(var book in Model)
+      {
+        <div class="book-item col-sm-2" style="width: 20%">
+          <div class="item-img">
+              <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><img src=@book.Image alt=@book.Title class="img-responsive center-block"></a>
+          </div>
+            <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><p class="title">@book.Title</p></a>
+            @book.Author <br/> 
+            @book.Genre
         </div>
-          <p class="title">@book.Title</p>
-          @book.Author <br/> 
-          @book.Genre
-      </div>
-    }
+      }
     }
 </div>

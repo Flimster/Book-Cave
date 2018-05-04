@@ -1,27 +1,62 @@
 .book-item {
-  padding: 0px;
+  padding: 10px 0px;
+  background-color: white;
+  
 }
 
 .book-img {
-
   /*background-color: yellow;*/
 }
 
 .book-img img {
   max-height: 100%;
   max-width: 100%;
-  margin: 0px auto;
-  padding: 0px;
+
 }
 
 .book-details {
   /*background-color: red;*/
 }
 
-.book-checkout {
-  /*background-color: green;*/
+.book-descriptions {
+  margin-top: 10px;
 }
 
-.book-description {
-  /*background-color: blue;*/
+.book-checkout {
+  background-color: white;
+  padding: 10px;
+  width: 16%; 
+  margin-left: 10px;
+}
+
+div .book-moreDetails {
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+div .book-moreDetails ul {
+  margin-left: 10px;
+}
+
+hr {
+  display: block;
+  width: 100%;               
+  background-color:lightgray;
+  height: 0.5px;
+  margin: 0px auto;
+}
+
+.btn {
+  margin-top: 10px;
+  width: 100%
+}
+
+div .book-all-reviews {
+  background-color: white;
+  margin-top: 10px;
+}
+
+div .book-review {
+  margin: 10px auto;
 }
