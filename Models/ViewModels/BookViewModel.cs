@@ -1,5 +1,3 @@
-
-
 namespace BookCave.Models.ViewModels
 
 {
@@ -10,5 +8,6 @@ namespace BookCave.Models.ViewModels
     public string Author { get; set; }
     public string Genre { get; set; }
     public string Image { get; set; }
+    public double Price { get; set; }
   }
 }

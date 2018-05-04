@@ -20,6 +20,10 @@
 	font-size: 16px;
 }
 
+.panel-body:hover{
+	cursor: pointer;
+}
+
 .user-information-box {
 	border-style: solid;
 	border-color: black;
@@ -68,8 +72,8 @@
 
 .order-image{
 	margin: 15px 0px 15px 0px;
-	height: 160px;
-	width: 160px;
+	height: 80px;
+	width: 80px;
 }
 
 #user-wish-list {}
