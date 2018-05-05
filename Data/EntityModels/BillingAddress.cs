@@ -7,6 +7,7 @@ namespace BookCave.Data.EntityModels
 
     {
         public int Id { get; set; }
+        [ForeignKey("Country")]
         public int CountryId { get; set; }
         public virtual Country Country {get; set; }
         public string StateOrProvince { get; set; }
