@@ -1,8 +1,10 @@
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
 {
+    [Authorize(Policy = "Customer")]
     public class BookController : Controller
     {
         public IActionResult Index(int? id)
