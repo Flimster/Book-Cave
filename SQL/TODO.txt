@@ -1,0 +1,28 @@
+1.
+
+As things stand with the db all <List>'s in the .cs files in Data/EntityModels 
+create a ForeignKey reference to the table that the <List> is coming from. 
+
+Example: List<Author> in Book.cs creates a column called BookId in the table
+Author with a FK reference to Book(Id). 
+This is not what we want. Because now Author has BookId which MUST always have
+VALID Id from Book(Id), which makes no sense since one Author can write many Books.
+
+Possible solution: Third normal for table structure. It would looks like this.
+
+TABLE1       TABLE2      {TABLE 2 DATA                   }       TABLE3
+       
+Book(Id)---> BookAuthors{ Id                               <----Author(Id)
+                          BookId (ForeignKey REF. to Book)
+                          AuthorId (FK REF. to Author) }
+
+
+Tyler's solution: All <List> are removed from the classes. Instead there
+will be a "middle" table containing the ID of Table A which can have many
+items from Table B. This way a LINQ query with a JOIN statement see:
+https://www.w3schools.com/sql/sql_join.asp
+Also check out Inner, Left, Right joins.
+This way we can create a LINQ().ToList(); which will compare the Id's and
+put them into a single table. 
+
+    - 
