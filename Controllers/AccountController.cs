@@ -6,6 +6,7 @@ using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Book_Cave.Services;
 
 namespace BookCave.Data.EntityModels
 {
@@ -29,16 +30,14 @@ namespace BookCave.Data.EntityModels
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
+            AccountService accountService = new AccountService();
 
             if(!ModelState.IsValid)
             {
                 return View();
             }
 
-            var user = new AspNetUsers {
-                UserName = model.Email,
-                Email = model.Email
-            };
+            var user = accountService.InitializeAccount(model);
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
