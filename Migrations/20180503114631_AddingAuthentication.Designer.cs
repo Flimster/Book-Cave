@@ -21,7 +21,7 @@ namespace BookCave.Migrations
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BookCave.Models.ApplicationUser", b =>
+            modelBuilder.Entity("BookCave.Models.AspNetUsers", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -190,7 +190,7 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("BookCave.Models.ApplicationUser")
+                    b.HasOne("BookCave.Models.AspNetUsers")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -198,7 +198,7 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("BookCave.Models.ApplicationUser")
+                    b.HasOne("BookCave.Models.AspNetUsers")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -211,7 +211,7 @@ namespace BookCave.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BookCave.Models.ApplicationUser")
+                    b.HasOne("BookCave.Models.AspNetUsers")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -219,7 +219,7 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("BookCave.Models.ApplicationUser")
+                    b.HasOne("BookCave.Models.AspNetUsers")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

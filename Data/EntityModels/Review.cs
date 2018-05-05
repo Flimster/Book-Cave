@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using BookCave.Models.ViewModels;
+using BookCave.Models;
+using BookCave.Data.EntityModels;
+
 
 namespace BookCave.Data.EntityModels
 {
@@ -12,7 +14,7 @@ namespace BookCave.Data.EntityModels
         public virtual Book Book {get;set;}
         [ForeignKey("User")]
         public string UserId { get; set; }
-        public virtual ApplicationUser User{get;set;}
+        public virtual AspNetUsers User{get;set;}
         public string Text { get; set; }
         public double Rating { get; set; }
         public DateTime Date { get; set; }

@@ -1,13 +1,14 @@
 @using Microsoft.AspNetCore.Identity
 @using System.Security.Claims
-@using BookCave.Models
+@using BookCave.Data.EntityModels
 
 <head>
     <link rel="stylesheet" href="~/css/loginPopup.css" type="text/css">
     <link rel="stylesheet" href="~/css/accountShortcutPanel.css" type="text/css">
 </head>
 
-@inject SignInManager<ApplicationUser> SignInManager
+<!--BUGGED CODE!-->
+@inject SignInManager<AspNetUsers> SignInManager 
 
 @{
     var claim = ((ClaimsIdentity) User.Identity).Claims.FirstOrDefault(c => c.Type == "Name")?.Value;

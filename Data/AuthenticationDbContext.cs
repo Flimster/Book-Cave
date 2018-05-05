@@ -6,7 +6,7 @@ using BookCave.Models.ViewModels;
 
 namespace BookCave.Data
 {
-    public class AuthenticationDbContext : IdentityDbContext<ApplicationUser>
+    public class AuthenticationDbContext : IdentityDbContext<AspNetUsers>
     {
 
         public DbSet<BillingAddress> BillingAddress {get; set;}

@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BookCave.Models;
 using BookCave.Data.EntityModels;
-using BookCave.Models.ViewModels;
 
 namespace BookCave
 {
@@ -31,7 +30,7 @@ namespace BookCave
             services.AddDbContext<AuthenticationDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<AspNetUsers, IdentityRole>()
                 .AddEntityFrameworkStores<AuthenticationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -62,6 +61,7 @@ namespace BookCave
                 googleOptions.ClientSecret = Configuration["akhv71BSyEIqTmA6qOm5uKu7"];
             });
 */
+
             services.AddMvc();
         }
 

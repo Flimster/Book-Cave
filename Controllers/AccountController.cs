@@ -1,8 +1,8 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using BookCave.Models;
+using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
-using BookCave.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +11,10 @@ namespace BookCave.Data.EntityModels
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<AspNetUsers> _signInManager;
+        private readonly UserManager<AspNetUsers> _userManager;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public AccountController(SignInManager<AspNetUsers> signInManager, UserManager<AspNetUsers> userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -35,7 +35,7 @@ namespace BookCave.Data.EntityModels
                 return View();
             }
 
-            var user = new ApplicationUser {
+            var user = new AspNetUsers {
                 UserName = model.Email,
                 Email = model.Email
             };
@@ -110,5 +110,6 @@ namespace BookCave.Data.EntityModels
             }
             return View("Index", "Home");
         }
+        
     }
 }
