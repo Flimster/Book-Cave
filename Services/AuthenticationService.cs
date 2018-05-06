@@ -50,9 +50,29 @@ namespace BookCave.Services
         }
 
         //Add default role to account
-        public async Task AddRole(AspNetUsers user, string role)
+        public async Task<bool> AddRole(AspNetUsers user, string role)
         {
-            await _userManager.AddToRoleAsync(user, role);
+            //Check if user has the requested role
+            bool roleCheck = await _roleManager.RoleExistsAsync(role);
+            if(!roleCheck)
+            {
+                await _userManager.AddToRoleAsync(user, role);
+                return true;
+            }
+            return false;
+        }
+
+        //Remove a role from an account
+        public async Task<bool> RemoveRole(AspNetUsers user, string role)
+        {
+            //Check if user has the requested role
+            bool roleCheck = await _roleManager.RoleExistsAsync(role);
+            if(roleCheck)
+            {
+                await _userManager.RemoveFromRoleAsync(user, role);
+                return true;
+            }
+            return false;
         }
     }
 }
