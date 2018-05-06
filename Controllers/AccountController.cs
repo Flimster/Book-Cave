@@ -45,7 +45,7 @@ namespace BookCave.Data.EntityModels
             {
                 //User successfully registered
                 await _userManager.AddClaimAsync(user, new Claim("Customer", $"{model.Name}"));
-                await authenticationService.AddRole(user, "Customer");
+                await authenticationService.AddRole(user.Email, "Customer");
                 await _signInManager.SignInAsync(user, false);
 
                 return RedirectToAction("Index", "Home");

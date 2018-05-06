@@ -52,8 +52,11 @@ namespace BookCave.Services
 
         //_userManager and _roleManager always null when passing managers
         //Add default role to account
-        public async Task<bool> AddRole(AspNetUsers user, string role)
+        public async Task<bool> AddRole(string email, string role)
         {
+            //Find the requested user
+            var user = await _userManager.FindByEmailAsync(email);
+
             //Check if user has the requested role
             bool roleCheck = await _roleManager.RoleExistsAsync(role);
             if(!roleCheck)
@@ -65,8 +68,11 @@ namespace BookCave.Services
         }
 
         //Remove a role from an account
-        public async Task<bool> RemoveRole(AspNetUsers user, string role)
+        public async Task<bool> RemoveRole(string email, string role)
         {
+            //Find the requested user
+            var user = await _userManager.FindByEmailAsync(email);
+            
             //Check if user has the requested role
             bool roleCheck = await _userManager.IsInRoleAsync(user, role);
             if(roleCheck)

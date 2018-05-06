@@ -94,6 +94,7 @@ namespace Book_Cave.Controllers
             }
         }
 
+
         //For adding roles to users
         public async Task AddRole(string email, string role)
         {
@@ -105,6 +106,9 @@ namespace Book_Cave.Controllers
             {
                 await _userManager.AddToRoleAsync(user, role);
             }
+
+            //Doing this instead of the above makes _userManager = null
+            //await _authenticationService.AddRole(email, role);
         }
 
         //For removing roles from users
@@ -119,6 +123,8 @@ namespace Book_Cave.Controllers
                 await _userManager.RemoveFromRoleAsync(user, role);
             }
 
+            //Doing this instead of the above makes _userManager = null
+            //await _authenticationService.Remove(email, role);
         }
     }
 }
