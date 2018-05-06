@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BookCave.Models;
 using BookCave.Data.EntityModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using BookCave.Services;
 
 namespace BookCave
 {
@@ -64,7 +66,7 @@ namespace BookCave
 
             services.AddMvc();
             
-            //Permissions
+            //Claims
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Admin", policy => policy.RequireClaim("Admin"));
