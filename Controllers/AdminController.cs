@@ -93,5 +93,32 @@ namespace Book_Cave.Controllers
 
             }
         }
+
+        //For adding roles to users
+        public async Task AddRole(string email, string role)
+        {
+            //Find the requested user
+            var user = await _userManager.FindByEmailAsync(email);
+
+            bool roleCheck = await _userManager.IsInRoleAsync(user, role);
+            if(!roleCheck)
+            {
+                await _userManager.AddToRoleAsync(user, role);
+            }
+        }
+
+        //For removing roles from users
+        public async Task RemoveRole(string email, string role)
+        {
+            //Find the requested user
+            var user = await _userManager.FindByEmailAsync(email);
+
+            bool roleCheck = await _userManager.IsInRoleAsync(user, role);
+            if(roleCheck)
+            {
+                await _userManager.RemoveFromRoleAsync(user, role);
+            }
+
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace BookCave.Services
 
         public AuthenticationService(UserManager<AspNetUsers> userManager, RoleManager<IdentityRole> roleManager)
         {
-            
+            _user = new AspNetUsers();
             _userManager = userManager;
             _roleManager = roleManager;
         }
@@ -49,6 +49,8 @@ namespace BookCave.Services
             return _user;
         }
 
+
+        //_userManager and _roleManager always null when passing managers
         //Add default role to account
         public async Task<bool> AddRole(AspNetUsers user, string role)
         {
@@ -66,7 +68,7 @@ namespace BookCave.Services
         public async Task<bool> RemoveRole(AspNetUsers user, string role)
         {
             //Check if user has the requested role
-            bool roleCheck = await _roleManager.RoleExistsAsync(role);
+            bool roleCheck = await _userManager.IsInRoleAsync(user, role);
             if(roleCheck)
             {
                 await _userManager.RemoveFromRoleAsync(user, role);
@@ -74,5 +76,6 @@ namespace BookCave.Services
             }
             return false;
         }
+        
     }
 }
