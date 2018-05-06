@@ -21,107 +21,109 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="row" id="upper-nav">
-            <div class="col-sm-1"></div>
-            
-            <div class="col-sm-3 nav-height-control">
-                <a asp-controller="Home" asp-action="Index"><img id="logo" src="~/images/LogoV2-W-text.png" alt="logo.png"></a>
-            </div>
-            
-            <div class="col-sm-5 nav-height-control">
-                <form action="get" method="#">
-                    <input type="text" id="search-input" placeholder="Search for a name, authore, genre, ISBN ...">
-                    <button type="submit" id="search-btn" class="btn btn-info"><div><i id="search-icon" class="fa fa-search"></i></div></button>
-                </form>
-            </div >
+    <div id="wrapper">   <!--Wrapper for the footer-->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="row" id="upper-nav">
+                <div class="col-sm-1"></div>
+                
+                <div class="col-sm-3 nav-height-control">
+                    <a asp-controller="Home" asp-action="Index"><img id="logo" src="~/images/LogoV2-W-text.png" alt="logo.png"></a>
+                </div>
+                
+                <div class="col-sm-5 nav-height-control">
+                    <form action="get" method="#">
+                        <input type="text" id="search-input" placeholder="Search for a name, authore, genre, ISBN ...">
+                        <button type="submit" id="search-btn" class="btn btn-info"><div><i id="search-icon" class="fa fa-search"></i></div></button>
+                    </form>
+                </div >
 
-            <div class="col-sm-1"></div>
+                <div class="col-sm-1"></div>
 
-            <div class="col-sm-1 nav-height-control">
-                <li id="account-pos">
-                    @await Html.PartialAsync("_LoginPartial")
-                </li>
-            </div>
-        </div>
-
-        <div class="row" id="lower-nav">
-            <div class="col-sm-1"></div>
-
-
-            <div class="col-sm-5">
-
-                <ul class="nav navbar-nav">
-                    <li class="dropdown mega-dropdown">
-                        <a id="mega-menu-link" href="#" class="dropdown-toggle" data-toggle="dropdown">Shop by<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
-                        <ul class="dropdown-menu mega-dropdown-menu col-sm-8 dropdown-menu-width-override">
-                            <li class="col-sm-4 vertical-line-right">
-                                <ul>
-                                    <li class="dropdown-header">Genre</li>
-                                    <li><a href="#">Adventure</a></li>
-                                    <li><a href="#">Fantasy</a></li>
-                                    <li><a href="#">Science fiction</a></li>
-                                    <li><a href="#">Drama</a></li>
-                                    <li><a href="#">Mystery</a></li>
-                                    <li><a href="#">Romance</a></li>
-                                    <li><a href="#">Satire</a></li>
-                                    <li><a href="#">Horror</a></li>
-                                </ul>
-                            </li>
-                            
-                            <li class="col-sm-4 vertical-line-right vertical-line-left">
-                                <ul>
-                                    <li class="dropdown-header">Authors</li>
-                                    <li><a href="#">Stephen King</a></li>
-                                    <li><a href="#">J. K. Rowling</a></li>
-                                    <li><a href="#">William Shakespear</a></li>
-                                    <li><a href="#">Jane Austin</a></li>
-                                    <li><a href="#">J. R. R. Tolkien</a></li>
-                                    <li><a href="#">Charles Dickens</a></li>
-                                    <li><a href="#">James Patterson</a></li>
-                                    <li><a href="#">Ernest Hemingway</a></li>
-                                </ul>
-                            </li>
-
-                            <li class="col-sm-4 vertical-line-left">
-                                <ul>
-                                    <li class="dropdown-header">Top 10 books</li>
-                                    <li><a href="#">Moby Dick</a></li>
-                                    <li><a href="#">The Hobbit</a></li>
-                                    <li><a href="#">Hamlet</a></li>
-                                    <li><a href="#">The adventures of Huckleberry Fin</a></li>
-                                    <li><a href="#">Pride and Prejudice</a></li>
-                                    <li><a href="#">The Davinci Code</a></li>
-                                    <li><a href="#">Harry Potter and The Deathly Hallows</a></li>
-                                    <li><a href="#">Harry Potter and the Philosopher's Stone</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                <div class="col-sm-1 nav-height-control">
+                    <li id="account-pos">
+                        @await Html.PartialAsync("_LoginPartial")
                     </li>
-                </ul>
-                <div class="navbar-header">
-                    <a href="#" class="sett2">Discounts</a>
                 </div>
-                <div class="navbar-header">
-                    <a href="#" class="sett2">Top 10</a>
-                </div>
-
             </div>
 
-            <div class="col-sm-4"></div>
+            <div class="row" id="lower-nav">
+                <div class="col-sm-1"></div>
 
-            <div class="col-sm-1">
-                <button id="cart-btn" class="btn btn-primary">Purchase</button>
+
+                <div class="col-sm-5">
+
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown mega-dropdown">
+                            <a id="mega-menu-link" href="#" class="dropdown-toggle" data-toggle="dropdown">Shop by<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                            <ul class="dropdown-menu mega-dropdown-menu col-sm-8 dropdown-menu-width-override">
+                                <li class="col-sm-4 vertical-line-right">
+                                    <ul>
+                                        <li class="dropdown-header">Genre</li>
+                                        <li><a href="#">Adventure</a></li>
+                                        <li><a href="#">Fantasy</a></li>
+                                        <li><a href="#">Science fiction</a></li>
+                                        <li><a href="#">Drama</a></li>
+                                        <li><a href="#">Mystery</a></li>
+                                        <li><a href="#">Romance</a></li>
+                                        <li><a href="#">Satire</a></li>
+                                        <li><a href="#">Horror</a></li>
+                                    </ul>
+                                </li>
+                                
+                                <li class="col-sm-4 vertical-line-right vertical-line-left">
+                                    <ul>
+                                        <li class="dropdown-header">Authors</li>
+                                        <li><a href="#">Stephen King</a></li>
+                                        <li><a href="#">J. K. Rowling</a></li>
+                                        <li><a href="#">William Shakespear</a></li>
+                                        <li><a href="#">Jane Austin</a></li>
+                                        <li><a href="#">J. R. R. Tolkien</a></li>
+                                        <li><a href="#">Charles Dickens</a></li>
+                                        <li><a href="#">James Patterson</a></li>
+                                        <li><a href="#">Ernest Hemingway</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="col-sm-4 vertical-line-left">
+                                    <ul>
+                                        <li class="dropdown-header">Top 10 books</li>
+                                        <li><a href="#">Moby Dick</a></li>
+                                        <li><a href="#">The Hobbit</a></li>
+                                        <li><a href="#">Hamlet</a></li>
+                                        <li><a href="#">The adventures of Huckleberry Fin</a></li>
+                                        <li><a href="#">Pride and Prejudice</a></li>
+                                        <li><a href="#">The Davinci Code</a></li>
+                                        <li><a href="#">Harry Potter and The Deathly Hallows</a></li>
+                                        <li><a href="#">Harry Potter and the Philosopher's Stone</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="navbar-header">
+                        <a href="#" class="sett2">Discounts</a>
+                    </div>
+                    <div class="navbar-header">
+                        <a href="#" class="sett2">Top 10</a>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-4"></div>
+
+                <div class="col-sm-1">
+                    <button id="cart-btn" class="btn btn-primary">Purchase</button>
+                </div>
             </div>
+        </nav>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+
         </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-
     </div>
 
-    <footer class="navbar-inverse footer-settings">
+    <footer class="navbar-inverse footer-settings footer">
         <div class="row">
             
             <div class="col-sm-1"></div>
@@ -138,18 +140,9 @@
             <div class="col-sm-4">
                 <h4>About us</h4>
             </div>
-
-            <div class="col-sm-3">
-                <h4>Newsletter</h4>
-                <form action="post">
-                    <input type="email" name="email" placeholder="email@youremail.com">
-                    <button type="submit" class="btn btn-info">Sign up!</button>
-                </form>
-            </div>
-
         </div>
     </footer>
-    
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

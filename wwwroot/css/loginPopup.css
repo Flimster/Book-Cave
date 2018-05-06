@@ -15,14 +15,15 @@
     color: grey;
     text-align: center;
     border-radius: 6px;
+    border: 1px solid #dcdcdc;
     position: fixed;
-    
-    top: 30%;
-    left: 35%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    -ms-transform: translateY(-50%) translate(-50%);
+    transform: translateY(-50%) translate(-50%);
     width:60em;
     height:36em;
-    margin-top: -9em;
-    margin-left: -15em;
 }
 
 /* Toggle this class - hide and show the popup */
