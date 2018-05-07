@@ -14,16 +14,14 @@ panels.on("click", function () {
 // name, email, favouritebook and favourite author
 $.get("User/GetProfile", function (data, status) {
 	var userProfileHTML =
-		"<div class=col-lg-12>" +
-		"<div class=col-lg-2>" +
-		"<img src=" + data.image + " alt='no image found' width=150px height=200px>" +
+		"<div class='col-lg-3'>" +
+		"<img src=" + data.image + " alt='no image found' width=150px height=200px style='margin-right:15px;'>" +
 		"</div>" +
-		"<div class='col-lg-10 profile-info'>" +
+		"<div class='col-lg-7 profile-info'>" +
 		data.name + "<br>" +
 		data.email + "<br>" +
 		data.favouriteBook + "<br>" +
 		data.favouriteAuthor + "<br>" +
-		"</div>" +
 		"</div>";
 	$("#user-box").html(userProfileHTML);
 }).fail(function (errorObject) {
@@ -34,16 +32,14 @@ $.get("User/GetProfile", function (data, status) {
 $("#panel-profile").on("click", function () {
 	$.get("User/GetProfile", function (data, status) {
 		var userProfileHTML =
-			"<div class=col-lg-12>" +
-			"<div class=col-lg-2>" +
-			"<img src=" + data.image + " alt='no image found' width=150px height=200px>" +
+			"<div class='col-lg-3'>" +
+			"<img src=" + data.image + " alt='no image found' width=150px height=200px style='margin-right:15px;'>" +
 			"</div>" +
-			"<div class='col-lg-10 profile-info'>" +
+			"<div class='col-lg-7 profile-info'>" +
 			data.name + "<br>" +
 			data.email + "<br>" +
 			data.favouriteBook + "<br>" +
 			data.favouriteAuthor + "<br>" +
-			"</div>" +
 			"</div>";
 		$("#user-box").html(userProfileHTML);
 	}).fail(function (errorObject) {
@@ -154,20 +150,20 @@ $("#panel-bookshelf").on("click", function () {
 
 $("#panel-settings").on("click", function () {
 	$.get("User/GetSettings", function (data, status) {
-		var settingsHTML = 
-		"<div class=col-lg-12>" + 
+		var settingsHTML =
+			"<div class=col-lg-12>" +
 			"<h2> Settings </h2>" +
 			"<form method='post'>" +
-				"<h3> Notifications </h3>" + 
-				"<label for='stuff'>Send emails stuff</label> " +
-				"<input type='checkbox' name='stuff' value='stuff'>" +
-				"<label for='stuff2'>Send emails about some other stuff</label> " +
-				"<input type='checkbox' name='stuff2' value='stuff2'>" +
+			"<h3> Notifications </h3>" +
+			"<div><label for='stuff'>Send emails stuff</label> " +
+			"<input type='checkbox' name='stuff' value='stuff'></div>" +
+			"<div><label for='stuff2'>Send emails about some other stuff</label> " +
+			"<input type='checkbox' name='stuff2' value='stuff2'></div>" +
 			"</form>" +
-				"<h3> Password </h3>" + 
-				"<button type='button' class='btn btn-primary'>Change Password</button>" +
-				"<h3> Delete Account </h3>" +
-				"<button type='button' class='btn btn-danger'>Delete</button>" +
+			"<h3> Password </h3>" +
+			"<button type='button' class='btn btn-primary'>Change Password</button>" +
+			"<h3> Delete Account </h3>" +
+			"<button type='button' class='btn btn-danger'>Delete</button>" +
 			"</div>";
 		$("#user-box").html(settingsHTML);
 	}).fail(function (errorObject) {
@@ -178,22 +174,22 @@ $("#panel-settings").on("click", function () {
 
 $("#panel-payment-shipping").on("click", function () {
 	$.get("User/GetPaymentAndShipping", function (data, status) {
-		paymentAndShippingHTML = 
-		"<h2> Payment methods </h2>" +
-		"<div class='col-lg-12'>" +
+		paymentAndShippingHTML =
+			"<h2> Payment methods </h2>" +
+			"<div class='col-lg-12'>" +
 			"<div class='col-lg-2'>Hello world</div>" +
 			"<div class='col-lg-2'>Hello world num 2</div>" +
-		"</div>" + 
-		"<h2> Billing address </h2>" + 
-		"<div class='col-lg-12'>" +
+			"</div>" +
+			"<h2> Billing address </h2>" +
+			"<div class='col-lg-12'>" +
 			"<div class='col-lg-2'>Hello world</div>" +
 			"<div class='col-lg-2'>Hello world num 2</div>" +
-		"</div>" + 
-		"<h2> Shipping Address </h2>" +
-		"<div class='col-lg-12'>" +
+			"</div>" +
+			"<h2> Shipping Address </h2>" +
+			"<div class='col-lg-12'>" +
 			"<div class='col-lg-2'>Hello world</div>" +
 			"<div class='col-lg-2'>Hello world num 2</div>" +
-		"</div>";
+			"</div>";
 		$("#user-box").html(paymentAndShippingHTML);
 	}).fail(function (errorObject) {
 		alert("Something went wrong");
