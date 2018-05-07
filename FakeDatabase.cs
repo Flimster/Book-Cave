@@ -10,7 +10,7 @@ namespace BookCave
         //public List<string> aa = new List<string> { "Abc", "Def"};
 
         public static List<BookViewModel> Books = new List<BookViewModel>()
-        {/* 
+        {/*
             new BookViewModel { Id = 1, Title = "Harry Potter and the chamber of secrets", Authors = new List<Author> {"J.K Rowling"}, Genre = "Fantasy", Image = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/4088/9781408855669.jpg", Price = 9.99 }, 
             new BookViewModel { Id = 2, Title = "Harry Potter and the goblet of fire", Authors = new List<string> {"J.K Rowling"}, Genre = "Fantasy", Image = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/4088/9781408855683.jpg", Price = 12.99},
             new BookViewModel { Id = 3, Title = "Head first C#", Authors = new List<string> {"Abcd"}, Genre = "Computer Science", Image = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/4493/9781449343507.jpg", Price = 13.99},
