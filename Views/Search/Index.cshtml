@@ -1,0 +1,76 @@
+@model List<BookCave.Models.ViewModels.BookViewModel>
+
+<head>
+  <link rel="stylesheet" href="~/css/Search/search.css">
+</head>
+
+<div class="search-container col-sm-10 col-sm-offset-1">
+  
+  <div class="search-filters col-sm-3">
+    <h3>Filters</h3>
+    <hr>
+    <form action="filter-menu">
+    
+      <div class="form-group">
+        <label for="search-string">Search</label>
+        <input type="text" class="form-control" name="search-string">
+      </div>
+
+      <div class="form-group">
+        <label for="search-price">Price</label>
+        <select class="form-control" name="searh-price">
+          <option value="low" label="Under 15">Under 15</option>
+          <option value="mid" label="15 to 30">15 to 30</option>
+          <option value="high" label="30+">30+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="search-genre">Genre</label>
+        <select class="form-control" name="searh-genre">
+          <option value="romance" label="Romance">Romance</option>
+          <option value="crime" label="Mystery">Mystery</option>
+          <option value="religious" label="Religious">Religious</option>
+          <option value="fantasy" label="Fantasy">Fantasy</option>
+          <option value="horror" label="Horror">Horror</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="search-author">Author</label>
+        <select class="form-control" name="searh-author">
+          <option value="jk-rowling" label="J.K Rowling">J.K Rowling</option>
+          <option value="andrewStellman" label="Andrew Stellman">Andrew Stellman</option>
+          <option value="jrr-Tolkien" label="J.R.R Tolkien">J.R.R Tolkien</option>
+          <option value="aldousHuxley" label="Aldous Huxley">Aldous Huxley</option>
+          <option value="georgeOrwell" label="George Orwell">George Orwell</option>
+          <option value="williamGolding" label="William Golding">William Golding</option>
+          <option value="jd-Salinger" label="J.D. Salinger">J.D. Salinger</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="search-language">Language</label>
+        <select class="form-control" name="searh-language">
+          
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="search-format">Format</label>
+        <select class="form-control" name="searh-format">
+          
+        </select>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">submit</button>
+      </div>
+    </form>  
+  </div>
+
+
+  <div class="search-results col-sm-8">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ut sit alias ipsum, eligendi cum voluptatum voluptate perspiciatis quae temporibus expedita doloribus delectus minus inventore at neque eveniet cupiditate voluptates.
+  </div>
+</div>

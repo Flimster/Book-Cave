@@ -1,0 +1,28 @@
+.search-container {
+  padding: 0px;
+}
+
+.search-filters {
+  background-color: white;
+}
+
+.search-results {
+  margin-left: 10px;
+  background-color: white;
+}
+
+.search-filters input {
+  margin: 0px;
+}
+
+
+
+
+
+hr {
+  display: block;
+  width: 100%;               
+  background-color:lightgray;
+  height: 0.5px;
+  margin: 0px auto;
+}
