@@ -1,15 +1,15 @@
-using Book_Cave.Models.RegistrationModels;
-using Book_Cave.Repositories;
+
+using BookCave.Models.RegistrationModels;
+using BookCave.Repositories;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
-using BookCave.Repositories;
+using System.Collections.Generic;
 
 namespace BookCave.Services
 {
     public class BookService
     {
         private BookRepo _bookRepo;
-        private PublisherRepo _publisherRepo;
         private AuthorRepo _authorRepo;
         private FormatsRepo _formatsRepo;
 
@@ -18,7 +18,6 @@ namespace BookCave.Services
         public BookService()
         {
             _bookRepo = new BookRepo();
-            _publisherRepo = new PublisherRepo();
             _authorRepo = new AuthorRepo();
             _formatsRepo = new FormatsRepo();
             _db = new DataContext();
@@ -26,10 +25,6 @@ namespace BookCave.Services
 
         public void WriteBook(BookRegistrationModel bookView)
         {
-            //var publisher = GetPublisher();
-            //var Formats = GetFormats();
-            //var Author = GetAuthor();
-
             var book = new Book() {
                 Title = bookView.Title,
                 Image = bookView.Image,
@@ -40,20 +35,25 @@ namespace BookCave.Services
                 ReleaseYear = bookView.ReleaseYear,
                 Visibility = bookView.Visibility,
                 Publisher = bookView.Publisher,
+
+                //BookFormat = bookView.Formats,
+
                 //Formats = _db.Formats.Where(t => );
 
                            /*var userProfiles = _dataContext.UserProfile
                                .Where(t => idList.Contains(t.Id)); */
                 //Author = 
+
             };
 
+            _authorRepo.WriteAuthor(bookView.Author);
             _bookRepo.WriteBook(book);
         }
 
-        //public List<int> GetPublisher()
-        //{
-
-        //}
+        public List<Author> GetAuthor()
+        {
+            return _authorRepo.GetAuthorList();
+        }
 
     }
 }

@@ -1,4 +1,4 @@
-namespace Book_Cave.Models.ViewModels
+namespace BookCave.Models.ViewModels
 {
     public class AuthorViewModel
     {

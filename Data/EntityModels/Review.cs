@@ -9,7 +9,7 @@ namespace BookCave.Data.EntityModels
     public class Review
     {
         public int Id { get; set; }
-         [ForeignKey("AspNetUsers")]
+        [ForeignKey("AspNetUsers")]
         public string AspNetUsersId { get; set; }
         public virtual IdentityUser AspNetUsers { get; set; }
         [ForeignKey("Book")]
