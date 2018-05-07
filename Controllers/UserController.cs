@@ -1,38 +1,36 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using BookCave.Models;
 using BookCave.Models.ViewModels;
+using BookCave.Data;
 
 namespace BookCave.Controllers
 {
 	public class UserController : Controller
 	{
-
+		[HttpGet]
 		public IActionResult Index()
 		{
 			return View();
 		}
 
 		[HttpGet]
-		public JsonResult GetProfile(int? id)
+		public JsonResult GetProfile()
 		{
 			var user = new UserPrivateViewModel
 			{
 				Image = "https://3.bp.blogspot.com/-j2CLGaKyPyg/TjMDiSi37DI/AAAAAAAAASA/RGQGSGtgstc/s1600/Chamber+of+Secrets+Poster.jpg",
 				Name = "Harry potter",
 				Email = "someemail@gmail.com",
-				FavouriteBook = "Some favourite",
-				FavouriteAuthor = "Some author"
+				FavouriteBook = "Some favourite book",
+				FavouriteAuthor = "Some test here"
 			};
 			return Json(user);
 		}
 
 		[HttpGet]
-		public JsonResult GetOrders(int? id)
+		public JsonResult GetOrders()
 		{
 
 			var orders = new List<OrderViewModel>
@@ -60,25 +58,25 @@ namespace BookCave.Controllers
 		}
 
 		[HttpGet]
-		public JsonResult GetWishList(int? id)
+		public JsonResult GetWishList()
 		{
 			return Json(FakeDatabase.Books);
 		}
 
 		[HttpGet]
-		public JsonResult GetBookShelf(int? id)
+		public JsonResult GetBookShelf()
 		{
 			return Json(FakeDatabase.Books);
 		}
 
 		[HttpGet]
-		public JsonResult GetSettings(int? id)
+		public JsonResult GetSettings()
 		{
 			return Json("Settings");
 		}
 
 		[HttpGet]
-		public JsonResult GetPaymentAndShipping(int? id)
+		public JsonResult GetPaymentAndShipping()
 		{
 			return Json("Payment and Shipping");
 		}
