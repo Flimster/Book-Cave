@@ -8,7 +8,7 @@ using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Book_Cave.Controllers
+namespace BookCave.Controllers
 {
     //[Authorize(Roles = "Administrator")]
     public class AdminController : Controller
@@ -56,8 +56,8 @@ namespace Book_Cave.Controllers
         {  
             AuthenticationService authenticationService = new AuthenticationService();
 
-            bool x = await _roleManager.RoleExistsAsync("Admin");
-            if (!x)
+            bool check = await _roleManager.RoleExistsAsync("Admin");
+            if (!check)
             {
 
                 // first we create Admin role    
@@ -84,8 +84,8 @@ namespace Book_Cave.Controllers
             }
 
             // creating Creating Customer role     
-            x = await _roleManager.RoleExistsAsync("Customer");
-            if (!x)
+            check = await _roleManager.RoleExistsAsync("Customer");
+            if (!check)
             {
                 var role = new IdentityRole();
                 role.Name = "Customer";

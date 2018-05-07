@@ -1,12 +1,15 @@
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BookCave.Services;
 
 namespace BookCave.Controllers
 {
     [Authorize(Roles = "Admin, Customer")]
     public class BookController : Controller
     {
+        private BookService _bs;
+
         public IActionResult Index(int? id)
         {
           if(id == null){
