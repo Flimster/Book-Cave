@@ -43,7 +43,7 @@ namespace BookCave.Services
                 TotalBans = 0,
                 UserName = model.Email,
                 Email = model.Email,
-                Name = model.Email.Split('@').FirstOrDefault()
+                Name = model.Name,
             };
 
             return _user;

@@ -1,5 +1,7 @@
+//show the login popup and grey background
 $("#login").click(function() {
-    $("#loginPopup").addClass("ShowOrHidePopup");
+    $("#login-popup").addClass("ShowOrHidePopup");
+    $("#login-overlay").css("display", "inline-block");
 });
 
 $("#loginBtn-Popup").click(function() {
@@ -22,6 +24,13 @@ $("#loginBtn-Popup").click(function() {
         }
     });
 });
+
+//background overlay when login is clicked
+$("#login-overlay").click(function() {
+    $("#login-popup").removeClass("ShowOrHidePopup");
+    $("#login-overlay").css("display", "none");
+})
+
 
 $("#reset-password-link").click(function() {
     $("#popup-form-container").empty();;
