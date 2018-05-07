@@ -46,14 +46,10 @@
             </div>
 
             <div class="row" id="lower-nav">
-                <div class="col-sm-1"></div>
-
-
-                <div class="col-sm-5">
-
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown mega-dropdown">
-                            <a id="mega-menu-link" href="#" class="dropdown-toggle" data-toggle="dropdown">Shop by<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <div class="col-sm-3" id="megamenu">
+                        <p class="lower-nav-search">Shop by<span class="glyphicon glyphicon-chevron-down pull-right"></span></p>
+                            <!--
                             <ul class="dropdown-menu mega-dropdown-menu col-sm-8 dropdown-menu-width-override">
                                 <li class="col-sm-4 vertical-line-right">
                                     <ul>
@@ -96,16 +92,16 @@
                                         <li><a href="#">Harry Potter and the Philosopher's Stone</a></li>
                                     </ul>
                                 </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="navbar-header">
-                        <a href="#" class="sett2">Discounts</a>
-                    </div>
-                    <div class="navbar-header">
-                        <a href="#" class="sett2">Top 10</a>
+                            </ul>-->
                     </div>
 
+                    <div class="col-sm-3" id="discounts">
+                        <p class="lower-nav-search">Discounts</p>
+                    </div>
+
+                    <div class="col-sm-3" id="top-10">
+                        <p class="lower-nav-search">Top 10</p>
+                    </div>
                 </div>
 
                 <div class="col-sm-4"></div>
@@ -126,11 +122,8 @@
     </div>
 
     <footer class="navbar-inverse footer-settings footer">
-        <div class="row">
-            
-            <div class="col-sm-1"></div>
-
-            <div class="col-sm-4">
+        <div>
+            <div class="col-sm-4 col-sm-offset-1">
                 <h4>Contact us</h4>
                 
                 <a href="https://www.facebook.com"><img class="social-size" src="~/images/fbIcon.svg" alt="facebook logo"></a>
@@ -141,6 +134,7 @@
 
             <div class="col-sm-4">
                 <h4>About us</h4>
+                <p><a href="mailto:bookcave@bookcave.com">bookcave@bookcave.com</a>></p>
             </div>
         </div>
     </footer>

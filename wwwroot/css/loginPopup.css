@@ -25,6 +25,7 @@
     width:60em;
     height:36em;
     z-index: 2;
+    padding: 0px 30px;
 }
 
 /* Toggle this class - hide and show the popup */

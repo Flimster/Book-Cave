@@ -77,32 +77,16 @@ body {
   color: #fff;
 }
 
-.sett2 {
-    margin: 15px;
+.lower-nav-search {
     color: #fff;
-    display: block;
-    text-decoration: none;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }
 
-.sett2:hover {
-  margin: 15px;
-  color: #9d9d9d;
-  display: block;
-  text-decoration: none;
-}
-
-.sett2:active {
-  margin: 15px;
-  color: #fff;
-  display: block;
-  text-decoration: none;
-}
-
-.sett2:focus {
-  margin: 15px;
-  color: #fff;
-  display: block;
-  text-decoration: none;
+#megamenu, #top-10, #discounts, #test-cnt {
+  display: table;
+  height: 100%;
 }
 
 .nav-height-control {
@@ -152,6 +136,10 @@ nav div div button {
 
 #lower-nav {
   background-color: #8e948e;
+}
+
+.row {
+  margin: 0px !important;
 }
 
 div > form > input {
@@ -221,7 +209,7 @@ html, body {
   width: 100%;
 }
 
-#shopping-cart-icon-container:hover {
+#shopping-cart-icon-container:hover, #top-10:hover, #discounts:hover, #megamenu:hover {
   background-color: #6e706e;
   cursor: pointer;
 }
