@@ -24,11 +24,10 @@ namespace Book_Cave.Repositories
                             User = (from a in _db.AspNetUsers
                                         join u in _db.AspNetUsers on O.AspNetUsersId equals u.Id
                                         select a).SingleOrDefault(),
-                                        ,
                             OrderDate = O.OrderDate,
                             OrderStatus = O.OrderStatus,
                             OrderPrice = O.OrderPrice,
-                            BookList = 
+                            //BookList = 
                             }).ToList();
 
             return order;
