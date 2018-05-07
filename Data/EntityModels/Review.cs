@@ -12,13 +12,14 @@ namespace BookCave.Data.EntityModels
         [ForeignKey("Book")]
         public int BookId { get; set; }
         public virtual Book Book {get;set;}
-        [ForeignKey("User")]
-        public string UserId { get; set; }
-        public virtual AspNetUsers User{get;set;}
+        [ForeignKey("AspNetUsers")]
+        public string AspNetUsersId { get; set; }
+        public virtual AspNetUsers AspNetUsers{get;set;}
         public string Text { get; set; }
         public double Rating { get; set; }
         public DateTime Date { get; set; }
         public int PositiveScore { get; set; }
         public int NegativeScore { get; set; }
+        public bool Edited {get; set;}
     }
 }

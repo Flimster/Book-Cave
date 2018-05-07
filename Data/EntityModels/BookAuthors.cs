@@ -1,18 +1,15 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using BookCave.Models;
-using BookCave.Data.EntityModels;
-
 
 namespace BookCave.Data.EntityModels
 {
-    public class OwnedBooks
+    public class BookAuthors
     {
         public int Id { get; set; }
-        [ForeignKey("AspNetUsers")]
-        public string AspNetUsersId { get; set; }
-        public virtual AspNetUsers AspNetUsers { get; set; }
         [ForeignKey("Book")]
         public int BookId { get; set; }
         public virtual Book Book { get; set; }
+        [ForeignKey("Author")]
+        public int AuthorId { get; set; }
+        public virtual Author Author { get; set; }
     }
 }

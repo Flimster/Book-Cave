@@ -7,6 +7,15 @@ namespace BookCave.Data.EntityModels
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }
+		[ForeignKey("BookAuthors")]
+		public int BookAuthorsId { get; set; }
+		public virtual BookAuthors BookAuthors { get; set; }
+		[ForeignKey("BookLanguages")]
+		public int BookLanguageId { get; set; }
+		public virtual BookLanguages BookLanguages { get; set; }
+		[ForeignKey("BookGenre")]
+		public int BookGenreId { get; set; }
+		public virtual BookGenre BookGenre { get; set; }
 		public string CoverPhoto { get; set; }
 		public int PageCount { get; set; }
 		[ForeignKey("Publisher")]
@@ -23,14 +32,5 @@ namespace BookCave.Data.EntityModels
 		[ForeignKey("BookFormat")]
 		public int BookFormatId { get; set; }
 		public virtual Formats BookFormat { get; set; }
-
-		#region NavigationProperties
-		public List<Author> AuthorId { get; set; }
-		//public Author Author {get; set;}
-		public List<Genre> GenreId { get; set; }
-		//public Genre Genre { get; set; }
-		public List<Language> LanguageId { get; set; }
-		//public Language Language {get; set;}
-		#endregion
 	}
 }
