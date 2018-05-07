@@ -4,11 +4,13 @@
 }
 
 #main-box {
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 #panel-box {
-	width: 240px;
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
 }
 
 .panel-selected{
@@ -32,19 +34,17 @@
 }
 
 #user-box {
-	width: 1200px;
+	background: white;
 	height: 100%;
-	float: left;
-	margin-left: 25px;
 }
 
 .profile-info{
 	font-size: 24px;
 }
 
-
 .order-information{
 	text-align: left;
+	font-size: 14px;
 }
 
 .order-seperator-top{

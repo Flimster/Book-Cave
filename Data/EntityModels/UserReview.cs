@@ -1,12 +1,9 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using BookCave.Models;
-using BookCave.Data.EntityModels;
 using Microsoft.AspNetCore.Identity;
 
 namespace BookCave.Data.EntityModels
 {
-    public class UserReviewList
+    public class UserReview
     {
         public int Id { get; set; }
          [ForeignKey("AspNetUsers")]
