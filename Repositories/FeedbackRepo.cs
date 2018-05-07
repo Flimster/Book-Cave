@@ -14,10 +14,10 @@ namespace Book_Cave.Repositories
             _db = new DataContext();
         }
 
-        public List<Feedback> GetFeedbackList()
+        public List<Feedbacks> GetFeedbackList()
         {
-            var feedback = (from F in _db.Feedback
-                        select new Feedback
+            var feedback = (from F in _db.Feedbacks
+                        select new Feedbacks
                         {
                             Id = F.Id,
                             //Missing query for users and more
@@ -26,7 +26,7 @@ namespace Book_Cave.Repositories
             return feedback;
         }
 
-        public void WriteFeedback(Feedback feedback)
+        public void WriteFeedback(Feedbacks feedback)
         {
             _db.Add(feedback);
             _db.SaveChanges();

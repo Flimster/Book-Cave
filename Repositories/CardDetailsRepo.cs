@@ -7,11 +7,11 @@ namespace BookCave.Repositories
 {
     public class CardDetailsRepo
     {
-        private AuthenticationDbContext _db;
+        private DataContext _db;
 
         public CardDetailsRepo()
         {
-            //_db = new DataContext();
+            _db = new DataContext();
         }
 
         public List<CardDetails> GetCardDetailsList()

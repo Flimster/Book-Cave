@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BookCave.Data.EntityModels;
 using BookCave.Data;
+using System.Linq;
 
 namespace BookCave.Repositories
 {
@@ -14,10 +15,10 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<Country> GetCountryList()
+        public List<Countries> GetCountryList()
         {
-            var country = (from C in _db.Country
-                        select new Country
+            var country = (from C in _db.Countries
+                        select new Countries
                         {
                             Id = C.Id,
                             Name = C.Name
@@ -26,7 +27,7 @@ namespace BookCave.Repositories
             return country;
         }
 
-        public void WriteCountry(Country country)
+        public void WriteCountry(Countries country)
         {
             _db.Add(country);
             _db.SaveChanges();

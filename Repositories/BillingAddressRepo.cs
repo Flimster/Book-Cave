@@ -7,11 +7,11 @@ namespace BookCave.Repositories
 {
     public class BillingAddressRepo
     {
-        private AuthenticationDbContext _db;
+        private DataContext _db;
 
         public BillingAddressRepo()
         {
-            //_db = new DataContext();
+            _db = new DataContext();
         }
 
         public List<BillingAddresses> GetBillingAddressList()
@@ -29,11 +29,7 @@ namespace BookCave.Repositories
             return billingAddresses;
         }
 
-<<<<<<< HEAD
-        public void WriteAuthor(BillingAddresses billingAddress)
-=======
-        public void WriteBillingAddress(BillingAddress billingAddress)
->>>>>>> 6503106af5a1734b4794bd6fa33275decd132fea
+        public void WriteBillingAddress(BillingAddresses billingAddress)
         {
             _db.Add(billingAddress);
             _db.SaveChanges();
