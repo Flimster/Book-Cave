@@ -11,22 +11,76 @@ namespace BookCave.Controllers
 {
 	public class UserController : Controller
 	{
+
 		public IActionResult Index()
 		{
 			return View();
 		}
+
 		[HttpGet]
-		public JsonResult GetProfile()
+		public JsonResult GetProfile(int? id)
 		{
 			var user = new UserPrivateViewModel
 			{
-				Image = "no-source",
+				Image = "https://3.bp.blogspot.com/-j2CLGaKyPyg/TjMDiSi37DI/AAAAAAAAASA/RGQGSGtgstc/s1600/Chamber+of+Secrets+Poster.jpg",
 				Name = "Harry potter",
 				Email = "someemail@gmail.com",
-                FavouriteBook = "Some favourite",
-                FavouriteAuthor = "Some author"
+				FavouriteBook = "Some favourite",
+				FavouriteAuthor = "Some author"
 			};
 			return Json(user);
+		}
+
+		[HttpGet]
+		public JsonResult GetOrders(int? id)
+		{
+
+			var orders = new List<OrderViewModel>
+				{
+					new OrderViewModel()
+					{
+							Id = 0,
+							UserId = 1,
+							OrderPlaced = new DateTime(),
+							OrderStatus = false,
+							TotalPrice = 50,
+							BookList = FakeDatabase.Books
+					},
+					new OrderViewModel()
+					{
+							Id = 1,
+							UserId = 1,
+							OrderPlaced = new DateTime(),
+							OrderStatus = false,
+							TotalPrice = 50,
+							BookList = FakeDatabase.Books
+					}
+				};
+			return Json(orders);
+		}
+
+		[HttpGet]
+		public JsonResult GetWishList(int? id)
+		{
+			return Json(FakeDatabase.Books);
+		}
+
+		[HttpGet]
+		public JsonResult GetBookShelf(int? id)
+		{
+			return Json(FakeDatabase.Books);
+		}
+
+		[HttpGet]
+		public JsonResult GetSettings(int? id)
+		{
+			return Json("Settings");
+		}
+
+		[HttpGet]
+		public JsonResult GetPaymentAndShipping(int? id)
+		{
+			return Json("Payment and Shipping");
 		}
 	}
 }
