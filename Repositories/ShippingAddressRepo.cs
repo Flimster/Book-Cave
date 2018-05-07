@@ -7,21 +7,21 @@ namespace BookCave.Repositories
 {
     public class ShippingAddressRepo
     {
-         private DataContext _db;
+         private AuthenticationDbContext _db;
 
         public ShippingAddressRepo()
         {
-            _db = new DataContext();
+           // _db = new DataContext();
         }
 
-        public List<ShippingAddress> GetShippingAddressList()
+        public List<ShippingAddresses> GetShippingAddressList()
         {
-            var shippingAddress = (from S in _db.ShippingAddress
-                        select new ShippingAddress
+            var shippingAddress = (from S in _db.ShippingAddresses
+                        select new ShippingAddresses
                         {
                             Id = S.Id,
                             CountryId = S.CountryId,
-                            Country = S.Country,
+                            Countries = S.Countries,
                             StateOrProvince = S.StateOrProvince,
                             City = S.City,
                         }).ToList();
@@ -29,7 +29,7 @@ namespace BookCave.Repositories
             return shippingAddress;
         }
 
-        public void WriteAuthor(ShippingAddress shippingAddress)
+        public void WriteAuthor(ShippingAddresses shippingAddress)
         {
             _db.Add(shippingAddress);
             _db.SaveChanges();

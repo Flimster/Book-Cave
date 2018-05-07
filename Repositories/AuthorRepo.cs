@@ -7,17 +7,17 @@ namespace BookCave.Repositories
 {
     public class AuthorRepo
     {
-        private DataContext _db;
+        private AuthenticationDbContext _db;
 
         public AuthorRepo()
         {
-            _db = new DataContext();
+            //_db = ;
         }
 
-        public List<Author> GetAuthorList()
+        public List<Authors> GetAuthorList()
         {
-            var authors = (from A in _db.Author
-                        select new Author
+            var authors = (from A in _db.Authors
+                        select new Authors
                         {
                             Id = A.Id,
                             Name = A.Name,
@@ -26,7 +26,7 @@ namespace BookCave.Repositories
             return authors;
         }
 
-        public void WriteAuthor(List<Author> author)
+        public void WriteAuthor(List<Authors> author)
         {
             _db.AddRange(author);
             _db.SaveChanges();

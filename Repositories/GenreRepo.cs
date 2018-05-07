@@ -7,17 +7,17 @@ namespace BookCave.Repositories
 {
     public class GenreRepo
     {
-        private DataContext _db;
+        private AuthenticationDbContext _db;
 
         public GenreRepo()
         {
-            _db = new DataContext();
+            //_db = new DataContext();
         }
 
-        public List<Genre> GetGenreList()
+        public List<Genres> GetGenreList()
         {
-            var genre = (from G in _db.Genre
-                        select new Genre
+            var genre = (from G in _db.Genres
+                        select new Genres
                         {
                             Id = G.Id,
                             Name = G.Name
@@ -26,7 +26,7 @@ namespace BookCave.Repositories
             return genre;
         }
 
-        public void WriteAuthor(Genre genre)
+        public void WriteAuthor(Genres genre)
         {
             _db.Add(genre);
             _db.SaveChanges();

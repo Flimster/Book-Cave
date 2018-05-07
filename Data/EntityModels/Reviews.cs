@@ -6,15 +6,15 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BookCave.Data.EntityModels
 {
-    public class Review
+    public class Reviews
     {
         public int Id { get; set; }
         [ForeignKey("AspNetUsers")]
         public string AspNetUsersId { get; set; }
         public virtual IdentityUser AspNetUsers { get; set; }
-        [ForeignKey("Book")]
+        [ForeignKey("Books")]
         public int BookId { get; set; }
-        public virtual Book Book { get; set; }
+        public virtual Books Books { get; set; }
         public string Text { get; set; }
         public double Rating { get; set; }
         public DateTime Date { get; set; }

@@ -1,10 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace BookCave.Data.EntityModels
 {
-    public class ShippingAddress
+    public class BillingAddresses
+
     {
         public int Id { get; set; }
+        [ForeignKey("Countries")]
         public int CountryId { get; set; }
-        public virtual Country Country {get; set; }
+        public virtual Countries Countries {get; set; }
         public string StateOrProvince { get; set; }
         public string Zip { get; set; }
         public string StreetAddress { get; set; }

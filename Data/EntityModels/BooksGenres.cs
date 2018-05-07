@@ -2,14 +2,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookCave.Data.EntityModels
 {
-    public class BookGenre
+    public class BooksGenres
     {
         public int Id { get; set; }
-        [ForeignKey("Genre")]
+        [ForeignKey("Genres")]
         public int GenreId { get; set; }
-        public virtual Genre Genre { get; set; }
-        [ForeignKey("Book")]
+        public virtual Genres Genres { get; set; }
+        [ForeignKey("Books")]
         public int BookId { get; set; }
-        public virtual Book Book { get; set; }
+        public virtual Books Books { get; set; }
     }
 }

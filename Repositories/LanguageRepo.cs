@@ -7,17 +7,17 @@ namespace Book_Cave.Repositories
 {
     public class LanguageRepo
     {
-        private DataContext _db;
+        private AuthenticationDbContext _db;
 
         public LanguageRepo()
         {
-            _db = new DataContext();
+            //_db = new DataContext();
         }
 
-        public List<Language> GetLanguageList()
+        public List<Languages> GetLanguageList()
         {
-            var language = (from L in _db.Genre
-                        select new Language
+            var language = (from L in _db.Genres
+                        select new Languages
                         {
                             Id = L.Id,
                             Name = L.Name
@@ -26,7 +26,7 @@ namespace Book_Cave.Repositories
             return language;
         }
 
-        public void WriteLanguage(Language language)
+        public void WriteLanguage(Languages language)
         {
             _db.Add(language);
             _db.SaveChanges();
