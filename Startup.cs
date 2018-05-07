@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BookCave.Models;
 using BookCave.Data.EntityModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using BookCave.Services;
 
 namespace BookCave
 {
@@ -63,6 +65,18 @@ namespace BookCave
 */
 
             services.AddMvc();
+            
+            //Claims
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy => policy.RequireClaim("Admin"));
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Customer", policy => policy.RequireClaim("Customer"));
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
