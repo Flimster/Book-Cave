@@ -7,7 +7,6 @@ namespace BookCave.Data.EntityModels
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }	
-		public string CoverPhoto { get; set; }
 		public int ReleaseYear { get; set; }
 		public double Price { get; set; }
 		public string Description { get; set; }
