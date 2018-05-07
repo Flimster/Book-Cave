@@ -24,7 +24,7 @@ namespace BookCave.Controllers
 				Name = "Harry potter",
 				Email = "someemail@gmail.com",
 				FavouriteBook = "Some favourite book",
-				FavouriteAuthor = "Some test"
+				FavouriteAuthor = "Some testdsaf"
 			};
 			return Json(user);
 		}
