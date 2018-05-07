@@ -1,5 +1,6 @@
 using Book_Cave.Models.RegistrationModels;
 using Book_Cave.Repositories;
+using BookCave.Data;
 using BookCave.Data.EntityModels;
 using BookCave.Repositories;
 
@@ -12,12 +13,15 @@ namespace BookCave.Services
         private AuthorRepo _authorRepo;
         private FormatsRepo _formatsRepo;
 
+        private DataContext _db;
+
         public BookService()
         {
             _bookRepo = new BookRepo();
             _publisherRepo = new PublisherRepo();
             _authorRepo = new AuthorRepo();
             _formatsRepo = new FormatsRepo();
+            _db = new DataContext();
         }
 
         public void WriteBook(BookRegistrationModel bookView)
@@ -35,8 +39,11 @@ namespace BookCave.Services
                 Description = bookView.Description,
                 ReleaseYear = bookView.ReleaseYear,
                 Visibility = bookView.Visibility,
-                //Publisher = bookView.Publisher,
-                //Formats = 
+                Publisher = bookView.Publisher,
+                //Formats = _db.Formats.Where(t => );
+
+                           /*var userProfiles = _dataContext.UserProfile
+                               .Where(t => idList.Contains(t.Id)); */
                 //Author = 
             };
 
