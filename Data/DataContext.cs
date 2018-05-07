@@ -13,7 +13,7 @@ namespace BookCave.Data
         public DbSet<BookLanguages> BookLanguages { get; set; }
         public DbSet<CardDetails> CardDetails {get; set;}
         public DbSet<Country> Country {get; set;}
-         public DbSet<Feedback> Feedback {get; set;}
+        public DbSet<Feedback> Feedback {get; set;}
         public DbSet<Formats> Formats {get; set;}
         public DbSet<Genre> Genre {get; set;}
         public DbSet<Language> Language {get; set;}
