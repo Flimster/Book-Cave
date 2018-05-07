@@ -1,6 +1,5 @@
 using BookCave.Data;
 using BookCave.Data.EntityModels;
-using BookCave.Models.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,10 +14,10 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<BookViewModel> GetBookList()
+        public List<Book> GetBookList()
         {
             var Books = (from B in _db.Book
-                        select new BookViewModel
+                        select new Book
                         {
                             Id = B.Id,
                             Title = B.Title,

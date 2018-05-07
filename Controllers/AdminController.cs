@@ -7,7 +7,7 @@ using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Book_Cave.Models.RegistrationModels;
+using BookCave.Models.RegistrationModels;
 
 namespace BookCave.Controllers
 {
@@ -132,8 +132,15 @@ namespace BookCave.Controllers
         [HttpPost]
         public void WriteBook(BookRegistrationModel book)
         {
-
             _bs.WriteBook(book);
+        }
+
+        [HttpGet]
+        public IActionResult GetAuthor()
+        {
+
+            var author = _bs.GetAuthor();
+            return View("AuthorList", author);
         }
 
     }

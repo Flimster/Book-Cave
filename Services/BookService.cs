@@ -1,7 +1,7 @@
-using Book_Cave.Models.RegistrationModels;
-using Book_Cave.Repositories;
-using BookCave.Data.EntityModels;
+using BookCave.Models.RegistrationModels;
 using BookCave.Repositories;
+using BookCave.Data.EntityModels;
+using System.Collections.Generic;
 
 namespace BookCave.Services
 {
@@ -22,10 +22,6 @@ namespace BookCave.Services
 
         public void WriteBook(BookRegistrationModel bookView)
         {
-            //var publisher = GetPublisher();
-            //var Formats = GetFormats();
-            //var Author = GetAuthor();
-
             var book = new Book() {
                 Title = bookView.Title,
                 Image = bookView.Image,
@@ -35,18 +31,18 @@ namespace BookCave.Services
                 Description = bookView.Description,
                 ReleaseYear = bookView.ReleaseYear,
                 Visibility = bookView.Visibility,
-                //Publisher = bookView.Publisher,
-                //Formats = 
-                //Author = 
+                Publisher = bookView.Publisher,
+                BookFormat = bookView.Formats,
             };
 
+            _authorRepo.WriteAuthor(bookView.Author);
             _bookRepo.WriteBook(book);
         }
 
-        //public List<int> GetPublisher()
-        //{
-
-        //}
+        public List<Author> GetAuthor()
+        {
+            return _authorRepo.GetAuthorList();
+        }
 
     }
 }

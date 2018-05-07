@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using BookCave.Data.EntityModels;
 
-namespace Book_Cave.Models.RegistrationModels
+namespace BookCave.Models.RegistrationModels
 {
     public class BookRegistrationModel
     {
         public string Title { get; set; }
-        public List<int> AuthorId { get; set; }
+        public List<Author> Author { get; set; }
         public List<string> Genre { get; set; }
         public string Image { get; set; }
         public double Price { get; set; }
@@ -16,6 +16,6 @@ namespace Book_Cave.Models.RegistrationModels
         public int ReleaseYear { get; set; }
         public bool Visibility { get; set; }
         public string Publisher { get; set; }
-        public List<Formats> Formats { get; set; }
+        public Formats Formats { get; set; }
     }
 }

@@ -5,30 +5,30 @@ using System.Linq;
 
 namespace BookCave.Repositories
 {
-    public class FormatsRepo
+    public class ReviewRepo
     {
         private DataContext _db;
 
-        public FormatsRepo()
+        public ReviewRepo()
         {
             _db = new DataContext();
         }
 
-        public List<Formats> GetBookList()
+        public List<Review> ReviewList()
         {
-            var Authors = (from A in _db.Formats
-                        select new Formats
+            var review = (from R in _db.Genre
+                        select new Review
                         {
-                            Id = A.Id,
-                            Name = A.Name,
+                            Id = R.Id,
+                            Name = R.Name
                         }).ToList();
             
-            return Authors;
+            return review;
         }
 
-        public void WriteAuthor(List<Formats> formats)
+        public void WriteAuthor(Review review)
         {
-            _db.AddRange(formats);
+            _db.Add(review);
             _db.SaveChanges();
         }
     }
