@@ -4,13 +4,11 @@
 }
 
 #main-box {
-	position: relative;
 	display: inline-block;
 }
 
 #panel-box {
-	float: left;
-	width: 250px;
+	width: 240px;
 }
 
 .panel-selected{
@@ -20,69 +18,58 @@
 	font-size: 16px;
 }
 
+.line{
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	border-width: 1px;
+}
+
 .panel-body:hover{
 	cursor: pointer;
 }
 
-.user-information-box {
-	border-style: solid;
-	border-color: black;
-	border-width: 1px;
-	width: 800px;
-	height: 600px;
+#user-box {
+	width: 1200px;
+	height: 100%;
 	float: left;
 	margin-left: 25px;
 }
 
-#user-profile {}
-
-#user-image img {
-	border-style: solid;
-	border-color: red;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	max-width: 200px;
-	max-height: 200px; 
-	border-radius: 30px;
-}
-
-#image-seperator {
-	border-style: solid;
-	border-color: black;
-	border-width: 2px;
-}
-
 .profile-info{
-	width: 400px;
-	height: 200px;
-	display: inline-block;
-	margin-left: 10px;
+	font-size: 24px;
 }
 
-#user-orders {
-	padding: 100px 75px 100px 75px;
+
+.order-information{
+	text-align: left;
 }
 
-.order-border{
-	border-style: solid;
-	border-color: black;
-	border-width: 2px;
+.order-seperator-top{
+	border-top-color: black;
+	border-top-style: dashed;
+	border-top-width: 1px;
+}
+
+.order-seperator-bottom{
+	border-bottom-color: black;
+	border-bottom-style: dashed;
+	border-bottom-width: 1px;
+	margin-bottom: 5px;
+}
+
+.order-book{
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .order-image{
-	margin: 15px 0px 15px 0px;
-	height: 80px;
-	width: 80px;
+	height: 200px;
+	width: 150px;
+	margin-left: 15px;
 }
-
-#user-wish-list {}
-
-#user-bookshelf {}
-
-#user-settings {}
-
-#user-payment-shipping {}
 
 .is-hidden {
 	display: none;
