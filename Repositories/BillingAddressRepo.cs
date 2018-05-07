@@ -29,7 +29,11 @@ namespace BookCave.Repositories
             return billingAddresses;
         }
 
+<<<<<<< HEAD
         public void WriteAuthor(BillingAddresses billingAddress)
+=======
+        public void WriteBillingAddress(BillingAddress billingAddress)
+>>>>>>> 6503106af5a1734b4794bd6fa33275decd132fea
         {
             _db.Add(billingAddress);
             _db.SaveChanges();

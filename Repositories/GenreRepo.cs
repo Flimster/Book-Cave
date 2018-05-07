@@ -26,7 +26,11 @@ namespace BookCave.Repositories
             return genre;
         }
 
+<<<<<<< HEAD
         public void WriteAuthor(Genres genre)
+=======
+        public void WriteGenre(Genre genre)
+>>>>>>> 6503106af5a1734b4794bd6fa33275decd132fea
         {
             _db.Add(genre);
             _db.SaveChanges();

@@ -11,7 +11,7 @@ namespace BookCave.Models.ViewModels
 		//public AspNetUsers User { get; set; }
 		public DateTime OrderDate { get; set; }
 		public bool OrderStatus { get; set; }
-		public double TotalPrice { get; set; }
+		public double OrderPrice { get; set; }
 		public List<BookViewModel> BookList { get; set; }
 	}
 }

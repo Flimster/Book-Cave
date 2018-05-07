@@ -14,21 +14,21 @@ namespace BookCave.Repositories
             //_db = new DataContext();
         }
 
-        public List<Formats> GetBookList()
+        public List<Formats> GetFormatList()
         {
-            var Authors = (from A in _db.Formats
+            var format = (from F in _db.Formats
                         select new Formats
                         {
-                            Id = A.Id,
-                            Name = A.Name,
+                            Id = F.Id,
+                            Name = F.Name,
                         }).ToList();
             
-            return Authors;
+            return format;
         }
 
-        public void WriteAuthor(List<Formats> formats)
+        public void WriteFormat(Formats formats)
         {
-            _db.AddRange(formats);
+            _db.Add(formats);
             _db.SaveChanges();
         }
     }

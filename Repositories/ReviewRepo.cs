@@ -25,7 +25,11 @@ namespace BookCave.Repositories
             return review;
         }
 
+<<<<<<< HEAD
         public void WriteAuthor(Reviews review)
+=======
+        public void WriteReview(Review review)
+>>>>>>> 6503106af5a1734b4794bd6fa33275decd132fea
         {
             _db.Add(review);
             _db.SaveChanges();
