@@ -20,7 +20,6 @@ namespace BookCave.Repositories
                         select new Review
                         {
                             Id = R.Id,
-                            Name = R.Name
                         }).ToList();
             
             return review;

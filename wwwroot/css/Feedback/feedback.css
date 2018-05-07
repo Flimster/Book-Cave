@@ -1,0 +1,13 @@
+#feedback-outer-box{
+	/* border-style: solid;
+	border-color: black;
+	border-width: 1px; */
+}
+
+#feedback-inner-box{
+	margin-left: 50px;
+	margin-right: auto;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+}
