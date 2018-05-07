@@ -14,7 +14,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<Country> GetGenreList()
+        public List<Country> GetCountryList()
         {
             var country = (from C in _db.Country
                         select new Country
@@ -26,7 +26,7 @@ namespace BookCave.Repositories
             return country;
         }
 
-        public void WriteAuthor(Country country)
+        public void WriteCountry(Country country)
         {
             _db.Add(country);
             _db.SaveChanges();

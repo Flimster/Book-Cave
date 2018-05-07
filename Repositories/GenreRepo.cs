@@ -26,7 +26,7 @@ namespace BookCave.Repositories
             return genre;
         }
 
-        public void WriteAuthor(Genre genre)
+        public void WriteGenre(Genre genre)
         {
             _db.Add(genre);
             _db.SaveChanges();

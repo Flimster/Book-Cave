@@ -29,7 +29,7 @@ namespace BookCave.Repositories
             return shippingAddress;
         }
 
-        public void WriteAuthor(ShippingAddress shippingAddress)
+        public void WriteShippingAddress(ShippingAddress shippingAddress)
         {
             _db.Add(shippingAddress);
             _db.SaveChanges();
