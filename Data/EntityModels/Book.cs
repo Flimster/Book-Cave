@@ -10,12 +10,15 @@ namespace BookCave.Data.EntityModels
 		public int ReleaseYear { get; set; }
 		public double Price { get; set; }
 		public string Description { get; set; }
-		public double Rating { get; set; }       //////////// Rating Rating
+		public double Rating { get; set; }      
 		public string ISBN10 { get; set; }
 		public string ISBN13 { get; set; }
 		public int StockCount { get; set; }
 		public bool Visibility { get; set; }
 		public virtual Formats BookFormat { get; set; }
 		public string Image {get;set;}
+		public string Publisher { get; set; }
+		public double Discount {get; set;}
+
 	}
 }
