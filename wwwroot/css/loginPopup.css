@@ -9,20 +9,22 @@
 }
 
 /* The actual popup */
-#loginPopup {
+#login-popup {
     visibility: hidden;
     background-color: #fffffffe;
     color: grey;
     text-align: center;
     border-radius: 6px;
+    border: 1px solid #dcdcdc;
     position: fixed;
-    
-    top: 30%;
-    left: 35%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    -ms-transform: translateY(-50%) translate(-50%);
+    transform: translateY(-50%) translate(-50%);
     width:60em;
     height:36em;
-    margin-top: -9em;
-    margin-left: -15em;
+    z-index: 2;
 }
 
 /* Toggle this class - hide and show the popup */
@@ -41,4 +43,42 @@
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity:1 ;}
+}
+
+#login-overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+    cursor: pointer;
+}
+
+#login-btn-container, #account-container {
+    height: 100%;
+    width: 100%;
+    background-color: #1d480e;
+    display: table;
+}
+  
+#login-btn-container:hover, #account-container:hover {
+    background-color: #183a0c;
+    cursor: pointer;
+}
+  
+#login, #account-shortcut {
+    color: white;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 20px;
+}
+
+#account-shortcut-panel {
+    display: none;
 }

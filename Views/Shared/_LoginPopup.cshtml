@@ -1,14 +1,16 @@
 @model BookCave.Models.ViewModels.LoginViewModel
 
-<div class="popuptext" id="loginPopup">
-    
+<div id="login-overlay"></div>
+
+<div class="popuptext" id="login-popup">
 
     <h1 id="popup-form-title">Login</h1>
 
     <div id="popup-form-container">
+        
         <form asp-action="Login" asp-controller="Account">
             <div class="form-group">
-                <input type="email" asp-for="Email" class="form-control" placeholder="Enter email..">
+                <input type="email" asp-for="Email" class="form-control" placeholder="Enter email.." autofocus="autofocus">
             </div>
             <div class="form-group">
                 <input type="password" asp-for="Password" class="form-control" placeholder="Enter password">
@@ -25,5 +27,4 @@
     
         <a id="reset-password-link">Reset password</a>
     </div>
-
 </div>
