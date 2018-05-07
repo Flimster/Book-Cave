@@ -23,11 +23,5 @@ namespace BookCave.Data.EntityModels
         public int UserGroup { get; set; }
         public int TotalReports { get; set; }
         public int TotalBans { get; set; }
-
-        #region NavigationProperties
-
-        public List<Review> Reviews { get; set; }
-
-        #endregion
     }
 }
