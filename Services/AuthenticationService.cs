@@ -30,10 +30,8 @@ namespace BookCave.Services
             _user = new AspNetUsers
             {
                 Image = "~/Images/DefaultProfileImage.png",
-                //Foreign key FavoriteBook
-                FavoriteBookId = 0,
-                //Foreign key FavoriteAuthor
-                FavoriteAuthorId = 0,
+                FavoriteBookId = 1,
+                FavoriteAuthorId = 1,
                 RegistrationDate = DateTime.Now,
                 LastLoggedInDate = DateTime.Now,
                 BookSuggestionsEmail = false,
@@ -58,7 +56,7 @@ namespace BookCave.Services
             var user = await _userManager.FindByEmailAsync(email);
 
             //Check if user has the requested role
-            bool roleCheck = await _roleManager.RoleExistsAsync(role);
+            bool roleCheck = await this._roleManager.RoleExistsAsync(role);
             if(!roleCheck)
             {
                 await _userManager.AddToRoleAsync(user, role);

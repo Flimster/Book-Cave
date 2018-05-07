@@ -7,6 +7,7 @@ using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Book_Cave.Models.RegistrationModels;
 
 namespace BookCave.Controllers
 {
@@ -16,6 +17,7 @@ namespace BookCave.Controllers
 
         private readonly UserManager<AspNetUsers> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private BookService _bs = new BookService();
 
         public AdminController(UserManager<AspNetUsers> userManager, RoleManager<IdentityRole> roleManager)
         {
@@ -53,7 +55,7 @@ namespace BookCave.Controllers
         //TODO: Find a better place for this
         [HttpPost]
         private async Task createRolesandUsers()
-        {  
+        {
             AuthenticationService authenticationService = new AuthenticationService();
 
             bool check = await _roleManager.RoleExistsAsync("Admin");
@@ -126,5 +128,13 @@ namespace BookCave.Controllers
             //Doing this instead of the above makes _userManager = null
             //await _authenticationService.Remove(email, role);
         }
+
+        [HttpPost]
+        public void WriteBook(BookRegistrationModel book)
+        {
+
+            _bs.WriteBook(book);
+        }
+
     }
 }

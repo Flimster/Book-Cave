@@ -22,10 +22,9 @@ namespace BookCave.Repositories
                         {
                             Id = B.Id,
                             Title = B.Title,
-                            //Image = B.Image,  MISSING
+                            Image = B.Image,
                             Price = B.Price,
-                            //Author = (where A in _db.Author
-                            //        join B.Id where B.Id equals B)
+                            //Author = (from
                         }).ToList();
             
             return Books;
