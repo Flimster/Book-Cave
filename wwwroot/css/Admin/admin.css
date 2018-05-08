@@ -15,8 +15,16 @@
 	margin-bottom: 15px;
 }
 
-
 .image-size{
 	height: 200px;
 	width: 150px;
+}
+
+#admin-buttons{
+	margin-bottom: 15px;
+	padding-left: 30px;
+}
+
+#search{
+	margin-left: 200px;
 }
