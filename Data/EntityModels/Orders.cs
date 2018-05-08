@@ -11,9 +11,6 @@ namespace BookCave.Data.EntityModels
     public class Orders
     {
         public int Id { get; set; }
-        [ForeignKey("AspNetUsers")]
-        public string AspNetUsersId { get; set; }
-        public virtual IdentityUser AspNetUsers { get; set; }
         public DateTime OrderDate { get; set; }
         public bool OrderStatus { get; set; }
         public double OrderPrice { get; set; }

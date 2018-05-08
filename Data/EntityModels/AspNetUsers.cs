@@ -9,12 +9,12 @@ namespace BookCave.Data.EntityModels
     {
         public string Image { get; set; }
         public string Name { get; set; }
-        [ForeignKey("FavoriteBook")]
+        [ForeignKey("Book")]
         public int FavoriteBookId { get; set; }
-        public virtual Books FavoriteBook { get; set; }
-        [ForeignKey("FavoriteAuthor")]
+        public virtual Books Books { get; set; }
+        [ForeignKey("Author")]
         public int FavoriteAuthorId { get; set; }
-        public virtual Authors FavoriteAuthor { get; set; }
+        public virtual Authors Authors { get; set; }
         public string Password { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime LastLoggedInDate { get; set; }
