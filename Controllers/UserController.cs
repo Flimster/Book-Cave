@@ -41,7 +41,7 @@ namespace BookCave.Controllers
 							//User = 1,
 							OrderDate = new DateTime(),
 							OrderStatus = false,
-							TotalPrice = 50,
+							OrderPrice = 50,
 							BookList = FakeDatabase.Books
 					},
 					new OrderViewModel()
@@ -50,7 +50,7 @@ namespace BookCave.Controllers
 							//User = ,
 							OrderDate = new DateTime(),
 							OrderStatus = false,
-							TotalPrice = 50,
+							OrderPrice = 50,
 							BookList = FakeDatabase.Books
 					}
 				};

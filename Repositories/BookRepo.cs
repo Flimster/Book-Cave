@@ -10,11 +10,11 @@ namespace BookCave.Repositories
 {
     public class BookRepo
     {
-        private DataContext _db;
+        private AuthenticationDbContext _db;
         
         public BookRepo()
         {
-            _db = new DataContext();
+            //_db = new DataContext();
         }
 
         public List<BookViewModel> GetBookList()

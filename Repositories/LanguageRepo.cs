@@ -7,11 +7,11 @@ namespace Book_Cave.Repositories
 {
     public class LanguageRepo
     {
-        private DataContext _db;
+        private AuthenticationDbContext _db;
 
         public LanguageRepo()
         {
-            _db = new DataContext();
+            //_db = new DataContext();
         }
 
         public List<Languages> GetLanguageList()
