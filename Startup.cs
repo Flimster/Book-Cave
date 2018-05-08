@@ -28,6 +28,9 @@ namespace BookCave
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Error handling
+            services.AddTransient<IAdminService, AdminService>();
+
             //Basic authentication settings
             services.AddDbContext<AuthenticationDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("AuthenticationConnection")));

@@ -47,7 +47,7 @@ namespace BookCave.Services
 
 
         //_userManager and _roleManager always null when passing managers
-        //Add default role to account
+        //Add default role to account4w
         public async Task<bool> AddRole(string email, string role)
         {
             //Find the requested user

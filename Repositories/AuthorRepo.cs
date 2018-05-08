@@ -26,7 +26,7 @@ namespace BookCave.Repositories
             return authors;
         }
 
-        public void Write(List<Authors> author)
+        public void WriteList(List<Authors> author)
         {
             _db.AddRange(author);
             _db.SaveChanges();

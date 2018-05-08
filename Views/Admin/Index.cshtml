@@ -32,7 +32,7 @@
     </fieldset>
 </form>
 
-<form asp-action="WriteBook" asp-controller="Admin">
+<form asp-action="CreateBook" asp-controller="Admin">
     <fieldset>
         <legend>Create book</legend>
         <input type="text" name="Title" placeholder="Title">
@@ -41,7 +41,7 @@
         <input type="text" name="ISBN10" placeholder="ISBN10">
         <input type="text" name="ISBN13" placeholder="ISBN13">
         <input type="text" name="Description" placeholder="Description">
-        <input type="text" name="ReleaseDate" placeholder="ReleaseDate">
+        <input type="text" name="ReleaseYear" placeholder="ReleaseYear">
         <input type="radio" name="Visibility" placeholder="true" value="true">
         <input type="radio" name="Visibility" placeholder="false" value="false">
         <input type="submit" value="Post">
