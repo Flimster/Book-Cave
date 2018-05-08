@@ -15,7 +15,6 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-
         public List<BookViewModel> GetList()
         {
             var Books = (from B in _db.Books

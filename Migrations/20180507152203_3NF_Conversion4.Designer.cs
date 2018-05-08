@@ -12,16 +12,17 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180507152203_3NF_Conversion4")]
+    partial class _3NF_Conversion4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Authors", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -30,10 +31,10 @@ namespace BookCave.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Author");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.BillingAddresses", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.BillingAddress", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -55,16 +56,16 @@ namespace BookCave.Migrations
                     b.ToTable("BillingAddress");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Books", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("BookFormatId");
+
                     b.Property<string>("Description");
 
                     b.Property<double>("Discount");
-
-                    b.Property<int>("Format");
 
                     b.Property<string>("ISBN10");
 
@@ -88,10 +89,12 @@ namespace BookCave.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.HasIndex("BookFormatId");
+
+                    b.ToTable("Book");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.BooksAuthors", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.BookAuthors", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -106,10 +109,10 @@ namespace BookCave.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("BooksAuthors");
+                    b.ToTable("BookAuthors");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.BooksGenres", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.BookGenre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -124,10 +127,10 @@ namespace BookCave.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("BookGenres");
+                    b.ToTable("BookGenre");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.BooksLanguages", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.BookLanguages", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -142,7 +145,7 @@ namespace BookCave.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("BooksLanguages");
+                    b.ToTable("BookLanguages");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.CardDetails", b =>
@@ -163,7 +166,7 @@ namespace BookCave.Migrations
                     b.ToTable("CardDetails");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Countries", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -172,10 +175,10 @@ namespace BookCave.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries");
+                    b.ToTable("Country");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Feedbacks", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Feedback", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -192,7 +195,7 @@ namespace BookCave.Migrations
 
                     b.HasIndex("AspNetUsersId");
 
-                    b.ToTable("Feedbacks");
+                    b.ToTable("Feedback");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.Formats", b =>
@@ -207,7 +210,7 @@ namespace BookCave.Migrations
                     b.ToTable("Formats");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Genres", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -216,10 +219,10 @@ namespace BookCave.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genre");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Languages", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Language", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -228,34 +231,38 @@ namespace BookCave.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages");
+                    b.ToTable("Language");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Orders", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AspNetUsersId");
 
                     b.Property<int>("BillingAddressId");
 
-                    b.Property<int>("BooksId");
-
                     b.Property<int>("CardDetailsId");
 
-                    b.Property<DateTime>("Date");
+                    b.Property<int>("OrderBooksId");
 
-                    b.Property<double>("Price");
+                    b.Property<DateTime>("OrderDate");
+
+                    b.Property<double>("OrderPrice");
+
+                    b.Property<bool>("OrderStatus");
 
                     b.Property<int>("ShippingAddressId");
 
-                    b.Property<bool>("Status");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Orders");
+                    b.HasIndex("AspNetUsersId");
+
+                    b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.OrdersBooks", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.OrderBooks", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -270,7 +277,25 @@ namespace BookCave.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrdersBooks");
+                    b.ToTable("OrderBooks");
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.OrderHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AspNetUsersId");
+
+                    b.Property<int>("OrderId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AspNetUsersId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderHistory");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.OwnedBooks", b =>
@@ -298,18 +323,18 @@ namespace BookCave.Migrations
 
                     b.Property<string>("AspNetUsersId");
 
-                    b.Property<int>("BooksId");
+                    b.Property<int>("BookId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AspNetUsersId");
 
-                    b.HasIndex("BooksId");
+                    b.HasIndex("BookId");
 
                     b.ToTable("ReadBooks");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Reviews", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -336,17 +361,15 @@ namespace BookCave.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Review");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.ShippingAddresses", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.ShippingAddress", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("City");
-
-                    b.Property<int?>("CountriesId");
 
                     b.Property<int>("CountryId");
 
@@ -358,9 +381,9 @@ namespace BookCave.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CountriesId");
+                    b.HasIndex("CountryId");
 
-                    b.ToTable("ShippingAddresses");
+                    b.ToTable("ShippingAddress");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UserBillingAddresses", b =>
@@ -381,7 +404,7 @@ namespace BookCave.Migrations
                     b.ToTable("UserBillingAddresses");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.UsersCards", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.UserCards", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -396,28 +419,10 @@ namespace BookCave.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.ToTable("UsersCards");
+                    b.ToTable("UserCards");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.UsersOrders", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AspNetUsersId");
-
-                    b.Property<int>("OrderId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AspNetUsersId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("UsersOrders");
-                });
-
-            modelBuilder.Entity("BookCave.Data.EntityModels.UsersReviews", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.UserReview", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -432,10 +437,10 @@ namespace BookCave.Migrations
 
                     b.HasIndex("ReviewId");
 
-                    b.ToTable("UsersReviews");
+                    b.ToTable("UserReviews");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.UsersShippingAddresses", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.UserShippingAddresses", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -450,10 +455,10 @@ namespace BookCave.Migrations
 
                     b.HasIndex("AspNetUsersId");
 
-                    b.ToTable("UsersShippingAddresses");
+                    b.ToTable("UserShippingAddresses");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Wishlists", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Wishlist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -468,7 +473,7 @@ namespace BookCave.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.ToTable("Wishlists");
+                    b.ToTable("Wishlist");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -641,11 +646,7 @@ namespace BookCave.Migrations
 
                     b.Property<bool>("ActiveStatus");
 
-                    b.Property<int?>("AuthorsId");
-
                     b.Property<bool>("BookSuggestionsEmail");
-
-                    b.Property<int?>("BooksId");
 
                     b.Property<int>("FavoriteAuthorId");
 
@@ -665,77 +666,105 @@ namespace BookCave.Migrations
 
                     b.Property<int>("TotalReports");
 
-                    b.HasIndex("AuthorsId");
+                    b.Property<int>("UserGroup");
 
-                    b.HasIndex("BooksId");
+                    b.HasIndex("FavoriteAuthorId");
+
+                    b.HasIndex("FavoriteBookId");
 
                     b.ToTable("AspNetUsers");
 
                     b.HasDiscriminator().HasValue("AspNetUsers");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.BillingAddresses", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.BillingAddress", b =>
                 {
-                    b.HasOne("BookCave.Data.EntityModels.Countries", "Countries")
+                    b.HasOne("BookCave.Data.EntityModels.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.BooksAuthors", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Book", b =>
                 {
-                    b.HasOne("BookCave.Data.EntityModels.Authors", "Authors")
+                    b.HasOne("BookCave.Data.EntityModels.Formats", "BookFormat")
+                        .WithMany()
+                        .HasForeignKey("BookFormatId");
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.BookAuthors", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.Author", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BookCave.Data.EntityModels.Books", "Books")
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.BooksGenres", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.BookGenre", b =>
                 {
-                    b.HasOne("BookCave.Data.EntityModels.Books", "Books")
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BookCave.Data.EntityModels.Genres", "Genres")
+                    b.HasOne("BookCave.Data.EntityModels.Genre", "Genre")
                         .WithMany()
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.BooksLanguages", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.BookLanguages", b =>
                 {
-                    b.HasOne("BookCave.Data.EntityModels.Books", "Book")
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BookCave.Data.EntityModels.Languages", "Language")
+                    b.HasOne("BookCave.Data.EntityModels.Language", "Language")
                         .WithMany()
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Feedbacks", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Feedback", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.OrdersBooks", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Order", b =>
                 {
-                    b.HasOne("BookCave.Data.EntityModels.Books", "Book")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                        .WithMany()
+                        .HasForeignKey("AspNetUsersId");
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.OrderBooks", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BookCave.Data.EntityModels.Orders", "Order")
+                    b.HasOne("BookCave.Data.EntityModels.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.OrderHistory", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                        .WithMany()
+                        .HasForeignKey("AspNetUsersId");
+
+                    b.HasOne("BookCave.Data.EntityModels.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -747,7 +776,7 @@ namespace BookCave.Migrations
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 
-                    b.HasOne("BookCave.Data.EntityModels.Books", "Books")
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -759,34 +788,35 @@ namespace BookCave.Migrations
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 
-                    b.HasOne("BookCave.Data.EntityModels.Books", "Books")
-                        .WithMany()
-                        .HasForeignKey("BooksId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("BookCave.Data.EntityModels.Reviews", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("AspNetUsersId");
-
-                    b.HasOne("BookCave.Data.EntityModels.Books", "Books")
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.ShippingAddresses", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Review", b =>
                 {
-                    b.HasOne("BookCave.Data.EntityModels.Countries", "Countries")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
                         .WithMany()
-                        .HasForeignKey("CountriesId");
+                        .HasForeignKey("AspNetUsersId");
+
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.ShippingAddress", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UserBillingAddresses", b =>
                 {
-                    b.HasOne("BookCave.Data.EntityModels.BillingAddresses", "Address")
+                    b.HasOne("BookCave.Data.EntityModels.BillingAddress", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -796,7 +826,7 @@ namespace BookCave.Migrations
                         .HasForeignKey("AspNetUsersId");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.UsersCards", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.UserCards", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
                         .WithMany()
@@ -808,33 +838,21 @@ namespace BookCave.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.UsersOrders", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.UserReview", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 
-                    b.HasOne("BookCave.Data.EntityModels.Orders", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("BookCave.Data.EntityModels.UsersReviews", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("AspNetUsersId");
-
-                    b.HasOne("BookCave.Data.EntityModels.Reviews", "Reviews")
+                    b.HasOne("BookCave.Data.EntityModels.Review", "Review")
                         .WithMany()
                         .HasForeignKey("ReviewId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.UsersShippingAddresses", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.UserShippingAddresses", b =>
                 {
-                    b.HasOne("BookCave.Data.EntityModels.ShippingAddresses", "Address")
+                    b.HasOne("BookCave.Data.EntityModels.ShippingAddress", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -844,13 +862,13 @@ namespace BookCave.Migrations
                         .HasForeignKey("AspNetUsersId");
                 });
 
-            modelBuilder.Entity("BookCave.Data.EntityModels.Wishlists", b =>
+            modelBuilder.Entity("BookCave.Data.EntityModels.Wishlist", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 
-                    b.HasOne("BookCave.Data.EntityModels.Books", "Books")
+                    b.HasOne("BookCave.Data.EntityModels.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -903,13 +921,15 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("BookCave.Data.EntityModels.AspNetUsers", b =>
                 {
-                    b.HasOne("BookCave.Data.EntityModels.Authors", "Authors")
+                    b.HasOne("BookCave.Data.EntityModels.Author", "FavoriteAuthor")
                         .WithMany()
-                        .HasForeignKey("AuthorsId");
+                        .HasForeignKey("FavoriteAuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BookCave.Data.EntityModels.Books", "Books")
+                    b.HasOne("BookCave.Data.EntityModels.Book", "FavoriteBook")
                         .WithMany()
-                        .HasForeignKey("BooksId");
+                        .HasForeignKey("FavoriteBookId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -51,7 +51,12 @@ namespace Book_Cave.Repositories
                                                      {
                                                          Id = Ge.Id,
                                                          Name = Ge.Name
-                                                     }).ToList()
+                                                     }).ToList(),
+                                            Image = Bo.Image,
+                                            Price = Bo.Price,
+                                            ISBN10 = Bo.ISBN10,
+                                            ISBN13 = Bo.ISBN13
+
                                         }).ToList()
                             }).ToList();
 

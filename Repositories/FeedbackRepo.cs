@@ -38,6 +38,30 @@ namespace Book_Cave.Repositories
                                         Date = Or.Date,
                                         Status = Or.Status,
                                         Price = Or.Price,
+                                        BookList = (from Ord in _db.Orders
+                                        join OrBo in _db.OrdersBooks on Ord.Id equals OrBo.OrderId
+                                        join Bo in _db.Books on OrBo.BookId equals Bo.Id
+                                        select new BookViewModel
+                                        {
+                                            Id = Bo.Id,
+                                            Title = Bo.Title,
+                                            Authors =  (from Bok in _db.Books
+                                                        join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
+                                                        join Au in _db.Authors on BoAu.AuthorId equals Au.Id
+                                                        select new AuthorViewModel
+                                                        {
+                                                            Id = Au.Id,
+                                                            Name = Au.Name
+                                                        }).ToList(),
+                                            Genre = (from Bk in _db.Books
+                                                     join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
+                                                     join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
+                                                     select new GenreViewModel
+                                                     {
+                                                         Id = Ge.Id,
+                                                         Name = Ge.Name
+                                                     }).ToList()
+                                        }).ToList()
                                      }).ToList(),
                             Date = F.Date,
                             Text = F.Text
