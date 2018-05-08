@@ -8,21 +8,26 @@ using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using BookCave.Models.RegistrationModels;
+using BookCave.Data;
+using System.Collections.Generic;
 
 namespace BookCave.Controllers
 {
     //[Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
-
+        private readonly DataContext _db;
         private readonly UserManager<AspNetUsers> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private BookService _bs = new BookService();
+        private readonly AdminService _adminService;
 
         public AdminController(UserManager<AspNetUsers> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _db = new DataContext();
+            _adminService = new AdminService();
         }
 
         public IActionResult Index()
@@ -96,7 +101,6 @@ namespace BookCave.Controllers
             }
         }
 
-
         //For adding roles to users
         public async Task AddRole(string email, string role)
         {
@@ -130,17 +134,26 @@ namespace BookCave.Controllers
         }
 
         [HttpPost]
-        public void WriteBook(BookRegistrationModel book)
+        public IActionResult CreateBook(BookRegistrationModel book)
         {
+            if(ModelState.IsValid)
+            {
+                //TODO implement error printout
+                ViewData["ErrorMessage"] = "Error";
+                return View("Error", "Home");
+            }
+
+            _adminService.ProcessNewBook(book);
+
             _bs.WriteBook(book);
+            return View("Index");
         }
 
         [HttpGet]
-        public IActionResult GetAuthor()
+        public List<BookViewModel> GetBookList()
         {
-
-            var author = _bs.GetAuthor();
-            return View("AuthorList", author);
+            var books = _bs.GetList();
+            return books;
         }
 
     }

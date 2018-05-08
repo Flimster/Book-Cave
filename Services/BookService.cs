@@ -4,6 +4,7 @@ using BookCave.Repositories;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
 using System.Collections.Generic;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Services
 {
@@ -35,22 +36,30 @@ namespace BookCave.Services
                 ReleaseYear = bookView.ReleaseYear,
                 Visibility = bookView.Visibility,
                 Publisher = bookView.Publisher,
-
-                //BookFormat = bookView.Formats,
-
-                //Formats = _db.Formats.Where(t => );
-
-                           /*var userProfiles = _dataContext.UserProfile
-                               .Where(t => idList.Contains(t.Id)); */
-                //Author = 
-
+                Rating = 0,
+                StockCount = bookView.StockCount,
+                Discount = bookView.Discount / 100,
             };
 
+            
+
+            var bookId = _bookRepo.Write(book);
+            
+            //Format && Author
             //_authorRepo.WriteAuthor(bookView.Authors);
-            _bookRepo.Write(book);
+        }
+        
+        public List<BookViewModel> GetBookList()
+        {
+            return _bookRepo.GetList();
         }
 
-        public List<Authors> GetAuthor()
+        public void DeleteBook(int Id)
+        {
+            
+        }
+
+        public List<Authors> GetAuthorList()
         {
             return _authorRepo.GetList();
         }
