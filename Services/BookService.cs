@@ -49,7 +49,7 @@ namespace BookCave.Services
             //_authorRepo.WriteAuthor(bookView.Authors);
         }
         
-        public List<BookViewModel> GetBookList()
+        public List<BookViewModel> GetList()
         {
             return _bookRepo.GetList();
         }
