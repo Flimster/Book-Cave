@@ -1,0 +1,78 @@
+
+@model BookCave.Models.ViewModels.OrderViewModel
+
+<head>
+    <link rel="stylesheet" href="~/css/Checkout/ShipBillCard.css">
+    <link rel="stylesheet" href="~/css/Checkout/Cart.css">
+</head>
+
+<div class="container">
+  <div class="col-sm-10 col-sm-offset-1">
+    <h2>Overview</h2>
+  </div>
+
+  <div class="col-sm-10 col-sm-offset-1">
+    <div class="table-container col-sm-3">
+      <table class="table table-sm">
+        <tr><th>Shipping address</th></tr>
+        <tr><td>Country: </td></tr>
+        <tr><td>State: </td></tr>
+        <tr><td>Zip: </td></tr>
+        <tr><td>Address: </td></tr>
+        <tr><td>Other: </td></tr>
+
+        <th>Billing address</th></tr>
+        <tr><td>Country: </td></tr>
+        <tr><td>State: </td></tr>
+        <tr><td>Zip: </td></tr>
+        <tr><td>Address: </td></tr>
+        <tr><td>Other: </td></tr>
+
+        <tr><th>Payment</th></tr>
+        <tr><td>Country: </td></tr>
+        <tr><td>State: </td></tr>
+        <tr><td>Zip: </td></tr>
+        <tr><td>Address: </td></tr>
+        <tr><td>Other: </td></tr>
+      </table>
+    </div>
+
+    <div class="order-overview col-sm-9">
+      <div class="col-sm-5">
+      <h4>Total Price: $@Model.TotalPrice</h4>
+    </div>
+    
+    <div class="order-checkout col-sm-2 col-sm-offset-5">
+      <a asp-action="Confirm"><button class="btn btn-primary">Confirm</button></a>
+    </div>
+    <hr>
+  </div>
+
+  <div class="order col-sm-9">
+    @foreach(var book in Model.BookList)
+    {
+      <div class="order-book col-sm-12">
+
+        <div class="book-img col-sm-1">
+          <img src="@book.Image" alt="@book.Title" style="background-color: yellow;">
+        </div>
+
+        <div class="book-details col-sm-8">
+          <a asp-controller="Book" asp-action="Index" asp-route-d=@book.Id><h4>@book.Title</h4></a>
+          @book.Author <br>
+          @book.Genre
+        </div>
+
+        <div class="book-opt col-sm-2">
+          <h4>$@book.Price</h4>
+        </div>
+      </div>  
+    }
+  </div>
+
+  <div class="col-sm-2 col-sm-offset-10">
+    <H4>Total Price: @Model.TotalPrice</H4>
+      <a asp-action="Confirm"><button class="btn btn-primary">Confirm</button></a>
+  </div>
+
+</div>

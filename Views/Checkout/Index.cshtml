@@ -1,0 +1,56 @@
+@model BookCave.Models.ViewModels.OrderViewModel
+
+<head>
+  <link rel="stylesheet" href="~/css/Checkout/Cart.css">
+</head>
+
+<div class="container">
+  <div class="col-sm-10 col-sm-offset-1">
+    <h2>Cart</h2>  
+  </div>
+
+  <div class="order-details col-sm-10 col-sm-offset-1">
+    <div class="col-sm-3">
+      <h4>Total Price: $@Model.TotalPrice</h4>
+    </div>
+    
+    <div class="order-checkout col-sm-2 col-sm-offset-7">
+      <a asp-action="Shipping"> <button class="btn btn-primary">Checkout</button></a>
+    </div>
+    <hr>
+  </div>
+
+  <div class="order col-sm-10 col-sm-offset-1">
+    @foreach(var book in Model.BookList)
+    {
+      <div class="order-book col-sm-12">
+
+        <div class="book-img col-sm-1">
+          <img src="@book.Image" alt="@book.Title" style="background-color: yellow;">
+        </div>
+
+        <div class="book-details col-sm-8">
+          <a asp-controller="Book" asp-action="Index" asp-route-d=@book.Id><h4>@book.Title</h4></a>
+          @book.Author <br>
+          @book.Genre
+        </div>
+
+        <div class="book-opt col-sm-2">
+          <h4>$@book.Price</h4>
+          <div class="book-stock">
+            <strong>
+              In stock
+            </strong>
+          </div>
+          <div class="input-group input-group-sm input-group-inline">
+            <label for="quant">Quantity</label><br>
+            <input class="input-control" type="number" name="quant" id="quant">
+          </div>
+          <div>
+            <a asp-controller="#" asp-action="#" asp-route-d=@book.Id>Delete</a>
+          </div>
+        </div>
+      </div>  
+    }
+  </div>
+</div>

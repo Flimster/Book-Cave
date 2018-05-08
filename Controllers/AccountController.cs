@@ -14,11 +14,13 @@ namespace BookCave.Data.EntityModels
     {
         private readonly SignInManager<AspNetUsers> _signInManager;
         private readonly UserManager<AspNetUsers> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(SignInManager<AspNetUsers> signInManager, UserManager<AspNetUsers> userManager)
+        public AccountController(SignInManager<AspNetUsers> signInManager, UserManager<AspNetUsers> userManager, RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Register()
@@ -45,7 +47,7 @@ namespace BookCave.Data.EntityModels
             {
                 //User successfully registered
                 await _userManager.AddClaimAsync(user, new Claim("Customer", $"{model.Name}"));
-                await authenticationService.AddRole(user.Email, "Customer");
+                await AddRole(user.Email, "Customer");
                 await _signInManager.SignInAsync(user, false);
 
                 return RedirectToAction("Index", "Home");
@@ -110,6 +112,23 @@ namespace BookCave.Data.EntityModels
             }
             return View("Index", "Home");
         }
-        
+
+
+        //Because of null
+        public async Task<bool> AddRole(string email, string role)
+        {
+            //Find the requested user
+            var user = await _userManager.FindByEmailAsync(email);
+
+            //Check if user has the requested role
+            bool roleCheck = await _roleManager.RoleExistsAsync(role);
+            if(!roleCheck)
+            {
+                await _userManager.AddToRoleAsync(user, role);
+                return true;
+            }
+            return false;
+        }
+
     }
 }

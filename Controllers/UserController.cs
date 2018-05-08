@@ -38,19 +38,19 @@ namespace BookCave.Controllers
 					new OrderViewModel()
 					{
 							Id = 0,
-							UserId = 1,
-							OrderPlaced = new DateTime(),
-							OrderStatus = false,
-							TotalPrice = 50,
+							//User = 1,
+							Date = new DateTime(),
+							Status = false,
+							Price = 50,
 							BookList = FakeDatabase.Books
 					},
 					new OrderViewModel()
 					{
 							Id = 1,
-							UserId = 1,
-							OrderPlaced = new DateTime(),
-							OrderStatus = false,
-							TotalPrice = 50,
+							//User = ,
+							Date = new DateTime(),
+							Status = false,
+							Price = 50,
 							BookList = FakeDatabase.Books
 					}
 				};
