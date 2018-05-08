@@ -1,0 +1,26 @@
+table {
+  background-color: white;
+}
+
+table, .table th, .table td {
+  border: none !important;
+  padding-bottom: 0px !important;
+}
+
+.table td {
+  padding-top: 2px !important;
+}
+
+.table-container {
+  padding-left: 0px;
+  padding-bottom: 10px !important;
+}
+
+.shipping-item-info {
+  background-color: white;
+  padding: 10px;
+}
+
+.order-overview {
+  background-color: white;
+}

@@ -1,0 +1,80 @@
+@model BookCave.Models.ViewModels.OrderViewModel
+
+<head>
+    <link rel="stylesheet" href="~/css/Checkout/ShipBillCard.css">
+</head>
+
+<div class="container">
+  <div class="col-sm-10 col-sm-offset-1">
+    <h2>Billing</h2>
+  </div>
+
+  <div class="col-sm-10 col-sm-offset-1">
+    <div class="table-container col-sm-3">
+      <table class="table table-sm">
+        <tr><th>Shipping address</th></tr>
+        
+        <tr><td>Country: </td></tr>
+        <tr><td>State: </td></tr>
+        <tr><td>Zip: </td></tr>
+        <tr><td>Address: </td></tr>
+        <tr><td>Other: </td></tr>
+
+        <th>Billing address</th></tr>
+        <tr><td>Country: </td></tr>
+        <tr><td>State: </td></tr>
+        <tr><td>Zip: </td></tr>
+        <tr><td>Address: </td></tr>
+        <tr><td>Other: </td></tr>
+
+        <tr><th>Payment</th></tr>
+        <tr><td>Country: </td></tr>
+        <tr><td>State: </td></tr>
+        <tr><td>Zip: </td></tr>
+        <tr><td>Address: </td></tr>
+        <tr><td>Other: </td></tr>
+      </table>
+    </div>
+
+    <div class="shipping-stored col-sm-9">
+      <div class="shipping-item col-sm-4">
+        <div class="shipping-item-info">
+          Country: <br>
+          State: <br>
+          Zip: <br>
+          Address: <br>
+          Other: 
+        </div>
+      </div>
+
+      <div class="shipping-item col-sm-4">
+        <div class="shipping-item-info">
+          Country: <br>
+          State: <br>
+          Zip: <br>
+          Address: <br>
+          Other: 
+        </div>
+      </div>
+
+      <div class="shipping-item col-sm-4">
+        <div class="shipping-item-info">
+          Country: <br>
+          State: <br>
+          Zip: <br>
+          Address: <br>
+          Other: 
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-2">
+      <a asp-action="Shipping"><button class="btn btn-primary">Back</button></a>
+    </div>
+    <div class="col-sm-2 col-sm-offset-8">
+      <a asp-action="Card"><button class="btn btn-primary">Continue</button></a>
+    </div>
+  </div>
+</div>

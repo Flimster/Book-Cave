@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
 {
-    [Authorize(Roles = "Admin, Customer")]
+    //[Authorize(Roles = "Admin, Customer")]
     public class BookController : Controller
     {
         public IActionResult Index(int? id)
