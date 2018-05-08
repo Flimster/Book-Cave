@@ -25,14 +25,10 @@ namespace Book_Cave.Repositories
                             User = (from Us in _db.Orders
                                     join UsOr in _db.UsersOrders on Us.Id equals UsOr.Id
                                     join As in _db.AspNetUsers on UsOr.AspNetUsersId equals As.Id
-                                    select new OrderViewModel
-                                    {
-                                        User = As.Name
-                                        
-                                    }).ToString(),
-                            OrderDate = O.OrderDate,
-                            OrderStatus = O.OrderStatus,
-                            OrderPrice = O.OrderPrice,
+                                    select As.Name).ToString(),
+                            Date = O.Date,
+                            Status = O.Status,
+                            Price = O.Price,
                             BookList = (from Or in _db.Orders
                                         join OrBo in _db.OrdersBooks on Or.Id equals OrBo.OrderId
                                         join Bo in _db.Books on OrBo.BookId equals Bo.Id
