@@ -14,7 +14,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<Reviews> ReviewList()
+        public List<Reviews> GetList()
         {
             var review = (from R in _db.Genres
                         select new Reviews
@@ -25,9 +25,15 @@ namespace BookCave.Repositories
             return review;
         }
 
-        public void WriteAuthor(Reviews review)
+        public void Write(Reviews review)
         {
             _db.Add(review);
+            _db.SaveChanges();
+        }
+
+        public void Remove(Reviews review)
+        {
+            _db.Remove(review);
             _db.SaveChanges();
         }
     }

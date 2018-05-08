@@ -15,7 +15,7 @@ namespace Book_Cave.Repositories
             _db = new DataContext();
         }
 
-        public List<OrderViewModel> GetOrderList()
+        public List<OrderViewModel> GetList()
         {
             var order = (from O in _db.Orders
                         select new OrderViewModel
@@ -33,9 +33,15 @@ namespace Book_Cave.Repositories
             return order;
         }
 
-        public void WriteOrder(Orders order)
+        public void Write(Orders order)
         {
             _db.Add(order);
+            _db.SaveChanges();
+        }
+
+        public void Remove(Orders order)
+        {
+            _db.Remove(order);
             _db.SaveChanges();
         }
     }

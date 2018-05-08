@@ -17,7 +17,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<BookViewModel> GetBookList()
+        public List<BookViewModel> GetList()
         {
             var Books = (from B in _db.Books
                         select new BookViewModel
@@ -39,9 +39,15 @@ namespace BookCave.Repositories
             return Books;
         }
 
-        public void WriteBook(Books book)
+        public void Write(Books book)
         {
             _db.Add(book);
+            _db.SaveChanges();
+        }
+
+        public void Remove(Books book)
+        {
+            _db.Remove(book);
             _db.SaveChanges();
         }
     }

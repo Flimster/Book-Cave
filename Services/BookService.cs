@@ -47,12 +47,12 @@ namespace BookCave.Services
             };
 
             //_authorRepo.WriteAuthor(bookView.Authors);
-            _bookRepo.WriteBook(book);
+            _bookRepo.Write(book);
         }
 
         public List<Authors> GetAuthor()
         {
-            return _authorRepo.GetAuthorList();
+            return _authorRepo.GetList();
         }
 
     }

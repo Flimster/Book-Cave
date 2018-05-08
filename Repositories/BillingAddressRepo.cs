@@ -14,7 +14,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<BillingAddresses> GetBillingAddressList()
+        public List<BillingAddresses> GetList()
         {
             var billingAddresses = (from B in _db.BillingAddress
                         select new BillingAddresses
@@ -29,9 +29,15 @@ namespace BookCave.Repositories
             return billingAddresses;
         }
 
-        public void WriteBillingAddress(BillingAddresses billingAddress)
+        public void Write(BillingAddresses billingAddress)
         {
             _db.Add(billingAddress);
+            _db.SaveChanges();
+        }
+
+        public void Remove(BillingAddresses address)
+        {
+            _db.Remove(address);
             _db.SaveChanges();
         }
     }
