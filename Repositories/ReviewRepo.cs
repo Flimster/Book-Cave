@@ -3,13 +3,15 @@ using BookCave.Data;
 using BookCave.Data.EntityModels;
 using System.Linq;
 using BookCave.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookCave.Repositories
 {
     public class ReviewRepo
     {
         private DataContext _db;
-
+        
         public ReviewRepo()
         {
             _db = new DataContext();
@@ -17,16 +19,18 @@ namespace BookCave.Repositories
 
         public List<ReviewViewModel> GetList()
         {
+            
+            
             var review = (from R in _db.Reviews
                         select new ReviewViewModel
                         {
                             Id = R.Id,
                             UserName = (from Re in _db.Reviews
-                                        join Us in _db.AspNetUsers on Re.AspNetUsersId equals Us.Id
-                                        select Us.Name).ToString(),
+                                        join Us in _db.AspNetUsers on Re.AspNetUsersId equals Us.CustomId
+                                        select Us.Name).SingleOrDefault(),
                             Book = (from Re in _db.Reviews
                                     join Bo in _db.Books on Re.BookId equals Bo.Id
-                                    select Bo.Title).ToString(),
+                                    select Bo.Title).SingleOrDefault(),
                             Text = R.Text,
                             Rating = R.Rating,
                             Date = R.Date,

@@ -8,6 +8,12 @@ namespace BookCave.Controllers
     //[Authorize(Roles = "Admin, Customer")]
     public class BookController : Controller
     {
+        private readonly BookService _bookService;
+
+        public BookController()
+        {
+            _bookService = new BookService();
+        }
 
         public IActionResult Index(int? id)
         {
@@ -22,6 +28,12 @@ namespace BookCave.Controllers
             return View("Not found");
           }
           return View(book);
+        }
+
+        public IActionResult Test()
+        {
+            var book = _bookService.GetReviewList();
+            return View(book);
         }
     }
 }
