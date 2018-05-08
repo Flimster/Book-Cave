@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using BookCave.Models;
 using BookCave.Data.EntityModels;
-
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace BookCave.Controllers
 {
@@ -40,6 +40,16 @@ namespace BookCave.Controllers
 
         public IActionResult Error()
         {
+            var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            if(exceptionFeature != null)
+            {
+                string path = exceptionFeature.Path;
+                Exception exception = exceptionFeature.Error;
+
+                //TODO: Write to databse
+            }
+
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

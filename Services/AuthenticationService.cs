@@ -30,15 +30,11 @@ namespace BookCave.Services
             _user = new AspNetUsers
             {
                 Image = "~/Images/DefaultProfileImage.png",
-                //Foreign key FavoriteBook
-                FavoriteBookId = 0,
-                //Foreign key FavoriteAuthor
-                FavoriteAuthorId = 0,
+                FavoriteBookId = 1,
+                FavoriteAuthorId = 1,
                 RegistrationDate = DateTime.Now,
                 LastLoggedInDate = DateTime.Now,
                 BookSuggestionsEmail = false,
-                ActiveStatus = true,
-                UserGroup = 0,
                 TotalReports = 0,
                 TotalBans = 0,
                 UserName = model.Email,
@@ -51,14 +47,14 @@ namespace BookCave.Services
 
 
         //_userManager and _roleManager always null when passing managers
-        //Add default role to account
+        //Add default role to account4w
         public async Task<bool> AddRole(string email, string role)
         {
             //Find the requested user
             var user = await _userManager.FindByEmailAsync(email);
 
             //Check if user has the requested role
-            bool roleCheck = await _roleManager.RoleExistsAsync(role);
+            bool roleCheck = await this._roleManager.RoleExistsAsync(role);
             if(!roleCheck)
             {
                 await _userManager.AddToRoleAsync(user, role);

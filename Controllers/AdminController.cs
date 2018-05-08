@@ -7,25 +7,60 @@ using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using BookCave.Models.RegistrationModels;
+using BookCave.Data;
+using System.Collections.Generic;
 
-namespace Book_Cave.Controllers
+namespace BookCave.Controllers
 {
     //[Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
-
+        private readonly DataContext _db;
         private readonly UserManager<AspNetUsers> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private BookService _bs = new BookService();
+        private readonly AdminService _adminService;
 
         public AdminController(UserManager<AspNetUsers> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _db = new DataContext();
+            _adminService = new AdminService();
         }
-
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetManageBooks()
+        {
+            return Json(BookCave.FakeDatabase.Books);
+        }
+
+        [HttpGet]
+        public JsonResult getUsers()
+        {
+            var user1 = new UserPrivateViewModel()
+            {
+                Id = 1,
+                Image = "https://mk0slamonlinensgt39k.kinstacdn.com/wp-content/uploads/2017/04/lebron_james_travel.jpg",
+                Email = "someemail@gmail.com",
+                Name = "Lebron James"
+            };
+             var user2 = new UserPrivateViewModel()
+            {
+                Id = 1,
+                Image = "https://mk0slamonlinensgt39k.kinstacdn.com/wp-content/uploads/2017/04/lebron_james_travel.jpg",
+                Email = "someemail@gmail.com",
+                Name = "Lebron James"
+            };
+
+            var users = new List<UserPrivateViewModel>(){user1, user2};
+            return Json(users);
         }
         
         [HttpPost]
@@ -53,11 +88,11 @@ namespace Book_Cave.Controllers
         //TODO: Find a better place for this
         [HttpPost]
         private async Task createRolesandUsers()
-        {  
+        {
             AuthenticationService authenticationService = new AuthenticationService();
 
-            bool x = await _roleManager.RoleExistsAsync("Admin");
-            if (!x)
+            bool check = await _roleManager.RoleExistsAsync("Admin");
+            if (!check)
             {
 
                 // first we create Admin role    
@@ -84,8 +119,8 @@ namespace Book_Cave.Controllers
             }
 
             // creating Creating Customer role     
-            x = await _roleManager.RoleExistsAsync("Customer");
-            if (!x)
+            check = await _roleManager.RoleExistsAsync("Customer");
+            if (!check)
             {
                 var role = new IdentityRole();
                 role.Name = "Customer";
@@ -93,7 +128,6 @@ namespace Book_Cave.Controllers
 
             }
         }
-
 
         //For adding roles to users
         public async Task AddRole(string email, string role)
@@ -126,5 +160,29 @@ namespace Book_Cave.Controllers
             //Doing this instead of the above makes _userManager = null
             //await _authenticationService.Remove(email, role);
         }
+
+        [HttpPost]
+        public IActionResult CreateBook(BookRegistrationModel book)
+        {
+            if(!ModelState.IsValid)
+            {
+                //TODO implement error printout
+                ViewData["ErrorMessage"] = "Error";
+                return View("Error", "Home");
+            }
+
+            _adminService.ProcessNewBook(book);
+
+            _bs.WriteBook(book);
+            return View("Index");
+        }
+
+        [HttpGet]
+        public List<BookViewModel> GetBookList()
+        {
+            var books = _bs.GetList();
+            return books;
+        }
+
     }
 }
