@@ -7,11 +7,11 @@ namespace BookCave.Repositories
 {
     public class FormatsRepo
     {
-        private AuthenticationDbContext _db;
+        private DataContext _db;
 
         public FormatsRepo()
         {
-            //_db = new DataContext();
+            _db = new DataContext();
         }
 
         public List<Formats> GetFormatList()

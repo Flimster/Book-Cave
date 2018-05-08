@@ -7,11 +7,11 @@ namespace BookCave.Repositories
 {
     public class GenreRepo
     {
-        private AuthenticationDbContext _db;
+        private DataContext _db;
 
         public GenreRepo()
         {
-            //_db = new DataContext();
+            _db = new DataContext();
         }
 
         public List<Genres> GetGenreList()

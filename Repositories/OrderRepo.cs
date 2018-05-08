@@ -8,11 +8,11 @@ namespace Book_Cave.Repositories
 {
     public class OrderRepo
     {
-        private AuthenticationDbContext _db;
+        private DataContext _db;
 
         public OrderRepo()
         {
-            //_db = new DataContext();
+            _db = new DataContext();
         }
 
         public List<OrderViewModel> GetOrderList()

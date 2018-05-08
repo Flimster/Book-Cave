@@ -7,11 +7,11 @@ namespace BookCave.Repositories
 {
     public class ShippingAddressRepo
     {
-         private AuthenticationDbContext _db;
+         private DataContext _db;
 
         public ShippingAddressRepo()
         {
-            //_db = new DataContext();
+            _db = new DataContext();
         }
 
         public List<ShippingAddresses> GetShippingAddressList()

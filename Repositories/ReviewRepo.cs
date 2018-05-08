@@ -7,11 +7,11 @@ namespace BookCave.Repositories
 {
     public class ReviewRepo
     {
-        private AuthenticationDbContext _db;
+        private DataContext _db;
 
         public ReviewRepo()
         {
-            //_db = new DataContext();
+            _db = new DataContext();
         }
 
         public List<Reviews> ReviewList()

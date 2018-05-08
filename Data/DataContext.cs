@@ -3,15 +3,15 @@ using BookCave.Data.EntityModels;
 namespace BookCave.Data
 {
     public class DataContext : DbContext
-    {/* 
+    {
         public DbSet<AspNetUsers> AspNetUsers {get;set;}
         public DbSet<Authors> Authors {get; set;}
-        public DbSet<BillingAddresses> BillingAddresses {get; set;}
+        public DbSet<BillingAddresses> BillingAddress {get; set;}
         public DbSet<Books> Books {get; set;}
         public DbSet<BooksAuthors> BooksAuthors {get;set;}
         public DbSet<BooksGenres> BookGenres {get;set;}
         public DbSet<BooksLanguages> BooksLanguages { get; set; }
-        public DbSet<CardsDetails> CardsDetails {get; set;}
+        public DbSet<CardDetails> CardDetails {get; set;}
         public DbSet<Countries> Countries {get; set;}
         public DbSet<Feedbacks> Feedbacks {get; set;}
         public DbSet<Formats> Formats {get; set;}
@@ -26,10 +26,9 @@ namespace BookCave.Data
         public DbSet<ShippingAddresses> ShippingAddresses { get; set; }
         public DbSet<UserBillingAddresses> UserBillingAddresses { get; set; }
         public DbSet<UsersCards> UsersCards { get; set; }
-        public DbSet<UsersReviews> UsersReviews {get;set;}
+        public DbSet<UsersReviews> UsersReviews { get; set; }
         public DbSet<UsersShippingAddresses> UsersShippingAddresses {get;set;}
         public DbSet<Wishlists> Wishlists {get;set;}
-*/
                 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         {

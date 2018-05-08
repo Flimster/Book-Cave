@@ -46,7 +46,7 @@ namespace BookCave.Services
 
             };
 
-            _authorRepo.WriteAuthor(bookView.Authors);
+            //_authorRepo.WriteAuthor(bookView.Authors);
             _bookRepo.WriteBook(book);
         }
 
