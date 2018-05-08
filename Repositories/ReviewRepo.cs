@@ -26,7 +26,7 @@ namespace BookCave.Repositories
                         {
                             Id = R.Id,
                             UserName = (from Re in _db.Reviews
-                                        join Us in _db.AspNetUsers on Re.AspNetUsersId equals Us.CustomId
+                                        join Us in _db.AspNetUsers on Re.AspNetUsersId equals Us.Id
                                         select Us.Name).SingleOrDefault(),
                             Book = (from Re in _db.Reviews
                                     join Bo in _db.Books on Re.BookId equals Bo.Id

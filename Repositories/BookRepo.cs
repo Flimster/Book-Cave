@@ -24,7 +24,7 @@ namespace BookCave.Repositories
                             Title = B.Title,
                      
                             Authors = (from Bo in _db.Books
-                                        join Ba in _db.BooksAuthors on B.Id equals Ba.Id
+                                        join Ba in _db.BooksAuthors on Bo.Id equals Ba.Id
                                         join BoAu in _db.Authors on Ba.AuthorId equals BoAu.Id
                                         select new AuthorViewModel
                                         {
@@ -32,7 +32,7 @@ namespace BookCave.Repositories
                                             Name = BoAu.Name
                                         }).ToList(),
                             Genre = (from Bk in _db.Books
-                                    join BoGe in _db.BookGenres on B.Id equals BoGe.BookId
+                                    join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
                                     join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
                                     select new GenreViewModel
                                     {

@@ -7,7 +7,7 @@ namespace BookCave.Data.EntityModels
 {
     public class AspNetUsers : IdentityUser
     {
-        //public override string Id { get; set; }
+        public string CustomId {get; set;}
         public string Image { get; set; }
         public string Name { get; set; }
         [ForeignKey("Book")]
