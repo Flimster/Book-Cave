@@ -25,7 +25,7 @@ $.get("User/GetProfile", function (data, status) {
 		"</div>";
 	$("#user-box").html(userProfileHTML);
 }).fail(function (errorObject) {
-	alert("Something went wrong");
+	console.log(errorObject);
 });
 
 
@@ -43,7 +43,7 @@ $("#panel-profile").on("click", function () {
 			"</div>";
 		$("#user-box").html(userProfileHTML);
 	}).fail(function (errorObject) {
-		alert("Something went wrong");
+		console.log(errorObject);
 	});
 });
 
@@ -98,7 +98,8 @@ $("#panel-orders").on("click", function () {
 		}
 		$("#user-box").html(orderInformationHTML);
 	}).fail(function (errorObject) {
-		alert("Something went wrong");
+		console.log(errorObject);
+
 	});
 });
 
@@ -122,7 +123,7 @@ $("#panel-wish-list").on("click", function () {
 		}
 		$("#user-box").html(wishListHTML);
 	}).fail(function (errorObject) {
-		alert("Something went wrong");
+		console.log(errorObject);
 	});
 });
 
@@ -144,7 +145,8 @@ $("#panel-bookshelf").on("click", function () {
 		}
 		$("#user-box").html(bookshelfHTML);
 	}).fail(function (errorObject) {
-		alert("Something went wrong");
+		console.log(errorObject);
+
 	});
 });
 
@@ -167,13 +169,18 @@ $("#panel-settings").on("click", function () {
 			"</div>";
 		$("#user-box").html(settingsHTML);
 	}).fail(function (errorObject) {
-		alert("Something went wrong");
+		console.log(errorObject);
+
 	});
 });
 
 
 $("#panel-payment-shipping").on("click", function () {
 	$.get("User/GetPaymentAndShipping", function (data, status) {
+		// const bingodingo = 'HELLO!';
+		// `<h2>${bingodingo}
+
+		// </h2>`
 		paymentAndShippingHTML =
 			"<h2> Payment methods </h2>" +
 			"<div class='col-lg-12'>" +
@@ -192,6 +199,6 @@ $("#panel-payment-shipping").on("click", function () {
 			"</div>";
 		$("#user-box").html(paymentAndShippingHTML);
 	}).fail(function (errorObject) {
-		alert("Something went wrong");
+		console.log(errorObject);
 	});
 });
