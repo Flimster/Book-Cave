@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using BookCave.Repositories;
 using BookCave.Models.ViewModels;
-using Book_Cave.Models.ViewModels;
 
 namespace BookCave.Repositories
 {
@@ -16,7 +15,6 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-
         public List<BookViewModel> GetList()
         {
             var Books = (from B in _db.Books
@@ -27,13 +25,13 @@ namespace BookCave.Repositories
                             Image = B.Image,
                             Price = B.Price,
                             Authors = (from Bo in _db.Books
-                                    join Ba in _db.BooksAuthors on Bo.Id equals Ba.Id
-                                    join BoAu in _db.Authors on Ba.AuthorId equals BoAu.Id
-                                    select new AuthorViewModel
-                                    {
-                                        Id = BoAu.Id,
-                                        Name = BoAu.Name
-                                    }).ToList()
+                                        join Ba in _db.BooksAuthors on Bo.Id equals Ba.Id
+                                        join BoAu in _db.Authors on Ba.AuthorId equals BoAu.Id
+                                        select new AuthorViewModel
+                                        {
+                                            Id = BoAu.Id,
+                                            Name = BoAu.Name
+                                        }).ToList()
                         }).ToList();
             
             return Books;

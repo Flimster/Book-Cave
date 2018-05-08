@@ -14,14 +14,14 @@ namespace BookCave.Services
         private AuthorRepo _authorRepo;
         private FormatsRepo _formatsRepo;
 
-        private AuthenticationDbContext _db;
+        private DataContext _db;
 
         public BookService()
         {
             _bookRepo = new BookRepo();
             _authorRepo = new AuthorRepo();
             _formatsRepo = new FormatsRepo();
-           // _db = new AuthenticationDbContext();
+            _db = new DataContext();
         }
 
         public void WriteBook(BookRegistrationModel bookView)

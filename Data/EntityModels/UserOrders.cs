@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BookCave.Data.EntityModels
 {
-    public class OrdersHistories
+    public class UsersOrders
     {
         public int Id { get; set; }
         [ForeignKey("AspNetUsers")]

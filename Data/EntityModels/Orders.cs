@@ -11,12 +11,9 @@ namespace BookCave.Data.EntityModels
     public class Orders
     {
         public int Id { get; set; }
-        [ForeignKey("AspNetUsers")]
-        public string AspNetUsersId { get; set; }
-        public virtual IdentityUser AspNetUsers { get; set; }
-        public DateTime OrderDate { get; set; }
-        public bool OrderStatus { get; set; }
-        public double OrderPrice { get; set; }
+        public DateTime Date { get; set; }
+        public bool Status { get; set; }
+        public double Price { get; set; }
        // [ForeignKey("ShippingAddress")]
         public int ShippingAddressId { get; set; }
         //public virtual ShippingAddress ShippingAddress { get; set; }
@@ -26,6 +23,6 @@ namespace BookCave.Data.EntityModels
         //[ForeignKey("CardDetails")]
         public int CardDetailsId { get; set; }
         //public virtual CardDetails CardDetails { get; set; } 
-        public int OrderBooksId { get; set; }
+        public int BooksId { get; set; }
     }
 }

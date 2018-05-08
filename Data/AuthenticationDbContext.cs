@@ -9,7 +9,6 @@ namespace BookCave.Data
 {
     public class AuthenticationDbContext : IdentityDbContext<IdentityUser>
     {
-
         public DbSet<AspNetUsers> AspNetUsers {get;set;}
         public DbSet<Authors> Authors {get; set;}
         public DbSet<BillingAddresses> BillingAddress {get; set;}
@@ -25,7 +24,7 @@ namespace BookCave.Data
         public DbSet<Languages> Languages {get; set;}
         public DbSet<Orders> Orders {get; set;}
         public DbSet<OrdersBooks> OrdersBooks { get; set; }
-        public DbSet<OrdersHistories> OrdersHistories { get; set; }
+        public DbSet<UsersOrders> UsersOrders { get; set; }
         public DbSet<OwnedBooks> OwnedBooks {get;set;}
         public DbSet<ReadBooks> ReadBooks {get;set;}
         public DbSet<Reviews> Reviews {get; set;}
