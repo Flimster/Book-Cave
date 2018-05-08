@@ -17,5 +17,15 @@ namespace BookCave
             new BookViewModel { Id = 8, Title = "Lord of the Flies", Author = "William Golding", Genre = "Fiction", Image = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/3995/9780399501487.jpg", Price = 12.99 },
             new BookViewModel { Id = 9, Title = "The Catcher in the Rye", Author = "J.D. Salinger", Genre = "Fiction", Image = "https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9780/3167/9780316769488.jpg", Price = 19.99 }
         };
+
+        public static OrderViewModel Order = new OrderViewModel
+        {
+          Id = 34,
+          UserId = 56,
+          OrderPlaced = new System.DateTime(2014, 09, 14),
+          OrderStatus = true,
+          BookList = Books,
+          TotalPrice = 112.91
+        };
     }
 }
