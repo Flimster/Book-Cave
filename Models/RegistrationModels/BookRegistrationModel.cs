@@ -6,7 +6,7 @@ namespace BookCave.Models.RegistrationModels
     public class BookRegistrationModel
     {
         public string Title { get; set; }
-        public List<Author> Author { get; set; }
+        public List<Authors> Authors { get; set; }
         public List<string> Genre { get; set; }
         public string Image { get; set; }
         public double Price { get; set; }

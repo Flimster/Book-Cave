@@ -14,10 +14,10 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<Review> ReviewList()
+        public List<Reviews> ReviewList()
         {
-            var review = (from R in _db.Genre
-                        select new Review
+            var review = (from R in _db.Genres
+                        select new Reviews
                         {
                             Id = R.Id,
                         }).ToList();
@@ -25,7 +25,7 @@ namespace BookCave.Repositories
             return review;
         }
 
-        public void WriteAuthor(Review review)
+        public void WriteAuthor(Reviews review)
         {
             _db.Add(review);
             _db.SaveChanges();

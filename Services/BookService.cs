@@ -13,19 +13,19 @@ namespace BookCave.Services
         private AuthorRepo _authorRepo;
         private FormatsRepo _formatsRepo;
 
-        private DataContext _db;
+        private AuthenticationDbContext _db;
 
         public BookService()
         {
             _bookRepo = new BookRepo();
             _authorRepo = new AuthorRepo();
             _formatsRepo = new FormatsRepo();
-            _db = new DataContext();
+           // _db = new AuthenticationDbContext();
         }
 
         public void WriteBook(BookRegistrationModel bookView)
         {
-            var book = new Book() {
+            var book = new Books() {
                 Title = bookView.Title,
                 Image = bookView.Image,
                 Price = bookView.Price,
@@ -46,11 +46,11 @@ namespace BookCave.Services
 
             };
 
-            _authorRepo.WriteAuthor(bookView.Author);
+            _authorRepo.WriteAuthor(bookView.Authors);
             _bookRepo.WriteBook(book);
         }
 
-        public List<Author> GetAuthor()
+        public List<Authors> GetAuthor()
         {
             return _authorRepo.GetAuthorList();
         }

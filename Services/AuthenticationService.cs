@@ -36,7 +36,6 @@ namespace BookCave.Services
                 LastLoggedInDate = DateTime.Now,
                 BookSuggestionsEmail = false,
                 ActiveStatus = true,
-                UserGroup = 0,
                 TotalReports = 0,
                 TotalBans = 0,
                 UserName = model.Email,

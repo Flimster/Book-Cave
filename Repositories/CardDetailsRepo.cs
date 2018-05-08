@@ -14,7 +14,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<CardDetails> GetPublisherList()
+        public List<CardDetails> GetCardDetailsList()
         {
             var cardDetails = (from C in _db.CardDetails
                         select new CardDetails
@@ -29,7 +29,7 @@ namespace BookCave.Repositories
             return cardDetails;
         }
 
-        public void WriteAuthor(CardDetails card)
+        public void WriteCardDetails(CardDetails card)
         {
             _db.Add(card);
             _db.SaveChanges();

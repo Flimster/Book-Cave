@@ -3,7 +3,7 @@ using BookCave.Data;
 using BookCave.Data.EntityModels;
 using System.Linq;
 
-namespace BookCave.Repositories
+namespace Book_Cave.Repositories
 {
     public class LanguageRepo
     {
@@ -14,19 +14,19 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<Language> GetLanguageList()
+        public List<Languages> GetLanguageList()
         {
-            var languages = (from L in _db.Language
-                        select new Language
+            var language = (from L in _db.Genres
+                        select new Languages
                         {
                             Id = L.Id,
-                            Name = L.Name,
+                            Name = L.Name
                         }).ToList();
             
-            return languages;
+            return language;
         }
 
-        public void WriteAuthor(Language language)
+        public void WriteLanguage(Languages language)
         {
             _db.Add(language);
             _db.SaveChanges();
