@@ -31,6 +31,7 @@ namespace BookCave.Repositories
                                                 Authors =  (from Bok in _db.Books
                                                             join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
                                                             join Au in _db.Authors on BoAu.AuthorId equals Au.Id
+                                                            where Bo.Id == BoAu.BookId && Au.Id == BoAu.AuthorId    //CHECK
                                                             select new AuthorViewModel
                                                             {
                                                                 Id = Au.Id,
@@ -39,6 +40,7 @@ namespace BookCave.Repositories
                                                 Genre = (from Bk in _db.Books
                                                         join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
                                                         join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
+                                                        where Bo.Id == BoGe.BookId && Ge.Id == BoGe.GenreId     //CHECK
                                                         select new GenreViewModel
                                                         {
                                                             Id = Ge.Id,
@@ -50,6 +52,7 @@ namespace BookCave.Repositories
                                                             ISBN13 = Bo.ISBN13 }).ToList(),
                             FavoriteAuthor = (from Us in _db.AspNetUsers
                                                 join Au in _db.Authors on Us.FavoriteAuthorId equals Au.Id
+                                                where U.FavoriteAuthorId == Au.Id   //CHECK
                                                 select new AuthorViewModel
                                                 {
                                                     Id = Au.Id,

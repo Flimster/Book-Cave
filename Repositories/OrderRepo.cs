@@ -25,6 +25,7 @@ namespace Book_Cave.Repositories
                             User = (from Us in _db.Orders
                                     join UsOr in _db.UsersOrders on Us.Id equals UsOr.Id
                                     join As in _db.AspNetUsers on UsOr.AspNetUsersId equals As.Id
+                                    where O.Id == UsOr.OrderId && UsOr.AspNetUsersId == As.Id   //CHECK
                                     select As.Name).ToString(),
                             Date = O.Date,
                             Status = O.Status,
