@@ -171,6 +171,7 @@ div > form > input {
 
 #logo {
   height: 50px;
+
 }
 
 #search-icon {
@@ -231,4 +232,12 @@ html, body {
   font-weight: 700;
   margin-top: 10px;
   font-size: 26px;
+}
+
+#shopping-icon-link {
+  text-decoration: none;
+}
+
+i.fas {
+  color: black;
 }
