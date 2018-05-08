@@ -44,14 +44,23 @@ namespace BookCave.Repositories
                                                             Id = Ge.Id,
                                                             Name = Ge.Name
                                                         }).ToList(),
-                            Image = Bo.Image,
-                            Price = Bo.Price,
-                            ISBN10 = Bo.ISBN10,
-                            ISBN13 = Bo.ISBN13
-
-                                            }).ToList(),
-                            RegistrationDate = U.RegistrationDate
-                         }).ToList();
+                                                            Image = Bo.Image,
+                                                            Price = Bo.Price,
+                                                            ISBN10 = Bo.ISBN10,
+                                                            ISBN13 = Bo.ISBN13 }).ToList(),
+                            FavoriteAuthor = (from Us in _db.AspNetUsers
+                                                join Au in _db.Authors on Us.FavoriteAuthorId equals Au.Id
+                                                select new AuthorViewModel
+                                                {
+                                                    Id = Au.Id,
+                                                    Name = Au.Name
+                                                }).ToList(),
+                            RegistrationDate = U.RegistrationDate,
+                            LastLoginDate = U.LastLoggedInDate,
+                            BookSuggestionsEmail = U.BookSuggestionsEmail,
+                            TotalReports = U.TotalReports,
+                            TotalBans = U.TotalBans
+                            }).ToList();
             return users;
         }
     }

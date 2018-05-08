@@ -19,7 +19,6 @@ namespace BookCave.Data.EntityModels
         public DateTime RegistrationDate { get; set; }
         public DateTime LastLoggedInDate { get; set; }
         public bool BookSuggestionsEmail { get; set; }
-        public bool ActiveStatus { get; set; }
         public int TotalReports { get; set; }
         public int TotalBans { get; set; }
     }
