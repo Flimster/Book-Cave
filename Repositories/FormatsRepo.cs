@@ -26,10 +26,11 @@ namespace BookCave.Repositories
             return format;
         }
 
-        public void Write(Formats formats)
+        public int Write(Formats formats)
         {
             _db.Add(formats);
             _db.SaveChanges();
+            return formats.Id;
         }
 
         public void Remove(Formats format)

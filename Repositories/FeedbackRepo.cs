@@ -25,7 +25,7 @@ namespace Book_Cave.Repositories
                             Id = F.Id,
                             UserName = (from Fe in _db.Feedbacks
                                         join Us in _db.AspNetUsers on Fe.AspNetUsersId equals Us.Id
-                                        select Us.Name).ToString(),
+                                        select Us.Name).SingleOrDefault(),
                             Order = (from Or in _db.Orders
                                      join Fe in _db.Feedbacks on Or.Id equals Fe.OrderId
                                      select new OrderViewModel
@@ -34,7 +34,7 @@ namespace Book_Cave.Repositories
                                          User = (from Us in _db.Orders
                                                 join UsOr in _db.UsersOrders on Us.Id equals UsOr.Id
                                                 join As in _db.AspNetUsers on UsOr.AspNetUsersId equals As.Id
-                                                select As.Name).ToString(),
+                                                select As.Name).SingleOrDefault(),
                                         Date = Or.Date,
                                         Status = Or.Status,
                                         Price = Or.Price,
@@ -64,10 +64,8 @@ namespace Book_Cave.Repositories
                                         }).ToList()
                                      }).ToList(),
                             Date = F.Date,
-                            Text = F.Text
-                            
-                        }).ToList();
-            
+                            Text = F.Text      
+                        }).ToList();   
             return feedback;
         }
 

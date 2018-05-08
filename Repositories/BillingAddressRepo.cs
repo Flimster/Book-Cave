@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
 using System.Linq;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Repositories
 {
@@ -14,14 +15,15 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<BillingAddresses> GetList()
+        public List<BillingAddressesViewModel> GetList()
         {
             var billingAddresses = (from B in _db.BillingAddress
-                        select new BillingAddresses
+                        select new BillingAddressesViewModel
                         {
                             Id = B.Id,
-                            CountryId = B.CountryId,
-                            Countries = B.Countries,
+                            Country = (from C in _db.Countries
+                                       where B.CountryId == C.Id
+                                       select C.Name).SingleOrDefault(),
                             StateOrProvince = B.StateOrProvince,
                             City = B.City,
                         }).ToList();

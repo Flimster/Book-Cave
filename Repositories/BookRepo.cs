@@ -37,10 +37,11 @@ namespace BookCave.Repositories
             return Books;
         }
 
-        public void Write(Books book)
+        public int Write(Books book)
         {
             _db.Add(book);
-            _db.SaveChanges();
+            _db.SaveChanges();           
+            return book.Id;
         }
 
         public void Remove(Books book)
