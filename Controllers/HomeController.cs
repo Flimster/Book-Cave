@@ -8,29 +8,23 @@ using Microsoft.AspNetCore.Authorization;
 using BookCave.Models;
 using BookCave.Data.EntityModels;
 using Microsoft.AspNetCore.Diagnostics;
+using BookCave.Services;
 
 namespace BookCave.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly BookService _bookService;
+
+        public HomeController()
+        {
+            _bookService = new BookService();
+        }
+
         public IActionResult Index()
         {
-            var Books = FakeDatabase.Books.Take(5).ToList();
-            return View(Books);
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
+            var books = _bookService.GetList();
+            return View(books);
         }
 
         public IActionResult Error()

@@ -8,7 +8,7 @@ namespace BookCave.Controllers
     {
         public IActionResult Index()
         {
-          return View(FakeDatabase.Order);
+          return View();
         }
 
         public IActionResult Shipping()
@@ -28,7 +28,7 @@ namespace BookCave.Controllers
 
         public IActionResult Review()
         {
-          return View(FakeDatabase.Order);
+          return View();
         }
 
         public IActionResult Confirm()

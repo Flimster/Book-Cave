@@ -38,7 +38,8 @@ namespace BookCave.Controllers
         [HttpGet]
         public JsonResult GetManageBooks()
         {
-            return Json(BookCave.FakeDatabase.Books);
+            var books = _bs.GetList();
+            return Json(books);
         }
 
         [HttpGet]
@@ -61,6 +62,12 @@ namespace BookCave.Controllers
 
             var users = new List<UserPrivateViewModel>(){user1, user2};
             return Json(users);
+        }
+
+        [HttpGet]
+        public OkResult getReports()
+        {
+            return Ok();
         }
         
         [HttpPost]
