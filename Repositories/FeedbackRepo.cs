@@ -14,7 +14,7 @@ namespace Book_Cave.Repositories
             _db = new DataContext();
         }
 
-        public List<Feedbacks> GetFeedbackList()
+        public List<Feedbacks> GetList()
         {
             var feedback = (from F in _db.Feedbacks
                         select new Feedbacks
@@ -26,9 +26,15 @@ namespace Book_Cave.Repositories
             return feedback;
         }
 
-        public void WriteFeedback(Feedbacks feedback)
+        public void Write(Feedbacks feedback)
         {
             _db.Add(feedback);
+            _db.SaveChanges();
+        }
+
+        public void Remove(Feedbacks feedback)
+        {
+            _db.Remove(feedback);
             _db.SaveChanges();
         }
     }

@@ -14,7 +14,7 @@ namespace Book_Cave.Repositories
             _db = new DataContext();
         }
 
-        public List<Languages> GetLanguageList()
+        public List<Languages> GetList()
         {
             var language = (from L in _db.Genres
                         select new Languages
@@ -26,9 +26,15 @@ namespace Book_Cave.Repositories
             return language;
         }
 
-        public void WriteLanguage(Languages language)
+        public void Write(Languages language)
         {
             _db.Add(language);
+            _db.SaveChanges();
+        }
+
+        public void Remove(Languages language)
+        {
+            _db.Remove(language);
             _db.SaveChanges();
         }
     }

@@ -14,7 +14,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<ShippingAddresses> GetShippingAddressList()
+        public List<ShippingAddresses> GetList()
         {
             var shippingAddress = (from S in _db.ShippingAddresses
                         select new ShippingAddresses
@@ -29,9 +29,15 @@ namespace BookCave.Repositories
             return shippingAddress;
         }
 
-        public void WriteAuthor(ShippingAddresses shippingAddress)
+        public void Write(ShippingAddresses shippingAddress)
         {
             _db.Add(shippingAddress);
+            _db.SaveChanges();
+        }
+
+        public void Remove(ShippingAddresses addr)
+        {
+            _db.Remove(addr);
             _db.SaveChanges();
         }
     }

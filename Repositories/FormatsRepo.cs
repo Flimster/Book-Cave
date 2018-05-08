@@ -14,7 +14,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<Formats> GetFormatList()
+        public List<Formats> GetList()
         {
             var format = (from F in _db.Formats
                         select new Formats
@@ -26,9 +26,15 @@ namespace BookCave.Repositories
             return format;
         }
 
-        public void WriteFormat(Formats formats)
+        public void Write(Formats formats)
         {
             _db.Add(formats);
+            _db.SaveChanges();
+        }
+
+        public void Remove(Formats format)
+        {
+            _db.Remove(format);
             _db.SaveChanges();
         }
     }

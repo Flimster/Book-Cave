@@ -14,7 +14,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<Authors> GetAuthorList()
+        public List<Authors> GetList()
         {
             var authors = (from A in _db.Authors
                         select new Authors
@@ -26,9 +26,15 @@ namespace BookCave.Repositories
             return authors;
         }
 
-        public void WriteAuthor(List<Authors> author)
+        public void Write(List<Authors> author)
         {
             _db.AddRange(author);
+            _db.SaveChanges();
+        }
+
+        public void Remove(Authors author)
+        {
+            _db.Remove(author);
             _db.SaveChanges();
         }
     }

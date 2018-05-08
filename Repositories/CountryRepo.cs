@@ -15,7 +15,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<Countries> GetCountryList()
+        public List<Countries> GetList()
         {
             var country = (from C in _db.Countries
                         select new Countries
@@ -27,9 +27,15 @@ namespace BookCave.Repositories
             return country;
         }
 
-        public void WriteCountry(Countries country)
+        public void Write(Countries country)
         {
             _db.Add(country);
+            _db.SaveChanges();
+        }
+
+        public void Remove(Countries country)
+        {
+            _db.Remove(country);
             _db.SaveChanges();
         }
     }
