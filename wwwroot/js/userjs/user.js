@@ -174,6 +174,10 @@ $("#panel-settings").on("click", function () {
 
 $("#panel-payment-shipping").on("click", function () {
 	$.get("User/GetPaymentAndShipping", function (data, status) {
+		// const bingodingo = 'HELLO!';
+		// `<h2>${bingodingo}
+
+		// </h2>`
 		paymentAndShippingHTML =
 			"<h2> Payment methods </h2>" +
 			"<div class='col-lg-12'>" +

@@ -7,6 +7,7 @@ using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Book_Cave.Controllers
 {
@@ -22,10 +23,38 @@ namespace Book_Cave.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
-
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetManageBooks()
+        {
+            return Json(BookCave.FakeDatabase.Books);
+        }
+
+        [HttpGet]
+        public JsonResult getUsers()
+        {
+            var user1 = new UserPrivateViewModel()
+            {
+                Id = 1,
+                Image = "https://mk0slamonlinensgt39k.kinstacdn.com/wp-content/uploads/2017/04/lebron_james_travel.jpg",
+                Email = "someemail@gmail.com",
+                Name = "Lebron James"
+            };
+             var user2 = new UserPrivateViewModel()
+            {
+                Id = 1,
+                Image = "https://mk0slamonlinensgt39k.kinstacdn.com/wp-content/uploads/2017/04/lebron_james_travel.jpg",
+                Email = "someemail@gmail.com",
+                Name = "Lebron James"
+            };
+
+            var users = new List<UserPrivateViewModel>(){user1, user2};
+            return Json(users);
         }
         
         [HttpPost]
