@@ -65,15 +65,15 @@ namespace BookCave.Services
                                                             Image = Up.Image,
                                                             Price = Up.Price,
                                                             ISBN10 = Up.ISBN10,
-                                                            ISBN13 = Up.ISBN13 }).ToList(),
+                                                            ISBN13 = Up.ISBN13 }).SingleOrDefault(),
                             FavoriteAuthor = (from Us in _db.AspNetUsers
                                                 join Au in _db.Authors on Us.FavoriteAuthorId equals Au.Id
-                                               //where U.FavoriteAuthorId == Au.Id   //CHECK
+                                                where U.FavoriteAuthorId == Au.Id   //CHECK
                                                 select new AuthorViewModel
                                                 {
                                                     Id = Au.Id,
                                                     Name = Au.Name
-                                                }).ToList(),
+                                                }).SingleOrDefault(),
                             RegistrationDate = U.RegistrationDate,
                             LastLoginDate = U.LastLoggedInDate,
                             BookSuggestionsEmail = U.BookSuggestionsEmail,
@@ -82,6 +82,11 @@ namespace BookCave.Services
                         }
                         ).ToList();
                         return user;
+        }
+
+        public void ChangeImage(string Path)
+        {
+            //var user = GetById();
         }
     }
 }
