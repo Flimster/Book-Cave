@@ -8,6 +8,16 @@ namespace BookCave.Controllers
     //[Authorize(Roles = "Admin, Customer")]
     public class BookController : Controller
     {
+        private readonly AspNetUsersService _aspNetUsersService;
+        private readonly BookService _bookService;
+        private readonly FeedbackService _feedbackService;
+        //private readonly Orders
+        public BookController()
+        {
+            _bookService = new BookService();
+            _feedbackService = new FeedbackService();
+            _aspNetUsersService = new AspNetUsersService();
+        }
 
         public IActionResult Index(int? id)
         {
@@ -21,7 +31,15 @@ namespace BookCave.Controllers
           {
             return View("Not found");
           }
-          return View(book);
+          return View(/*book*/);
+        }
+
+        public IActionResult Test()
+        {
+            var feedback = _feedbackService.GetList();
+            var book = _bookService.GetReviewList();
+            var aspNetUsers = _aspNetUsersService.GetList();
+            return View(aspNetUsers);
         }
     }
 }

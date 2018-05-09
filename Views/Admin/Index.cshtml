@@ -33,6 +33,12 @@
     </fieldset>
 </form> -->
 
+<form asp-controller="Admin" asp-action="DisableAccount">
+    <input type="date" name="date">
+    <input type="text" name="email" value="default@default.com">
+    <input type="submit">
+</form>
+
 
 <div class="col-lg-12">
     <div id="admin-panel" class="panel col-lg-2">
@@ -41,6 +47,24 @@
         <div id="admin-reports" class="panel-body">Reports</div>
     </div>
     <div id="admin-main-box" class="col-lg-10">
-
+        <div id="admin-buttons" class="col-lg-12">
+            <div id="button" class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
+                <input type="text" name="search" id="search">
+            </div>
+        </div>
+        <hr class="seperator">
+        <div id="information" class="col-lg-12">
+        </div>
+        <div id="page-turn" class="col-lg-12">
+            <div class="col-lg-3">
+                <button id="prev" class="btn btn-primary col-lg-6">Prev</button>
+            </div>
+            <div class="col-lg-6"></div>
+            <div class="col-lg-3">
+                <button id="next" class="btn btn-primary col-lg-6">Next</button>
+            </div>
+        </div>
     </div>
 </div>

@@ -11,7 +11,7 @@ namespace BookCave.Data.EntityModels
         public int Id { get; set; }
          [ForeignKey("AspNetUsers")]
         public string AspNetUsersId { get; set; }
-        public virtual IdentityUser AspNetUsers { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         [ForeignKey("Address")]
         public int AddressId { get; set; }
         public virtual BillingAddresses Address { get; set; }

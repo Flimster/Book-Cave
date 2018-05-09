@@ -36,3 +36,12 @@ hr {
 .BookListTitle {
   margin-top: 10px; 
 }
+
+.error {
+  background-color: white; 
+}
+
+.error-text {
+  font-size: 30px;
+  margin-bottom: 15px !important;
+}
