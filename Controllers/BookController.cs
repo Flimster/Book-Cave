@@ -9,10 +9,11 @@ namespace BookCave.Controllers
     public class BookController : Controller
     {
         private readonly BookService _bookService;
-
+        private readonly FeedbackService _feedbackService;
         public BookController()
         {
             _bookService = new BookService();
+            _feedbackService = new FeedbackService();
         }
 
         public IActionResult Index(int? id)
@@ -32,8 +33,9 @@ namespace BookCave.Controllers
 
         public IActionResult Test()
         {
+            var feedback = _feedbackService.GetList();
             var book = _bookService.GetReviewList();
-            return View(book);
+            return View(feedback);
         }
     }
 }

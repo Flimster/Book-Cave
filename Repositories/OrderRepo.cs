@@ -5,7 +5,7 @@ using System.Linq;
 using BookCave.Models.ViewModels;
 
 
-namespace Book_Cave.Repositories
+namespace BookCave.Repositories
 {
     public class OrderRepo
     {
@@ -26,7 +26,7 @@ namespace Book_Cave.Repositories
                                     join UsOr in _db.UsersOrders on Us.Id equals UsOr.Id
                                     join As in _db.AspNetUsers on UsOr.AspNetUsersId equals As.Id
                                     where O.Id == UsOr.OrderId && UsOr.AspNetUsersId == As.Id   //CHECK
-                                    select As.Name).ToString(),
+                                    select As.Name).SingleOrDefault(),
                             Date = O.Date,
                             Status = O.Status,
                             Price = O.Price,

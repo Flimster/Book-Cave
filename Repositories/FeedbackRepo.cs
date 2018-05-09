@@ -4,7 +4,7 @@ using BookCave.Data.EntityModels;
 using System.Linq;
 using BookCave.Models.ViewModels;
 
-namespace Book_Cave.Repositories
+namespace BookCave.Repositories
 {
     public class FeedbackRepo
     {
