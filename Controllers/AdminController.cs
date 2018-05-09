@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using BookCave.Models.RegistrationModels;
 using BookCave.Data;
 using System.Collections.Generic;
+using System;
 
 namespace BookCave.Controllers
 {
@@ -21,11 +22,13 @@ namespace BookCave.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private BookService _bs = new BookService();
         private readonly AdminService _adminService;
+        private readonly AuthenticationService _authenticationService;
 
         public AdminController(UserManager<AspNetUsers> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _authenticationService = new AuthenticationService();
             _db = new DataContext();
             _adminService = new AdminService();
         }
@@ -67,7 +70,6 @@ namespace BookCave.Controllers
         //Function that changes any claim
         public async Task ChangeClaim(string email, string newClaim)
         {
-            await createRolesandUsers();
             /*
             var user = await _userManager.FindByEmailAsync(email);
             //var claim = (await _userManager.GetClaimsAsync(user))[0];
@@ -86,6 +88,7 @@ namespace BookCave.Controllers
 
 
         //TODO: Find a better place for this
+        //Creates default roles and a defult admin user for the database
         [HttpPost]
         private async Task createRolesandUsers()
         {
@@ -132,34 +135,20 @@ namespace BookCave.Controllers
         //For adding roles to users
         public async Task AddRole(string email, string role)
         {
-            //Find the requested user
-            var user = await _userManager.FindByEmailAsync(email);
-
-            bool roleCheck = await _userManager.IsInRoleAsync(user, role);
-            if(!roleCheck)
-            {
-                await _userManager.AddToRoleAsync(user, role);
-            }
-
-            //Doing this instead of the above makes _userManager = null
-            //await _authenticationService.AddRole(email, role);
+            await _authenticationService.AddRole(email, role, _userManager);
         }
 
         //For removing roles from users
         public async Task RemoveRole(string email, string role)
         {
-            //Find the requested user
-            var user = await _userManager.FindByEmailAsync(email);
-
-            bool roleCheck = await _userManager.IsInRoleAsync(user, role);
-            if(roleCheck)
-            {
-                await _userManager.RemoveFromRoleAsync(user, role);
-            }
-
-            //Doing this instead of the above makes _userManager = null
-            //await _authenticationService.Remove(email, role);
+            await _authenticationService.RemoveRole(email, role, _userManager);
         }
+
+        public void DisableAccount(string email, DateTime date)
+        {
+            _authenticationService.DisableAccount(email, date, _userManager);
+        }
+            
 
         [HttpPost]
         public IActionResult CreateBook(BookRegistrationModel book)
