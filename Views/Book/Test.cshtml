@@ -1,21 +1,11 @@
-@model List<BookCave.Models.ViewModels.OrderViewModel>
+@model List<BookCave.Models.ViewModels.BillingAddressesViewModel>
 
 <h1>Hi</h1>
 @foreach(var b in Model)
 {
     <p>@b.Id</p>
-    <p>@b.Title</p>
-   @foreach(var c in b.Authors)
-    {
-        <p>@c.Name</p>
-    }
-    @foreach(var d in b.Genre)
-    {
-        <p>@d.Name</p>
-    }
-    <p>@b.Image</p>
-    <p>@b.Price</p>
-    <p>@b.ISBN10</p>
-    <p>@b.ISBN13</p>
-
+    <p>@b.StateOrProvince</p>
+    <p>@b.Country</p>
+    <p>@b.City</p>
+    <p>@b.Zip</p>
 }
