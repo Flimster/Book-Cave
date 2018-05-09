@@ -6,6 +6,7 @@ namespace BookCave.Models.ViewModels
 {
     public class AspNetUserViewModel
     {
+        public string Id { get; set; }
         public string Image { get; set; }
         public string Name { get; set; }
         public List<BookViewModel> FavoriteBook { get; set; }
