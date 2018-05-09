@@ -35,11 +35,6 @@ namespace BookCave.Controllers
             return View(books);
         }
 
-        public IActionResult PageNotFound()
-        {
-          return View();
-        }
-
         public IActionResult Error()
         {
             var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
