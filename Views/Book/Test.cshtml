@@ -1,28 +1,25 @@
+<<<<<<< HEAD
 @model List<BookCave.Models.ViewModels.OrderViewModel>
+=======
+@model List<BookCave.Models.ViewModels.BookViewModel>
+>>>>>>> 61b25ceb41406450926b55ba3fce4d6a7ce4610a
 
 <h1>Hi</h1>
 @foreach(var b in Model)
 {
     <p>@b.Id</p>
-    <p>@b.User</p>
-    <p>@b.Date</p>
-    <p>@b.Status</p>
+    <p>@b.Title</p>
+   @foreach(var c in b.Authors)
+    {
+        <p>@c.Name</p>
+    }
+    @foreach(var d in b.Genre)
+    {
+        <p>@d.Name</p>
+    }
+    <p>@b.Image</p>
     <p>@b.Price</p>
-        @foreach(var c in b.BookList)
-        {
-            <p>@c.Id</p>
-            <p>@c.Title</p>
-            @foreach(var d in c.Authors)
-            {
-                <p>@d.Name</p>
-            }
-            @foreach(var d in c.Genre)
-            {
-                <p>@d.Name</p>
-            }
-            <p>@c.Image</p>
-            <p>@c.Price</p>
-            <p>@c.ISBN10</p>
-            <p>@c.ISBN13</p>
-        }
+    <p>@b.ISBN10</p>
+    <p>@b.ISBN13</p>
+
 }
