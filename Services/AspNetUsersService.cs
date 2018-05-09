@@ -29,7 +29,7 @@ namespace BookCave.Services
             return _aspNetUserRepo.GetList();
         }
 
-        public List<AspNetUserViewModel> GetById(string Id)
+        public AspNetUserViewModel GetById(string Id)
         {
             var user = (from U in _db.AspNetUsers
                         where U.Id == Id
@@ -80,7 +80,7 @@ namespace BookCave.Services
                             TotalReports = U.TotalReports,
                             TotalBans = U.TotalBans
                         }
-                        ).ToList();
+                        ).SingleOrDefault();
                         return user;
         }
 
