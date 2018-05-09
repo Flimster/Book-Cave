@@ -28,11 +28,13 @@
             <div class="row" id="upper-nav">
                 <div class="col-sm-1"></div>
                 
-                <div class="col-sm-3 nav-height-control">
-                    <a asp-controller="Home" asp-action="Index"><img id="logo" src="~/images/LogoV2-W-text.png" alt="logo.png"></a>
+                <div class="col-sm-2 nav-height-control">
+                    <a asp-controller="Home" asp-action="Index">
+                      <img id="logo" src="~/images/LogoV2-W-text.png" alt="logo.png">
+                      </a>
                 </div>
                 
-                <div class="col-sm-5 nav-height-control">
+                <div class="col-sm-6 nav-height-control">
                     <form action="get" method="#">
                         <input type="text" id="search-input" placeholder="Search for a name, authore, genre, ISBN ...">
                         <button type="submit" id="search-btn" class="btn btn-info"><div><i id="search-icon" class="fa fa-search"></i></div></button>
@@ -112,10 +114,12 @@
                 <div class="col-sm-4"></div>
 
                 <div class="col-sm-1" >
-                    <div id="shopping-cart-icon-container">
-                        <i class="fas fa-shopping-cart" id="shopping-cart-icon"></i>
-                        <h2 id="num-items-in-cart">0</h2>
-                    </div>
+                    <a id="shopping-icon-link" asp-controller="Checkout" asp-action="Index">
+                      <div id="shopping-cart-icon-container">
+                          <i class="fas fa-shopping-cart" id="shopping-cart-icon"></i>
+                          <h2 id="num-items-in-cart">0</h2>
+                      </div>
+                    </a>
                 </div>
             </div>
         </nav>
@@ -172,6 +176,7 @@
         <script src="~/js/loginPopup.js" asp-append-version="true"></script>
         <script src="~/js/userjs/user.js"></script>
         <script src="~/js/Admin/admin.js"></script>
+        <script src="~/js/Admin/adminCreateHTML.js"></script>
     </environment>
 
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
