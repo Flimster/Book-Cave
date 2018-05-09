@@ -13,6 +13,7 @@ namespace BookCave.Services
         private BookRepo _bookRepo;
         private AuthorRepo _authorRepo;
         private FormatsRepo _formatsRepo;
+        private readonly ReviewRepo _reviewRepo;
 
         private DataContext _db;
 
@@ -22,6 +23,7 @@ namespace BookCave.Services
             _authorRepo = new AuthorRepo();
             _formatsRepo = new FormatsRepo();
             _db = new DataContext();
+            _reviewRepo = new ReviewRepo();
         }
 
         public void WriteBook(BookRegistrationModel bookView)
@@ -62,6 +64,11 @@ namespace BookCave.Services
         public List<Authors> GetAuthorList()
         {
             return _authorRepo.GetList();
+        }
+
+        public List<ReviewViewModel> GetReviewList()
+        {
+            return _reviewRepo.GetList();
         }
 
     }

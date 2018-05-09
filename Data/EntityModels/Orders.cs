@@ -14,15 +14,14 @@ namespace BookCave.Data.EntityModels
         public DateTime Date { get; set; }
         public bool Status { get; set; }
         public double Price { get; set; }
-       // [ForeignKey("ShippingAddress")]
-        public int ShippingAddressId { get; set; }
-        //public virtual ShippingAddress ShippingAddress { get; set; }
-        //[ForeignKey("BillingAddress")]
-        public int BillingAddressId { get; set; }
-       // public virtual BillingAddress BillingAddress { get; set; }
-        //[ForeignKey("CardDetails")]
+        [ForeignKey("ShippingAddresses")]
+        public int ShippingAddressesId { get; set; }
+        public virtual ShippingAddresses BillingAdShippingAddressesdresses { get; set; }
+        [ForeignKey("BillingAddresses")]
+        public int BillingAddressesId { get; set; }
+        public virtual BillingAddresses BillingAddresses { get; set; }
+        [ForeignKey("CardDetails")]
         public int CardDetailsId { get; set; }
-        //public virtual CardDetails CardDetails { get; set; } 
-        public int BooksId { get; set; }
+        public virtual CardDetails CardDetails { get; set; } 
     }
 }

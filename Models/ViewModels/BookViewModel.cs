@@ -10,6 +10,7 @@ namespace BookCave.Models.ViewModels
       public string Title { get; set; }
       public List<AuthorViewModel> Authors { get; set; }
       public List<GenreViewModel> Genre { get; set; }
+      public List<LanguageViewModel> Language {get; set;}
       public string Image { get; set; }
       public double Price { get; set; }
       public string ISBN10 { get; set; }
