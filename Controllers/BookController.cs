@@ -16,8 +16,16 @@ namespace BookCave.Controllers
       }
         public IActionResult Index(int? id)
         {
-          var books = _db.GetList();
-          return View(books[0]);
+
+          var book = _db.GetList()[0];
+          return View(book);
+        }
+
+        public IActionResult Test()
+        {
+            // var feedback = _feedbackService.GetList();
+            // var book = _bookService.GetReviewList();
+             return View();
         }
     }
 }

@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using BookCave.Data;
-using BookCave.Models.RegistrationModels;
+using BookCave.Data.EntityModels;
+using BookCave.Models.InputModel;
 
 namespace BookCave.Services
 {
     public class AdminService : IAdminService
     {
-        public void ProcessNewBook(BookRegistrationModel book)
+        public void ProcessNewBook(BookInputModel book)
         {
             if(string.IsNullOrEmpty(book.Title)) { throw new Exception("Title is empty"); }
 

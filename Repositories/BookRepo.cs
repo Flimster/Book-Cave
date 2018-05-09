@@ -45,6 +45,7 @@ namespace BookCave.Repositories
                             Authors = (from Bo in _db.Books
                                         join Ba in _db.BooksAuthors on Bo.Id equals Ba.Id
                                         join BoAu in _db.Authors on Ba.AuthorId equals BoAu.Id
+                                        where B.Id == Ba.BookId && BoAu.Id == Ba.AuthorId   //CHECK 
                                         select new AuthorViewModel
                                         {
                                             Id = BoAu.Id,
