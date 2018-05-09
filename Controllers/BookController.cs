@@ -2,12 +2,14 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BookCave.Services;
+using BookCave.Data;
 
 namespace BookCave.Controllers
 {
     //[Authorize(Roles = "Admin, Customer")]
     public class BookController : Controller
     {
+        private readonly DataContext _db;
         private readonly CardDetailsService _cardDetailsService;
         private readonly AspNetUsersService _aspNetUsersService;
         private readonly BookService _bookService;
@@ -27,8 +29,8 @@ namespace BookCave.Controllers
         public IActionResult Index(int? id)
         {
 
-          var book = _db.GetList()[0];
-          return View(book);
+          //var book = _db.GetList()[0];
+          return View();
         }
 
         public IActionResult Test()
