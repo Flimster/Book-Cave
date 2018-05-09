@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using BookCave.Data.EntityModels;
 
-namespace BookCave.Models.RegistrationModels
+namespace BookCave.Models.InputModel
 {
-    public class BookRegistrationModel
+    public class BookInputModel
     {
         [Required(ErrorMessage = "Title is empty")]
         public string Title { get; set; }
