@@ -4,6 +4,8 @@ using BookCave.Models.ViewModels;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using BookCave.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Services
 {
@@ -12,10 +14,12 @@ namespace BookCave.Services
         AspNetUsers _user;
         private readonly UserManager<AspNetUsers> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly AdminRepo _adminRepo;
 
         public AuthenticationService(UserManager<AspNetUsers> userManager, RoleManager<IdentityRole> roleManager)
         {
             _user = new AspNetUsers();
+            _adminRepo = new AdminRepo();
             _userManager = userManager;
             _roleManager = roleManager;
         }
@@ -23,6 +27,7 @@ namespace BookCave.Services
         public AuthenticationService()
         {
             _user = new AspNetUsers();
+            _adminRepo = new AdminRepo();
         }
 
         public AspNetUsers InitializeAccount(RegisterViewModel model)
@@ -47,8 +52,8 @@ namespace BookCave.Services
 
 
         //_userManager and _roleManager always null when passing managers
-        //Add default role to account4w
-        public async Task<bool> AddRole(string email, string role)
+        //Add default role to account
+        public async Task<bool> AddRole(string email, string role, UserManager<AspNetUsers> userManager)
         {
             //Find the requested user
             var user = await _userManager.FindByEmailAsync(email);
@@ -64,7 +69,7 @@ namespace BookCave.Services
         }
 
         //Remove a role from an account
-        public async Task<bool> RemoveRole(string email, string role)
+        public async Task<bool> RemoveRole(string email, string role, UserManager<AspNetUsers> userManager)
         {
             //Find the requested user
             var user = await _userManager.FindByEmailAsync(email);
@@ -77,6 +82,12 @@ namespace BookCave.Services
                 return true;
             }
             return false;
+        }
+
+        [HttpPost]
+        public void DisableAccount(string email, DateTime date, UserManager<AspNetUsers> userManager)
+        {
+            _adminRepo.DisableAccount(email, date, userManager);
         }
         
     }
