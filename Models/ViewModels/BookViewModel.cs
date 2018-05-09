@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 
 namespace BookCave.Models.ViewModels
@@ -15,5 +16,13 @@ namespace BookCave.Models.ViewModels
       public double Price { get; set; }
       public string ISBN10 { get; set; }
       public string ISBN13 { get; set; }
+      public string Description { get; set; }
+      public List<LanguagesViewModel> Languages { get; set; }
+      public string Publisher { get; set; }
+      public int ReleaseYear { get; set; }
+      public double Rating { get; set; }
+      public int StockCount { get; set; }
+      public int FormatsId { get; set; }
+      public double Discount { get; set; }
     }
 }
