@@ -7,7 +7,7 @@ using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using BookCave.Models.RegistrationModels;
+using BookCave.Models.InputModel;
 using BookCave.Data;
 using System.Collections.Generic;
 using System;
@@ -288,7 +288,7 @@ namespace BookCave.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult CreateBook(BookRegistrationModel book)
+		public IActionResult CreateBook(BookInputModel book)
 		{
 			if (!ModelState.IsValid)
 			{
