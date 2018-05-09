@@ -16,22 +16,24 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div id="account-container">
-        <p id="account-shortcut">Account</p>
-        
-        <div id="account-shortcut-panel">
-            <form asp-action="LogOut" asp-controller="Account" method="post">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <button class="btn btn-link navbar-btn navbar-link">@claim</button>
-                    </li>
-                    <li>
-                        <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
-                    </li>
-                </ul>
-            </form>
+    <a asp-controller="User" asp-action="MyProfile">
+        <div id="account-container">
+                <p id="account-shortcut">Account</p>
+            
+            <div id="account-shortcut-panel">
+                <form asp-action="LogOut" asp-controller="Account" method="post">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <button class="btn btn-link navbar-btn navbar-link">@claim</button>
+                        </li>
+                        <li>
+                            <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
         </div>
-    </div>
+    </a>
 }
 else
 {
