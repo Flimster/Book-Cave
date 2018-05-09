@@ -6,7 +6,7 @@ namespace BookCave.Data.EntityModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int CardNumber { get; set; }
+        public string CardNumber { get; set; }
         public int Cvc { get; set; }
         public DateTime ExpirationDate { get; set; }
     }

@@ -8,6 +8,7 @@ namespace BookCave.Controllers
     //[Authorize(Roles = "Admin, Customer")]
     public class BookController : Controller
     {
+        private readonly CardDetailsService _cardDetailsService;
         private readonly AspNetUsersService _aspNetUsersService;
         private readonly BookService _bookService;
         private readonly FeedbackService _feedbackService;
@@ -20,6 +21,7 @@ namespace BookCave.Controllers
             _aspNetUsersService = new AspNetUsersService();
             _ordersService = new OrdersService();
             _billingAddressService = new BillingAddressService();
+            _cardDetailsService = new CardDetailsService();
         }
 
         public IActionResult Index(int? id)
@@ -42,8 +44,9 @@ namespace BookCave.Controllers
             //var feedback = _feedbackService.GetList();
             //var book = _bookService.GetList();
             //var aspNetUsers = _aspNetUsersService.GetList();
-            var billing = _billingAddressService.GetList();
-            return View(billing);
+            //var billing = _billingAddressService.GetList();
+            var card = _cardDetailsService.GetList();
+            return View(card);
         }
     }
 }

@@ -1,11 +1,11 @@
-@model List<BookCave.Models.ViewModels.BillingAddressesViewModel>
+@model List<BookCave.Data.EntityModels.CardDetails>
 
 <h1>Hi</h1>
 @foreach(var b in Model)
 {
     <p>@b.Id</p>
-    <p>@b.StateOrProvince</p>
-    <p>@b.Country</p>
-    <p>@b.City</p>
-    <p>@b.Zip</p>
+    <p>@b.Name</p>
+    <p>@b.CardNumber</p>
+    <p>@b.Cvc</p>
+    <p>@b.ExpirationDate</p>
 }
