@@ -14,7 +14,7 @@
 // 		"</div>" +
 // 		"<div class='col-lg-12 profile-info'>" +
 // 		"<div class='col-lg-4'>" +
-// 		data.favouriteBook +
+// 		data.FavoriteBook +
 // 		"</div>" +
 // 		"<div class='col-lg-4'></div>" +		
 // 		"<div class='col-lg-4'>" +
