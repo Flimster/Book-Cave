@@ -1,16 +1,20 @@
-@model List<BookCave.Models.ViewModels.AspNetUserViewModel>
+@model List<BookCave.Models.ViewModels.BookViewModel>
 
 <h1>Hi</h1>
 @foreach(var b in Model)
 {
+    <p>@b.Id</p>
+    <p>@b.Title</p>
+   @foreach(var c in b.Authors)
+    {
+        <p>@c.Name</p>
+    }
+    @foreach(var d in b.Genre)
+    {
+        <p>@d.Name</p>
+    }
     <p>@b.Image</p>
-    <p>@b.Name</p>
-    <p>@b.FavoriteBook</p>
-   
-    <p>@b.FavoriteAuthor</p>
-    <p>@b.RegistrationDate</p>
-    <p>@b.LastLoginDate</p>
-    <p>@b.BookSuggestionsEmail</p>
-    <p>@b.TotalReports</p>
-    <p>@b.TotalBans</p>
+    <p>@b.Price</p>
+    <p>@b.ISBN10</p>
+    <p>@b.ISBN13</p>
 }

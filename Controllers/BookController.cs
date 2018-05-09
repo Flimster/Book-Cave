@@ -35,10 +35,10 @@ namespace BookCave.Controllers
 
         public IActionResult Test()
         {
-            var feedback = _feedbackService.GetList();
-            var book = _bookService.GetReviewList();
-            var aspNetUsers = _aspNetUsersService.GetList();
-            return View(aspNetUsers);
+            //var feedback = _feedbackService.GetList();
+            var book = _bookService.GetList();
+            //var aspNetUsers = _aspNetUsersService.GetList();
+            return View(book);
         }
     }
 }
