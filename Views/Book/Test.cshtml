@@ -1,11 +1,29 @@
-@model List<BookCave.Data.EntityModels.CardDetails>
+@model List<BookCave.Models.ViewModels.FeedbackViewModel>
 
 <h1>Hi</h1>
 @foreach(var b in Model)
 {
-    <p>@b.Id</p>
-    <p>@b.Name</p>
-    <p>@b.CardNumber</p>
-    <p>@b.Cvc</p>
-    <p>@b.ExpirationDate</p>
+    <p>@b.UserName</p>
+    @foreach(var d in b.Order)
+    {
+        <p>@d.User</p>
+        <p>@d.Date</p>
+        <p>@d.Status</p>
+        <p>@d.Price</p>
+        @foreach(var e in d.BookList)
+        {
+            <p>@e.Title</p>
+            <p>@e.Image</p>
+            @foreach(var f in e.Authors)
+            {
+                <p>@f.Name</p>
+            }
+            @foreach(var g in e.Genre)
+            {
+                <p>@g.Name</p>
+            }
+        }
+    }
+    <p>@b.Date</p>
+    <p>@b.Text</p>
 }
