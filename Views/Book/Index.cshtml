@@ -3,6 +3,16 @@
 <head>
   <link rel="stylesheet" href="~/css/Book/BookDetails.css">
   
+<script>
+  $(document).ready(function() {
+  var price = $("#prev-price")
+  console.log(price);
+  if(price === 0)
+  {
+    $("#discount-price").html(price);
+  }  });
+</script>
+
 </head>
 
 <div class="book-item col-sm-8 col-sm-offset-1">
