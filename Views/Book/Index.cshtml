@@ -12,7 +12,7 @@
   </div>
   
   <div class="book-details col-sm-8">
-    <h3>@Model.Title</h3>
+    <h3 class="book-title" id=@Model.Id>@Model.Title</h3>
     <p>
       @foreach(var author in Model.Authors)
       {
@@ -69,11 +69,11 @@
       </h4>
     }
     
-    @if(@Model.Discount == 0)
+    @if(@Model.Discount != 0)
     {
-      <div id="prev-price" class="text-muted">@Model.Price</div>
+      <span id="prev-price" class="text-muted">@Model.Price</span>
+      <span id="discount" class="text-muted">@Model.Discount</span>
       <h3 id="discount-price" class="price"></h3>
-      <div id="discount">@Model.Discount</div>
     }
     else
     {

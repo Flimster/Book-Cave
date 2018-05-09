@@ -1,10 +1,10 @@
 $(document).ready(function() {
-  var price = $("#prev-price").text();
-  if(price)
+  var discount = $("#discount").text().replace(',','.');
+  //discount = (",1").replace(',','.');
+  if(discount)
   {
-    //var discount = $("#discount").text();
-    var discount = .9;
-    price =  (+price.replace(',','.') *discount);
-    $("#discount-price").html(price);
+    var price = $("#prev-price").text().replace(',','.');
+    $("#discount").html((discount * 100) + "% discount");
+    $("#discount-price").html(price * (1 - discount));
   }
 });
