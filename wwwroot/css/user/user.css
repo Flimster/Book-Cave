@@ -3,9 +3,6 @@
 	padding: 0px;
 }
 
-#main-box {
-	/* display: inline-block; */
-}
 
 #panel-box {
 	border-color: black;
@@ -38,7 +35,23 @@
 	height: 100%;
 }
 
+#image-container{
+	border-bottom-style: solid;
+	border-bottom-color: black;
+	border-bottom-width: 1px;
+}
+
+#profile-image{
+	width: 150px;
+	height: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	margin-bottom: 15px;
+}
+
 .profile-info{
+	margin: 60px 15px;
 	font-size: 24px;
 }
 
