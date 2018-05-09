@@ -25,7 +25,7 @@ namespace BookCave.Repositories
                             Id = F.Id,
                             UserName = (from Fe in _db.Feedbacks
                                         join Us in _db.AspNetUsers on Fe.AspNetUsersId equals Us.Id
-                                        where F.AspNetUsersId == Us.Id
+                                        //where F.AspNetUsersId == Us.Id
                                         select Us.Name).SingleOrDefault(),
                             Order = (from Or in _db.Orders
                                      join Fe in _db.Feedbacks on Or.Id equals Fe.OrderId
@@ -35,7 +35,7 @@ namespace BookCave.Repositories
                                          User = (from Us in _db.Orders
                                                 join UsOr in _db.UsersOrders on Us.Id equals UsOr.Id
                                                 join As in _db.AspNetUsers on UsOr.AspNetUsersId equals As.Id
-                                                where Or.Id == UsOr.OrderId && UsOr.AspNetUsersId == As.Id  //CHECK
+                                                //where Or.Id == UsOr.OrderId && UsOr.AspNetUsersId == As.Id  //CHECK
                                                 select As.Name).SingleOrDefault(),
                                         Date = Or.Date,
                                         Status = Or.Status,
@@ -47,6 +47,7 @@ namespace BookCave.Repositories
                                         {
                                             Id = Bo.Id,
                                             Title = Bo.Title,
+                                            Image = Bo.Image,
                                             Authors =  (from Bok in _db.Books
                                                         join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
                                                         join Au in _db.Authors on BoAu.AuthorId equals Au.Id

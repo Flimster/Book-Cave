@@ -64,7 +64,7 @@ namespace BookCave.Migrations
 
                     b.Property<double>("Discount");
 
-                    b.Property<int>("Format");
+                    b.Property<int>("FormatsId");
 
                     b.Property<string>("ISBN10");
 
@@ -87,6 +87,8 @@ namespace BookCave.Migrations
                     b.Property<bool>("Visibility");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FormatsId");
 
                     b.ToTable("Books");
                 });
@@ -150,7 +152,7 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CardNumber");
+                    b.Property<string>("CardNumber");
 
                     b.Property<int>("Cvc");
 
@@ -236,9 +238,7 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("BillingAddressId");
-
-                    b.Property<int>("BooksId");
+                    b.Property<int>("BillingAddressesId");
 
                     b.Property<int>("CardDetailsId");
 
@@ -246,11 +246,17 @@ namespace BookCave.Migrations
 
                     b.Property<double>("Price");
 
-                    b.Property<int>("ShippingAddressId");
+                    b.Property<int>("ShippingAddressesId");
 
                     b.Property<bool>("Status");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BillingAddressesId");
+
+                    b.HasIndex("CardDetailsId");
+
+                    b.HasIndex("ShippingAddressesId");
 
                     b.ToTable("Orders");
                 });
@@ -639,8 +645,6 @@ namespace BookCave.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<bool>("ActiveStatus");
-
                     b.Property<int?>("AuthorsId");
 
                     b.Property<bool>("BookSuggestionsEmail");
@@ -656,8 +660,6 @@ namespace BookCave.Migrations
                     b.Property<DateTime>("LastLoggedInDate");
 
                     b.Property<string>("Name");
-
-                    b.Property<string>("Password");
 
                     b.Property<DateTime>("RegistrationDate");
 
@@ -679,6 +681,14 @@ namespace BookCave.Migrations
                     b.HasOne("BookCave.Data.EntityModels.Countries", "Countries")
                         .WithMany()
                         .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.Books", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.Formats", "Formats")
+                        .WithMany()
+                        .HasForeignKey("FormatsId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -723,9 +733,27 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("BookCave.Data.EntityModels.Feedbacks", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.Orders", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.BillingAddresses", "BillingAddresses")
+                        .WithMany()
+                        .HasForeignKey("BillingAddressesId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BookCave.Data.EntityModels.CardDetails", "CardDetails")
+                        .WithMany()
+                        .HasForeignKey("CardDetailsId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BookCave.Data.EntityModels.ShippingAddresses", "ShippingAddresses")
+                        .WithMany()
+                        .HasForeignKey("ShippingAddressesId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.OrdersBooks", b =>
@@ -743,7 +771,7 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("BookCave.Data.EntityModels.OwnedBooks", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 
@@ -755,7 +783,7 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("BookCave.Data.EntityModels.ReadBooks", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 
@@ -767,7 +795,7 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("BookCave.Data.EntityModels.Reviews", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 
@@ -791,14 +819,14 @@ namespace BookCave.Migrations
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UsersCards", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 
@@ -810,7 +838,7 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UsersOrders", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 
@@ -822,7 +850,7 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UsersReviews", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 
@@ -839,14 +867,14 @@ namespace BookCave.Migrations
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.Wishlists", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "AspNetUsers")
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUsersId");
 

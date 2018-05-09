@@ -1,24 +1,40 @@
 using System.Collections.Generic;
 using BookCave.Data;
 using BookCave.Models.ViewModels;
+using BookCave.Repositories;
 using System.Linq;
 
-namespace BookCave.Repositories
+namespace BookCave.Services
 {
-    public class AspNetUsersRepo
+    public class AspNetUsersService
     {
+        private AspNetUsersRepo _aspNetUserRepo;
+        private BookRepo _bookRepo;
+        private AuthorRepo _authorRepo;
+        private GenreRepo _genreRepo;
+
         private DataContext _db;
 
-        public AspNetUsersRepo()
+        public AspNetUsersService()
         {
+            _aspNetUserRepo = new AspNetUsersRepo();
+            _bookRepo = new BookRepo();
+            _authorRepo = new AuthorRepo();
+            _genreRepo = new GenreRepo();
             _db = new DataContext();
         }
 
         public List<AspNetUserViewModel> GetList()
         {
-            var users = (from U in _db.AspNetUsers
-                         select new AspNetUserViewModel
-                         {
+            return _aspNetUserRepo.GetList();
+        }
+
+        public List<AspNetUserViewModel> GetById(string Id)
+        {
+            var user = (from U in _db.AspNetUsers
+                        where U.Id == Id
+                        select new AspNetUserViewModel
+                        {
                             Image = U.Image,
                             Name = U.Name,
                             FavoriteBook = (from Us in _db.AspNetUsers   
@@ -63,8 +79,9 @@ namespace BookCave.Repositories
                             BookSuggestionsEmail = U.BookSuggestionsEmail,
                             TotalReports = U.TotalReports,
                             TotalBans = U.TotalBans
-                            }).ToList();
-            return users;
+                        }
+                        ).ToList();
+                        return user;
         }
     }
 }

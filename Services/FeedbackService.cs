@@ -10,6 +10,9 @@ namespace BookCave.Services
         private FeedbackRepo _feedbackRepo;
         private BookRepo _bookRepo;
         private OrderRepo _orderRepo;
+        private ReviewRepo _reviewRepo;
+        private AuthorRepo _authorRepo;
+        private GenreRepo _genreRepo;
         private DataContext _db;
 
          public FeedbackService()
@@ -17,6 +20,7 @@ namespace BookCave.Services
              _feedbackRepo = new FeedbackRepo();
              _bookRepo = new BookRepo();
              _orderRepo = new OrderRepo();
+             _reviewRepo = new ReviewRepo();
              _db = new DataContext();
          }
 
