@@ -38,7 +38,6 @@ namespace BookCave.Controllers
 					new OrderViewModel()
 					{
 							Id = 0,
-							//User = 1,
 							Date = new DateTime(),
 							Status = false,
 							Price = 50,
@@ -47,7 +46,6 @@ namespace BookCave.Controllers
 					new OrderViewModel()
 					{
 							Id = 1,
-							//User = ,
 							Date = new DateTime(),
 							Status = false,
 							Price = 50,
