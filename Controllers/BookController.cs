@@ -41,12 +41,12 @@ namespace BookCave.Controllers
 
         public IActionResult Test()
         {
-            //var feedback = _feedbackService.GetList();
+            var feedback = _feedbackService.GetList();
             //var book = _bookService.GetList();
             //var aspNetUsers = _aspNetUsersService.GetList();
             //var billing = _billingAddressService.GetList();
-            var card = _cardDetailsService.GetList();
-            return View(card);
+            //var card = _cardDetailsService.GetList();
+            return View(feedback);
         }
     }
 }
