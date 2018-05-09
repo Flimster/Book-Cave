@@ -30,7 +30,7 @@
 	cursor: pointer;
 }
 
-#user-box {
+.main-box {
 	background: white;
 	height: 100%;
 }
