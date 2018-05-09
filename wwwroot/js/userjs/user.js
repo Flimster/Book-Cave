@@ -9,19 +9,26 @@ panels.on("click", function () {
 	currentPanelSelected = $(this);
 });
 
-
-// When the user goes to his account this loads his image
-// name, email, favouritebook and favourite author
 $.get("User/GetProfile", function (data, status) {
 	var userProfileHTML =
-		"<div class='col-lg-3'>" +
-		"<img src=" + data.image + " alt='no image found' width=150px height=200px style='margin-right:15px;'>" +
+		"<div class='col-lg-12'>" +
+			"<img id='profile-image' src=" + data.image + " alt='no image found'>" +
 		"</div>" +
-		"<div class='col-lg-7 profile-info'>" +
-		data.name + "<br>" +
-		data.email + "<br>" +
-		data.favouriteBook + "<br>" +
-		data.favouriteAuthor + "<br>" +
+		"<div class='col-lg-12 profile-info'>" +
+			"<div class='col-lg-6'>" +
+				data.name + 
+			"</div>" +
+			"<div class='col-lg-6'>" +
+				data.email +
+			"</div>" +
+		"</div>" +
+		"<div class='col-lg-12 profile-info'>" +
+			"<div class='col-lg-6'>" +
+				data.favouriteBook +
+			"</div>" +
+			"<div class='col-lg-6'>" +
+				data.favouriteAuthor +
+			"</div>" +
 		"</div>";
 	$("#user-box").html(userProfileHTML);
 }).fail(function (errorObject) {
