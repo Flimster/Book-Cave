@@ -6,5 +6,6 @@ namespace BookCave.Models.ViewModels
         public string Country { get; set; }
         public string StateOrProvince { get; set; }
         public string City { get; set; }
+        public string Zip {get; set;}
     }
 }
