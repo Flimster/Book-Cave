@@ -3,27 +3,22 @@
 <h1>Hi</h1>
 @foreach(var b in Model)
 {
-    <p>@b.Id</p>
-    @foreach(var c in Model.UserName)
+    <p>@b.UserName</p>
+    @foreach(var d in b.Order)
     {
-        <p>@c.Name</p>
-    }
-    @foreach(var d in Model.Order)
-    {
-        <p>@d.Id</p>
         <p>@d.User</p>
         <p>@d.Date</p>
         <p>@d.Status</p>
         <p>@d.Price</p>
-        @foreach(var e in Model.BookList)
+        @foreach(var e in d.BookList)
         {
-            <p>@e.Id</p>
             <p>@e.Title</p>
-            @foreach(var f in Model.Authors)
+            <p>@e.Image</p>
+            @foreach(var f in e.Authors)
             {
                 <p>@f.Name</p>
             }
-            @foreach(var g in Model.Genre)
+            @foreach(var g in e.Genre)
             {
                 <p>@g.Name</p>
             }

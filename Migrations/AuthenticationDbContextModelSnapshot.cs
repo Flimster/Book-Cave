@@ -88,6 +88,8 @@ namespace BookCave.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FormatsId");
+
                     b.ToTable("Books");
                 });
 
@@ -150,7 +152,7 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CardNumber");
+                    b.Property<string>("CardNumber");
 
                     b.Property<int>("Cvc");
 
@@ -649,8 +651,6 @@ namespace BookCave.Migrations
 
                     b.Property<int?>("BooksId");
 
-                    b.Property<string>("CustomId");
-
                     b.Property<int>("FavoriteAuthorId");
 
                     b.Property<int>("FavoriteBookId");
@@ -660,8 +660,6 @@ namespace BookCave.Migrations
                     b.Property<DateTime>("LastLoggedInDate");
 
                     b.Property<string>("Name");
-
-                    b.Property<string>("Password");
 
                     b.Property<DateTime>("RegistrationDate");
 
@@ -683,6 +681,14 @@ namespace BookCave.Migrations
                     b.HasOne("BookCave.Data.EntityModels.Countries", "Countries")
                         .WithMany()
                         .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.Books", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.Formats", "Formats")
+                        .WithMany()
+                        .HasForeignKey("FormatsId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -744,7 +750,7 @@ namespace BookCave.Migrations
                         .HasForeignKey("CardDetailsId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BookCave.Data.EntityModels.ShippingAddresses", "BillingAdShippingAddressesdresses")
+                    b.HasOne("BookCave.Data.EntityModels.ShippingAddresses", "ShippingAddresses")
                         .WithMany()
                         .HasForeignKey("ShippingAddressesId")
                         .OnDelete(DeleteBehavior.Cascade);

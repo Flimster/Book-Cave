@@ -47,6 +47,7 @@ namespace BookCave.Repositories
                                         {
                                             Id = Bo.Id,
                                             Title = Bo.Title,
+                                            Image = Bo.Image,
                                             Authors =  (from Bok in _db.Books
                                                         join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
                                                         join Au in _db.Authors on BoAu.AuthorId equals Au.Id

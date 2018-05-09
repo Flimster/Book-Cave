@@ -16,7 +16,7 @@ namespace BookCave.Data.EntityModels
         public double Price { get; set; }
         [ForeignKey("ShippingAddresses")]
         public int ShippingAddressesId { get; set; }
-        public virtual ShippingAddresses BillingAdShippingAddressesdresses { get; set; }
+        public virtual ShippingAddresses ShippingAddresses { get; set; }
         [ForeignKey("BillingAddresses")]
         public int BillingAddressesId { get; set; }
         public virtual BillingAddresses BillingAddresses { get; set; }
