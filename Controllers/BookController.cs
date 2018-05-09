@@ -11,12 +11,13 @@ namespace BookCave.Controllers
         private readonly AspNetUsersService _aspNetUsersService;
         private readonly BookService _bookService;
         private readonly FeedbackService _feedbackService;
-        //private readonly Orders
+        private readonly OrdersService _ordersService;
         public BookController()
         {
             _bookService = new BookService();
             _feedbackService = new FeedbackService();
             _aspNetUsersService = new AspNetUsersService();
+            _ordersService = new OrdersService();
         }
 
         public IActionResult Index(int? id)
@@ -36,10 +37,12 @@ namespace BookCave.Controllers
 
         public IActionResult Test()
         {
-            var feedback = _feedbackService.GetList();
+            /*var feedback = _feedbackService.GetList();
             var book = _bookService.GetReviewList();
             var aspNetUsers = _aspNetUsersService.GetList();
-            return View(aspNetUsers);
+            */
+            var orders = _ordersService.GetList();
+            return View(orders);
         }
     }
 }

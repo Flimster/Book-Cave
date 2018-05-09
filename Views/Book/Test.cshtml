@@ -1,11 +1,14 @@
-@model List<BookCave.Models.ViewModels.AspNetUserViewModel>
+@model List<BookCave.Models.ViewModels.OrderViewModel>
 
 <h1>Hi</h1>
 @foreach(var b in Model)
 {
-    <p>@b.Image</p>
-    <p>@b.Name</p>
-        @foreach(var c in b.FavoriteBook)
+    <p>@b.Id</p>
+    <p>@b.User</p>
+    <p>@b.Date</p>
+    <p>@b.Status</p>
+    <p>@b.Price</p>
+        @foreach(var c in b.BookList)
         {
             <p>@c.Id</p>
             <p>@c.Title</p>
@@ -13,10 +16,13 @@
             {
                 <p>@d.Name</p>
             }
+            @foreach(var d in c.Genre)
+            {
+                <p>@d.Name</p>
+            }
+            <p>@c.Image</p>
+            <p>@c.Price</p>
+            <p>@c.ISBN10</p>
+            <p>@c.ISBN13</p>
         }
-    <p>@b.RegistrationDate</p>
-    <p>@b.LastLoginDate</p>
-    <p>@b.BookSuggestionsEmail</p>
-    <p>@b.TotalReports</p>
-    <p>@b.TotalBans</p>
 }
