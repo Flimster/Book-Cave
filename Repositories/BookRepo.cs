@@ -22,6 +22,25 @@ namespace BookCave.Repositories
                         {
                             Id = B.Id,
                             Title = B.Title,
+                            Description = B.Description,
+                            Publisher = B.Publisher,
+                            Image = B.Image,
+                            Price = B.Price,
+                            ISBN10 = B.ISBN10,
+                            ISBN13 = B.ISBN13,
+                            ReleaseYear = B.ReleaseYear,
+                            Rating = B.Rating,
+                            StockCount = B.StockCount,
+                            FormatsId = B.FormatsId,
+                            Discount = B.Discount,
+
+                            Languages = (from BoLa in _db.BooksLanguages
+                                         join Bo in _db.Books on BoLa.BookId equals Bo.Id 
+                                         join La in _db.Languages on BoLa.LanguageId equals La.Id
+                                         select new LanguagesViewModel
+                                        {
+                                          Name = La.Name
+                                        }).ToList(),
                      
                             Authors = (from Bo in _db.Books
                                         join Ba in _db.BooksAuthors on Bo.Id equals Ba.Id
@@ -38,13 +57,8 @@ namespace BookCave.Repositories
                                     {
                                         Id = Ge.Id,
                                         Name = Ge.Name
-                                    }).ToList(),
-                            Image = B.Image,
-                            Price = B.Price,
-                            ISBN10 = B.ISBN10,
-                            ISBN13 = B.ISBN13
+                                    }).ToList()
                         }).ToList();
-            
             return Books;
         }
 

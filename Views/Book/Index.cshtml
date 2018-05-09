@@ -2,41 +2,109 @@
 
 <head>
   <link rel="stylesheet" href="~/css/Book/BookDetails.css">
+  
 </head>
 
 <div class="book-item col-sm-8 col-sm-offset-1">
   
   <div class="book-img col-sm-4">
-    <img src=@Model.Image alt=@Model.Title>
+    <img src=@Model.Image alt="@Model.Title">
   </div>
   
   <div class="book-details col-sm-8">
     <h3>@Model.Title</h3>
-    <p>Author: @Model.Author</p>
-    <p>Genre: @Model.Genre</p>
+    <p>
+      @foreach(var author in Model.Authors)
+      {
+        if(author == Model.Authors[Model.Authors.Count() - 1])
+        {
+          @author.Name @Html.Raw(". ")
+        }
+        else
+        {
+            @author.Name @Html.Raw(", ")
+        }
+      }
+    </p>
+    <p>
+      @foreach(var genre in Model.Genre)
+      {
+        if(genre == Model.Genre[Model.Genre.Count() - 1])
+        {
+          @genre.Name @Html.Raw(". ")
+        }
+        else
+        {
+            @genre.Name @Html.Raw(", ")
+        }
+      }
+    </p>
+
+    <div class="rating">
+      <div class="star-outer">
+        <div class="star-inner"></div>
+      </div>
+      @Model.Rating
+    </div>
 
     <div class="book-descriptions">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi magnam temporibus odio, sed dicta eaque dolore eveniet perferendis doloribus impedit saepe neque cumque quod eligendi tempora itaque beatae recusandae voluptatibus!</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, optio natus reprehenderit dolorum blanditiis temporibus autem culpa obcaecati quam esse dicta velit aliquid earum reiciendis eligendi iste veniam vero praesentium.</p>
+      <p>
+        @Model.Description
+      </p>
     </div>
   </div>
 </div>
 
 <div class="book-checkout col-sm-2">
-    <h3>$@Model.Price</h3>
+    @if(@Model.StockCount > 0)
+    {
+      <h4 class="text-success">
+        In stock
+      </h4>
+    }
+    else
+    {
+      <h4 class="text-danger">
+        Out of stock
+      </h4>
+    }
+    
+    @if(@Model.Discount == 0)
+    {
+      <div id="prev-price" class="text-muted">@Model.Price</div>
+      <h3 id="discount-price" class="price"></h3>
+    }
+    else
+    {
+      <h3 class="price">@Model.Price</h3>
+    }
+    
+    
+    
     <hr>
     <button class="btn btn-primary btn-fluid">Add to cart</button>
-    <button class="btn">Add to Wish list</button>
+    <button class="btn btn-default">Add to Wish list</button>
   </div>
 
 <div class="book-moreDetails col-sm-10 col-sm-offset-1">
   <h3>More details</h3>
   <ul>
-    <li>ISBN10: </li>
-    <li>ISBN13: </li>
-    <li>Language: </li>
-    <li>Publisher: </li>
-    <li>Country: </li>
+    <li>ISBN10: @Model.ISBN10</li>
+    <li>ISBN13: @Model.ISBN13</li>
+    <li>Language: 
+      @foreach(var la in Model.Languages)
+      {
+        if(la == Model.Languages[Model.Languages.Count() - 1])
+        {
+          @la.Name @Html.Raw(". ")
+        }
+        else
+        {
+            @la.Name @Html.Raw(", ")
+        }
+      }
+    </li>
+    <li>Publisher: @Model.Publisher</li>
   </ul>
 </div>
 
@@ -63,6 +131,4 @@
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi asperiores culpa possimus dolores harum nulla natus repudiandae, error nisi! Aspernatur numquam iste sed non quis enim vitae rerum quia labore!
       </div>
     </div>
-    
-  
 </div>

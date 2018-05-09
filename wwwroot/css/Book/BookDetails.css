@@ -4,18 +4,10 @@
   
 }
 
-.book-img {
-  /*background-color: yellow;*/
-}
-
 .book-img img {
   max-height: 100%;
   max-width: 100%;
 
-}
-
-.book-details {
-  /*background-color: red;*/
 }
 
 .book-descriptions {
@@ -28,6 +20,15 @@
   width: 16%; 
   margin-left: 10px;
 }
+
+#prev-price {
+  text-decoration: line-through;
+}
+
+h3.price {
+  margin-top: 0px;
+}
+
 
 div .book-moreDetails {
   background-color: white;
@@ -59,4 +60,30 @@ div .book-all-reviews {
 
 div .book-review {
   margin: 10px auto;
+}
+
+
+
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+}
+ 
+.stars-outer::before {
+  content: "\f006 \f006 \f006 \f006 \f006";
+}
+ 
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+ 
+.stars-inner::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: #f8ce0b;
 }
