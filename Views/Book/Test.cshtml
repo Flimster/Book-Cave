@@ -1,7 +1,11 @@
-@model List<BookCave.Models.ViewModels.ReviewViewModel>
+@model List<BookCave.Data.EntityModels.CardDetails>
 
 <h1>Hi</h1>
 @foreach(var b in Model)
 {
-    <p>@b.Book</p>
+    <p>@b.Id</p>
+    <p>@b.Name</p>
+    <p>@b.CardNumber</p>
+    <p>@b.Cvc</p>
+    <p>@b.ExpirationDate</p>
 }

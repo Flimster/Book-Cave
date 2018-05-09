@@ -22,11 +22,11 @@ namespace BookCave.Repositories
                         select new OrderViewModel
                         { 
                             Id = O.Id,
-                            User = (from Us in _db.Orders
-                                    join UsOr in _db.UsersOrders on Us.Id equals UsOr.Id
-                                    join As in _db.AspNetUsers on UsOr.AspNetUsersId equals As.Id
-                                    where O.Id == UsOr.OrderId && UsOr.AspNetUsersId == As.Id   //CHECK
-                                    select As.Name).SingleOrDefault(),
+                            User = (from Or in _db.Orders
+                                    join OrUs in _db.UsersOrders on Or.Id equals OrUs.OrderId
+                                    join Us in _db.AspNetUsers on OrUs.AspNetUsersId equals Us.Id
+                                    //where O.Id == OrUs.OrderId && OrUs.AspNetUsersId == Us.Id   //CHECK
+                                    select Us.Name).SingleOrDefault(),
                             Date = O.Date,
                             Status = O.Status,
                             Price = O.Price,

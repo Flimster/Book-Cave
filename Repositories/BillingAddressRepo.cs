@@ -26,6 +26,7 @@ namespace BookCave.Repositories
                                        select C.Name).SingleOrDefault(),
                             StateOrProvince = B.StateOrProvince,
                             City = B.City,
+                            Zip = B.Zip
                         }).ToList();
             
             return billingAddresses;
