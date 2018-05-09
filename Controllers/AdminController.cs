@@ -70,6 +70,7 @@ namespace BookCave.Controllers
         //Function that changes any claim
         public async Task ChangeClaim(string email, string newClaim)
         {
+            await createRolesandUsers();
             /*
             var user = await _userManager.FindByEmailAsync(email);
             //var claim = (await _userManager.GetClaimsAsync(user))[0];
