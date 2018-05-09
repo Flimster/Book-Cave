@@ -1,10 +1,9 @@
-
-using BookCave.Models.RegistrationModels;
 using BookCave.Repositories;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
 using System.Collections.Generic;
 using BookCave.Models.ViewModels;
+using BookCave.Models.InputModel;
 
 namespace BookCave.Services
 {
@@ -26,7 +25,7 @@ namespace BookCave.Services
             _reviewRepo = new ReviewRepo();
         }
 
-        public void WriteBook(BookRegistrationModel bookView)
+        public void WriteBook(BookInputModel bookView)
         {
             var book = new Books() {
                 Title = bookView.Title,
