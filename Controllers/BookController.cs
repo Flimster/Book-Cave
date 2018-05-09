@@ -26,17 +26,9 @@ namespace BookCave.Controllers
 
         public IActionResult Index(int? id)
         {
-          if(id == null){
-            return View("Not found");
-          }
-          var book = (from b in FakeDatabase.Books
-                       where b.Id == id
-                       select b).SingleOrDefault();
-          if(book == null)
-          {
-            return View("Not found");
-          }
-          return View(/*book*/);
+
+          var book = _db.GetList()[0];
+          return View(book);
         }
 
         public IActionResult Test()

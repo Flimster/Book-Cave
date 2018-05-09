@@ -4,18 +4,10 @@
   
 }
 
-.book-img {
-  /*background-color: yellow;*/
-}
-
 .book-img img {
   max-height: 100%;
   max-width: 100%;
 
-}
-
-.book-details {
-  /*background-color: red;*/
 }
 
 .book-descriptions {
@@ -28,6 +20,15 @@
   width: 16%; 
   margin-left: 10px;
 }
+
+#prev-price {
+  text-decoration: line-through;
+}
+
+h3.price {
+  margin-top: 0px;
+}
+
 
 div .book-moreDetails {
   background-color: white;
