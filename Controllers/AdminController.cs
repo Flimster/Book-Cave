@@ -30,7 +30,7 @@ namespace BookCave.Controllers
 			_roleManager = roleManager;
 			_db = new DataContext();
 			_adminService = new AdminService();
-      _authenticationService = new AuthenticationService();
+      		_authenticationService = new AuthenticationService();
 		}
 		[HttpGet]
 		public IActionResult Index()
@@ -120,96 +120,6 @@ namespace BookCave.Controllers
             */
 
         }
-
-/*
-        //TODO: Find a better place for this
-        //Creates default roles and a defult admin user for the database
-        [HttpPost]
-        private async Task createRolesandUsers()
-        {
-            AuthenticationService authenticationService = new AuthenticationService();
-
-            bool check = await _roleManager.RoleExistsAsync("Admin");
-            if (!check)
-            {
-
-                // first we create Admin role    
-                var role = new IdentityRole();
-                role.Name = "Admin";
-                await _roleManager.CreateAsync(role);
-
-                //Here we create a Admin super user who will maintain the website
-                var model = new RegisterViewModel();
-                model.Email = "default@default.com";
-                model.Password = "Aa@12345";
-
-                var user = authenticationService.InitializeAccount(model);
-
-                IdentityResult chkUser = await _userManager.CreateAsync(user, model.Password);
-
-                //Add default User to Role Admin    
-                if (chkUser.Succeeded)
-                {
-                    var result1 = await _userManager.AddToRoleAsync(user, "Admin");
-                }
-
-                //Write user to db
-            }
-
-            // creating Creating Customer role     
-            check = await _roleManager.RoleExistsAsync("Customer");
-            if (!check)
-            {
-                var role = new IdentityRole();
-                role.Name = "Customer";
-                await _roleManager.CreateAsync(role);
-
-            }
-        }
-
-        //For adding roles to users
-        public async Task AddRole(string email, string role)
-        {
-            await _authenticationService.AddRole(email, role, _userManager);
-        }
-
-        //For removing roles from users
-        public async Task RemoveRole(string email, string role)
-        {
-            await _authenticationService.RemoveRole(email, role, _userManager);
-        }
-
-        public void DisableAccount(string email, DateTime date)
-        {
-            _authenticationService.DisableAccount(email, date, _userManager);
-        }
-            
-
-        [HttpPost]
-        public IActionResult CreateBook(BookRegistrationModel book)
-        {
-            if(!ModelState.IsValid)
-            {
-                //TODO implement error printout
-                ViewData["ErrorMessage"] = "Error";
-                return View("Error", "Home");
-            }
-
-            _adminService.ProcessNewBook(book);
-
-            _bs.WriteBook(book);
-            return View("Index");
-        }
-
-        [HttpGet]
-        public List<BookViewModel> GetBookList()
-        {
-            var books = _bs.GetList();
-            return books;
-        }
-
-    }
-    */
 
 		//TODO: Find a better place for this
 		[HttpPost]
