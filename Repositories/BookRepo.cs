@@ -33,7 +33,6 @@ namespace BookCave.Repositories
                             StockCount = B.StockCount,
                             FormatsId = B.FormatsId,
                             Discount = B.Discount,
-
                             Languages = 
                                 (from BoLa in _db.BooksLanguages
                                 join La in _db.Languages on BoLa.LanguageId equals La.Id
@@ -47,19 +46,20 @@ namespace BookCave.Repositories
                                 (from BoAu in _db.BooksAuthors
                                 join Au in _db.Authors on BoAu.AuthorId equals Au.Id
                                 where BoAu.BookId == B.Id
-                                        select new AuthorViewModel
-                                        {
-                                            Id = Au.Id,
-                                            Name = Au.Name
-                                        }).ToList(),
-                            Genre = (from Bk in _db.Books
-                                    join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
-                                    join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
-                                    select new GenreViewModel
-                                    {
-                                        Id = Ge.Id,
-                                        Name = Ge.Name
-                                    }).ToList()
+                                select new AuthorViewModel
+                                {
+                                    Id = Au.Id,
+                                    Name = Au.Name
+                                }).ToList(),
+                            Genre = 
+                                (from BoGe in _db.BookGenres
+                                join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
+                                where BoGe.BookId == B.Id
+                                select new GenreViewModel
+                                {
+                                    Id = Ge.Id,
+                                    Name = Ge.Name
+                                }).ToList()
                         }).ToList();
             return Books;
         }
