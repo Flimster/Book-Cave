@@ -247,6 +247,12 @@ i.fas {
   color: black;
 }
 
-.created-by {
-  color: #999;
+.created-by-li a:link, .created-by-li a:hover, .created-by-li a:visited, .created-by-li a:active {
+  color: rgb(197, 197, 197);
+  margin-top: 2px;
+  text-decoration: none;
+}
+
+.created-by-ul {
+  list-style-type: none;
 }

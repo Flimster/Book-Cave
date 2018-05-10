@@ -37,7 +37,7 @@ namespace BookCave.Controllers
 
         public IActionResult Error()
         {
-            var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            /*var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
             if(exceptionFeature != null)
             {
@@ -47,7 +47,13 @@ namespace BookCave.Controllers
                 //TODO: Write to databse
             }
 
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });*/
+            return View("Error");
+        }
+
+        public IActionResult Error404()
+        {
+          return View("PageNotFound");
         }
     }
 }
