@@ -63,14 +63,14 @@ namespace BookCave.Services
                                                             Image = Up.Image,
                                                             Price = Up.Price,
                                                             ISBN10 = Up.ISBN10,
-                                                            ISBN13 = Up.ISBN13 }).SingleOrDefault(),
+                                                            ISBN13 = Up.ISBN13 }).FirstOrDefault(),
                             FavoriteAuthor = (from Us in _db.AspNetUsers
                                                 join Au in _db.Authors on Us.FavoriteAuthorId equals Au.Id
                                                 select new AuthorViewModel
                                                 {
                                                     Id = Au.Id,
                                                     Name = Au.Name
-                                                }).SingleOrDefault(),
+                                                }).FirstOrDefault(),
                             RegistrationDate = U.RegistrationDate,
                             LastLoginDate = U.LastLoggedInDate,
                             BookSuggestionsEmail = U.BookSuggestionsEmail,
@@ -79,63 +79,6 @@ namespace BookCave.Services
                         }
                         ).SingleOrDefault();
                         return user;
-        }
-
-        public void ChangeEmail(string Id, string NewEmail)
-        {
-            var user =
-                from Us in _db.AspNetUsers
-                where Us.Id == Id
-                select Us;
-
-                foreach(AspNetUsers usr in user)
-                {
-                    usr.Email = NewEmail;
-                    usr.NormalizedEmail = NewEmail.ToUpper();
-                    usr.NormalizedUserName = NewEmail.ToUpper();
-                    usr.UserName = NewEmail.ToLower();
-                }
-
-                _db.SaveChanges();
-        }
-
-        public void ChangeImage(string Id, string NewImage)
-        {
-            var image =
-                from Us in _db.AspNetUsers
-                where Us.Id == Id
-                select Us;
-
-                foreach(AspNetUsers usr in image)
-                {
-                    usr.Image = NewImage;
-                }
-        }
-
-        public void ChangeName(string Id, string NewName)
-        {
-            var name =
-            from Us in _db.AspNetUsers
-                where Us.Id == Id
-                select Us;
-
-                foreach(AspNetUsers usr in name)
-                {
-                    usr.Name = NewName;
-                }
-        }
-
-        public void ChangeBookSuggestionEmail(string Id, bool NewEmailSetting)
-        {
-            var email =
-                from Us in _db.AspNetUsers
-                where Us.Id == Id
-                select Us;
-
-                foreach(AspNetUsers usr in email)
-                {
-                    usr.BookSuggestionsEmail = NewEmailSetting;
-                }
         }
     }
 }   
