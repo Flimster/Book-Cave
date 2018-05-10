@@ -1,4 +1,4 @@
-@model BookCave.Models.ViewModels.OrderViewModel
+@model BookCave.Models.ViewModels.CartViewModel
 
 <head>
   <link rel="stylesheet" href="~/css/Checkout/Cart.css">
@@ -11,7 +11,7 @@
 
   <div class="order-details col-sm-10 col-sm-offset-1">
     <div class="col-sm-3">
-      <h4>Total Price: $@Model.TotalPrice</h4>
+      <h4>Total Price: $@Model.Price</h4>
     </div>
     
     <div class="order-checkout col-sm-2 col-sm-offset-7">
@@ -30,9 +30,17 @@
         </div>
 
         <div class="book-details col-sm-8">
-          <a asp-controller="Book" asp-action="Index" asp-route-d=@book.Id><h4>@book.Title</h4></a>
-          @book.Author <br>
-          @book.Genre
+            <a asp-controller="Book" asp-action="Index" asp-route-d=@book.Id><h4>@book.Title</h4></a>
+            @foreach(var author in book.Authors)
+            {
+              @author.Name <br>
+            }
+          
+            @foreach(var genre in book.Genre)
+            {
+              @genre.Name
+            }
+          
         </div>
 
         <div class="book-opt col-sm-2">

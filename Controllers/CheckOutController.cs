@@ -1,14 +1,26 @@
 using System.Collections.Generic;
+using System.Linq;
 using BookCave.Models.ViewModels;
+using BookCave.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
 {
     public class CheckOutController : Controller
     {
-        public IActionResult Index()
+        private readonly CheckoutService _checkoutService;
+
+        public CheckOutController()
         {
-          return View();
+            _checkoutService = new CheckoutService();
+        }
+
+        [HttpPost]
+        public IActionResult Index([FromBody]List<int> idArr)
+        {
+            var bookList = _checkoutService.GetItemsInCart(idArr);
+            var order = _checkoutService.GetCartViewModel(bookList);
+            return View(order);
         }
 
         public IActionResult Shipping()

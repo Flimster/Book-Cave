@@ -26,11 +26,6 @@ namespace BookCave.Controllers
 
         public IActionResult Index(int id)
         {
-<<<<<<< HEAD
-
-          var book = _bookService.GetList()[0];
-          return View(book);
-=======
           if(id == 0){
             return View("PageNotFound");
           }
@@ -39,8 +34,7 @@ namespace BookCave.Controllers
             var book = _bookService.GetList()[id - 1];
             return View(book);
           }
-          
->>>>>>> e5c538ffc61692eefd19bf158a24c1ef11cf51b0
+
         }
 
         public IActionResult Test()

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace BookCave.Services
 {
@@ -29,64 +32,78 @@ namespace BookCave.Services
 
         public void AddToCartCookie(int quantity, string data)
         {
-/*            var cartCookie = InitializeCookie();
-            var cookieData = _httpContextAccessor.HttpContext.Request.Cookies["Cart"];
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
 
-            int stringLength = cookieData.Length;
-            int i = 0;
-            bool numOrId = false;
-            List<string> itemCount = new List<string>();
-            List<int> itemId = new List<int>();
-            string tmpCount = "";
-            string tmpId = "";
-
-            //Split up the cookie into a number and a serial number
-            while(i < stringLength)
+            var cart = new List<CartDataModel>() 
+            { 
+                new CartDataModel { Quantity = Convert.ToInt32(quantity), Id = Convert.ToInt32(data)}
+            };
+            int counter = 0;
+            if(cookieData != null)
             {
-                //true if should read in number, false if id should be read in
-                if(cookieData[i] == '!')
+                foreach(var c in cookieData)
                 {
-                    numOrId = true;
-                    i += 1;
-                    if(i != 1)
+                    cart.Add(cookieData[counter]);
+                    counter++;  
+                }
+            }
+            var jsonData = JsonConvert.SerializeObject(cart);
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", jsonData, cartCookie);
+        }
+
+        public void RemoveFromCartCookie(int id)
+        {
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
+            if(cookieData != null)
+            {
+                var itemToRemove = cookieData.FirstOrDefault(r => r.Id == id);
+                cookieData.Remove(itemToRemove);
+            }
+
+            var jsonData = JsonConvert.SerializeObject(cookieData);
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", jsonData, cartCookie);
+        }
+
+        public void EditItemCartCookie(int id, int qty)
+        {
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
+            if(cookieData != null)
+            {
+                for(int i = 0; i < cookieData.Count; i++)
+                {
+                    if(cookieData[i].Id == id)
                     {
-                        itemId.Add(Convert.ToInt32(tmpId));
-                        tmpId = "";
+                        if((cookieData[i].Id + id) <= 0)
+                        {
+                            cookieData.Remove(cookieData[i]);
+                        } else {
+                            cookieData[i].Quantity = cookieData[i].Quantity + qty;
+                        }
+                        break;
                     }
                 }
-                if(cookieData[i] == '-')
-                {
-                    numOrId = false;
-                    i += 1;
-                    itemCount.Add(tmpCount);
-                    tmpCount = "";
-                }
-
-                //Add all numbers in a row a temp string
-                if(numOrId)
-                {
-                    tmpCount += cookieData[i];
-                }
-                else
-                {
-                    tmpId += cookieData[i];
-                }
-                i++;
             }
 
-            //Check if the item already exists
-            for(int t = 0; t < itemCount.Count; t++)
+            var jsonData = JsonConvert.SerializeObject(cookieData);
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", jsonData, cartCookie);
+        }
+
+        public int GetNumItemsInCartCookie()
+        {
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
+            
+            if(cookieData == null)
             {
-                if(itemCount[t] == data)
-                {
-                    itemId[t] = itemId[t] + quantity;
-                    break;
-                }
+                return 0;
             }
-
-            string serializedData = cookieData + "!" + quantity + "-" + data;
-            _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", serializedData, cartCookie);
-*/
+            return cookieData.Count;
         }
         
     }
