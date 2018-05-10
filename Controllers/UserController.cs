@@ -1,13 +1,13 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using BookCave.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using BookCave.Data;
 using BookCave.Services;
-using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
 using BookCave.Data.EntityModels;
+using BookCave.Models.ViewModels;
 using BookCave.Models.InputModels;
 
 namespace BookCave.Controllers
@@ -31,7 +31,13 @@ namespace BookCave.Controllers
 
 		[HttpGet]
 		//[Authorize(Roles = "Customer")]
-		public IActionResult Index(int id)
+		public IActionResult Index()
+		{
+			return View();
+		}
+
+		[HttpGet]
+		public IActionResult EditProfile()
 		{
 			return View();
 		}
@@ -39,7 +45,12 @@ namespace BookCave.Controllers
 		[HttpPost]
 		public IActionResult EditProfile(ProfileInputModel profileInput)
 		{
-			return Redirect("Index");
+			if (ModelState.IsValid)
+			{
+				Console.WriteLine("YTESS");
+				return RedirectToAction ("MyProfile");
+			}
+			return View();
 		}
 
 		public async Task<IActionResult> MyProfile()
