@@ -107,19 +107,6 @@ namespace BookCave.Repositories
 
             return order;
         }
-
-        public void Write(Orders order)
-        {
-            _db.Add(order);
-            _db.SaveChanges();
-        }
-
-        public void Remove(Orders order)
-        {
-            _db.Remove(order);
-            _db.SaveChanges();
-        }
-
         public List<OrderViewModel> GetByUserId(string Id)
         {
             var orderByUserId = 
@@ -171,5 +158,18 @@ namespace BookCave.Repositories
                     }).ToList();
             return orderByUserId;
         }
+
+        public void Write(Orders order)
+        {
+            _db.Add(order);
+            _db.SaveChanges();
+        }
+
+        public void Remove(Orders order)
+        {
+            _db.Remove(order);
+            _db.SaveChanges();
+        }
     }
 }
+
