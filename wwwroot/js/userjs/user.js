@@ -16,7 +16,6 @@ $("#panel-profile").on("click", function(){
 });
 
 $("#panel-orders").on("click", function(){
-	console.log("Went here");
 	currentInformation.addClass("is-hidden");
 	currentInformation = $("#orders");
 	currentInformation.removeClass("is-hidden");

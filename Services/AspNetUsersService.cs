@@ -10,18 +10,11 @@ namespace BookCave.Services
     public class AspNetUsersService
     {
         private AspNetUsersRepo _aspNetUserRepo;
-        private BookRepo _bookRepo;
-        private AuthorRepo _authorRepo;
-        private GenreRepo _genreRepo;
-
         private DataContext _db;
 
         public AspNetUsersService()
         {
             _aspNetUserRepo = new AspNetUsersRepo();
-            _bookRepo = new BookRepo();
-            _authorRepo = new AuthorRepo();
-            _genreRepo = new GenreRepo();
             _db = new DataContext();
         }
 
@@ -52,6 +45,16 @@ namespace BookCave.Services
         public void ChangeBookSuggestionEmail(string Id, bool NewEmailSetting)
         {
             _aspNetUserRepo.ChangeBookSuggestionEmail(Id, NewEmailSetting);
+        }
+
+        public void ChangeFavoriteBook(string Id, int BookId)
+        {
+            _aspNetUserRepo.ChangeFavoriteBook(Id, BookId);
+        }
+
+        public void ChangeFavoriteAuthor(string Id, int AuthorId)
+        {
+            _aspNetUserRepo.ChangeFavoriteAuthor(Id, AuthorId);
         }
     }
 }   
