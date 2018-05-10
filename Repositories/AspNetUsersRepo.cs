@@ -70,5 +70,68 @@ namespace BookCave.Repositories
                         }).ToList();
             return users;
         }
+
+        public void Write(AspNetUsers aspNetUsers)
+        {
+            _db.Add(aspNetUsers);
+            _db.SaveChanges();
+        }
+
+        public void ChangeEmail(string Id, string NewEmail)
+        {
+            var user =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in user)
+                {
+                    usr.Email = NewEmail;
+                    usr.NormalizedEmail = NewEmail.ToUpper();
+                    usr.NormalizedUserName = NewEmail.ToUpper();
+                    usr.UserName = NewEmail.ToLower();
+                }
+
+                _db.SaveChanges();
+        }
+
+        public void ChangeImage(string Id, string NewImage)
+        {
+            var image =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in image)
+                {
+                    usr.Image = NewImage;
+                }
+        }
+
+        public void ChangeName(string Id, string NewName)
+        {
+            var name =
+            from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in name)
+                {
+                    usr.Name = NewName;
+                }
+        }
+
+        public void ChangeBookSuggestionEmail(string Id, bool NewEmailSetting)
+        {
+            var email =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in email)
+                {
+                    usr.BookSuggestionsEmail = NewEmailSetting;
+                }
+        }
     }
 }
