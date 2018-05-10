@@ -81,8 +81,19 @@
 
 .order-image{
 	height: 200px;
-	width: 150px;
+	width: 200px;
 	margin-left: 15px;
+}
+
+.space{
+	margin-bottom: 15px;
+}
+
+.address-box{
+	margin-right: 15px;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
 }
 
 .is-hidden {

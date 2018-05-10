@@ -17,12 +17,12 @@ namespace BookCave.Services
             _db = new DataContext();
         }
 
-        public List<BillingAddressesViewModel> GetList()
+        public List<BillingAddressViewModel> GetList()
         {
             return _billingAddressRepo.GetList();
         }
 
-        public List<BillingAddressesViewModel> GetByUserId(string Id)
+        public List<BillingAddressViewModel> GetByUserId(string Id)
         {
             return _billingAddressRepo.GetByUserId(Id);
         }
