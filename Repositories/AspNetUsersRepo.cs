@@ -24,9 +24,8 @@ namespace BookCave.Repositories
                         Image = U.Image,
                         Name = U.Name,
                         FavoriteBook =
-                            (from Us in _db.AspNetUsers   
-                            from Up in _db.Books
-                            where Us.FavoriteBookId == Up.Id          
+                            (from Up in _db.Books
+                            where U.FavoriteBookId == Up.Id          
                             select new BookViewModel
                             {
                                 Id = Up.Id,

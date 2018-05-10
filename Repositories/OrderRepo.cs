@@ -146,20 +146,18 @@ namespace BookCave.Repositories
                                     Id = Bo.Id,
                                     Title = Bo.Title,
                                     Authors =  
-                                            (from Bok in _db.Books
-                                            join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
+                                            (from BoAu in _db.BooksAuthors
                                             join Au in _db.Authors on BoAu.AuthorId equals Au.Id
-                                            where BoAu.AuthorId == Au.Id
+                                            where BoAu.BookId == Bo.Id
                                             select new AuthorViewModel
                                             {
                                                 Id = Au.Id,
                                                 Name = Au.Name
                                             }).ToList(),
                                     Genre = 
-                                        (from Bk in _db.Books
-                                        join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
+                                        (from BoGe in _db.BookGenres
                                         join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
-                                        where Bk.Id == BoGe.BookId
+                                        where BoGe.BookId == Bo.Id
                                         select new GenreViewModel
                                         {
                                             Id = Ge.Id,
