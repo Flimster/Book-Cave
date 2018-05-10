@@ -49,7 +49,7 @@ namespace BookCave.Repositories
                                                             Image = Up.Image,
                                                             Price = Up.Price,
                                                             ISBN10 = Up.ISBN10,
-                                                            ISBN13 = Up.ISBN13 }).SingleOrDefault(),
+                                                            ISBN13 = Up.ISBN13 }).FirstOrDefault(),
                             FavoriteAuthor = (from Us in _db.AspNetUsers
                                                 join Au in _db.Authors on Us.FavoriteAuthorId equals Au.Id
                                                //where U.FavoriteAuthorId == Au.Id   //CHECK
@@ -57,7 +57,7 @@ namespace BookCave.Repositories
                                                 {
                                                     Id = Au.Id,
                                                     Name = Au.Name
-                                                }).SingleOrDefault(),
+                                                }).FirstOrDefault(),
                             RegistrationDate = U.RegistrationDate,
                             LastLoginDate = U.LastLoggedInDate,
                             BookSuggestionsEmail = U.BookSuggestionsEmail,
