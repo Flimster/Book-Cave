@@ -1,0 +1,17 @@
+.row1 {
+  background-color: white !important;
+  padding: 10px 0px;
+}
+
+.book-item {
+  width: 20%;
+}
+
+p {
+  margin: 2px;
+  font-size: 12px;
+}
+
+p.title {
+  font-size: 14px;
+}

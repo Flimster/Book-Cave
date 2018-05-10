@@ -70,5 +70,23 @@ namespace BookCave.Services
         {
             return _reviewRepo.GetList();
         }
+
+        public List<BookViewModel> GetTop10()
+        {
+            var books = _bookRepo.GetList();
+            books = (from Bo in books
+                     orderby Bo.Rating descending
+                     select Bo).Take(10).ToList();
+            return books;
+        }
+
+        public List<BookViewModel> GetDiscount()
+        {
+            var books = _bookRepo.GetList();
+            books = (from Bo in books
+                     where Bo.Discount != 0
+                     select Bo).ToList();
+            return books;
+        }
     }
 }

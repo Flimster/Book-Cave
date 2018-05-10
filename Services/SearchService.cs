@@ -15,17 +15,7 @@ namespace BookCave.Services
 
         public SearchViewModel FilterByGenre(SearchViewModel searchResults)
         {
-            /*searchResults.BookList = (from Bo in searchResults.BookList
-                                      where Bo == (from Ge in Bo.Genre
-                                                    where Ge.Id == searchResults.Genre
-                                                    select Ge)
-                                      select Bo).ToList(); */
-
-            
-            //questions.Where(q => q.Answers.Any(a => a.Name == "SomeName"))
-
             searchResults.BookList = searchResults.BookList.Where(Bo => Bo.Genre.Any(Ge => Ge.Id == searchResults.Genre)).ToList();
-
             return searchResults;
         }
 

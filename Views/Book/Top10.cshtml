@@ -1,0 +1,64 @@
+@model List<BookCave.Models.ViewModels.BookViewModel>
+
+<head>
+  <link rel="stylesheet" href="~/css/Book/Top10.css">
+</head>
+
+@{
+  int counter = 1;
+}
+
+<div class="container col-sm-10 col-sm-offset-1">
+<div class="row">
+  <h2>Top 10 Books</h2>
+</div>  
+  @foreach(var book in Model)
+  {
+    <div class="top10-item row">
+      <div class="top10-img col-sm-3">
+        <img src=@book.Image alt=@book.Title>
+      </div>
+
+      <div class="book-details col-sm-8">
+        <h3 class="book-title" id=@book.Id>@counter. @book.Title</h3>
+        <p>
+          @foreach(var author in book.Authors)
+          {
+            if(author == book.Authors[book.Authors.Count() - 1])
+            {
+              @author.Name @Html.Raw(". ")
+            }
+            else
+            {
+                @author.Name @Html.Raw(", ")
+            }
+          }
+        </p>
+        <p>
+          @foreach(var genre in book.Genre)
+          {
+            if(genre == book.Genre[book.Genre.Count() - 1])
+            {
+              @genre.Name @Html.Raw(". ")
+            }
+            else
+            {
+                @genre.Name @Html.Raw(", ")
+            }
+          }
+        </p>
+
+        <div class="rating">
+          Rating: @book.Rating
+        </div>
+        <br>
+        <div class="book-descriptions">
+          <p>
+            @book.Description
+          </p>
+        </div>
+      </div>
+    </div>
+    counter++;
+  }
+</div>
