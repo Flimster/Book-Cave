@@ -8,14 +8,12 @@ namespace BookCave.Services
     public class BillingAddressService
     {
         private BillingAddressRepo _billingAddressRepo;
-        private CountryRepo _countryRepo;
 
         private DataContext _db;
 
         public BillingAddressService()
         {
             _billingAddressRepo = new BillingAddressRepo();
-            _countryRepo = new CountryRepo();
             _db = new DataContext();
         }
 
