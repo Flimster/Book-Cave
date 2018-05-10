@@ -37,7 +37,6 @@ namespace BookCave.Controllers
             var book = _bookService.GetList()[id - 1];
             return View(book);
           }
-          
         }
 
         public IActionResult Test()
