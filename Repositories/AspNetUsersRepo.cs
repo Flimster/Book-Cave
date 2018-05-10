@@ -25,7 +25,7 @@ namespace BookCave.Repositories
                         Name = U.Name,
                         FavoriteBook =
                             (from Up in _db.Books
-                            where U.FavoriteBookId == Up.Id          
+                            where U.BooksId == Up.Id          
                             select new BookViewModel
                             {
                                 Id = Up.Id,
@@ -54,7 +54,7 @@ namespace BookCave.Repositories
                                 ISBN13 = Up.ISBN13 }).FirstOrDefault(),
                         FavoriteAuthor = 
                             (from Au in _db.Authors
-                            where U.FavoriteAuthorId == Au.Id
+                            where U.AuthorsId == Au.Id
                             select new AuthorViewModel
                             {
                                 Id = Au.Id,
@@ -84,7 +84,7 @@ namespace BookCave.Repositories
 
                 foreach(AspNetUsers usr in user)
                 {
-                    usr.Email = NewEmail;
+                    usr.Email = NewEmail.ToLower();
                     usr.NormalizedEmail = NewEmail.ToUpper();
                     usr.NormalizedUserName = NewEmail.ToUpper();
                     usr.UserName = NewEmail.ToLower();
@@ -163,51 +163,51 @@ namespace BookCave.Repositories
                 }
 
             _db.SaveChanges();
-        }
 
-        public AspNetUserViewModel GetById(string Id)
+        public AspNetUserViewModel GetById(string userId)
         {
             var user = (from U in _db.AspNetUsers
-                        where U.Id == Id
+                        where U.Id == userId
                         select new AspNetUserViewModel
                         {
                             Image = U.Image,
                             Name = U.Name,
-                            FavoriteBook = (from Up in _db.Books
-                                            where U.FavoriteBookId == Up.Id          
-                                            select new BookViewModel
-                                            {
-                                                Id = Up.Id,
-                                                Title = Up.Title,
-                                                Authors =  
-                                                    (from Bok in _db.Books
-                                                    join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
-                                                    join Au in _db.Authors on BoAu.AuthorId equals Au.Id
-                                                    select new AuthorViewModel
-                                                    {
-                                                        Id = Au.Id,
-                                                        Name = Au.Name
-                                                    }).ToList(),
-                                                Genre = 
-                                                    (from Bk in _db.Books
-                                                    join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
-                                                    join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
-                                                    select new GenreViewModel
-                                                    {
-                                                        Id = Ge.Id,
-                                                        Name = Ge.Name
-                                                    }).ToList(),
-                                                Image = Up.Image,
-                                                Price = Up.Price,
-                                                ISBN10 = Up.ISBN10,
-                                                ISBN13 = Up.ISBN13 }).FirstOrDefault(),
+                            FavoriteBook = 
+                                (from Up in _db.Books
+                                where U.BooksId == Up.Id          
+                                select new BookViewModel
+                                {
+                                    Id = Up.Id,
+                                    Title = Up.Title,
+                                    Authors =  
+                                        (from Bok in _db.Books
+                                        join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
+                                        join Au in _db.Authors on BoAu.AuthorId equals Au.Id
+                                        select new AuthorViewModel
+                                        {
+                                            Id = Au.Id,
+                                            Name = Au.Name
+                                        }).ToList(),
+                                    Genre = 
+                                        (from Bk in _db.Books
+                                        join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
+                                        join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
+                                        select new GenreViewModel
+                                        {
+                                            Id = Ge.Id,
+                                            Name = Ge.Name
+                                        }).ToList(),
+                                    Image = Up.Image,
+                                    Price = Up.Price,
+                                    ISBN10 = Up.ISBN10,
+                                    ISBN13 = Up.ISBN13 }).FirstOrDefault(),
                             FavoriteAuthor = (from Us in _db.AspNetUsers
-                                                join Au in _db.Authors on Us.FavoriteAuthorId equals Au.Id
-                                                select new AuthorViewModel
-                                                {
-                                                    Id = Au.Id,
-                                                    Name = Au.Name
-                                                }).FirstOrDefault(),
+                                    join Au in _db.Authors on Us.AuthorsId equals Au.Id
+                                    select new AuthorViewModel
+                                    {
+                                        Id = Au.Id,
+                                        Name = Au.Name
+                                    }).FirstOrDefault(),
                             RegistrationDate = U.RegistrationDate,
                             LastLoginDate = U.LastLoggedInDate,
                             BookSuggestionsEmail = U.BookSuggestionsEmail,

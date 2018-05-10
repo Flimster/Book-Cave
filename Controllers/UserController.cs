@@ -99,6 +99,7 @@ namespace BookCave.Controllers
 			return RedirectToAction("MyProfile");
 		}
 
+
 		public async Task<IActionResult> MyProfile()
 		{
 			var user = await _userManager.GetUserAsync(User);

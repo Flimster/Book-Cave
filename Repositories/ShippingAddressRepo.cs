@@ -54,6 +54,24 @@ namespace BookCave.Repositories
             return shippingAddresses;
         }
 
+        public void Edit(int addressId, ShippingAddresses address)
+        {
+            var shippingAddress =
+                from Bil in _db.ShippingAddresses
+                where Bil.Id == addressId
+                select Bil;
+
+                foreach(ShippingAddresses ship in shippingAddress)
+                {
+                    ship.City = address.City;
+                    ship.Zip = address.Zip;
+                    ship.CountriesId = address.CountriesId;
+                    ship.StateOrProvince = address.StateOrProvince;
+                    ship.StreetAddress = address.StreetAddress;
+                }
+                _db.SaveChanges();
+        }
+
         public void Write(ShippingAddresses shippingAddress)
         {
             _db.Add(shippingAddress);
