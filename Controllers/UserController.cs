@@ -69,6 +69,7 @@ namespace BookCave.Controllers
 				Orders = _orderService.GetByUserId(user.Id),
 				WishList = _bookService.GetList(),
 				BookShelf = _bookService.GetList()
+				
 			};
 			return View("Index", profile);
 		}
