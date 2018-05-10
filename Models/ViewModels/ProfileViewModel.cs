@@ -15,8 +15,8 @@ namespace BookCave.Models.ViewModels
 		public List<BookViewModel> WishList { get; set; }
 		public List<BookViewModel> BookShelf { get; set; }
 		public bool BookSuggestionsEmail { get; set; }
-		// public List<PaymentViewModel> PaymentMethods {get; set;}
-		// public List<BillingViewModel> PaymentMethods {get; set;}
-		// public List<ShippingViewModel> PaymentMethods {get; set;}
+		public List<CardDetailsViewModel> PaymentMethods {get; set;}
+		public List<BillingAddressViewModel> BillingAddresses {get; set;}
+		public List<ShippingViewModel> ShippingAddresses {get; set;}
 	}
 }

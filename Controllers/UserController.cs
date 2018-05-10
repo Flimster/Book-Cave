@@ -19,6 +19,8 @@ namespace BookCave.Controllers
 		private readonly UserManager<AspNetUsers> _userManager;
 		private readonly AspNetUsersService _userService;
 		private readonly OrdersService _orderService;
+		private readonly BillingAddressService _billingService;
+		private readonly CardDetailsService _cardService;
 
 		private static string _id;
 
@@ -28,6 +30,8 @@ namespace BookCave.Controllers
 			_userService = new AspNetUsersService();
 			_bookService = new BookService();
 			_orderService = new OrdersService();
+			_billingService = new  BillingAddressService();
+			_cardService = new  CardDetailsService();
 		}
 
 		[HttpGet]
@@ -72,8 +76,8 @@ namespace BookCave.Controllers
 				FavoriteAuthor = userInfo.FavoriteAuthor,
 				Orders = _orderService.GetByUserId(user.Id),
 				WishList = _bookService.GetList(),
-				BookShelf = _bookService.GetList()
-
+				BookShelf = _bookService.GetList(),
+				BillingAddresses = _billingService.GetByUserId(user.Id)
 			};
 			return View("Index", profile);
 		}
