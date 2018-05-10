@@ -3,6 +3,7 @@ using BookCave.Data;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 using System.Linq;
+using BookCave.Data.EntityModels;
 
 namespace BookCave.Services
 {
@@ -47,7 +48,6 @@ namespace BookCave.Services
                                                 Authors =  (from Bok in _db.Books
                                                             join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
                                                             join Au in _db.Authors on BoAu.AuthorId equals Au.Id
-                                                            //where Up.Id == BoAu.BookId && Au.Id == BoAu.AuthorId    //CHECK
                                                             select new AuthorViewModel
                                                             {
                                                                 Id = Au.Id,
@@ -56,7 +56,6 @@ namespace BookCave.Services
                                                 Genre = (from Bk in _db.Books
                                                         join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
                                                         join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
-                                                        //where Up.Id == BoGe.BookId && Ge.Id == BoGe.GenreId     //CHECK
                                                         select new GenreViewModel
                                                         {
                                                             Id = Ge.Id,
@@ -68,7 +67,6 @@ namespace BookCave.Services
                                                             ISBN13 = Up.ISBN13 }).ToList(),
                             FavoriteAuthor = (from Us in _db.AspNetUsers
                                                 join Au in _db.Authors on Us.FavoriteAuthorId equals Au.Id
-                                               //where U.FavoriteAuthorId == Au.Id   //CHECK
                                                 select new AuthorViewModel
                                                 {
                                                     Id = Au.Id,
@@ -83,5 +81,62 @@ namespace BookCave.Services
                         ).SingleOrDefault();
                         return user;
         }
+
+        public void ChangeEmail(string Id, string NewEmail)
+        {
+            var user =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in user)
+                {
+                    usr.Email = NewEmail;
+                    usr.NormalizedEmail = NewEmail.ToUpper();
+                    usr.NormalizedUserName = NewEmail.ToUpper();
+                    usr.UserName = NewEmail.ToLower();
+                }
+
+                _db.SaveChanges();
+        }
+
+        public void ChangeImage(string Id, string NewImage)
+        {
+            var image =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in image)
+                {
+                    usr.Image = NewImage;
+                }
+        }
+
+        public void ChangeName(string Id, string NewName)
+        {
+            var name =
+            from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in name)
+                {
+                    usr.Name = NewName;
+                }
+        }
+
+        public void ChangeBookSuggestionEmail(string Id, bool NewEmailSetting)
+        {
+            var email =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in email)
+                {
+                    usr.BookSuggestionsEmail = NewEmailSetting;
+                }
+        }
     }
-}
+}   
