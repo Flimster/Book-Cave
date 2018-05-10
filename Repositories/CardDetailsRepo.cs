@@ -14,9 +14,6 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-
-        public List<CardDetailsView> GetList()
-        {
             var cardDetails = (from C in _db.CardDetails
                         select new CardDetailsView
                         {
