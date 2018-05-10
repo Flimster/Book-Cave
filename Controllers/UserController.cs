@@ -6,8 +6,9 @@ using BookCave.Models.ViewModels;
 using BookCave.Data;
 using BookCave.Services;
 using Microsoft.AspNetCore.Identity;
-using BookCave.Data.EntityModels;
 using System.Threading.Tasks;
+using BookCave.Data.EntityModels;
+using BookCave.Models.InputModels;
 
 namespace BookCave.Controllers
 {
@@ -35,70 +36,10 @@ namespace BookCave.Controllers
 			return View();
 		}
 
-		[HttpGet]
-		public JsonResult GetProfile()
+		[HttpPost]
+		public IActionResult EditProfile(ProfileInputModel profileInput)
 		{
-			var user = new UserPrivateViewModel
-			{
-				Image = "https://3.bp.blogspot.com/-j2CLGaKyPyg/TjMDiSi37DI/AAAAAAAAASA/RGQGSGtgstc/s1600/Chamber+of+Secrets+Poster.jpg",
-				Name = "Harry potter",
-				Email = "someemail@gmail.com",
-				FavoriteBook = "Some favourite book",
-				FavouriteAuthor = "Some testdsafdsaf"
-			};
-			return Json(user);
-		}
-
-		[HttpGet]
-		public JsonResult GetOrders()
-		{
-
-			var orders = new List<OrderViewModel>
-				{
-					new OrderViewModel()
-					{
-							Id = 0,
-							Date = new DateTime(),
-							Status = false,
-							Price = 50,
-							BookList = _bookService.GetList()
-					},
-					new OrderViewModel()
-					{
-							Id = 1,
-							Date = new DateTime(),
-							Status = false,
-							Price = 50,
-							BookList = _bookService.GetList()
-					}
-				};
-			return Json(orders);
-		}
-
-		[HttpGet]
-		public JsonResult GetWishList()
-		{
-			var books = _bookService.GetList();
-			return Json(books);
-		}
-
-		[HttpGet]
-		public JsonResult GetBookShelf()
-		{
-			var books = _bookService.GetList();
-			return Json(books);
-		}
-
-		[HttpGet]
-		public JsonResult GetSettings()
-		{
-			return Json("Settings");
-		}
-
-		[HttpGet]
-		public JsonResult GetPaymentAndShipping()
-		{
-			return Json("Payment and Shipping");
+			return Redirect("Index");
 		}
 
 		public async Task<IActionResult> MyProfile()
@@ -112,8 +53,10 @@ namespace BookCave.Controllers
 				Image = user.Image,
 				Name = user.Name,
 				Email = user.Email,
-				//FavoriteBook = test.FavoriteBook,
-				//FavoriteAuthor = test.FavoriteAuthor
+				FavoriteBook = test.FavoriteBook,
+				FavoriteAuthor = test.FavoriteAuthor,
+				WishList = _bookService.GetList(),
+				BookShelf = _bookService.GetList()
 			};
 			return View("Index", profile);
 		}
