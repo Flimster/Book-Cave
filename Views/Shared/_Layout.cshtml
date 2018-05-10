@@ -25,7 +25,7 @@
 <body>
     <div id="wrapper">   <!--Wrapper for the footer-->
         <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="row" id="upper-nav">
+            <div class="row row-width" id="upper-nav">
                 <div class="col-sm-1"></div>
                 
                 <div class="col-sm-2 nav-height-control">
@@ -35,8 +35,8 @@
                 </div>
                 
                 <div class="col-sm-6 nav-height-control">
-                    <form action="get" method="#">
-                        <input type="text" id="search-input" placeholder="Search for a name, authore, genre, ISBN ...">
+                    <form asp-controller="Search" asp-action="Index">
+                        <input type="text" id="search-input" name="title" placeholder="Search for a Title">
                         <button type="submit" id="search-btn" class="btn btn-info"><div><i id="search-icon" class="fa fa-search"></i></div></button>
                     </form>
                 </div >
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="row" id="lower-nav">
+            <div class="row row-width" id="lower-nav">
                 <div class="col-sm-1"></div>
 
 
@@ -61,54 +61,56 @@
                                 <li class="col-sm-4 vertical-line-right">
                                     <ul>
                                         <li class="dropdown-header">Genre</li>
-                                        <li><a href="#">Adventure</a></li>
-                                        <li><a href="#">Fantasy</a></li>
-                                        <li><a href="#">Science fiction</a></li>
-                                        <li><a href="#">Drama</a></li>
-                                        <li><a href="#">Mystery</a></li>
-                                        <li><a href="#">Romance</a></li>
-                                        <li><a href="#">Satire</a></li>
-                                        <li><a href="#">Horror</a></li>
+                                        <form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="genre" value="1">Horror</button>
+                                        </form>
+                                        <li><form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="genre" value="2">Sci fi</button>
+                                        </form></li>
+                                        <li><form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="genre" value="3">Romance</button>
+                                        </form></li>
+                                        <li><form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="genre" value="4">Thriller</button>
+                                        </form></li>
+                                        <li><form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="genre" value="5">Comedy</button>
+                                        </form></li>
+                                        <li><form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="genre" value="6">Education</button>
+                                        </form></li>
                                     </ul>
                                 </li>
                                 
                                 <li class="col-sm-4 vertical-line-right vertical-line-left">
                                     <ul>
                                         <li class="dropdown-header">Authors</li>
-                                        <li><a href="#">Stephen King</a></li>
-                                        <li><a href="#">J. K. Rowling</a></li>
-                                        <li><a href="#">William Shakespear</a></li>
-                                        <li><a href="#">Jane Austin</a></li>
-                                        <li><a href="#">J. R. R. Tolkien</a></li>
-                                        <li><a href="#">Charles Dickens</a></li>
-                                        <li><a href="#">James Patterson</a></li>
-                                        <li><a href="#">Ernest Hemingway</a></li>
-                                    </ul>
-                                </li>
-
-                                <li class="col-sm-4 vertical-line-left">
-                                    <ul>
-                                        <li class="dropdown-header">Top 10 books</li>
-                                        <li><a href="#">Moby Dick</a></li>
-                                        <li><a href="#">The Hobbit</a></li>
-                                        <li><a href="#">Hamlet</a></li>
-                                        <li><a href="#">The adventures of Huckleberry Fin</a></li>
-                                        <li><a href="#">Pride and Prejudice</a></li>
-                                        <li><a href="#">The Davinci Code</a></li>
-                                        <li><a href="#">Harry Potter and The Deathly Hallows</a></li>
-                                        <li><a href="#">Harry Potter and the Philosopher's Stone</a></li>
+                                        <li><form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="author" value="1">J.K Rowling</button>
+                                        </form></li>
+                                        <li><form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="author" value="2">Stephen King</button>
+                                        </form></li>
+                                        <li><form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="author" value="3">Imany</button>
+                                        </form></li>
+                                        <li><form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="author" value="4">Ginger Malfoy</button>
+                                        </form></li>
+                                        <li><form asp-controller="Search" asp-action="Index">
+                                          <button class="btn btn-link" name="author" value="5">Sambrina Chichi</button>
+                                        </form></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                     </ul>
                     <div class="navbar-header">
-                        <a href="#" class="sett2">Discounts</a>
+                        <a asp-controller="Book" asp-action="Discount" class="sett2">Discounts</a>
                     </div>
                     <div class="navbar-header">
-                        <a href="#" class="sett2">Top 10</a>
+                        <a asp-controller="Book" asp-action="Top10" class="sett2">Top 10</a>
                     </div>
-
                 </div>
 
                 <div class="col-sm-4"></div>
@@ -125,27 +127,49 @@
         </nav>
         <div class="container body-content">
             @RenderBody()
-            <hr />
 
         </div>
     </div>
 
     <footer class="navbar-inverse footer-settings footer">
-        <div class="row">
+        <div class="row row-width">
             
-            <div class="col-sm-1"></div>
+            <div class="col-sm-10 col-sm-offset-1">
 
-            <div class="col-sm-4">
-                <h4>Contact us</h4>
-                
-                <a href="https://www.facebook.com"><img class="social-size" src="~/images/fbIcon.svg" alt="facebook logo"></a>
-                <a href="https://www.twitter.com"><img class="social-size" src="~/images/twIcon.svg" alt="twitter logo"></a>
-                <a href="https://instagram.com"><img class="social-size" src="~/images/igIcon.svg" alt="instagram logo"></a>
-                    
-            </div>
+              <div class="col-sm-4">
+                  <h4>Contact us</h4>
+                  
+                  <a href="https://www.facebook.com"><img class="social-size" src="~/images/fbIcon.svg" alt="facebook logo"></a>
+                  <a href="https://www.twitter.com"><img class="social-size" src="~/images/twIcon.svg" alt="twitter logo"></a>
+                  <a href="https://instagram.com"><img class="social-size" src="~/images/igIcon.svg" alt="instagram logo"></a>
+                      
+              </div>
 
-            <div class="col-sm-4">
-                <h4>About us</h4>
+              <div class="col-sm-3">
+                  <h4>About us</h4>
+              </div>
+              
+              <div class="col-sm-5">
+                <div class="col-sm-4">
+                  <h4>Easter eggs:</h4>
+                </div>
+                <div class="col-sm-8">
+                  <ul>
+                    <li class="created-by">
+                      <span>Brynjar "" - Error</span>
+                    </li>
+                    <li>
+                      Daði "The professor" - 
+                    </li>
+                    <li>
+                      Ingi "" - 404
+                    </li>
+                    <li>
+                      Tyler "Lerd of thu wangs" - 
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
         </div>
     </footer>

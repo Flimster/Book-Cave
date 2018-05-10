@@ -37,18 +37,29 @@ namespace BookCave.Controllers
             var book = _bookService.GetList()[id - 1];
             return View(book);
           }
-          
+        }
+
+        public IActionResult Top10()
+        {
+            var books = _bookService.GetTop10();
+            return View(books);
+        }
+
+        public IActionResult Discount()
+        {
+          var books = _bookService.GetDiscount();
+          return View(books);
         }
 
         public IActionResult Test()
         {
             //var feedback = _feedbackService.();
             //var book = _bookService.GetList();
-            var aspNetUsers = _aspNetUsersService.GetById("25a13905-92e4-4a72-a707-5b761313650e");
+            //var aspNetUsers = _aspNetUsersService.GetById("25a13905-92e4-4a72-a707-5b761313650e");
             //var billing = _billingAddressService.GetList();
             //var card = _cardDetailsService.GetList();
-            //var order = _ordersService.GetByUserId("f8277a4c-5152-4599-83cb-598ef8fa8056");
-            return View(aspNetUsers);
+            var order = _ordersService.GetByUserId("25a13905-92e4-4a72-a707-5b761313650e");
+            return View(order);
         }
     }
 }

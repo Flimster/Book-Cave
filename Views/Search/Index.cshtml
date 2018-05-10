@@ -1,76 +1,133 @@
-@model List<BookCave.Models.ViewModels.BookViewModel>
+@model BookCave.Models.ViewModels.SearchViewModel
 
 <head>
   <link rel="stylesheet" href="~/css/Search/search.css">
 </head>
+
+@{
+  int counter = 0;
+}
 
 <div class="search-container col-sm-10 col-sm-offset-1">
   
   <div class="search-filters col-sm-3">
     <h3>Filters</h3>
     <hr>
-    <form action="filter-menu">
+    <form asp-controller="Search" asp-action="Index">
     
       <div class="form-group">
-        <label for="search-string">Search</label>
-        <input type="text" class="form-control" name="search-string">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" name="title" value=@Model.Title>
       </div>
 
       <div class="form-group">
-        <label for="search-price">Price</label>
-        <select class="form-control" name="searh-price">
-          <option value="low" label="Under 15">Under 15</option>
-          <option value="mid" label="15 to 30">15 to 30</option>
-          <option value="high" label="30+">30+</option>
+        <label for="genre">Genre</label>
+        <select class="form-control" name="genre">
+          <option value="0" label="All">All</option>
+          <option value="1" label="Horror">Horror</option>
+          <option value="2" label="Sci fi">Sci fi</option>
+          <option value="3" label="Romance">Romance</option>
+          <option value="4" label="Thriller">Thriller</option>
+          <option value="5" label="Comedy">Comedy</option>
+          <option value="6" label="Education">Education</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="search-genre">Genre</label>
-        <select class="form-control" name="searh-genre">
-          <option value="romance" label="Romance">Romance</option>
-          <option value="crime" label="Mystery">Mystery</option>
-          <option value="religious" label="Religious">Religious</option>
-          <option value="fantasy" label="Fantasy">Fantasy</option>
-          <option value="horror" label="Horror">Horror</option>
+        <label for="author">Author</label>
+        <select class="form-control" name="author">
+          <option value="0" label="All">All</option>
+          <option value="1" label="J.K Rowling">J.K Rowling</option>
+          <option value="2" label="Stephen King">Stephen King</option>
+          <option value="3" label="Imany">Imany</option>
+          <option value="4" label="Ginger Malfoy">Ginger Malfoy</option>
+          <option value="5" label="Sambrina Chichi">Sambrina Chichi</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="search-author">Author</label>
-        <select class="form-control" name="searh-author">
-          <option value="jk-rowling" label="J.K Rowling">J.K Rowling</option>
-          <option value="andrewStellman" label="Andrew Stellman">Andrew Stellman</option>
-          <option value="jrr-Tolkien" label="J.R.R Tolkien">J.R.R Tolkien</option>
-          <option value="aldousHuxley" label="Aldous Huxley">Aldous Huxley</option>
-          <option value="georgeOrwell" label="George Orwell">George Orwell</option>
-          <option value="williamGolding" label="William Golding">William Golding</option>
-          <option value="jd-Salinger" label="J.D. Salinger">J.D. Salinger</option>
+        <label for="price">Price</label>
+        <select class="form-control" name="price">
+          <option value="0" label="All"></option>
+          <option value="15" label="Under 15"></option>
+          <option value="30" label="15 to 30"></option>
+          <option value="31" label="Over 30"></option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="search-language">Language</label>
-        <select class="form-control" name="searh-language">
-          
+        <label for="language">Language</label>
+        <select class="form-control" name="language">
+          <option value="0" label="All">All</option>
+          <option value="1" label="Icelandic">Icelandic</option>
+          <option value="2" label="English">English</option>
+          <option value="3" label="German">German</option>
+          <option value="4" label="French">French</option>
+          <option value="5" label="C#">C#</option>
+          <option value="6" label="Javascript">Javascript</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="search-format">Format</label>
-        <select class="form-control" name="searh-format">
-          
+        <label for="format">Format</label>
+        <select class="form-control" name="format">
+          <option value="0" label="All">All</option>
+          <option value="1" label="Hard Cover">Hard Cover</option>
+          <option value="2" label="Ebook">Ebook</option>
         </select>
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary" type="submit">submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </div>
     </form>  
   </div>
 
 
-  <div class="search-results col-sm-8">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ut sit alias ipsum, eligendi cum voluptatum voluptate perspiciatis quae temporibus expedita doloribus delectus minus inventore at neque eveniet cupiditate voluptates.
-  </div>
+  <div class="search-results col-sm-9" style="width: 73%">
+     <div class="row">
+          @foreach(var book in Model.BookList)
+          {
+            if (counter != 0 && counter % 4 == 0)
+            {
+                @:</div>
+                @:<div class="row">
+            }
+            
+            <div class="book-item col-sm-3">
+              <div class="item-img">
+                  <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><img src=@book.Image alt=@book.Title class="img-responsive center-block"></a>
+              </div>
+                <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><p class="title">@book.Title</p></a>
+                <p class="author">
+                  @foreach(var author in book.Authors)
+                  {
+                    if(author == book.Authors[book.Authors.Count() - 1])
+                    {
+                      @author.Name @Html.Raw(". ")
+                    }
+                    else
+                    {
+                      @author.Name @Html.Raw(", ")
+                    }
+                  }
+                </p>
+                <p class="genre">
+                  @foreach(var genre in book.Genre)
+                  {
+                    if(genre == book.Genre[book.Genre.Count() - 1])
+                    {
+                      @genre.Name @Html.Raw(". ")
+                    }
+                    else
+                    {
+                      @genre.Name @Html.Raw(", ")
+                    }
+                  }
+                </p>
+            </div>
+            counter++;
+          }
+      </div>
+    </div>  
 </div>

@@ -4,6 +4,11 @@ body {
   background: #f0f0f0;
 }
 
+.row-width {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .mega-dropdown {
   position: static !important;
   width: 100%;
@@ -181,13 +186,13 @@ div > form > input {
 }
 
 .social-size {
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
   margin: 5px;
 }
 
 .footer-settings {
-  height: 200px;
+  height: 100px;
 }
 
 .footer-settings h4 {
@@ -199,9 +204,9 @@ div > form > input {
   height: auto !important;
   height: 100%;
   /* Negative indent footer by its height */
-  margin: 0 auto -200px;
+  margin: 0 auto -100px;
   /* Pad the bottom by footer height */
-  padding: 0 0 230px;
+  padding: 0 0 120px;
 }
 
 html, body {
@@ -240,4 +245,8 @@ html, body {
 
 i.fas {
   color: black;
+}
+
+.created-by {
+  color: #999;
 }

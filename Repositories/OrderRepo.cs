@@ -107,6 +107,57 @@ namespace BookCave.Repositories
 
             return order;
         }
+        public List<OrderViewModel> GetByUserId(string Id)
+        {
+            var orderByUserId = 
+                    (from UsOr in _db.UsersOrders
+                    join Ord in _db.Orders on UsOr.OrderId equals Ord.Id
+                    where UsOr.AspNetUsersId == Id 
+                    select new OrderViewModel
+                    { 
+                        Id = Ord.Id,
+                        User = 
+                            (from UsOr in _db.UsersOrders
+                            join Usr in _db.AspNetUsers on UsOr.AspNetUsersId equals Usr.Id
+                            where UsOr.AspNetUsersId == Id
+                            select Usr.Name).FirstOrDefault(),
+                        Date = Ord.Date,
+                        Status = Ord.Status,
+                        Price = Ord.Price,
+                        BookList = 
+                                (from OrBo in _db.OrdersBooks
+                                join Bo in _db.Books on OrBo.BookId equals Bo.Id
+                                where OrBo.OrderId == Ord.Id
+                                select new BookViewModel
+                                {
+                                    Id = Bo.Id,
+                                    Title = Bo.Title,
+                                    Authors =  
+                                            (from BoAu in _db.BooksAuthors
+                                            join Au in _db.Authors on BoAu.AuthorId equals Au.Id
+                                            where BoAu.BookId == Bo.Id
+                                            select new AuthorViewModel
+                                            {
+                                                Id = Au.Id,
+                                                Name = Au.Name
+                                            }).ToList(),
+                                    Genre = 
+                                        (from BoGe in _db.BookGenres
+                                        join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
+                                        where BoGe.BookId == Bo.Id
+                                        select new GenreViewModel
+                                        {
+                                            Id = Ge.Id,
+                                            Name = Ge.Name
+                                        }).ToList(),
+                                    Image = Bo.Image,
+                                    Price = Bo.Price,
+                                    ISBN10 = Bo.ISBN10,
+                                    ISBN13 = Bo.ISBN13
+                                }).ToList()
+                    }).ToList();
+            return orderByUserId;
+        }
 
         public void Write(Orders order)
         {
@@ -121,3 +172,4 @@ namespace BookCave.Repositories
         }
     }
 }
+
