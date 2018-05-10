@@ -44,7 +44,22 @@
         </div>
 
         <div class="book-opt col-sm-2">
-          <h4>$@book.Price</h4>
+
+          <div style="display: inline">
+            @if(book.Discount == 0)
+            {
+              <h4>$@book.Price</h4>
+            }
+            else
+            {
+              <h4 style="display: inline">$@(book.Price * 1 - book.Discount)</h4>
+              <h5 style="text-decoration: line-through;display: inline;">$@book.Price</h5>
+            }
+          </div>
+
+
+
+          
           <div class="book-stock">
             <strong>
               In stock
