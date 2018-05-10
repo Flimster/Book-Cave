@@ -112,8 +112,8 @@ namespace BookCave.Controllers
 				Image = user.Image,
 				Name = user.Name,
 				Email = user.Email,
-				FavoriteBook = test.FavoriteBook,
-				FavoriteAuthor = test.FavoriteAuthor
+				//FavoriteBook = test.FavoriteBook,
+				//FavoriteAuthor = test.FavoriteAuthor
 			};
 			return View("Index", profile);
 		}

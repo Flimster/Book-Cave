@@ -24,6 +24,7 @@ namespace BookCave.Controllers
             _ordersService = new OrdersService();
             _billingAddressService = new BillingAddressService();
             _cardDetailsService = new CardDetailsService();
+            _db = new DataContext();
         }
 
         public IActionResult Index(int? id)
@@ -40,6 +41,7 @@ namespace BookCave.Controllers
             var aspNetUsers = _aspNetUsersService.GetById("25a13905-92e4-4a72-a707-5b761313650e");
             //var billing = _billingAddressService.GetList();
             //var card = _cardDetailsService.GetList();
+            //var order = _ordersService.GetByUserId("f8277a4c-5152-4599-83cb-598ef8fa8056");
             return View(aspNetUsers);
         }
     }
