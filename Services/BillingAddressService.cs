@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BookCave.Data;
+using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 
@@ -8,20 +9,33 @@ namespace BookCave.Services
     public class BillingAddressService
     {
         private BillingAddressRepo _billingAddressRepo;
-        private CountryRepo _countryRepo;
 
         private DataContext _db;
 
         public BillingAddressService()
         {
             _billingAddressRepo = new BillingAddressRepo();
-            _countryRepo = new CountryRepo();
             _db = new DataContext();
         }
 
-        public List<BillingAddressesViewModel> GetList()
+        public List<BillingAddressViewModel> GetList()
         {
             return _billingAddressRepo.GetList();
+        }
+
+        public void Write(BillingAddressViewModel address)
+        {
+            _billingAddressRepo.Write(address);
+        }
+
+        public void Edit(int addressId, BillingAddresses address)
+        {
+            _billingAddressRepo.Edit(addressId, address);
+        }
+
+        public List<BillingAddressViewModel> GetByUserId(string Id)
+        {
+            return _billingAddressRepo.GetByUserId(Id);
         }
     }
 }

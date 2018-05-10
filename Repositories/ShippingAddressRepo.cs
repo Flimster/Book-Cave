@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
 using System.Linq;
+using Book_Cave.Models.ViewModels;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Repositories
 {
@@ -14,19 +16,60 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<ShippingAddresses> GetList()
+        public List<ShippingAddressViewModel> GetList()
         {
             var shippingAddress = (from S in _db.ShippingAddresses
-                        select new ShippingAddresses
+                        select new ShippingAddressViewModel
                         {
                             Id = S.Id,
-                            CountryId = S.CountryId,
-                            Countries = S.Countries,
+                            Country = 
+                                (from C in _db.Countries
+                                where S.Id == C.Id
+                                select C.Name).FirstOrDefault(),
                             StateOrProvince = S.StateOrProvince,
                             City = S.City,
                         }).ToList();
             
             return shippingAddress;
+        }
+
+        public List<ShippingAddressViewModel> GetByUserId(string UserId)
+        {
+            var shippingAddresses = 
+                (from UsBi in _db.UserBillingAddresses
+                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
+                where UsBi.AspNetUsersId == UserId
+                select new ShippingAddressViewModel
+                {
+                    Id = Bil.Id,
+                    Country =
+                        (from C in _db.Countries
+                        where Bil.CountryId == C.Id
+                        select C.Name).FirstOrDefault(),
+                    StateOrProvince = Bil.StateOrProvince,
+                    City = Bil.City,
+                    Zip = Bil.Zip,
+                    StreetAddress = Bil.StreetAddress
+                }).ToList();
+            return shippingAddresses;
+        }
+
+        public void Edit(int addressId, ShippingAddresses address)
+        {
+            var shippingAddress =
+                from Bil in _db.ShippingAddresses
+                where Bil.Id == addressId
+                select Bil;
+
+                foreach(ShippingAddresses ship in shippingAddress)
+                {
+                    ship.City = address.City;
+                    ship.Zip = address.Zip;
+                    ship.CountriesId = address.CountriesId;
+                    ship.StateOrProvince = address.StateOrProvince;
+                    ship.StreetAddress = address.StreetAddress;
+                }
+                _db.SaveChanges();
         }
 
         public void Write(ShippingAddresses shippingAddress)

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
+using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 
 namespace BookCave.Services
@@ -17,9 +18,14 @@ namespace BookCave.Services
             _db = new DataContext();
         }
 
-        public List<CardDetails> GetList()
+        public List<CardDetailsView> GetList()
         {
             return _cardDetailsRepo.GetList();
+        }
+
+        public List<CardDetailsView> GetByUserId(string UserId)
+        {
+            return _cardDetailsRepo.GetByUserId(UserId);
         }
     }
 }

@@ -16,91 +16,50 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<OrderViewModel> GetOrderList(BookCave.Data.EntityModels.Orders Ord)
-        {
-            var orders = (from O in _db.Orders
-                          select new OrderViewModel
-                          {
-                            Id = Ord.Id,
-                            User = (from Or in _db.Orders
-                                    join OrUs in _db.UsersOrders on Or.Id equals OrUs.OrderId
-                                    join Us in _db.AspNetUsers on OrUs.AspNetUsersId equals Us.Id
-                                    select Us.Name).SingleOrDefault(),
-                            Date = Ord.Date,
-                            Status = Ord.Status,
-                            Price = Ord.Price,
-                            BookList = (from Or in _db.Orders
-                                        join OrBo in _db.OrdersBooks on Or.Id equals OrBo.OrderId
-                                        join Bo in _db.Books on OrBo.BookId equals Bo.Id
-                                        select new BookViewModel
-                                        {
-                                            Id = Bo.Id,
-                                            Title = Bo.Title,
-                                            Authors =  (from Bok in _db.Books
-                                                        join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
-                                                        join Au in _db.Authors on BoAu.AuthorId equals Au.Id
-                                                        select new AuthorViewModel
-                                                        {
-                                                            Id = Au.Id,
-                                                            Name = Au.Name
-                                                        }).ToList(),
-                                            Genre = (from Bk in _db.Books
-                                                     join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
-                                                     join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
-                                                     select new GenreViewModel
-                                                     {
-                                                         Id = Ge.Id,
-                                                         Name = Ge.Name
-                                                     }).ToList(),
-                                            Image = Bo.Image,
-                                            Price = Bo.Price,
-                                            ISBN10 = Bo.ISBN10,
-                                            ISBN13 = Bo.ISBN13
-                                        }).ToList(),
-                            }).ToList();
-                return orders;
-        }
         public List<OrderViewModel> GetList()
         {
             var order = (from O in _db.Orders
                         select new OrderViewModel
                         { 
                             Id = O.Id,
-                            User = (from Or in _db.Orders
-                                    join OrUs in _db.UsersOrders on Or.Id equals OrUs.OrderId
-                                    join Us in _db.AspNetUsers on OrUs.AspNetUsersId equals Us.Id
-                                    //where O.Id == OrUs.OrderId && OrUs.AspNetUsersId == Us.Id   //CHECK
-                                    select Us.Name).SingleOrDefault(),
+                            User = 
+                                (from UsOr in _db.UsersOrders
+                                join Us in _db.AspNetUsers on UsOr.AspNetUsersId equals Us.Id
+                                where UsOr.OrderId == O.Id
+                                select Us.Name).SingleOrDefault(),
                             Date = O.Date,
                             Status = O.Status,
                             Price = O.Price,
-                            BookList = (from Or in _db.Orders
-                                        join OrBo in _db.OrdersBooks on Or.Id equals OrBo.OrderId
-                                        join Bo in _db.Books on OrBo.BookId equals Bo.Id
-                                        select new BookViewModel
+                            BookList = 
+                                (from OrBo in _db.OrdersBooks
+                                join Bo in _db.Books on OrBo.BookId equals Bo.Id
+                                where OrBo.OrderId == O.Id
+                                select new BookViewModel
+                                {
+                                    Id = Bo.Id,
+                                    Title = Bo.Title,
+                                    Authors =  
+                                        (from BoAu in _db.BooksAuthors
+                                        join Au in _db.Authors on BoAu.AuthorId equals Au.Id
+                                        where BoAu.BookId == Bo.Id
+                                        select new AuthorViewModel
                                         {
-                                            Id = Bo.Id,
-                                            Title = Bo.Title,
-                                            Authors =  (from Bok in _db.Books
-                                                        join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
-                                                        join Au in _db.Authors on BoAu.AuthorId equals Au.Id
-                                                        select new AuthorViewModel
-                                                        {
-                                                            Id = Au.Id,
-                                                            Name = Au.Name
-                                                        }).ToList(),
-                                            Genre = (from Bk in _db.Books
-                                                     join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
-                                                     join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
-                                                     select new GenreViewModel
-                                                     {
-                                                         Id = Ge.Id,
-                                                         Name = Ge.Name
-                                                     }).ToList(),
-                                            Image = Bo.Image,
-                                            Price = Bo.Price,
-                                            ISBN10 = Bo.ISBN10,
-                                            ISBN13 = Bo.ISBN13
+                                            Id = Au.Id,
+                                            Name = Au.Name
+                                        }).ToList(),
+                                    Genre = 
+                                        (from BoGe in _db.BookGenres
+                                        join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
+                                        where BoGe.BookId == Bo.Id
+                                        select new GenreViewModel
+                                        {
+                                            Id = Ge.Id,
+                                            Name = Ge.Name
+                                        }).ToList(),
+                                    Image = Bo.Image,
+                                    Price = Bo.Price,
+                                    ISBN10 = Bo.ISBN10,
+                                    ISBN13 = Bo.ISBN13
 
                                         }).ToList()
                             }).ToList();
@@ -126,34 +85,50 @@ namespace BookCave.Repositories
                         Price = Ord.Price,
                         BookList = 
                                 (from OrBo in _db.OrdersBooks
-                                join Bo in _db.Books on OrBo.BookId equals Bo.Id
+                                join B in _db.Books on OrBo.BookId equals B.Id
                                 where OrBo.OrderId == Ord.Id
                                 select new BookViewModel
                                 {
-                                    Id = Bo.Id,
-                                    Title = Bo.Title,
-                                    Authors =  
-                                            (from BoAu in _db.BooksAuthors
-                                            join Au in _db.Authors on BoAu.AuthorId equals Au.Id
-                                            where BoAu.BookId == Bo.Id
-                                            select new AuthorViewModel
-                                            {
-                                                Id = Au.Id,
-                                                Name = Au.Name
-                                            }).ToList(),
+                                    Id = B.Id,
+                                    Title = B.Title,
+                                    Description = B.Description,
+                                    Publisher = B.Publisher,
+                                    Image = B.Image,
+                                    Price = B.Price,
+                                    ISBN10 = B.ISBN10,
+                                    ISBN13 = B.ISBN13,
+                                    ReleaseYear = B.ReleaseYear,
+                                    Rating = B.Rating,
+                                    StockCount = B.StockCount,
+                                    FormatsId = B.FormatsId,
+                                    Discount = B.Discount,
+                                    Languages = 
+                                        (from BoLa in _db.BooksLanguages
+                                        join La in _db.Languages on BoLa.LanguageId equals La.Id
+                                        where BoLa.BookId == B.Id
+                                        select new LanguagesViewModel
+                                        {
+                                            Name = La.Name
+                                        }).ToList(),
+                            
+                                    Authors = 
+                                        (from BoAu in _db.BooksAuthors
+                                        join Au in _db.Authors on BoAu.AuthorId equals Au.Id
+                                        where BoAu.BookId == B.Id
+                                        select new AuthorViewModel
+                                        {
+                                            Id = Au.Id,
+                                            Name = Au.Name
+                                        }).ToList(),
                                     Genre = 
                                         (from BoGe in _db.BookGenres
                                         join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
-                                        where BoGe.BookId == Bo.Id
+                                        where BoGe.BookId == B.Id
                                         select new GenreViewModel
                                         {
                                             Id = Ge.Id,
                                             Name = Ge.Name
-                                        }).ToList(),
-                                    Image = Bo.Image,
-                                    Price = Bo.Price,
-                                    ISBN10 = Bo.ISBN10,
-                                    ISBN13 = Bo.ISBN13
+                                        }).ToList()
                                 }).ToList()
                     }).ToList();
             return orderByUserId;
