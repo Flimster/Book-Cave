@@ -14,7 +14,6 @@
 		<div id="panel-payment-shipping" class="panel-body">Payment and shipping</div>
 	</div>
 
-	<!-- REMEBER TO CHANGE THE FORM FOR ASP -->
 	<div id="profile" class="col-lg-10 main-box">
 		<div id="image-container" class="col-lg-12">
 			<img id="profile-image" src="@Model.Image" alt="no image found">
@@ -30,16 +29,17 @@
 		</div>
 		<div class="col-lg-12 profile-info">
 			<div class="col-lg-5">
-				@Model.FavoriteBook[0].Title
+				@Model.FavoriteBook.Title
 			</div>
 			<div class="col-lg-2"></div>			
 			<div class="col-lg-5">
-				@Model.FavoriteAuthor[0].Name
+				@Model.FavoriteAuthor.Name
 			</div>
 		</div>
 		<div class="col-lg-12">
 			<div class="col-lg-5"></div>
 			<div class="col-lg-3">
+				<a asp-controller="User" asp-action="EditProfile"><button class="btn btn-success">Edit Profile</button></a>
 			</div>
 			<div class="col-lg-5"></div>
 		</div>
@@ -47,7 +47,48 @@
 
 
 	<div id="orders" class="col-lg-10 is-hidden main-box">
-		<h1>dsfdsafdasf</h1>
+		@foreach (var order in Model.Orders)
+		{
+			<div class="col-lg-12 order-information">
+				<hr class="order-seperator-top">
+				<div class="col-lg-3">Order Placed</div>
+				<div class="col-lg-3">Order Order ID</div>
+				<div class="col-lg-3">Order Status</div>
+				<div class="col-lg-3">Total Price</div>
+			</div>
+			<div class="col-lg-12 order-information">
+				<div class="col-lg-3">@order.Date</div>
+				<div class="col-lg-3">@order.Id</div>
+				<div class="col-lg-3">@order.Status</div>
+				<div class="col-lg-3">$ @order.Price</div>
+				<hr class="order-seperator-bottom">
+			</div>
+				@foreach (var book in order.BookList)
+				{
+				<div class="col-lg-12 order-book">
+					<div class="col-lg-4">
+						<img src="@book.Image" alt="@book.Title" class="order-image">
+					</div>
+					<div class="col-lg-4">
+						@book.Title
+						<br>
+						@foreach (var genre in book.Genre)
+						{
+							@genre.Name @Html.Raw(" ")
+						}
+						<br>
+						@foreach (var author in book.Authors)
+						{
+							@author.Name @Html.Raw(" ")
+						}
+						<br>
+					</div>
+					<div class="col-lg-4">
+						Some text
+					</div>
+				</div>
+				}
+		}
 	</div>
 	<div id="wishlist" class="col-lg-10 is-hidden main-box">
 		@foreach (var book in Model.BookShelf)
@@ -97,6 +138,7 @@
 	</div>
 	<div id="settings" class="col-lg-10 is-hidden main-box">
 		<h1>Settings</h1>
+
 	</div>
 	<div id="payment-shipping" class="col-lg-10 is-hidden main-box">
 		<h1>Payment and shipping</h1>

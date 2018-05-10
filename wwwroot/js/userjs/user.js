@@ -48,5 +48,5 @@ $("#panel-payment-shipping").on("click", function(){
 });
 
 $("#edit-profile").on("click", function(){
-	$.post()
-})
+
+});
