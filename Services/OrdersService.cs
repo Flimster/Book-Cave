@@ -31,7 +31,7 @@ namespace BookCave.Services
 
         public List<OrderViewModel> GetByUserId(string Id)
         {
-            return GetByUserId(Id);
+            return _orderRepo.GetByUserId(Id);
         }
     }
 }

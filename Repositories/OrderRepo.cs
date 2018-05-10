@@ -139,9 +139,8 @@ namespace BookCave.Repositories
                         Price = Ord.Price,
                         BookList = 
                                 (from OrBo in _db.OrdersBooks
-                                join Or in _db.Orders on OrBo.OrderId equals Or.Id
                                 join Bo in _db.Books on OrBo.BookId equals Bo.Id
-                                where Bo.Id == OrBo.BookId
+                                where OrBo.OrderId == Ord.Id
                                 select new BookViewModel
                                 {
                                     Id = Bo.Id,
@@ -150,27 +149,27 @@ namespace BookCave.Repositories
                                             (from Bok in _db.Books
                                             join BoAu in _db.BooksAuthors on Bok.Id equals BoAu.Id
                                             join Au in _db.Authors on BoAu.AuthorId equals Au.Id
+                                            where BoAu.AuthorId == Au.Id
                                             select new AuthorViewModel
                                             {
                                                 Id = Au.Id,
                                                 Name = Au.Name
                                             }).ToList(),
-                        Genre = 
-                            (from Bk in _db.Books
-                            join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
-                            join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
-                            where Bk.Id == BoGe.BookId
-                            select new GenreViewModel
-                            {
-                                Id = Ge.Id,
-                                Name = Ge.Name
-                            }).ToList(),
-                        Image = Bo.Image,
-                        Price = Bo.Price,
-                        ISBN10 = Bo.ISBN10,
-                        ISBN13 = Bo.ISBN13
-
-                        }).ToList()
+                                    Genre = 
+                                        (from Bk in _db.Books
+                                        join BoGe in _db.BookGenres on Bk.Id equals BoGe.BookId
+                                        join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
+                                        where Bk.Id == BoGe.BookId
+                                        select new GenreViewModel
+                                        {
+                                            Id = Ge.Id,
+                                            Name = Ge.Name
+                                        }).ToList(),
+                                    Image = Bo.Image,
+                                    Price = Bo.Price,
+                                    ISBN10 = Bo.ISBN10,
+                                    ISBN13 = Bo.ISBN13
+                                }).ToList()
                     }).ToList();
             return orderByUserId;
         }
