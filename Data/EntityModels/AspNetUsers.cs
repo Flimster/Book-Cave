@@ -10,10 +10,10 @@ namespace BookCave.Data.EntityModels
         public string Image { get; set; }
         public string Name { get; set; }
         [ForeignKey("Book")]
-        public int FavoriteBookId { get; set; }
+        public int BooksId { get; set; }
         public virtual Books Books { get; set; }
         [ForeignKey("Author")]
-        public int FavoriteAuthorId { get; set; }
+        public int AuthorsId { get; set; }
         public virtual Authors Authors { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime LastLoggedInDate { get; set; }

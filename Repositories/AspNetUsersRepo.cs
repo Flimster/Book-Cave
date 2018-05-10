@@ -25,7 +25,7 @@ namespace BookCave.Repositories
                         Name = U.Name,
                         FavoriteBook =
                             (from Up in _db.Books
-                            where U.FavoriteBookId == Up.Id          
+                            where U.BooksId == Up.Id          
                             select new BookViewModel
                             {
                                 Id = Up.Id,
@@ -54,7 +54,7 @@ namespace BookCave.Repositories
                                 ISBN13 = Up.ISBN13 }).FirstOrDefault(),
                         FavoriteAuthor = 
                             (from Au in _db.Authors
-                            where U.FavoriteAuthorId == Au.Id
+                            where U.AuthorsId == Au.Id
                             select new AuthorViewModel
                             {
                                 Id = Au.Id,
@@ -144,7 +144,7 @@ namespace BookCave.Repositories
 
                 foreach(AspNetUsers usr in author)
                 {
-                    usr.FavoriteAuthorId = NewAuthorId;
+                    usr.AuthorsId = NewAuthorId;
                 }
 
             _db.SaveChanges();
@@ -159,7 +159,7 @@ namespace BookCave.Repositories
 
                 foreach(AspNetUsers usr in author)
                 {
-                    usr.FavoriteAuthorId = newBookId;
+                    usr.AuthorsId = newBookId;
                 }
 
             _db.SaveChanges();
@@ -175,7 +175,7 @@ namespace BookCave.Repositories
                             Name = U.Name,
                             FavoriteBook = 
                                 (from Up in _db.Books
-                                where U.FavoriteBookId == Up.Id          
+                                where U.BooksId == Up.Id          
                                 select new BookViewModel
                                 {
                                     Id = Up.Id,
@@ -203,7 +203,7 @@ namespace BookCave.Repositories
                                     ISBN10 = Up.ISBN10,
                                     ISBN13 = Up.ISBN13 }).FirstOrDefault(),
                             FavoriteAuthor = (from Us in _db.AspNetUsers
-                                    join Au in _db.Authors on Us.FavoriteAuthorId equals Au.Id
+                                    join Au in _db.Authors on Us.AuthorsId equals Au.Id
                                     select new AuthorViewModel
                                     {
                                         Id = Au.Id,
