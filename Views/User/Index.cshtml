@@ -13,7 +13,9 @@
 		<div id="panel-settings" class="panel-body">Settings</div>
 		<div id="panel-payment-shipping" class="panel-body">Payment and shipping</div>
 	</div>
-	<div id="profile" class="col-lg-10">
+
+	<!-- REMEBER TO CHANGE THE FORM FOR ASP -->
+	<div id="profile" class="col-lg-10 main-box">
 		<div id="image-container" class="col-lg-12">
 			<img id="profile-image" src="@Model.Image" alt="no image found">
 		</div>
@@ -35,23 +37,69 @@
 				@Model.FavoriteAuthor[0].Name
 			</div>
 		</div>
+		<div class="col-lg-12">
+			<div class="col-lg-5"></div>
+			<div class="col-lg-3">
+			</div>
+			<div class="col-lg-5"></div>
+		</div>
 	</div>
 
 
-	<div id="orders" class="col-lg-10 is-hidden">
+	<div id="orders" class="col-lg-10 is-hidden main-box">
 		<h1>dsfdsafdasf</h1>
 	</div>
-	<div id="wishlist" class="col-lg-10 is-hidden">
-		<h1>ddaffadldfasl;kdfasl;kdfas;lkasfl;k</h1>
+	<div id="wishlist" class="col-lg-10 is-hidden main-box">
+		@foreach (var book in Model.BookShelf)
+		{
+			<div class="col-lg-12">
+				<div class="col-lg-6">
+					<img src="@book.Image" alt="no image found">
+				</div>
+				<div class="col-lg-6">
+					@book.Title
+					<br>
+					@foreach (var genre in book.Genre)
+					{
+						@genre.Name @Html.Raw(" ")
+					}
+					<br>
+					@foreach (var author in book.Authors)
+					{
+						@author.Name @Html.Raw(" ")
+					}
+				</div>
+			</div>
+		}
 	</div>
-	<div id="bookshelf" class="col-lg-10 is-hidden">
-
+	<div id="bookshelf" class="col-lg-10 is-hidden main-box">
+		@foreach (var book in Model.BookShelf)
+		{
+			<div class="col-lg-12">
+				<div class="col-lg-6">
+					<img src="@book.Image" alt="no image found">
+				</div>
+				<div class="col-lg-6">
+					@book.Title
+					<br>
+					@foreach (var genre in book.Genre)
+					{
+						@genre.Name @Html.Raw(" ")
+					}
+					<br>
+					@foreach (var author in book.Authors)
+					{
+						@author.Name @Html.Raw(" ")
+					}
+				</div>
+			</div>
+		}
 	</div>
-	<div id="settings" class="col-lg-10 is-hidden">
-
+	<div id="settings" class="col-lg-10 is-hidden main-box">
+		<h1>Settings</h1>
 	</div>
-	<div id="payment-shipping" class="col-lg-10 is-hidden">
-
+	<div id="payment-shipping" class="col-lg-10 is-hidden main-box">
+		<h1>Payment and shipping</h1>
 	</div>
 
 	

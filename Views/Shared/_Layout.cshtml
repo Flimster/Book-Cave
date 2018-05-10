@@ -183,6 +183,35 @@
     </environment>
 
 
+    <script type="text/javascript">
+
+        $( window ).ready(function() {
+                var idArr = (JSON.parse(localStorage.getItem("storage")));
+            $("#num-items-in-cart").html(idArr.length);
+            
+
+            $(".cart").click(function() {
+            var Id = $("#book-title").attr("id");
+            let idArr = new Array();
+            let tmpArr = new Array();
+            tmpArr = (JSON.parse(localStorage.getItem("storage")));
+            if(tmpArr == null) {
+                idArr.push(Id);
+            } else {
+                idArr = (JSON.parse(localStorage.getItem("storage")));
+                idArr.push(Id);
+            }
+            localStorage.setItem("storage", JSON.stringify(idArr))
+            console.log(idArr);
+            $("#num-items-in-cart").html(idArr.length);
+            });
+
+        });
+
+        
+    </script>
+
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
