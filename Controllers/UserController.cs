@@ -48,8 +48,10 @@ namespace BookCave.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				string bytes = Base64Encode(profileInput.Image);
+				// string bytes = Base64Encode(profileInput.Image);
 				_userService.ChangeName(_id, profileInput.Name);
+				_userService.ChangeEmail(_id, profileInput.Email);
+				_userService.ChangeImage(_id, profileInput.Image);
 				return RedirectToAction("MyProfile");
 			}
 			return View();
@@ -74,18 +76,6 @@ namespace BookCave.Controllers
 
 			};
 			return View("Index", profile);
-		}
-
-		public static string Base64Encode(string plainText)
-		{
-			var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-			return System.Convert.ToBase64String(plainTextBytes);
-		}
-
-		public static string Base64Decode(string base64EncodedData)
-		{
-			var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-			return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
 		}
 	}
 }
