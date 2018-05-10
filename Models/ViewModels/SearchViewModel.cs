@@ -11,6 +11,5 @@ namespace BookCave.Models.ViewModels
         public int Price { get; set; }
         public int Language { get; set; }
         public int Format { get; set; }
-
     }
 }

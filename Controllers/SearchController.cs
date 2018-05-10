@@ -26,31 +26,31 @@ namespace BookCave.Controllers
             searchResults = _searchService.FilterByTitle(searchResults);
           }
 
-          if(genre != null && genre != 0)
+          if(genre != 0)
           {
             searchResults.Genre = genre;
             searchResults = _searchService.FilterByGenre(searchResults);
           }
 
-          if(author != null && author != 0)
+          if(author != 0)
           {
             searchResults.Author = author;
             searchResults = _searchService.FilterByAuthor(searchResults);
           }
 
-          if(price != null && price != 0)
+          if(price != 0)
           {
             searchResults.Price = price; 
             searchResults = _searchService.FilterByPrice(searchResults);
           }
 
-          if(language != null && language != 0)
+          if(language != 0)
           {
             searchResults.Language = language;
             searchResults = _searchService.FilterByLanguage(searchResults);
           }
 
-          if(format != null && format != 0)
+          if(format != 0)
           {
             searchResults.Format = format;
             searchResults = _searchService.FilterByFormat(searchResults);
