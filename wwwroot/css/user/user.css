@@ -89,6 +89,13 @@
 	margin-bottom: 15px;
 }
 
+.address-box{
+	margin-right: 15px;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+}
+
 .is-hidden {
 	display: none;
 }

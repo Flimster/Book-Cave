@@ -20,6 +20,7 @@ namespace BookCave.Controllers
 		private readonly AspNetUsersService _userService;
 		private readonly OrdersService _orderService;
 		private readonly BillingAddressService _billingService;
+		private readonly ShippingAddressService _shippingService;
 		private readonly CardDetailsService _cardService;
 
 		private static string _id;
@@ -31,6 +32,7 @@ namespace BookCave.Controllers
 			_bookService = new BookService();
 			_orderService = new OrdersService();
 			_billingService = new  BillingAddressService();
+			_shippingService = new ShippingAddressService();
 			_cardService = new  CardDetailsService();
 		}
 
@@ -61,6 +63,12 @@ namespace BookCave.Controllers
 			return View();
 		}
 
+		[HttpGet]
+		public IActionResult AddShipping()
+		{
+			return View();
+		}
+
 		public async Task<IActionResult> MyProfile()
 		{
 			var user = await _userManager.GetUserAsync(User);
@@ -77,7 +85,8 @@ namespace BookCave.Controllers
 				Orders = _orderService.GetByUserId(user.Id),
 				WishList = _bookService.GetList(),
 				BookShelf = _bookService.GetList(),
-				BillingAddresses = _billingService.GetByUserId(user.Id)
+				BillingAddresses = _billingService.GetByUserId(user.Id),
+				ShippingAddresses= _shippingService.GetByUserId(user.Id)
 			};
 			return View("Index", profile);
 		}

@@ -24,7 +24,7 @@ namespace BookCave.Repositories
                             Id = S.Id,
                             Country = 
                                 (from C in _db.Countries
-                                where S.CountriesId == C.Id
+                                where S.Id == C.Id
                                 select C.Name).FirstOrDefault(),
                             StateOrProvince = S.StateOrProvince,
                             City = S.City,
@@ -48,7 +48,8 @@ namespace BookCave.Repositories
                         select C.Name).FirstOrDefault(),
                     StateOrProvince = Bil.StateOrProvince,
                     City = Bil.City,
-                    Zip = Bil.Zip
+                    Zip = Bil.Zip,
+                    StreetAddress = Bil.StreetAddress
                 }).ToList();
             return shippingAddresses;
         }

@@ -17,6 +17,6 @@ namespace BookCave.Models.ViewModels
 		public bool BookSuggestionsEmail { get; set; }
 		public List<CardDetailsViewModel> PaymentMethods {get; set;}
 		public List<BillingAddressViewModel> BillingAddresses {get; set;}
-		public List<ShippingViewModel> ShippingAddresses {get; set;}
+		public List<ShippingAddressViewModel> ShippingAddresses {get; set;}
 	}
 }
