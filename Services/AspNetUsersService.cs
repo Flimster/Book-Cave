@@ -28,7 +28,6 @@ namespace BookCave.Services
         {
             return _aspNetUserRepo.GetList();
         }
-
         public AspNetUserViewModel GetById(string Id)
         {
             var user = (from U in _db.AspNetUsers
