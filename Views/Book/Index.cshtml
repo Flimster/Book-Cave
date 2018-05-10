@@ -1,18 +1,8 @@
 @model BookCave.Models.ViewModels.BookViewModel
 
+
 <head>
   <link rel="stylesheet" href="~/css/Book/BookDetails.css">
-  
-<script>
-  $(document).ready(function() {
-  var price = $("#prev-price")
-  console.log(price);
-  if(price === 0)
-  {
-    $("#discount-price").html(price);
-  }  });
-</script>
-
 </head>
 
 <div class="book-item col-sm-8 col-sm-offset-1">
@@ -22,7 +12,7 @@
   </div>
   
   <div class="book-details col-sm-8">
-    <h3>@Model.Title</h3>
+    <h3 class="book-title" id=@Model.Id>@Model.Title</h3>
     <p>
       @foreach(var author in Model.Authors)
       {
@@ -57,10 +47,6 @@
       @Model.Rating
     </div>
 
-    <div class="star-outer">
-      <div class="star-inner"></div>
-    </div>
-
     <div class="book-descriptions">
       <p>
         @Model.Description
@@ -83,20 +69,19 @@
       </h4>
     }
     
-    @if(@Model.Discount == 0)
+    @if(@Model.Discount != 0)
     {
-      <div id="prev-price" class="text-muted">@Model.Price</div>
+      <span id="prev-price" class="text-muted">@Model.Price</span>
+      <span id="discount" class="text-muted">@Model.Discount</span>
       <h3 id="discount-price" class="price"></h3>
     }
     else
     {
       <h3 class="price">@Model.Price</h3>
     }
-    
-    
-    
+  
     <hr>
-    <button class="btn btn-primary btn-fluid">Add to cart</button>
+    <button class="btn btn-primary btn-fluid cart">Add to cart</button>
     <button class="btn btn-default">Add to Wish list</button>
   </div>
 

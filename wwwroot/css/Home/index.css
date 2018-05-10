@@ -45,3 +45,8 @@ hr {
   font-size: 30px;
   margin-bottom: 15px !important;
 }
+
+p.author, p.genre {
+  margin-bottom: 0px;
+  margin: 2px !important;
+}
