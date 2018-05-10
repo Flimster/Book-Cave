@@ -22,7 +22,32 @@
               <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><img src=@book.Image alt=@book.Title class="img-responsive center-block"></a>
           </div>
             <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><p class="title">@book.Title</p></a>
-            @book.Genre
+            <p class="author">
+              @foreach(var author in book.Authors)
+              {
+                if(author == book.Authors[book.Authors.Count() - 1])
+                {
+                  @author.Name @Html.Raw(". ")
+                }
+                else
+                {
+                  @author.Name @Html.Raw(", ")
+                }
+              }
+            </p>
+            <p class="genre">
+              @foreach(var genre in book.Genre)
+              {
+                if(genre == book.Genre[book.Genre.Count() - 1])
+                {
+                  @genre.Name @Html.Raw(". ")
+                }
+                else
+                {
+                  @genre.Name @Html.Raw(", ")
+                }
+              }
+            </p>
         </div>
       }
     }

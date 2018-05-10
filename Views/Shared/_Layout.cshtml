@@ -151,14 +151,16 @@
     </footer>
 
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <environment exclude="Development">
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/nav.js" asp-append-version="true"></script>
         <script src="~/js/loginPopup.js" asp-append-version="true"></script>
     </environment>
-    <environment exclude="Development">
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
@@ -176,11 +178,39 @@
         <script src="~/js/loginPopup.js" asp-append-version="true"></script>
         <script src="~/js/userjs/user.js"></script>
         <script src="~/js/Admin/admin.js"></script>
+        <script src="~/js/Book/BookDetails.js"></script>
         <script src="~/js/Admin/adminCreateHTML.js"></script>
     </environment>
 
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
+    <script type="text/javascript">
+
+        $( window ).ready(function() {
+                var idArr = (JSON.parse(localStorage.getItem("storage")));
+            $("#num-items-in-cart").html(idArr.length);
+            
+
+            $(".cart").click(function() {
+            var Id = $("#book-title").attr("id");
+            let idArr = new Array();
+            let tmpArr = new Array();
+            tmpArr = (JSON.parse(localStorage.getItem("storage")));
+            if(tmpArr == null) {
+                idArr.push(Id);
+            } else {
+                idArr = (JSON.parse(localStorage.getItem("storage")));
+                idArr.push(Id);
+            }
+            localStorage.setItem("storage", JSON.stringify(idArr))
+            console.log(idArr);
+            $("#num-items-in-cart").html(idArr.length);
+            });
+
+        });
+
+        
+    </script>
+
 
     @RenderSection("Scripts", required: false)
 </body>

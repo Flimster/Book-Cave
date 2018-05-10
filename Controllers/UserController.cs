@@ -4,81 +4,61 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using BookCave.Models.ViewModels;
 using BookCave.Data;
+using BookCave.Services;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using BookCave.Data.EntityModels;
+using BookCave.Models.InputModels;
 
 namespace BookCave.Controllers
 {
 	public class UserController : Controller
 	{
+		private readonly BookService _bookService;
+		private readonly UserManager<AspNetUsers> _userManager;
+		private readonly AspNetUsersService _userService;
+		private readonly OrdersService _orderService;
+
+		// private readonly string userEmail;
+
+		public UserController(UserManager<AspNetUsers> userManager)
+		{
+			_userManager = userManager;
+			_userService = new AspNetUsersService();
+			_bookService = new BookService();
+			_orderService = new OrdersService();
+		}
+
 		[HttpGet]
-		public IActionResult Index()
+		//[Authorize(Roles = "Customer")]
+		public IActionResult Index(int id)
 		{
 			return View();
 		}
 
-		[HttpGet]
-		public JsonResult GetProfile()
+		[HttpPost]
+		public IActionResult EditProfile(ProfileInputModel profileInput)
 		{
-			var user = new UserPrivateViewModel
+			return Redirect("Index");
+		}
+
+		public async Task<IActionResult> MyProfile()
+		{
+			var user = await _userManager.GetUserAsync(User);
+			var test = _userService.GetById(user.Id);
+
+			var profile = new ProfileViewModel
 			{
-				Image = "https://3.bp.blogspot.com/-j2CLGaKyPyg/TjMDiSi37DI/AAAAAAAAASA/RGQGSGtgstc/s1600/Chamber+of+Secrets+Poster.jpg",
-				Name = "Harry potter",
-				Email = "someemail@gmail.com",
-				FavouriteBook = "Some favourite book",
-				FavouriteAuthor = "Some testdsafdsaf"
+				Id = user.Id,
+				Image = user.Image,
+				Name = user.Name,
+				Email = user.Email,
+				//FavoriteBook = test.FavoriteBook,
+				//FavoriteAuthor = test.FavoriteAuthor,
+				WishList = _bookService.GetList(),
+				BookShelf = _bookService.GetList()
 			};
-			return Json(user);
-		}
-
-		[HttpGet]
-		public JsonResult GetOrders()
-		{
-
-			var orders = new List<OrderViewModel>
-				{
-					new OrderViewModel()
-					{
-							Id = 0,
-							//User = 1,
-							Date = new DateTime(),
-							Status = false,
-							Price = 50,
-							BookList = FakeDatabase.Books
-					},
-					new OrderViewModel()
-					{
-							Id = 1,
-							//User = ,
-							Date = new DateTime(),
-							Status = false,
-							Price = 50,
-							BookList = FakeDatabase.Books
-					}
-				};
-			return Json(orders);
-		}
-
-		[HttpGet]
-		public JsonResult GetWishList()
-		{
-			return Json(FakeDatabase.Books);
-		}
-
-		[HttpGet]
-		public JsonResult GetBookShelf()
-		{
-			return Json(FakeDatabase.Books);
-		}
-
-		[HttpGet]
-		public JsonResult GetSettings()
-		{
-			return Json("Settings");
-		}
-
-		[HttpGet]
-		public JsonResult GetPaymentAndShipping()
-		{
-			return Json("Payment and Shipping");
+			return View("Index", profile);
 		}
 	}
 }

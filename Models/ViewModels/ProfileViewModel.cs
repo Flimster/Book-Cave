@@ -3,14 +3,14 @@ using BookCave.Models.ViewModels;
 
 namespace BookCave.Models.ViewModels
 {
-	public class UserPrivateViewModel
+	public class ProfileViewModel
 	{
-		public int Id { get; set; }
+		public string Id { get; set; }
 		public string Image { get; set; }
 		public string Name { get; set; }
 		public string Email { get; set; }
-		public string FavoriteBook { get; set; }
-		public string FavouriteAuthor { get; set; }
+		public List<BookViewModel> FavoriteBook { get; set; }
+		public List<AuthorViewModel> FavoriteAuthor { get; set; }
 		public List<OrderViewModel> PastOrders { get; set; }
 		public List<BookViewModel> WishList { get; set; }
 		public List<BookViewModel> BookShelf { get; set; }
