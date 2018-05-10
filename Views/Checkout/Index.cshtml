@@ -50,12 +50,17 @@
               In stock
             </strong>
           </div>
-          <div class="input-group input-group-sm input-group-inline">
-            <label for="quant">Quantity</label><br>
-            <input class="input-control" type="number" name="quant" value=@book.NumOfBooks>
-          </div>
+          <form asp-action="EditCart" asp-controller="CheckOut">
+            <div class="input-group input-group-sm input-group-inline">
+              <label for="quant">Quantity</label><br>
+              <input class="form-control" type="number" name="qty" value="@book.NumOfBooks">
+              <button class="btn btn-link" name="id" value="@book.Id">Update item</button>
+            </div>
+          </form>
           <div>
-            <button class="btn btn-link" id="@book.Id">Delete</button>
+          <form asp-action="RemoveFromCart" asp-controller="CheckOut">
+            <button class="btn btn-link delete-from-cart" name="id" value="@book.Id">Delete</button>
+          </form>
           </div>
         </div>
       </div>  

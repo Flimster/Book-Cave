@@ -28,9 +28,10 @@ namespace BookCave.Controllers
         }
 
         [HttpPost]
-        public void RemoveFromCart([FromQuery] int id)
+        public IActionResult RemoveFromCart(int id)
         {
             _cookieService.RemoveFromCartCookie(id);
+            return RedirectToAction("Index");
         }
         
         public IActionResult Index()
@@ -39,6 +40,12 @@ namespace BookCave.Controllers
             var bookList = _checkoutService.GetItemsInCart(cartArr);
             var order = _checkoutService.GetCartViewModel(bookList, cartArr);
             return View(order);
+        }
+
+        public IActionResult EditCart(int qty, int id)
+        {
+          _cookieService.EditItemCartCookie(id, qty);
+          return RedirectToAction("Index");
         }
 
         public IActionResult Shipping()

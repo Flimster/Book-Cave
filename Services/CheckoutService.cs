@@ -29,9 +29,11 @@ namespace BookCave.Services
         public CartViewModel GetCartViewModel(List<BookViewModel> books, List<CartDataModel> cartArr)
         {
             var totalPrice = 0.0;
+            var t = 0;
             foreach(var b in books)
             {
-                totalPrice += b.Price;
+                totalPrice += b.Price * cartArr[t].Quantity * (1 - b.Discount);
+                t++;
             }
 
             var orderBookList = new List<OrderBookViewModel>();

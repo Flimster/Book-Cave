@@ -193,7 +193,8 @@
             var url = window.location.pathname.split('/');
             url = url.pop();
 
-            var quantity = 1;
+            var quantity = $("#book-qty").val();
+            console.log(quantity);
 
             $.post(`/CheckOut/AddToCart?qty=${quantity}&id=${url}`,{}).done(function() {
                 $("#num-items-in-cart").html( getCookie("CartCount") );
@@ -201,8 +202,8 @@
         });
 
         //remove from cart
-        $(".btn.btn-link").click(function() {
-            var bookId = $(".btn.btn-link").attr("id");
+     /*   $(".delete-from-cart").click(function() {
+            var bookId = $(".delete-from-cart").attr("name");
 
             $.post(`/CheckOut/RemoveFromCart?id=${bookId}`,{}).done(function() {
                 $("#num-items-in-cart").html( getCookie("CartCount") );
@@ -210,7 +211,20 @@
                 location.reload();
             });
         });
+    */
 
+        //Edit cart
+     /*   $(".update-cart").click(function() {
+            var bookId = 0;
+            var quantity = 0;
+
+            $.post(`/CheckOut/EditCart?qty=${quantity}&id=${bookId}`,{}).done(function() {
+                $("#num-items-in-cart").html( getCookie("CartCount") );
+            }).done(function() {
+                location.reload();
+            });
+        });
+    */
 
     
 
