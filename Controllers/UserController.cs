@@ -69,6 +69,36 @@ namespace BookCave.Controllers
 			return View();
 		}
 
+		[HttpPost]
+		public IActionResult AddShipping(ShippingAddressViewModel shipping)
+		{
+			return RedirectToAction("MyProfile");
+		}
+
+		[HttpGet]
+		public IActionResult AddBilling()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult AddBilling(BillingAddressViewModel billing)
+		{
+			return RedirectToAction("MyProfile");
+		}
+
+		[HttpGet]
+		public IActionResult AddCard()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult AddCard(CardDetailsViewModel card)
+		{
+			return RedirectToAction("MyProfile");
+		}
+
 		public async Task<IActionResult> MyProfile()
 		{
 			var user = await _userManager.GetUserAsync(User);
