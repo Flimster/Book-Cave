@@ -4,6 +4,7 @@ using BookCave.Data.EntityModels;
 using System.Collections.Generic;
 using BookCave.Models.ViewModels;
 using BookCave.Models.InputModel;
+using System.Linq;
 
 namespace BookCave.Services
 {
@@ -69,6 +70,5 @@ namespace BookCave.Services
         {
             return _reviewRepo.GetList();
         }
-
     }
 }
