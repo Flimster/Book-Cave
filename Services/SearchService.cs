@@ -37,10 +37,17 @@ namespace BookCave.Services
 
         public SearchViewModel FilterByPrice(SearchViewModel searchResults)
         {
-            if(searchResults.Price <= 30)
+            if(searchResults.Price == 15)
             {
               searchResults.BookList = (from Bo in searchResults.BookList
                                         where Bo.Price < searchResults.Price
+                                        select Bo).ToList();
+            }
+
+            else if(searchResults.Price == 30)
+            {
+              searchResults.BookList = (from Bo in searchResults.BookList
+                                        where Bo.Price <= 15 && Bo.Price > 30
                                         select Bo).ToList();
             }
             else
