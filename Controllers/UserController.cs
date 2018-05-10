@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -18,8 +19,11 @@ namespace BookCave.Controllers
 		private readonly UserManager<AspNetUsers> _userManager;
 		private readonly AspNetUsersService _userService;
 		private readonly OrdersService _orderService;
+		private readonly BillingAddressService _billingService;
+		private readonly ShippingAddressService _shippingService;
+		private readonly CardDetailsService _cardService;
 
-		// private readonly string userEmail;
+		private static string _id;
 
 		public UserController(UserManager<AspNetUsers> userManager)
 		{
@@ -27,6 +31,9 @@ namespace BookCave.Controllers
 			_userService = new AspNetUsersService();
 			_bookService = new BookService();
 			_orderService = new OrdersService();
+			_billingService = new  BillingAddressService();
+			_shippingService = new ShippingAddressService();
+			_cardService = new  CardDetailsService();
 		}
 
 		[HttpGet]
@@ -47,28 +54,39 @@ namespace BookCave.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				Console.WriteLine("YTESS");
-				return RedirectToAction ("MyProfile");
+				// string bytes = Base64Encode(profileInput.Image);
+				_userService.ChangeName(_id, profileInput.Name);
+				_userService.ChangeEmail(_id, profileInput.Email);
+				_userService.ChangeImage(_id, profileInput.Image);
+				return RedirectToAction("MyProfile");
 			}
+			return View();
+		}
+
+		[HttpGet]
+		public IActionResult AddShipping()
+		{
 			return View();
 		}
 
 		public async Task<IActionResult> MyProfile()
 		{
 			var user = await _userManager.GetUserAsync(User);
-			var test = _userService.GetById(user.Id);
-
+			_id = user.Id;
+			var userInfo = _userService.GetById(user.Id);
 			var profile = new ProfileViewModel
 			{
 				Id = user.Id,
 				Image = user.Image,
 				Name = user.Name,
 				Email = user.Email,
-				FavoriteBook = test.FavoriteBook,
-				FavoriteAuthor = test.FavoriteAuthor,
+				FavoriteBook = userInfo.FavoriteBook,
+				FavoriteAuthor = userInfo.FavoriteAuthor,
 				Orders = _orderService.GetByUserId(user.Id),
 				WishList = _bookService.GetList(),
-				BookShelf = _bookService.GetList()
+				BookShelf = _bookService.GetList(),
+				BillingAddresses = _billingService.GetByUserId(user.Id),
+				ShippingAddresses= _shippingService.GetByUserId(user.Id)
 			};
 			return View("Index", profile);
 		}
