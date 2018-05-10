@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace BookCave.Controllers
 		private readonly AspNetUsersService _userService;
 		private readonly OrdersService _orderService;
 
-		// private readonly string userEmail;
+		private static string _id;
 
 		public UserController(UserManager<AspNetUsers> userManager)
 		{
@@ -47,8 +48,9 @@ namespace BookCave.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				Console.WriteLine("YTESS");
-				return RedirectToAction ("MyProfile");
+				string bytes = Base64Encode(profileInput.Image);
+				_userService.ChangeName(_id, profileInput.Name);
+				return RedirectToAction("MyProfile");
 			}
 			return View();
 		}
@@ -56,22 +58,34 @@ namespace BookCave.Controllers
 		public async Task<IActionResult> MyProfile()
 		{
 			var user = await _userManager.GetUserAsync(User);
-			var test = _userService.GetById(user.Id);
-
+			_id = user.Id;
+			var userInfo = _userService.GetById(user.Id);
 			var profile = new ProfileViewModel
 			{
 				Id = user.Id,
 				Image = user.Image,
 				Name = user.Name,
 				Email = user.Email,
-				FavoriteBook = test.FavoriteBook,
-				FavoriteAuthor = test.FavoriteAuthor,
+				FavoriteBook = userInfo.FavoriteBook,
+				FavoriteAuthor = userInfo.FavoriteAuthor,
 				Orders = _orderService.GetByUserId(user.Id),
 				WishList = _bookService.GetList(),
 				BookShelf = _bookService.GetList()
-				
+
 			};
 			return View("Index", profile);
+		}
+
+		public static string Base64Encode(string plainText)
+		{
+			var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+			return System.Convert.ToBase64String(plainTextBytes);
+		}
+
+		public static string Base64Decode(string base64EncodedData)
+		{
+			var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+			return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
 		}
 	}
 }

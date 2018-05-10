@@ -81,8 +81,12 @@
 
 .order-image{
 	height: 200px;
-	width: 150px;
+	width: 200px;
 	margin-left: 15px;
+}
+
+.space{
+	margin-bottom: 15px;
 }
 
 .is-hidden {
