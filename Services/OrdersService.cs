@@ -31,8 +31,8 @@ namespace BookCave.Services
 
         public List<OrderViewModel> GetByUserId(string Id)
         {
-            var orderByUserId = (from U in _db.AspNetUsers
-                                 join OrUs in _db.UsersOrders on U.Id equals OrUs.AspNetUsersId
+            var orderByUserId = (from U in _db.UsersOrders
+                                 join OrUs in _db.UsersOrders on Id equals OrUs.AspNetUsersId
                                  join Ord in _db.Orders on OrUs.OrderId equals Ord.Id
                                 select new OrderViewModel
                         { 

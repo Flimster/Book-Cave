@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BookCave.Data;
 using BookCave.Models.ViewModels;
 using System.Linq;
+using BookCave.Data.EntityModels;
 
 namespace BookCave.Repositories
 {
@@ -65,6 +66,89 @@ namespace BookCave.Repositories
                             TotalBans = U.TotalBans
                             }).ToList();
             return users;
+        }
+
+                public void ChangeEmail(string Id, string NewEmail)
+        {
+            var user =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in user)
+                {
+                    usr.Email = NewEmail;
+                    usr.NormalizedEmail = NewEmail.ToUpper();
+                    usr.NormalizedUserName = NewEmail.ToUpper();
+                    usr.UserName = NewEmail.ToLower();
+                }
+
+                _db.SaveChanges();
+        }
+
+        public void ChangeImage(string Id, string NewImage)
+        {
+            var image =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in image)
+                {
+                    usr.Image = NewImage;
+                }
+        }
+
+        public void ChangeName(string Id, string NewName)
+        {
+            var name =
+            from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in name)
+                {
+                    usr.Name = NewName;
+                }
+        }
+
+        public void ChangeBookSuggestionEmail(string Id, bool NewEmailSetting)
+        {
+            var email =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in email)
+                {
+                    usr.BookSuggestionsEmail = NewEmailSetting;
+                }
+        }
+
+        public void ChangeFavoriteBook(string Id, int BookId)
+        {
+            var favoriteBook =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in favoriteBook)
+                {
+                    usr.FavoriteBookId = BookId;
+                }
+        }
+
+        public void ChangeFavoriteAuthor(string Id, int AuthorId)
+        {
+            var favoriteBook =
+                from Us in _db.AspNetUsers
+                where Us.Id == Id
+                select Us;
+
+                foreach(AspNetUsers usr in favoriteBook)
+                {
+                    usr.FavoriteBookId = AuthorId;
+                }
         }
     }
 }
