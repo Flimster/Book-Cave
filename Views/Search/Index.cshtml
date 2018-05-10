@@ -4,6 +4,10 @@
   <link rel="stylesheet" href="~/css/Search/search.css">
 </head>
 
+@{
+  int counter = 0;
+}
+
 <div class="search-container col-sm-10 col-sm-offset-1">
   
   <div class="search-filters col-sm-3">
@@ -64,13 +68,56 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary" type="submit">submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </div>
     </form>  
   </div>
 
 
-  <div class="search-results col-sm-8">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ut sit alias ipsum, eligendi cum voluptatum voluptate perspiciatis quae temporibus expedita doloribus delectus minus inventore at neque eveniet cupiditate voluptates.
-  </div>
+  <div class="search-results col-sm-9" style="width: 73%">
+     <div class="row">
+          @foreach(var book in Model)
+          {
+            if (counter != 0 && counter % 4 == 0)
+            {
+                @:</div>
+                @:<div class="row">
+            }
+            
+            <div class="book-item col-sm-3">
+              <div class="item-img">
+                  <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><img src=@book.Image alt=@book.Title class="img-responsive center-block"></a>
+              </div>
+                <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><p class="title">@book.Title</p></a>
+                <p class="author">
+                  @foreach(var author in book.Authors)
+                  {
+                    if(author == book.Authors[book.Authors.Count() - 1])
+                    {
+                      @author.Name @Html.Raw(". ")
+                    }
+                    else
+                    {
+                      @author.Name @Html.Raw(", ")
+                    }
+                  }
+                </p>
+                <p class="genre">
+                  @foreach(var genre in book.Genre)
+                  {
+                    if(genre == book.Genre[book.Genre.Count() - 1])
+                    {
+                      @genre.Name @Html.Raw(". ")
+                    }
+                    else
+                    {
+                      @genre.Name @Html.Raw(", ")
+                    }
+                  }
+                </p>
+            </div>
+            counter++;
+          }
+      </div>
+    </div>  
 </div>
