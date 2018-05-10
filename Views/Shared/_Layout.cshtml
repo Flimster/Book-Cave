@@ -35,8 +35,8 @@
                 </div>
                 
                 <div class="col-sm-6 nav-height-control">
-                    <form action="get" method="#">
-                        <input type="text" id="search-input" placeholder="Search for a name, authore, genre, ISBN ...">
+                    <form asp-controller="Search" asp-action="Index">
+                        <input type="text" id="search-input" name="title" placeholder="Search for a Title">
                         <button type="submit" id="search-btn" class="btn btn-info"><div><i id="search-icon" class="fa fa-search"></i></div></button>
                     </form>
                 </div >
