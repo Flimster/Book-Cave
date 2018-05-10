@@ -39,6 +39,18 @@ namespace BookCave.Controllers
           }
         }
 
+        public IActionResult Top10()
+        {
+            var books = _bookService.GetTop10();
+            return View(books);
+        }
+
+        public IActionResult Discount()
+        {
+          var books = _bookService.GetDiscount();
+          return View(books);
+        }
+
         public IActionResult Test()
         {
             //var feedback = _feedbackService.();
