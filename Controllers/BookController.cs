@@ -27,11 +27,17 @@ namespace BookCave.Controllers
             _db = new DataContext();
         }
 
-        public IActionResult Index(int? id)
+        public IActionResult Index(int id)
         {
-
-          //var book = _db.GetList()[0];
-          return View();
+          if(id == 0){
+            return View("PageNotFound");
+          }
+          else
+          {
+            var book = _bookService.GetList()[id - 1];
+            return View(book);
+          }
+          
         }
 
         public IActionResult Test()
