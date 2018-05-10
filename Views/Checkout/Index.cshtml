@@ -52,10 +52,10 @@
           </div>
           <div class="input-group input-group-sm input-group-inline">
             <label for="quant">Quantity</label><br>
-            <input class="input-control" type="number" name="quant" id="quant">
+            <input class="input-control" type="number" name="quant" value=@book.NumOfBooks>
           </div>
           <div>
-            <a asp-controller="#" asp-action="#" asp-route-d=@book.Id>Delete</a>
+            <button class="btn btn-link" id="@book.Id">Delete</button>
           </div>
         </div>
       </div>  

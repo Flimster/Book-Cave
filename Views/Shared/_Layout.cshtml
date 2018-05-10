@@ -184,32 +184,31 @@
 
 
     <script type="text/javascript">
-
+    
     $( window ).ready(function() {
          $("#num-items-in-cart").html( getCookie("CartCount") );
 
+        //Add item to cart
         $("#add-to-cart-btn").click(function() {
             var url = window.location.pathname.split('/');
             url = url.pop();
 
             var quantity = 1;
-            console.log(quantity + " - " + url);
 
             $.post(`/CheckOut/AddToCart?qty=${quantity}&id=${url}`,{}).done(function() {
                 $("#num-items-in-cart").html( getCookie("CartCount") );
             }) 
         });
 
-        $("#remove-from-cart").click(function() {
-            var url = window.location.pathname.split('/');
-            url = url.pop();
-            
-            var quantity = 1;
-            console.log(quantity + " - " + url);
+        //remove from cart
+        $(".btn.btn-link").click(function() {
+            var bookId = $(".btn.btn-link").attr("id");
 
-            $.post(`/CheckOut/AddToCart?qty=${quantity}&id=${url}`,{}).done(function() {
+            $.post(`/CheckOut/RemoveFromCart?id=${bookId}`,{}).done(function() {
                 $("#num-items-in-cart").html( getCookie("CartCount") );
-            }) 
+            }).done(function() {
+                location.reload();
+            });
         });
 
 

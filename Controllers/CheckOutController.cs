@@ -32,13 +32,12 @@ namespace BookCave.Controllers
         {
             _cookieService.RemoveFromCartCookie(id);
         }
-
         
         public IActionResult Index()
         {
             var cartArr = _cookieService.GetCart();
             var bookList = _checkoutService.GetItemsInCart(cartArr);
-            var order = _checkoutService.GetCartViewModel(bookList);
+            var order = _checkoutService.GetCartViewModel(bookList, cartArr);
             return View(order);
         }
 
