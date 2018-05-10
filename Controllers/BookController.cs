@@ -9,13 +9,13 @@ namespace BookCave.Controllers
     //[Authorize(Roles = "Admin, Customer")]
     public class BookController : Controller
     {
+        private readonly DataContext _db;
         private readonly CardDetailsService _cardDetailsService;
         private readonly AspNetUsersService _aspNetUsersService;
         private readonly BookService _bookService;
         private readonly FeedbackService _feedbackService;
         private readonly OrdersService _ordersService;
         private readonly BillingAddressService _billingAddressService;
-        private DataContext _db;
         public BookController()
         {
             _bookService = new BookService();
@@ -44,10 +44,11 @@ namespace BookCave.Controllers
         {
             //var feedback = _feedbackService.();
             //var book = _bookService.GetList();
-            _aspNetUsersService.ChangeEmail("b0dbe992-6394-4766-b07d-eb1159f64fcb", "Newemail@verynew.new");
+            //var aspNetUsers = _aspNetUsersService.GetById("25a13905-92e4-4a72-a707-5b761313650e");
             //var billing = _billingAddressService.GetList();
             //var card = _cardDetailsService.GetList();
-            return View();
+            var order = _ordersService.GetByUserId("25a13905-92e4-4a72-a707-5b761313650e");
+            return View(order);
         }
     }
 }

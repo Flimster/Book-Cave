@@ -18,6 +18,6 @@ namespace BookCave.Models.ViewModels
 		public bool wantsEmailWishList { get; set; }
 		// public List<PaymentViewModel> PaymentMethods {get; set;}
 		// public List<BillingViewModel> PaymentMethods {get; set;}
-		// public List<ShippingViewModel> PaymentMethods {get; set;}
+		// public List<ShippingAddressViewModel> PaymentMethods {get; set;}
 	}
 }

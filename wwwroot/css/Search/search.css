@@ -15,9 +15,30 @@
   margin: 0px;
 }
 
+.book-item {
+  margin: 10px 0px;
+  font-size: 12px;
+}
 
+.item-img {
+  height: 150px;
+  width: 150px;
+  margin-bottom: 5px;
+}
 
+.book-item .item-img img {
+  max-height: 100%;
+  max-width: 100%;
+}
 
+.book-item p.title {
+  font-size: 14px;
+}
+
+p.author, p.genre {
+  margin-bottom: 0px;
+  margin: 2px !important;
+}
 
 hr {
   display: block;
