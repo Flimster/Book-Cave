@@ -64,8 +64,9 @@ namespace BookCave.Controllers
 				Image = user.Image,
 				Name = user.Name,
 				Email = user.Email,
-				//FavoriteBook = test.FavoriteBook,
-				//FavoriteAuthor = test.FavoriteAuthor,
+				FavoriteBook = test.FavoriteBook,
+				FavoriteAuthor = test.FavoriteAuthor,
+				Orders = _orderService.GetByUserId(user.Id),
 				WishList = _bookService.GetList(),
 				BookShelf = _bookService.GetList()
 			};
