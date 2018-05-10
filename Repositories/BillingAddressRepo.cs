@@ -15,10 +15,10 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<BillingAddressesViewModel> GetList()
+        public List<BillingAddressViewModel> GetList()
         {
             var billingAddresses = (from B in _db.BillingAddress
-                        select new BillingAddressesViewModel
+                        select new BillingAddressViewModel
                         {
                             Id = B.Id,
                             Country = 
@@ -33,13 +33,13 @@ namespace BookCave.Repositories
             return billingAddresses;
         }
 
-        public List<BillingAddressesViewModel> GetByUserId(string UserId)
+        public List<BillingAddressViewModel> GetByUserId(string UserId)
         {
             var billingAddresses = 
                 (from UsBi in _db.UserBillingAddresses
                 join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
                 where UsBi.AspNetUsersId == UserId
-                select new BillingAddressesViewModel
+                select new BillingAddressViewModel
                 {
                     Id = Bil.Id,
                     Country =
@@ -48,7 +48,8 @@ namespace BookCave.Repositories
                         select C.Name).FirstOrDefault(),
                     StateOrProvince = Bil.StateOrProvince,
                     City = Bil.City,
-                    Zip = Bil.Zip
+                    Zip = Bil.Zip,
+                    StreetAddress = Bil.StreetAddress
                 }).ToList();
             return billingAddresses;
         }
