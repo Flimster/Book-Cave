@@ -144,7 +144,7 @@ namespace BookCave.Repositories
 
                 foreach(AspNetUsers usr in author)
                 {
-                    usr.FavoriteAuthorId = NewAuthorId;
+                    usr.AuthorsId = NewAuthorId;
                 }
 
             _db.SaveChanges();
@@ -159,11 +159,12 @@ namespace BookCave.Repositories
 
                 foreach(AspNetUsers usr in author)
                 {
-                    usr.FavoriteAuthorId = NewBookId;
+                    usr.AuthorsId = NewBookId;
                 }
 
             _db.SaveChanges();
-
+        }
+        
         public AspNetUserViewModel GetById(string userId)
         {
             var user = (from U in _db.AspNetUsers

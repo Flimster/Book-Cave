@@ -27,6 +27,7 @@ namespace BookCave.Controllers
             _billingAddressService = new BillingAddressService();
             _cardDetailsService = new CardDetailsService();
             _ordersService = new OrdersService();
+            _reviewsService = new ReviewsService();
             _db = new DataContext();
         }
 
@@ -62,9 +63,8 @@ namespace BookCave.Controllers
             //var billing = _billingAddressService.GetList();
             //var card = _cardDetailsService.GetList();
             //var order = _ordersService.GetByUserId("25a13905-92e4-4a72-a707-5b761313650e");
-            
 
-            return View();
+            return View(_reviewsService.GetByUserId("8e252996-4d12-48fb-be5f-23fb7c2cc3e4"));
         }
     }
 }
