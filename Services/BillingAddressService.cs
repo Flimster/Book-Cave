@@ -23,5 +23,10 @@ namespace BookCave.Services
         {
             return _billingAddressRepo.GetList();
         }
+
+        public List<BillingAddressesViewModel> GetByUserId(string Id)
+        {
+            return _billingAddressRepo.GetByUserId(Id);
+        }
     }
 }

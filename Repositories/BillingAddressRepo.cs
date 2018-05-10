@@ -21,14 +21,35 @@ namespace BookCave.Repositories
                         select new BillingAddressesViewModel
                         {
                             Id = B.Id,
-                            Country = (from C in _db.Countries
-                                       where B.CountryId == C.Id
-                                       select C.Name).SingleOrDefault(),
+                            Country = 
+                                (from C in _db.Countries
+                                where B.CountryId == C.Id
+                                select C.Name).FirstOrDefault(),
                             StateOrProvince = B.StateOrProvince,
                             City = B.City,
                             Zip = B.Zip
                         }).ToList();
             
+            return billingAddresses;
+        }
+
+        public List<BillingAddressesViewModel> GetByUserId(string UserId)
+        {
+            var billingAddresses = 
+                (from UsBi in _db.UserBillingAddresses
+                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
+                where UsBi.AspNetUsersId == UserId
+                select new BillingAddressesViewModel
+                {
+                    Id = Bil.Id,
+                    Country =
+                        (from C in _db.Countries
+                        where Bil.CountryId == C.Id
+                        select C.Name).FirstOrDefault(),
+                    StateOrProvince = Bil.StateOrProvince,
+                    City = Bil.City,
+                    Zip = Bil.Zip
+                }).ToList();
             return billingAddresses;
         }
 
