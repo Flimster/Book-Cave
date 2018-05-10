@@ -114,7 +114,7 @@
                 <div class="col-sm-4"></div>
 
                 <div class="col-sm-1" >
-                    <a id="shopping-icon-link">
+                    <a id="shopping-icon-link" asp-controller="CheckOut" asp-action="Index">
                       <div id="shopping-cart-icon-container">
                           <i class="fas fa-shopping-cart" id="shopping-cart-icon"></i>
                           <h2 id="num-items-in-cart">0</h2>
@@ -185,6 +185,56 @@
 
     <script type="text/javascript">
 
+    $( window ).ready(function() {
+         $("#num-items-in-cart").html( getCookie("CartCount") );
+
+        $("#add-to-cart-btn").click(function() {
+            var url = window.location.pathname.split('/');
+            url = url.pop();
+
+            var quantity = 1;
+            console.log(quantity + " - " + url);
+
+            $.post(`/CheckOut/AddToCart?qty=${quantity}&id=${url}`,{}).done(function() {
+                $("#num-items-in-cart").html( getCookie("CartCount") );
+            }) 
+        });
+
+        $("#remove-from-cart").click(function() {
+            var url = window.location.pathname.split('/');
+            url = url.pop();
+            
+            var quantity = 1;
+            console.log(quantity + " - " + url);
+
+            $.post(`/CheckOut/AddToCart?qty=${quantity}&id=${url}`,{}).done(function() {
+                $("#num-items-in-cart").html( getCookie("CartCount") );
+            }) 
+        });
+
+
+    
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    });
+
+
+/*
         $( window ).ready(function() {
                 var idArr = (JSON.parse(localStorage.getItem("storage")));
                 if(idArr != null) {
@@ -238,7 +288,7 @@
             });
 
         });
-
+*/
         
     </script>
 

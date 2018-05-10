@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using BookCave.Models.ViewModels;
 using BookCave.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
@@ -9,16 +11,33 @@ namespace BookCave.Controllers
     public class CheckOutController : Controller
     {
         private readonly CheckoutService _checkoutService;
+        private readonly CookieService _cookieService;
+        private readonly IHttpContextAccessor _httpContextAccessor;  
 
-        public CheckOutController()
+        public CheckOutController(IHttpContextAccessor httpContextAccessor)
         {
-            _checkoutService = new CheckoutService();
+            _httpContextAccessor = httpContextAccessor;
+            _checkoutService = new CheckoutService(httpContextAccessor);
+            _cookieService = new CookieService(_httpContextAccessor);
         }
 
         [HttpPost]
-        public IActionResult Index([FromBody]List<int> idArr)
+        public void AddToCart([FromQuery]int qty, int id)
         {
-            var bookList = _checkoutService.GetItemsInCart(idArr);
+            _cookieService.AddToCartCookie(qty, id);
+        }
+
+        [HttpPost]
+        public void RemoveFromCart([FromQuery] int id)
+        {
+            _cookieService.RemoveFromCartCookie(id);
+        }
+
+        
+        public IActionResult Index()
+        {
+            var cartArr = _cookieService.GetCart();
+            var bookList = _checkoutService.GetItemsInCart(cartArr);
             var order = _checkoutService.GetCartViewModel(bookList);
             return View(order);
         }

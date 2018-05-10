@@ -25,23 +25,39 @@ namespace BookCave.Services
                 TimeSpan ts = new TimeSpan(30, 0, 0, 0);
                 DateTime expDate = DateTime.Now + ts;
                 cartCookie.Expires = expDate;
-                _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", "value", cartCookie);
+                List<CartDataModel> def = new List<CartDataModel>();
+                var serial = JsonConvert.SerializeObject(def);
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", serial, cartCookie);
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("CartCount", "0", cartCookie);
             }
             return cartCookie;
         }
 
-        public void AddToCartCookie(int quantity, string data)
+        public void AddToCartCookie(int quantity, int id)
         {
+            bool idExists = false; 
             var cartCookie = InitializeCookie();
             var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
 
-            var cart = new List<CartDataModel>() 
-            { 
-                new CartDataModel { Quantity = Convert.ToInt32(quantity), Id = Convert.ToInt32(data)}
-            };
+            List<CartDataModel> cart = new List<CartDataModel>();
+
             int counter = 0;
             if(cookieData != null)
             {
+                //check if item is in basket
+                for(int i = 0; i < cookieData.Count; i++)
+                {
+                    if(cookieData[i].Id == id) {
+                        cookieData[i].Quantity += quantity;
+                        idExists = true;
+                    }
+                }
+
+                if(!idExists)
+                {
+                    cart.Add(new CartDataModel { Quantity = Convert.ToInt32(quantity), Id = id} );
+                }
+
                 foreach(var c in cookieData)
                 {
                     cart.Add(cookieData[counter]);
@@ -51,6 +67,7 @@ namespace BookCave.Services
             var jsonData = JsonConvert.SerializeObject(cart);
 
             _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", jsonData, cartCookie);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("CartCount", Convert.ToString(cart.Count), cartCookie);
         }
 
         public void RemoveFromCartCookie(int id)
@@ -103,7 +120,28 @@ namespace BookCave.Services
             {
                 return 0;
             }
+
+            int cookieCounter = 0;
+            for(int i = 0; i < cookieData.Count; i++)
+            {
+                cookieCounter += cookieData[i].Quantity;
+            }
+
             return cookieData.Count;
+        }
+
+        public List<CartDataModel> GetCart()
+        {
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
+            var arr = new List<CartDataModel>();
+
+            if(cookieData == null)
+            {
+                return arr;
+            }
+
+            return cookieData;
         }
         
     }

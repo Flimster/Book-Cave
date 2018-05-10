@@ -30,7 +30,8 @@ namespace BookCave.Controllers
         {
             var books = _bookService.GetList();
             //_cookieService.AddToCartCookie(2, "2323");
-            _cookieService.RemoveFromCartCookie(2323);
+            //_cookieService.RemoveFromCartCookie(2323);
+            _cookieService.InitializeCookie();
 
             return View(books);
         }
