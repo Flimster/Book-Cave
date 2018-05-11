@@ -21,21 +21,20 @@ namespace BookCave.Repositories
         public BillingAddressViewModel GetByAddressId(int addressId)
         {
             var billingAddresses = 
-                (from UsBi in _db.UserBillingAddresses
-                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
-                where UsBi.AddressId == addressId
+                (from Bi in _db.BillingAddress
+                where Bi.Id == addressId
                 select new BillingAddressViewModel
                 {
-                    Id = Bil.Id,
-                    AspNetUserId = Bil.AspNetUserId,
+                    Id = Bi.Id,
+                    AspNetUserId = Bi.AspNetUserId,
                     Country =
                         (from C in _db.Countries
-                        where Bil.CountryId == C.Id
+                        where Bi.CountryId == C.Id
                         select C.Name).SingleOrDefault(),
-                    StateOrProvince = Bil.StateOrProvince,
-                    City = Bil.City,
-                    Zip = Bil.Zip,
-                    StreetAddress = Bil.StreetAddress
+                    StateOrProvince = Bi.StateOrProvince,
+                    City = Bi.City,
+                    Zip = Bi.Zip,
+                    StreetAddress = Bi.StreetAddress
                 }).SingleOrDefault();
             return billingAddresses;
         }
@@ -43,20 +42,19 @@ namespace BookCave.Repositories
         public List<BillingAddressViewModel> GetByUserId(string userId)
         {
             var billingAddresses = 
-                (from UsBi in _db.UserBillingAddresses
-                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
-                where UsBi.AspNetUserId == userId
+                (from Bi in _db.BillingAddress
+                where Bi.AspNetUserId == userId
                 select new BillingAddressViewModel
                 {
-                    Id = Bil.Id,
+                    Id = Bi.Id,
                     Country =
                         (from C in _db.Countries
-                        where Bil.CountryId == C.Id
+                        where Bi.CountryId == C.Id
                         select C.Name).FirstOrDefault(),
-                    StateOrProvince = Bil.StateOrProvince,
-                    City = Bil.City,
-                    Zip = Bil.Zip,
-                    StreetAddress = Bil.StreetAddress
+                    StateOrProvince = Bi.StateOrProvince,
+                    City = Bi.City,
+                    Zip = Bi.Zip,
+                    StreetAddress = Bi.StreetAddress
                 } ).ToList();
 
             return billingAddresses;
@@ -69,12 +67,10 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void Write(string UserId, BillingAddresses BillingAddress)
+        public void Write(BillingAddresses BillingAddress)
         {
-            int Number;
             _db.Add(BillingAddress);
             _db.SaveChanges();
-            Number = BillingAddress.Id;
         }
 
         public void Remove(BillingAddresses billingAddress)
