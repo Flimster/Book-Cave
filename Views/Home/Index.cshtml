@@ -25,13 +25,14 @@
             <p class="author">
               @foreach(var author in book.Authors)
               {
+                @author.Name
                 if(author == book.Authors[book.Authors.Count() - 1])
                 {
-                  @author.Name @Html.Raw(". ")
+                  @Html.Raw(". ")
                 }
                 else
                 {
-                  @author.Name @Html.Raw(", ")
+                  @Html.Raw(", ")
                 }
               }
             </p>

@@ -37,17 +37,7 @@ namespace BookCave.Controllers
 
         public IActionResult Error()
         {
-            /*var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-
-            if(exceptionFeature != null)
-            {
-                string path = exceptionFeature.Path;
-                Exception exception = exceptionFeature.Error;
-
-                //TODO: Write to databse
-            }
-
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });*/
+            
             return View("Error");
         }
 
