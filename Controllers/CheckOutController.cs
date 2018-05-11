@@ -204,7 +204,7 @@ namespace BookCave.Controllers
                 return RedirectToAction("Card");
             }
 
-            return RedirectToAction("Confirmed", user.Name);
+            return RedirectToAction("Confirmed", "CheckOut", user.Name);
         }
 
         public IActionResult Confirmed(string name)
