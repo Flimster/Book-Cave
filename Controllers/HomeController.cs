@@ -28,7 +28,7 @@ namespace BookCave.Controllers
 
         public IActionResult Index()
         {
-            var books = _bookService.GetList();
+            var books = _bookService.Recommended();
             //_cookieService.InitializeCookie();
             //_cookieService.AddToCartCookie(2, "2323");
 
