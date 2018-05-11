@@ -13,28 +13,17 @@ namespace BookCave.Repositories
         public CardDetailsRepo()
         {
             _db = new DataContext();
-        }
-        public void Write(CardDetailsViewModel card)
-        {
-            _db.Add(card);
-            _db.SaveChanges();
-        }
-
-        public void Remove(CardDetailsViewModel card)
-        {
-            _db.Remove(card);
-            _db.SaveChanges();
-        }
+        } 
 
         public List<CardDetailsViewModel> GetByUserId(string userId)
         {
             var cardDetails = 
                 (from C in _db.CardDetails
-                join UsCa in _db.UsersCards on C.Id equals UsCa.CardId
-                where userId == UsCa.AspNetUserId
+                where userId == C.AspNetUserId
                 select new CardDetailsViewModel
                 {
                     Id = C.Id,
+                    AspNetUserId = C.AspNetUserId,
                     Name = C.Name,
                     CardNumber = C.CardNumber,
                     Cvc = C.Cvc,
@@ -47,17 +36,29 @@ namespace BookCave.Repositories
         {
             var cardDetails = 
                 (from C in _db.CardDetails
-                join UsCa in _db.UsersCards on C.Id equals UsCa.CardId
-                where cardId == UsCa.CardId
+                where cardId == C.Id
                 select new CardDetailsViewModel
                 {
                     Id = C.Id,
+                    AspNetUserId = C.AspNetUserId,
                     Name = C.Name,
                     CardNumber = C.CardNumber,
                     Cvc = C.Cvc,
                     ExpirationDate = C.ExpirationDate,
                 }).SingleOrDefault();
             return cardDetails;
+        }
+
+        public void Write(CardDetails card)
+        {
+            _db.Add(card);
+            _db.SaveChanges();
+        }
+
+        public void Remove(CardDetails card)
+        {
+            _db.Remove(card);
+            _db.SaveChanges();
         }
     }
 }

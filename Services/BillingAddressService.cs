@@ -17,9 +17,9 @@ namespace BookCave.Services
             _billingAddressRepo = new BillingAddressRepo();
             _db = new DataContext();
         }
-        public void Write(string UserId, BillingAddresses billingAddress)
+        public void Write(BillingAddresses billingAddress)
         {
-            _billingAddressRepo.Write(UserId, billingAddress);
+            _billingAddressRepo.Write(billingAddress);
         }
 
         public void Edit(int addressId, BillingAddresses billingAddress)

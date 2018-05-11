@@ -1,9 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 using BookCave.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
@@ -12,13 +17,24 @@ namespace BookCave.Controllers
     {
         private readonly CheckoutService _checkoutService;
         private readonly CookieService _cookieService;
-        private readonly IHttpContextAccessor _httpContextAccessor;  
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ShippingAddressService _shippingServicee;
+        private readonly BillingAddressService _billingService;
+        private readonly CardDetailsService _cardService;
+        private readonly UserManager<AspNetUsers> _userManager;
+        private static CheckoutViewModel _model;
+        private readonly OrdersService _orderService;
 
-        public CheckOutController(IHttpContextAccessor httpContextAccessor)
+        public CheckOutController(IHttpContextAccessor httpContextAccessor, UserManager<AspNetUsers> userManager)
         {
             _httpContextAccessor = httpContextAccessor;
             _checkoutService = new CheckoutService(httpContextAccessor);
             _cookieService = new CookieService(_httpContextAccessor);
+            _shippingServicee = new ShippingAddressService();
+            _billingService = new BillingAddressService();
+            _cardService = new CardDetailsService();
+            _userManager = userManager;
+            _orderService = new OrdersService();
         }
 
         [HttpPost]
@@ -36,9 +52,7 @@ namespace BookCave.Controllers
         
         public IActionResult Index()
         {
-            var cartArr = _cookieService.GetCart();
-            var bookList = _checkoutService.GetItemsInCart(cartArr);
-            var order = _checkoutService.GetCartViewModel(bookList, cartArr);
+            var order = _checkoutService.GetCartViewModel();
             return View(order);
         }
 
@@ -48,29 +62,102 @@ namespace BookCave.Controllers
           return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin,Customer")]
+        [HttpGet]
         public IActionResult Shipping()
         {
-          return View();
+            var _claimsPrincipal = new ClaimsPrincipal(User);
+
+            var id = _userManager.GetUserId(_claimsPrincipal);
+            _model = new CheckoutViewModel();
+            _model.ShippingAddresses = _shippingServicee.GetByUserId(id);
+            return View(_model);
         }
 
+        //if user selects a shipping address
+        [Authorize(Roles = "Admin,Customer")]
+        [HttpPost]
+        public IActionResult Shipping(int addrId)
+        {
+            var _claimsPrincipal = new ClaimsPrincipal(User);
+            var id = _userManager.GetUserId(_claimsPrincipal);
+
+            _model.SelectedShipping = _shippingServicee.GetByAddressId(addrId);
+            
+            return View(_model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin,Customer")]
         public IActionResult Billing()
         {
-          return View();
+            var _claimsPrincipal = new ClaimsPrincipal(User);
+            var id = _userManager.GetUserId(_claimsPrincipal);
+
+            _model.BillingAddresses = _billingService.GetByUserId(id);
+
+          return View(_model);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Admin,Customer")]
+        public IActionResult Billing(int addrId)
+        {
+            var _claimsPrincipal = new ClaimsPrincipal(User);
+            var id = _userManager.GetUserId(_claimsPrincipal);
+
+            _model.SelectedBilling = _billingService.GetByAddressId(addrId);
+            
+            return View(_model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin,Customer")]
         public IActionResult Card()
         {
-          return View();
+            var _claimsPrincipal = new ClaimsPrincipal(User);
+            var id = _userManager.GetUserId(_claimsPrincipal);
+
+            _model.Cards = _cardService.GetByUserId(id);
+
+            return View(_model);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Admin,Customer")]
+        public IActionResult Card(int cardId)
+        {
+            var _claimsPrincipal = new ClaimsPrincipal(User);
+            var id = _userManager.GetUserId(_claimsPrincipal);
+
+            _model.SelectedCard = _cardService.GetByCardId(cardId);
+
+            return View(_model);
+        }
+
+        [Authorize(Roles = "Admin,Customer")]
         public IActionResult Review()
         {
-          return View();
+            _model.Order = _checkoutService.GetCartViewModel();
+            
+
+            return View(_model);
         }
 
-        public IActionResult Confirm()
+        [Authorize(Roles = "Admin,Customer")]
+        public async Task<IActionResult> Confirm()
         {
-          return View();
+            var user = await _userManager.GetUserAsync(User);
+            _orderService.WriteOrdersBooks(user.Id, _model);
+            _cookieService.ClearCart();
+
+            return RedirectToAction("Confirmed", user.Name);
+        }
+
+        public IActionResult Confirmed(string name)
+        {
+            ViewBag.Name = name;
+            return View("Confirm");
         }
     }
 }

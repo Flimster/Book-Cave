@@ -10,10 +10,18 @@ namespace BookCave.Repositories
     public class OrderRepo
     {
         private DataContext _db;
+        private UserOrdersRepo _userOrdersRepo;
+        private UsersOrders _userOrders;
+        private OrderBooksRepo _orderBooksRepo;
+        private OrdersBooks _ordersBooks;
 
         public OrderRepo()
         {
             _db = new DataContext();
+            _orderBooksRepo = new OrderBooksRepo();
+            _userOrdersRepo = new UserOrdersRepo();
+            _userOrders = new UsersOrders();
+            _ordersBooks = new OrdersBooks();
         }
 
         public List<OrderViewModel> GetList()
@@ -134,15 +142,29 @@ namespace BookCave.Repositories
             return orderByUserId;
         }
 
-        public void Write(Orders order)
+        public void Write(string UserId, Orders Order, List<OrderBookViewModel> Books)
         {
-            _db.Add(order);
+            _db.Add(Order);
             _db.SaveChanges();
+
+            for(int i = 0; i < Books.Count; i++)
+            {
+                for(int j = 0; j < Books[i].NumOfBooks; j++)
+                {
+                    _ordersBooks.BookId = Books[i].Id;
+                    _ordersBooks.OrderId = Order.Id;
+                    _orderBooksRepo.Write(_ordersBooks);
+                }
+                
+            }
+            _userOrders.OrderId = Order.Id;
+            _userOrders.AspNetUserId = UserId;
+            _userOrdersRepo.Write(_userOrders);
         }
 
-        public void Remove(Orders order)
+        public void Remove(Orders Order)
         {
-            _db.Remove(order);
+            _db.Remove(Order);
             _db.SaveChanges();
         }
     }

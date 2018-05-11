@@ -10,6 +10,9 @@ namespace BookCave.Data.EntityModels
         [ForeignKey("Countries")]
         public int CountryId { get; set; }
         public virtual Countries Countries {get; set; }
+        [ForeignKey("AspNetUsers")]
+        public string AspNetUserId { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public string StateOrProvince { get; set; }
         public string Zip { get; set; }
         public string StreetAddress { get; set; }

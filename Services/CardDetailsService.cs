@@ -26,5 +26,15 @@ namespace BookCave.Services
         {
             return _cardDetailsRepo.GetByCardId(cardId);
         }
+
+        public void Write(CardDetails card)
+        {
+            _cardDetailsRepo.Write(card);
+        }
+
+        public void Remove(CardDetails card)
+        {
+            _cardDetailsRepo.Remove(card);
+        }
     }
 }

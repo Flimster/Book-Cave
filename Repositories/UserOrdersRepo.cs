@@ -12,9 +12,15 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public void Write(UsersOrders userOrders)
+        public void Write(UsersOrders UsersOrders)
         {
-            _db.Add(userOrders);
+            _db.Add(UsersOrders);
+            _db.SaveChanges();
+        }
+
+        public void Remove(UsersOrders UsersOrders)
+        {
+            _db.Remove(UsersOrders);
             _db.SaveChanges();
         }
     }
