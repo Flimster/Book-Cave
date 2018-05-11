@@ -14,7 +14,7 @@ namespace BookCave.Repositories
 
         public void Write(OrdersBooks OrderBooks)
         {
-            _db.Add(OrderBooks);
+            _db.Update(OrderBooks);
             _db.SaveChanges();
         }
     }

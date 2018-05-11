@@ -143,12 +143,9 @@ namespace BookCave.Repositories
 
             for(int i = 0; i < Books.Count; i++)
             {
-                for(int j = 0; j < Books[i].NumOfBooks; j++)
-                {
-                    _ordersBooks.BookId = Books[i].Id;
-                    _ordersBooks.OrderId = Order.Id;
-                    _orderBooksRepo.Write(_ordersBooks);
-                }
+                _ordersBooks.BookId = Books[i].Id;
+                _ordersBooks.OrderId = Order.Id;
+                _orderBooksRepo.Write(_ordersBooks);
                 
             }
         }
