@@ -54,13 +54,24 @@
           </p>
         </div>
 
-        <div class="review form-group">
-          <label for="rating">Rating</label>
-          <input type="number" class="form-control" id="rating">
-          <label for="comment">Comment</label>
-          <textarea class="form-control" id="comment"></textarea>  
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        <form asp-controller="Book" asp-action="CreateReview">
+          <div class="form-group" style="display: none;">
+              <input type="number" class="form-control" name="id" value=@Model.Id>
+          </div>
+          <div class="review form-group">
+            <label for="rating">Rating</label>
+            <input type="number" class="form-control rating" name="rating">
+          </div>
+
+          <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea class="form-control comment" name="comment"></textarea>  
+          </div>
+          
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
