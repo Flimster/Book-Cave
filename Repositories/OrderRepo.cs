@@ -143,6 +143,7 @@ namespace BookCave.Repositories
 
         public void Write(string UserId, Orders Order, List<OrderBookViewModel> Books)
         {
+            Order.AspNetUserId = UserId;
             _db.Add(Order);
             _db.SaveChanges();
 
