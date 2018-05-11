@@ -13,7 +13,42 @@ namespace BookCave.Repositories
         public CardDetailsRepo()
         {
             _db = new DataContext();
+        } 
+
+        public List<CardDetailsViewModel> GetByUserId(string userId)
+        {
+            var cardDetails = 
+                (from C in _db.CardDetails
+                where userId == C.AspNetUserId
+                select new CardDetailsViewModel
+                {
+                    Id = C.Id,
+                    AspNetUserId = C.AspNetUserId,
+                    Name = C.Name,
+                    CardNumber = C.CardNumber,
+                    Cvc = C.Cvc,
+                    ExpirationDate = C.ExpirationDate,
+                }).ToList();
+            return cardDetails;
         }
+
+        public CardDetailsViewModel GetByCardId(int cardId)
+        {
+            var cardDetails = 
+                (from C in _db.CardDetails
+                where cardId == C.Id
+                select new CardDetailsViewModel
+                {
+                    Id = C.Id,
+                    AspNetUserId = C.AspNetUserId,
+                    Name = C.Name,
+                    CardNumber = C.CardNumber,
+                    Cvc = C.Cvc,
+                    ExpirationDate = C.ExpirationDate,
+                }).SingleOrDefault();
+            return cardDetails;
+        }
+
         public void Write(CardDetailsViewModel card)
         {
             _db.Add(card);
@@ -24,40 +59,6 @@ namespace BookCave.Repositories
         {
             _db.Remove(card);
             _db.SaveChanges();
-        }
-
-        public List<CardDetailsViewModel> GetByUserId(string userId)
-        {
-            var cardDetails = 
-                (from C in _db.CardDetails
-                join UsCa in _db.UsersCards on C.Id equals UsCa.CardId
-                where userId == UsCa.AspNetUserId
-                select new CardDetailsViewModel
-                {
-                    Id = C.Id,
-                    Name = C.Name,
-                    CardNumber = C.CardNumber,
-                    Cvc = C.Cvc,
-                    ExpirationDate = C.ExpirationDate,
-                }).ToList();
-            return cardDetails;
-        }
-
-        public List<CardDetailsViewModel> GetByCardId(int cardId)
-        {
-            var cardDetails = 
-                (from C in _db.CardDetails
-                join UsCa in _db.UsersCards on C.Id equals UsCa.CardId
-                where cardId == UsCa.CardId
-                select new CardDetailsViewModel
-                {
-                    Id = C.Id,
-                    Name = C.Name,
-                    CardNumber = C.CardNumber,
-                    Cvc = C.Cvc,
-                    ExpirationDate = C.ExpirationDate,
-                }).ToList();
-            return cardDetails;
         }
     }
 }

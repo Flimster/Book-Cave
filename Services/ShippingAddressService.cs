@@ -17,7 +17,7 @@ namespace BookCave.Services
             _db = new DataContext();
         }
 
-        public List<ShippingAddressViewModel> GetByAddressId(int addressId)
+        public ShippingAddressViewModel GetByAddressId(int addressId)
         {
             return _shippingAddressRepo.GetByAddressId(addressId);
         }

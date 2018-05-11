@@ -12,9 +12,10 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180511183008_3NF_Conversion12")]
+    partial class _3NF_Conversion12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,8 +157,6 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AspNetUserId");
-
                     b.Property<string>("CardNumber");
 
                     b.Property<int>("Cvc");
@@ -167,8 +166,6 @@ namespace BookCave.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AspNetUserId");
 
                     b.ToTable("CardDetails");
                 });
@@ -721,13 +718,6 @@ namespace BookCave.Migrations
                         .WithMany()
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("BookCave.Data.EntityModels.CardDetails", b =>
-                {
-                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("AspNetUserId");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.Feedbacks", b =>

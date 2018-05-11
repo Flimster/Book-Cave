@@ -8,61 +8,72 @@ namespace BookCave.Repositories
 {
     public class BillingAddressRepo
     {
+        private UserBillingAddresses _userBillingAddresses;
+        private BillingAddressViewModel _billingAddressView;
         private DataContext _db;
 
         public BillingAddressRepo()
         {
             _db = new DataContext();
+            _userBillingAddresses = new UserBillingAddresses();
+            _billingAddressView = new BillingAddressViewModel();
         }
+        public BillingAddressViewModel GetByAddressId(int addressId)
+        {
+            var billingAddresses = 
+                (from Bi in _db.BillingAddress
+                where Bi.Id == addressId
+                select new BillingAddressViewModel
+                {
+                    Id = Bi.Id,
+                    AspNetUserId = Bi.AspNetUserId,
+                    Country =
+                        (from C in _db.Countries
+                        where Bi.CountryId == C.Id
+                        select C.Name).SingleOrDefault(),
+                    StateOrProvince = Bi.StateOrProvince,
+                    City = Bi.City,
+                    Zip = Bi.Zip,
+                    StreetAddress = Bi.StreetAddress
+                }).SingleOrDefault();
+            return billingAddresses;
+        }
+
         public List<BillingAddressViewModel> GetByUserId(string userId)
         {
             var billingAddresses = 
-                (from UsBi in _db.UserBillingAddresses
-                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
-                where UsBi.AspNetUserId == userId
+                (from Bi in _db.BillingAddress
+                where Bi.AspNetUserId == userId
                 select new BillingAddressViewModel
                 {
-                    Id = Bil.Id,
+                    Id = Bi.Id,
                     Country =
                         (from C in _db.Countries
-                        where Bil.CountryId == C.Id
+                        where Bi.CountryId == C.Id
                         select C.Name).FirstOrDefault(),
-                    StateOrProvince = Bil.StateOrProvince,
-                    City = Bil.City,
-                    Zip = Bil.Zip,
-                    StreetAddress = Bil.StreetAddress
-                }).ToList();
+                    StateOrProvince = Bi.StateOrProvince,
+                    City = Bi.City,
+                    Zip = Bi.Zip,
+                    StreetAddress = Bi.StreetAddress
+                } ).ToList();
+
             return billingAddresses;
         }
 
-        public List<BillingAddressViewModel> GetByAddressId(int addressId)
-        {
-            var billingAddresses = 
-                (from UsBi in _db.UserBillingAddresses
-                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
-                where UsBi.AddressId == addressId
-                select new BillingAddressViewModel
-                {
-                    Id = Bil.Id,
-                    Country =
-                        (from C in _db.Countries
-                        where Bil.CountryId == C.Id
-                        select C.Name).FirstOrDefault(),
-                    StateOrProvince = Bil.StateOrProvince,
-                    City = Bil.City,
-                    Zip = Bil.Zip,
-                    StreetAddress = Bil.StreetAddress
-                }).ToList();
-            return billingAddresses;
-        }
-
-        public void Write(BillingAddressViewModel billingAddress)
-        {
-            _db.Add(billingAddress);
+        public void WriteMiddleTable(string UserId, int BillingAddress) {
+            _userBillingAddresses.AddressId = BillingAddress;
+            _userBillingAddresses.AspNetUserId = UserId;
+            _db.Add(_userBillingAddresses);
             _db.SaveChanges();
         }
 
-        public void Remove(BillingAddressViewModel billingAddress)
+        public void Write(BillingAddresses BillingAddress)
+        {
+            _db.Add(BillingAddress);
+            _db.SaveChanges();
+        }
+
+        public void Remove(BillingAddresses billingAddress)
         {
             _db.Remove(billingAddress);
             _db.SaveChanges();

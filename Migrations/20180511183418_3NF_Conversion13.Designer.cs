@@ -12,8 +12,8 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    [Migration("20180511091240_3NF_Conversion12")]
-    partial class _3NF_Conversion12
+    [Migration("20180511183418_3NF_Conversion13")]
+    partial class _3NF_Conversion13
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,8 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AspNetUserId");
+
                     b.Property<string>("City");
 
                     b.Property<int>("CountryId");
@@ -50,6 +52,8 @@ namespace BookCave.Migrations
                     b.Property<string>("Zip");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AspNetUserId");
 
                     b.HasIndex("CountryId");
 
@@ -153,6 +157,8 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AspNetUserId");
+
                     b.Property<string>("CardNumber");
 
                     b.Property<int>("Cvc");
@@ -162,6 +168,8 @@ namespace BookCave.Migrations
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AspNetUserId");
 
                     b.ToTable("CardDetails");
                 });
@@ -351,9 +359,11 @@ namespace BookCave.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AspNetUserId");
+
                     b.Property<string>("City");
 
-                    b.Property<int>("CountryId");
+                    b.Property<int?>("CountryId");
 
                     b.Property<string>("StateOrProvince");
 
@@ -362,6 +372,8 @@ namespace BookCave.Migrations
                     b.Property<string>("Zip");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AspNetUserId");
 
                     b.HasIndex("CountryId");
 
@@ -384,24 +396,6 @@ namespace BookCave.Migrations
                     b.HasIndex("AspNetUserId");
 
                     b.ToTable("UserBillingAddresses");
-                });
-
-            modelBuilder.Entity("BookCave.Data.EntityModels.UsersBookRating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AspNetUserId");
-
-                    b.Property<int>("BookId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AspNetUserId");
-
-                    b.HasIndex("BookId");
-
-                    b.ToTable("UsersBookRating");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UsersCards", b =>
@@ -673,6 +667,10 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("BookCave.Data.EntityModels.BillingAddresses", b =>
                 {
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
+                        .WithMany()
+                        .HasForeignKey("AspNetUserId");
+
                     b.HasOne("BookCave.Data.EntityModels.Countries", "Countries")
                         .WithMany()
                         .HasForeignKey("CountryId")
@@ -724,6 +722,13 @@ namespace BookCave.Migrations
                         .WithMany()
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.CardDetails", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
+                        .WithMany()
+                        .HasForeignKey("AspNetUserId");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.Feedbacks", b =>
@@ -802,10 +807,13 @@ namespace BookCave.Migrations
 
             modelBuilder.Entity("BookCave.Data.EntityModels.ShippingAddresses", b =>
                 {
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
+                        .WithMany()
+                        .HasForeignKey("AspNetUserId");
+
                     b.HasOne("BookCave.Data.EntityModels.Countries", "Countries")
                         .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CountryId");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UserBillingAddresses", b =>
@@ -818,18 +826,6 @@ namespace BookCave.Migrations
                     b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
                         .WithMany()
                         .HasForeignKey("AspNetUserId");
-                });
-
-            modelBuilder.Entity("BookCave.Data.EntityModels.UsersBookRating", b =>
-                {
-                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
-                        .WithMany()
-                        .HasForeignKey("AspNetUserId");
-
-                    b.HasOne("BookCave.Data.EntityModels.Books", "Books")
-                        .WithMany()
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UsersCards", b =>

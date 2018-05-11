@@ -17,13 +17,13 @@
     border-radius: 6px;
     border: 1px solid #dcdcdc;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     -webkit-transform: translateY(-50%) translateX(-50%);
     -ms-transform: translateY(-50%) translate(-50%);
     transform: translateY(-50%) translate(-50%);
-    width:60em;
-    height:36em;
+    width:30em;
+    height:20em;
     z-index: 2;
 }
 
