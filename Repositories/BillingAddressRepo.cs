@@ -36,7 +36,7 @@ namespace BookCave.Repositories
                     Zip = Bil.Zip,
                     StreetAddress = Bil.StreetAddress
                 } ).ToList();
-                
+
             return billingAddresses.OrderBy(q => q.Id).ToList();
         }
 
@@ -62,7 +62,7 @@ namespace BookCave.Repositories
         }
 
         public void WriteMiddleTable(string UserId, BillingAddresses BillingAddress) {
-            var adr = GetByUserId(UserId).LastOrDefault();
+            var adr = GetByUserId(UserId).FirstOrDefault();
             _userBillingAddresses.AddressId = adr.Id;
             _userBillingAddresses.AspNetUserId = UserId;
             _db.Add(_userBillingAddresses);
