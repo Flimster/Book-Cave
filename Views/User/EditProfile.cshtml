@@ -7,30 +7,31 @@
 <div>
 	<form method="post">
 		<div>
-			<table class="table-condensed">
+			<table class="table">
 				<tr>
-					<td><label asp-for="Name">Name</label></td>
-					<td><input type="text" class="form-control" asp-for="Name"></td>
+					<td><label asp-for="Name">Full name</label></td>
+					<td><input type="text" class="form-control" asp-for="Name" placeholder="Anna Johnson"></td>
 					<td><span asp-validation-for="Name"></span></td>
 				</tr>
 				<tr>
 					<td><label asp-for="Email">Email</label></td>
-					<td><input type="email" class="form-control" asp-for="Email"></td>
+					<td><input type="email" class="form-control" asp-for="Email" placeholder="example@example.com"></td>
 					<td><span asp-validation-for="Email"></span></td>
 				</tr>
 				<tr>
-					<td><label asp-for="BookTitle">Title</label></td>
-					<td><input type="text" class="form-control" asp-for="BookTitle"></td>
+					<td><label asp-for="BookTitle">Favorite book</label></td>
+					<td><input type="text" class="form-control" asp-for="BookTitle" placeholder="Harry Potter"></td>
 					<td><span asp-validation-for="BookTitle"></span></td>
 				</tr>
 				<tr>
-					<td><label asp-for="Author">Author</label></td>
-					<td><input type="text" class="form-control" asp-for="Author"></td>
+					<td><label asp-for="Author">Favorite author</label></td>
+					<td><input type="text" class="form-control" asp-for="Author" placeholder="J. K. Rowling"></td>
 					<td><span asp-validation-for="Author"></span></td>
 				</tr>
 				<tr>
-					<td><label asp-for="Image">Image</label></td>
-					<td><input type="file" asp-for="Image"></td>
+					<td><label asp-for="Image">Profile image (link)</label></td>
+					<td><input type="url" class="form-control" asp-for="Image" placeholder="https://i.imgur.com/NmIbayR.png"></td>
+					<td><p>Please input the entire url with the file ending</p></td>
 					<td><span asp-validation-for="Image"></span></td>
 				</tr>
 			</table>

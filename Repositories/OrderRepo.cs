@@ -20,56 +20,6 @@ namespace BookCave.Repositories
             _ordersBooks = new OrdersBooks();
         }
 
-        /*public List<OrderViewModel> GetList()
-        {
-            var order = (from O in _db.Orders
-                        select new OrderViewModel
-                        { 
-                            Id = O.Id,
-                            User = 
-                                (from UsOr in _db.Orders
-                                join Us in _db.AspNetUsers on UsOr.AspNetUserId equals Us.Id
-                                where UsOr.OrderId == O.Id
-                                select Us.Name).SingleOrDefault(),
-                            Date = O.Date,
-                            Status = O.Status,
-                            Price = O.Price,
-                            BookList = 
-                                (from OrBo in _db.OrdersBooks
-                                join Bo in _db.Books on OrBo.BookId equals Bo.Id
-                                where OrBo.OrderId == O.Id
-                                select new BookViewModel
-                                {
-                                    Id = Bo.Id,
-                                    Title = Bo.Title,
-                                    Authors =  
-                                        (from BoAu in _db.BooksAuthors
-                                        join Au in _db.Authors on BoAu.AuthorId equals Au.Id
-                                        where BoAu.BookId == Bo.Id
-                                        select new AuthorViewModel
-                                        {
-                                            Id = Au.Id,
-                                            Name = Au.Name
-                                        }).ToList(),
-                                    Genre = 
-                                        (from BoGe in _db.BookGenres
-                                        join Ge in _db.Genres on BoGe.GenreId equals Ge.Id
-                                        where BoGe.BookId == Bo.Id
-                                        select new GenreViewModel
-                                        {
-                                            Id = Ge.Id,
-                                            Name = Ge.Name
-                                        }).ToList(),
-                                    Image = Bo.Image,
-                                    Price = Bo.Price,
-                                    ISBN10 = Bo.ISBN10,
-                                    ISBN13 = Bo.ISBN13
-
-                                        }).ToList()
-                            }).ToList();
-
-            return order;
-        }*/
         public List<OrderViewModel> GetByUserId(string Id)
         {
             var orderByUserId = 
@@ -132,11 +82,11 @@ namespace BookCave.Repositories
                                             Name = Ge.Name
                                         }).ToList()
                                 }).ToList(),
-                        Quantity =
+                       /* Quantity =
                             (from Ord in _db.Orders
                             join OrBo in _db.OrdersBooks on Ord.Id equals OrBo.OrderId
                             where Ord.AspNetUserId == Id
-                            select OrBo.Quantity).FirstOrDefault()
+                            select OrBo.Quantity).FirstOrDefault()*/
                     }).ToList();
             return orderByUserId;
         }

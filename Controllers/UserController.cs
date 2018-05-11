@@ -77,9 +77,9 @@ namespace BookCave.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				// string bytes = Base64Encode(profileInput.Image);
 				_userService.ChangeName(_id, profileInput.Name);
 				_userService.ChangeEmail(_id, profileInput.Email);
+				_userService.ChangeImage(_id, profileInput.Image);
 				_userService.ChangeImage(_id, profileInput.Image);
 				return RedirectToAction("MyProfile");
 			}
