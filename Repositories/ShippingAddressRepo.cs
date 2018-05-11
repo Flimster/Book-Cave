@@ -37,7 +37,7 @@ namespace BookCave.Repositories
             return shippingAddresses;
         }
 
-        public List<ShippingAddressViewModel> GetByAddressId(int addressId)
+        public ShippingAddressViewModel GetByAddressId(int addressId)
         {
             var shippingAddresses = 
                 (from UsBi in _db.UsersShippingAddresses
@@ -54,7 +54,7 @@ namespace BookCave.Repositories
                     City = Shi.City,
                     Zip = Shi.Zip,
                     StreetAddress = Shi.StreetAddress
-                }).ToList();
+                }).SingleOrDefault();
             return shippingAddresses;
         }
 

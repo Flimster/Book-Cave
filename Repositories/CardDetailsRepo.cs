@@ -43,7 +43,7 @@ namespace BookCave.Repositories
             return cardDetails;
         }
 
-        public List<CardDetailsViewModel> GetByCardId(int cardId)
+        public CardDetailsViewModel GetByCardId(int cardId)
         {
             var cardDetails = 
                 (from C in _db.CardDetails
@@ -56,7 +56,7 @@ namespace BookCave.Repositories
                     CardNumber = C.CardNumber,
                     Cvc = C.Cvc,
                     ExpirationDate = C.ExpirationDate,
-                }).ToList();
+                }).SingleOrDefault();
             return cardDetails;
         }
     }
