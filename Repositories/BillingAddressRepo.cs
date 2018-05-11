@@ -87,10 +87,9 @@ namespace BookCave.Repositories
         public void Write(string UserId, BillingAddresses BillingAddress)
         {
             var a = _db.Add(BillingAddress);
-            
+            _db.SaveChanges();
             //_userBillingAddresses.AddressId = BillingAddress.Id;   
             WriteMiddleTable(UserId, BillingAddress);
-            _db.SaveChanges();
         }
 
         public void Remove(BillingAddresses billingAddress)
