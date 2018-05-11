@@ -31,9 +31,32 @@ namespace BookCave.Controllers
 			_userService = new AspNetUsersService();
 			_bookService = new BookService();
 			_orderService = new OrdersService();
-			_billingService = new  BillingAddressService();
+			_billingService = new BillingAddressService();
 			_shippingService = new ShippingAddressService();
-			_cardService = new  CardDetailsService();
+			_cardService = new CardDetailsService();
+		}
+
+		public async Task<IActionResult> MyProfile()
+		{
+			var user = await _userManager.GetUserAsync(User);
+			_id = user.Id;
+			var userInfo = _userService.GetById(user.Id);
+			var profile = new ProfileViewModel
+			{
+				Id = user.Id,
+				Image = user.Image,
+				Name = user.Name,
+				Email = user.Email,
+				FavoriteBook = userInfo.FavoriteBook,
+				FavoriteAuthor = userInfo.FavoriteAuthor,
+				Orders = _orderService.GetByUserId(user.Id),
+				WishList = _bookService.GetList(),
+				BookShelf = _bookService.GetList(),
+				PaymentMethods = _cardService.GetByUserId(user.Id),
+				BillingAddresses = _billingService.GetByUserId(user.Id),
+				ShippingAddresses = _shippingService.GetByUserId(user.Id)
+			};
+			return View("Index", profile);
 		}
 
 		[HttpGet]
@@ -99,27 +122,5 @@ namespace BookCave.Controllers
 			return RedirectToAction("MyProfile");
 		}
 
-
-		public async Task<IActionResult> MyProfile()
-		{
-			var user = await _userManager.GetUserAsync(User);
-			_id = user.Id;
-			var userInfo = _userService.GetById(user.Id);
-			var profile = new ProfileViewModel
-			{
-				Id = user.Id,
-				Image = user.Image,
-				Name = user.Name,
-				Email = user.Email,
-				FavoriteBook = userInfo.FavoriteBook,
-				FavoriteAuthor = userInfo.FavoriteAuthor,
-				Orders = _orderService.GetByUserId(user.Id),
-				WishList = _bookService.GetList(),
-				BookShelf = _bookService.GetList(),
-				BillingAddresses = _billingService.GetByUserId(user.Id),
-				ShippingAddresses= _shippingService.GetByUserId(user.Id)
-			};
-			return View("Index", profile);
-		}
 	}
 }
