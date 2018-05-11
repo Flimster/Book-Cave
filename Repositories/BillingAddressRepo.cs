@@ -14,12 +14,33 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-        public List<BillingAddressViewModel> GetByUserId(string UserId)
+        public List<BillingAddressViewModel> GetByUserId(string userId)
         {
             var billingAddresses = 
                 (from UsBi in _db.UserBillingAddresses
                 join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
-                where UsBi.AspNetUserId == UserId
+                where UsBi.AspNetUserId == userId
+                select new BillingAddressViewModel
+                {
+                    Id = Bil.Id,
+                    Country =
+                        (from C in _db.Countries
+                        where Bil.CountryId == C.Id
+                        select C.Name).FirstOrDefault(),
+                    StateOrProvince = Bil.StateOrProvince,
+                    City = Bil.City,
+                    Zip = Bil.Zip,
+                    StreetAddress = Bil.StreetAddress
+                }).ToList();
+            return billingAddresses;
+        }
+
+        public List<BillingAddressViewModel> GetByAddressId(int addressId)
+        {
+            var billingAddresses = 
+                (from UsBi in _db.UserBillingAddresses
+                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
+                where UsBi.AddressId == addressId
                 select new BillingAddressViewModel
                 {
                     Id = Bil.Id,

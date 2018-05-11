@@ -21,5 +21,10 @@ namespace BookCave.Services
         {
             return _cardDetailsRepo.GetByUserId(UserId);
         }
+
+        public List<CardDetailsViewModel> GetByCardId(int cardId)
+        {
+            return _cardDetailsRepo.GetByCardId(cardId);
+        }
     }
 }
