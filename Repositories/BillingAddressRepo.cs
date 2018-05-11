@@ -18,6 +18,27 @@ namespace BookCave.Repositories
             _userBillingAddresses = new UserBillingAddresses();
             _billingAddressView = new BillingAddressViewModel();
         }
+        public BillingAddressViewModel GetByAddressId(int addressId)
+        {
+            var billingAddresses = 
+                (from UsBi in _db.UserBillingAddresses
+                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
+                where UsBi.AddressId == addressId
+                select new BillingAddressViewModel
+                {
+                    Id = Bil.Id,
+                    Country =
+                        (from C in _db.Countries
+                        where Bil.CountryId == C.Id
+                        select C.Name).SingleOrDefault(),
+                    StateOrProvince = Bil.StateOrProvince,
+                    City = Bil.City,
+                    Zip = Bil.Zip,
+                    StreetAddress = Bil.StreetAddress
+                }).SingleOrDefault();
+            return billingAddresses;
+        }
+
         public List<BillingAddressViewModel> GetByUserId(string userId)
         {
             var billingAddresses = 
@@ -40,27 +61,6 @@ namespace BookCave.Repositories
             return billingAddresses.OrderBy(q => q.Id).ToList();
         }
 
-        public BillingAddressViewModel GetByAddressId(int addressId)
-        {
-            var billingAddresses = 
-                (from UsBi in _db.UserBillingAddresses
-                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
-                where UsBi.AddressId == addressId
-                select new BillingAddressViewModel
-                {
-                    Id = Bil.Id,
-                    Country =
-                        (from C in _db.Countries
-                        where Bil.CountryId == C.Id
-                        select C.Name).SingleOrDefault(),
-                    StateOrProvince = Bil.StateOrProvince,
-                    City = Bil.City,
-                    Zip = Bil.Zip,
-                    StreetAddress = Bil.StreetAddress
-                }).SingleOrDefault();
-            return billingAddresses;
-        }
-
         public void WriteMiddleTable(string UserId, BillingAddresses BillingAddress) {
             var adr = GetByUserId(UserId).FirstOrDefault();
             _userBillingAddresses.AddressId = adr.Id;
@@ -71,8 +71,8 @@ namespace BookCave.Repositories
 
         public void Write(string UserId, BillingAddresses BillingAddress)
         {
-            _userBillingAddresses.AddressId = BillingAddress.Id;   
             _db.Add(BillingAddress);
+            _userBillingAddresses.AddressId = BillingAddress.Id;   
             WriteMiddleTable(UserId, BillingAddress);
             _db.SaveChanges();
         }
