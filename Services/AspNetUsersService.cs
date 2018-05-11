@@ -27,34 +27,34 @@ namespace BookCave.Services
             return _aspNetUserRepo.GetById(Id);
         }
 
-        public void ChangeEmail(string Id, string NewEmail)
+        public void ChangeEmail(string userId, string newEmail)
         {
-            _aspNetUserRepo.ChangeEmail(Id, NewEmail);
+            _aspNetUserRepo.ChangeEmail(userId, newEmail);
         }
 
-        public void ChangeImage(string Id, string NewImage)
+        public void ChangeImage(string userId, string newImage)
         {
-            _aspNetUserRepo.ChangeImage(Id, NewImage);
+            _aspNetUserRepo.ChangeImage(userId, newImage);
         }
 
-        public void ChangeName(string Id, string NewName)
+        public void ChangeName(string userId, string newName)
         {
-            _aspNetUserRepo.ChangeName(Id, NewName);
+            _aspNetUserRepo.ChangeName(userId, newName);
         }
 
-        public void ChangeBookSuggestionEmail(string Id, bool NewEmailSetting)
+        public void ChangeBookSuggestionEmail(string userId, bool newEmailSetting)
         {
-            _aspNetUserRepo.ChangeBookSuggestionEmail(Id, NewEmailSetting);
+            _aspNetUserRepo.ChangeBookSuggestionEmail(userId, newEmailSetting);
         }
 
-        public void ChangeFavoriteBook(string Id, int BookId)
+        public void ChangeFavoriteBook(string userId, int bookId)
         {
-            _aspNetUserRepo.ChangeFavoriteBook(Id, BookId);
+            _aspNetUserRepo.ChangeFavoriteBook(userId, bookId);
         }
 
-        public void ChangeFavoriteAuthor(string Id, int AuthorId)
+        public void ChangeFavoriteAuthor(string userId, int authorId)
         {
-            _aspNetUserRepo.ChangeFavoriteAuthor(Id, AuthorId);
+            _aspNetUserRepo.ChangeFavoriteAuthor(userId, authorId);
         }
     }
 }   

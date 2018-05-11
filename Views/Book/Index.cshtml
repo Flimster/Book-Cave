@@ -40,12 +40,14 @@
       }
     </p>
 
-    <div class="rating">
-      <div class="star-outer">
-        <div class="star-inner"></div>
+     <div class="rating">
+        Rating: @Model.Rating
+        @for(int i = 0; i < (int)Model.Rating; i++)
+        {
+          
+          <i class="fas fa-star"></i>
+        }
       </div>
-      @Model.Rating
-    </div>
 
     <div class="book-descriptions">
       <p>
@@ -79,9 +81,12 @@
     {
       <h3 class="price">@Model.Price</h3>
     }
-  
+
+    <label for="book-qty">Quntity:</label>
+    <input class="form-control input-sm" type="number" id="book-qty" value="1">
+
     <hr>
-    <button class="btn btn-primary btn-fluid cart">Add to cart</button>
+    <button class="btn btn-primary btn-fluid cart" id="add-to-cart-btn">Add to cart</button>
     <button class="btn btn-default">Add to Wish list</button>
   </div>
 
@@ -130,4 +135,13 @@
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi asperiores culpa possimus dolores harum nulla natus repudiandae, error nisi! Aspernatur numquam iste sed non quis enim vitae rerum quia labore!
       </div>
     </div>
+    @foreach (var review in Model.Reviews)
+    {
+    	<div class="book-review col-sm-12">
+      		<hr>
+      		<div>
+        		@review.Text
+      		</div>
+    </div>
+    }
 </div>

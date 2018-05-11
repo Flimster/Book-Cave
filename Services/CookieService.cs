@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using BookCave.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace BookCave.Services
 {
@@ -22,71 +25,142 @@ namespace BookCave.Services
                 TimeSpan ts = new TimeSpan(30, 0, 0, 0);
                 DateTime expDate = DateTime.Now + ts;
                 cartCookie.Expires = expDate;
-                _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", "value", cartCookie);
+                List<CartDataModel> def = new List<CartDataModel>();
+                var serial = JsonConvert.SerializeObject(def);
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", serial, cartCookie);
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("CartCount", "0", cartCookie);
             }
             return cartCookie;
         }
 
-        public void AddToCartCookie(int quantity, string data)
+        public void AddToCartCookie(int quantity, int id)
         {
-/*            var cartCookie = InitializeCookie();
-            var cookieData = _httpContextAccessor.HttpContext.Request.Cookies["Cart"];
+            bool idExists = false; 
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
 
-            int stringLength = cookieData.Length;
-            int i = 0;
-            bool numOrId = false;
-            List<string> itemCount = new List<string>();
-            List<int> itemId = new List<int>();
-            string tmpCount = "";
-            string tmpId = "";
-
-            //Split up the cookie into a number and a serial number
-            while(i < stringLength)
+            List<CartDataModel> cart = new List<CartDataModel>();
+            var itemsInCart = 0;
+            int counter = 0;
+            if(cookieData != null)
             {
-                //true if should read in number, false if id should be read in
-                if(cookieData[i] == '!')
+                for (int i = 0; i < cookieData.Count; i++)
                 {
-                    numOrId = true;
-                    i += 1;
-                    if(i != 1)
-                    {
-                        itemId.Add(Convert.ToInt32(tmpId));
-                        tmpId = "";
+                    itemsInCart += cookieData[i].Quantity;
+                }
+
+                //check if item is in basket
+                for(int i = 0; i < cookieData.Count; i++)
+                {
+                    
+                    if(cookieData[i].Id == id) {
+                        cookieData[i].Quantity += quantity;
+                        idExists = true;
+                        
                     }
                 }
-                if(cookieData[i] == '-')
+
+                if(!idExists)
                 {
-                    numOrId = false;
-                    i += 1;
-                    itemCount.Add(tmpCount);
-                    tmpCount = "";
+                    cart.Add(new CartDataModel { Quantity = Convert.ToInt32(quantity), Id = id} );
                 }
 
-                //Add all numbers in a row a temp string
-                if(numOrId)
+                foreach(var c in cookieData)
                 {
-                    tmpCount += cookieData[i];
+                    cart.Add(cookieData[counter]);
+                    counter++;  
                 }
-                else
-                {
-                    tmpId += cookieData[i];
-                }
-                i++;
             }
 
-            //Check if the item already exists
-            for(int t = 0; t < itemCount.Count; t++)
+            itemsInCart += quantity;
+
+            var jsonData = JsonConvert.SerializeObject(cart);
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", jsonData, cartCookie);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("CartCount", Convert.ToString(itemsInCart), cartCookie);
+        }
+
+        public void RemoveFromCartCookie(int id)
+        {
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
+            var cookieCount = JsonConvert.DeserializeObject<int>(_httpContextAccessor.HttpContext.Request.Cookies["CartCount"]);
+            var toSubtract = 0;
+            if(cookieData != null)
             {
-                if(itemCount[t] == data)
+                var itemToRemove = cookieData.FirstOrDefault(r => r.Id == id);
+                toSubtract = itemToRemove.Quantity;
+                cookieData.Remove(itemToRemove);
+            }
+
+            var jsonData = JsonConvert.SerializeObject(cookieData);
+
+            cookieCount -= toSubtract;
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", jsonData, cartCookie);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("CartCount", Convert.ToString(cookieCount), cartCookie);
+        }
+
+        public void EditItemCartCookie(int id, int qty)
+        {
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
+            var cookieCount = JsonConvert.DeserializeObject<int>(_httpContextAccessor.HttpContext.Request.Cookies["CartCount"]);
+            if(cookieData != null)
+            {
+                for(int i = 0; i < cookieData.Count; i++)
                 {
-                    itemId[t] = itemId[t] + quantity;
-                    break;
+                    if(cookieData[i].Id == id)
+                    {
+                        if((cookieData[i].Id + id) <= 0)
+                        {
+                            cookieData.Remove(cookieData[i]);
+                            cookieCount = 0;
+                        } else {
+                            cookieCount += qty - cookieData[i].Quantity;
+                            cookieData[i].Quantity = qty;
+                        }
+                        break;
+                    }
                 }
             }
 
-            string serializedData = cookieData + "!" + quantity + "-" + data;
-            _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", serializedData, cartCookie);
-*/
+            var jsonData = JsonConvert.SerializeObject(cookieData);
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", jsonData, cartCookie);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("CartCount", Convert.ToString(cookieCount), cartCookie);
+        }
+
+        public int GetNumItemsInCartCookie()
+        {
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
+            
+            if(cookieData == null)
+            {
+                return 0;
+            }
+
+            int cookieCounter = 0;
+            for(int i = 0; i < cookieData.Count; i++)
+            {
+                cookieCounter += cookieData[i].Quantity;
+            }
+
+            return cookieData.Count;
+        }
+
+        public List<CartDataModel> GetCart()
+        {
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
+            var arr = new List<CartDataModel>();
+
+            if(cookieData == null)
+            {
+                return arr;
+            }
+
+            return cookieData;
         }
         
     }

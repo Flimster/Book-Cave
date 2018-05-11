@@ -61,13 +61,17 @@
 
 #login-btn-container, #account-container {
     height: 100%;
-    width: 100%;
     background-color: #1d480e;
     display: table;
 }
   
 #login-btn-container:hover, #account-container:hover {
     background-color: #183a0c;
+    cursor: pointer;
+}
+
+#login-btn-container:active, #account-container:active, {
+    background-color: #15310b;
     cursor: pointer;
 }
   
@@ -79,6 +83,33 @@
     font-size: 20px;
 }
 
-#account-shortcut-panel {
-    display: none;
+#logout, #logout:hover, #logout:active {
+    font-size: 20px;
+    text-decoration: none;
+    color: #fff;
+}
+
+#login-account-container, #logout-btn-container {
+    height: 100%
+}
+
+#logout, #account-shortcut {
+    height: 65px;
+    background-color: #1d480e;
+}
+
+#logout:hover, #account-shortcut:hover {
+    background-color: #183a0c;
+}
+
+#logout-btn-container {
+    padding-left: 0px;
+}
+
+#account-shortcut {
+    border: 0px;
+}
+
+#account-shortcut:active, #logout:active {
+    background-color: #15310b;
 }

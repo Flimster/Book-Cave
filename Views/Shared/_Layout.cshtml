@@ -41,9 +41,7 @@
                     </form>
                 </div >
 
-                <div class="col-sm-1"></div>
-
-                <div class="col-sm-1 nav-height-control">
+                <div class="col-sm-2 nav-height-control">
                     @await Html.PartialAsync("_LoginPartial")
                 </div>
             </div>
@@ -54,30 +52,30 @@
 
                 <div class="col-sm-5">
 
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown mega-dropdown">
-                            <a id="mega-menu-link" href="#" class="dropdown-toggle" data-toggle="dropdown">Shop by<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
-                            <ul class="dropdown-menu mega-dropdown-menu col-sm-8 dropdown-menu-width-override">
+                    <ul class="nav navbar-nav col-sm-3" id="mega-dropdown-container">
+                        <button id="shop-by-replacement" class="lower-nav-link-hover">Shop by<span class="glyphicon glyphicon-chevron-down pull-right" id="mega-menu-arrow"></span></button>
+                        <li class="dropdown mega-dropdown  lower-nav-link-hover" id="mega-dropdown-btn">
+                            <ul class="dropdown-menu mega-dropdown-menu col-sm-8 dropdown-menu-width-override" id="mega-dropdown-menu">
                                 <li class="col-sm-4 vertical-line-right">
                                     <ul>
                                         <li class="dropdown-header">Genre</li>
                                         <form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="1">Horror</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="1">Horror</button>
                                         </form>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="2">Sci fi</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="2">Sci fi</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="3">Romance</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="3">Romance</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="4">Thriller</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="4">Thriller</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="5">Comedy</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="5">Comedy</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="6">Education</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="6">Education</button>
                                         </form></li>
                                     </ul>
                                 </li>
@@ -86,37 +84,37 @@
                                     <ul>
                                         <li class="dropdown-header">Authors</li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="author" value="1">J.K Rowling</button>
+                                          <button class="btn btn-link mega-item" name="author" value="1">J.K Rowling</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="author" value="2">Stephen King</button>
+                                          <button class="btn btn-link mega-item" name="author" value="2">Stephen King</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="author" value="3">Imany</button>
+                                          <button class="btn btn-link mega-item" name="author" value="3">Imany</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="author" value="4">Ginger Malfoy</button>
+                                          <button class="btn btn-link mega-item" name="author" value="4">Ginger Malfoy</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="author" value="5">Sambrina Chichi</button>
+                                          <button class="btn btn-link mega-item" name="author" value="5">Sambrina Chichi</button>
                                         </form></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                    <div class="navbar-header">
-                        <a asp-controller="Book" asp-action="Discount" class="sett2">Discounts</a>
+                    <div class="navbar-header col-sm-3 lower-nav-link-hover">
+                        <a asp-controller="Book" asp-action="Discount" class="nav-item" id="discount-link">On Sale</a>
                     </div>
-                    <div class="navbar-header">
-                        <a asp-controller="Book" asp-action="Top10" class="sett2">Top 10</a>
+                    <div class="navbar-header col-sm-3 lower-nav-link-hover">
+                        <a asp-controller="Book" asp-action="Top10" class="nav-item" id="top-10-link">Top 10</a>
                     </div>
                 </div>
 
                 <div class="col-sm-4"></div>
 
-                <div class="col-sm-1" >
-                    <a id="shopping-icon-link" asp-controller="Checkout" asp-action="Index">
+                <div class="col-sm-1" id="shopping-cart-effects">
+                    <a id="shopping-icon-link" asp-controller="CheckOut" asp-action="Index">
                       <div id="shopping-cart-icon-container">
                           <i class="fas fa-shopping-cart" id="shopping-cart-icon"></i>
                           <h2 id="num-items-in-cart">0</h2>
@@ -156,7 +154,7 @@
                 <div class="col-sm-8">
                   <ul class="created-by-ul">
                     <li class="created-by-li">
-                      <a asp-controller="Home" asp-action="Error">Brynjar Grétarsson</a>
+                      <a asp-controller="Home" asp-action="Error">Brynjar Örn Grétarsson</a>
                     </li>
                     <li class="created-by-li">
                       Daði Steinn Brynjarsson
@@ -208,14 +206,80 @@
 
 
     <script type="text/javascript">
+    
+    $( window ).ready(function() {
+         $("#num-items-in-cart").html( getCookie("CartCount") );
 
+        //Add item to cart
+        $("#add-to-cart-btn").click(function() {
+            var url = window.location.pathname.split('/');
+            url = url.pop();
+
+            var quantity = $("#book-qty").val();
+            console.log(quantity);
+
+            $.post(`/CheckOut/AddToCart?qty=${quantity}&id=${url}`,{}).done(function() {
+                $("#num-items-in-cart").html( getCookie("CartCount") );
+            }) 
+        });
+
+        //remove from cart
+     /*   $(".delete-from-cart").click(function() {
+            var bookId = $(".delete-from-cart").attr("name");
+
+            $.post(`/CheckOut/RemoveFromCart?id=${bookId}`,{}).done(function() {
+                $("#num-items-in-cart").html( getCookie("CartCount") );
+            }).done(function() {
+                location.reload();
+            });
+        });
+    */
+
+        //Edit cart
+     /*   $(".update-cart").click(function() {
+            var bookId = 0;
+            var quantity = 0;
+
+            $.post(`/CheckOut/EditCart?qty=${quantity}&id=${bookId}`,{}).done(function() {
+                $("#num-items-in-cart").html( getCookie("CartCount") );
+            }).done(function() {
+                location.reload();
+            });
+        });
+    */
+
+    
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    });
+
+
+/*
         $( window ).ready(function() {
                 var idArr = (JSON.parse(localStorage.getItem("storage")));
-            $("#num-items-in-cart").html(idArr.length);
+                if(idArr != null) {
+                    $("#num-items-in-cart").html(idArr.length);
+                }
             
 
             $(".cart").click(function() {
-            var Id = $("#book-title").attr("id");
+            var Id = $(".book-title").attr("id");
+            console.log(Id);
             let idArr = new Array();
             let tmpArr = new Array();
             tmpArr = (JSON.parse(localStorage.getItem("storage")));
@@ -230,8 +294,36 @@
             $("#num-items-in-cart").html(idArr.length);
             });
 
-        });
+            $(".#shopping-cart-icon").click(function() {
+                idArr = (JSON.parse(localStorage.getItem("storage")));
+                console.log(idArr);
+                
+                //$.post( "Checkout/Index", idArr );
 
+                
+                $.ajax({
+                    type: "POST",
+                    url: 'CheckOut/Index',
+                    data: JSON.stringify(idArr),
+                    dataType: "html",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resp) {
+                        console.log(resp);
+                        //document.open();
+                        //document.write(resp);
+                        //document.close();
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+                
+
+
+            });
+
+        });
+*/
         
     </script>
 

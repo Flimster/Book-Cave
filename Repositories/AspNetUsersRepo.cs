@@ -93,77 +93,78 @@ namespace BookCave.Repositories
                 _db.SaveChanges();
         }
 
-        public void ChangeImage(string Id, string NewImage)
+        public void ChangeImage(string userId, string newImage)
         {
             var image =
                 from Us in _db.AspNetUsers
-                where Us.Id == Id
+                where Us.Id == userId
                 select Us;
 
                 foreach(AspNetUsers usr in image)
                 {
-                    usr.Image = NewImage;
+                    usr.Image = newImage;
                 }
                 _db.SaveChanges();
         }
 
-        public void ChangeName(string Id, string NewName)
+        public void ChangeName(string userId, string newName)
         {
             var name =
             from Us in _db.AspNetUsers
-                where Us.Id == Id
+                where Us.Id == userId
                 select Us;
 
                 foreach(AspNetUsers usr in name)
                 {
-                    usr.Name = NewName;
+                    usr.Name = newName;
                 }
                 _db.SaveChanges();
         }
 
-        public void ChangeBookSuggestionEmail(string Id, bool NewEmailSetting)
+        public void ChangeBookSuggestionEmail(string userId, bool newEmailSetting)
         {
             var email =
                 from Us in _db.AspNetUsers
-                where Us.Id == Id
+                where Us.Id == userId
                 select Us;
 
                 foreach(AspNetUsers usr in email)
                 {
-                    usr.BookSuggestionsEmail = NewEmailSetting;
+                    usr.BookSuggestionsEmail = newEmailSetting;
                 }
                 _db.SaveChanges();
         }
 
-        public void ChangeFavoriteAuthor(string Id, int NewAuthorId)
+        public void ChangeFavoriteAuthor(string userId, int newAuthorId)
         {
             var author =
                 from Us in _db.AspNetUsers
-                where Us.Id == Id
+                where Us.Id == userId
                 select Us;
 
                 foreach(AspNetUsers usr in author)
                 {
-                    usr.AuthorsId = NewAuthorId;
+                    usr.AuthorsId = newAuthorId;
                 }
 
             _db.SaveChanges();
         }
 
-        public void ChangeFavoriteBook(string Id, int NewBookId)
+        public void ChangeFavoriteBook(string userId, int newBookId)
         {
             var author =
                 from Us in _db.AspNetUsers
-                where Us.Id == Id
+                where Us.Id == userId
                 select Us;
 
                 foreach(AspNetUsers usr in author)
                 {
-                    usr.AuthorsId = NewBookId;
+                    usr.AuthorsId = newBookId;
                 }
 
             _db.SaveChanges();
         }
+        
         
         public AspNetUserViewModel GetById(string userId)
         {

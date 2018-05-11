@@ -17,13 +17,7 @@ namespace BookCave.Services
             _cardDetailsRepo = new CardDetailsRepo();
             _db = new DataContext();
         }
-
-        public List<CardDetailsView> GetList()
-        {
-            return _cardDetailsRepo.GetList();
-        }
-
-        public List<CardDetailsView> GetByUserId(string UserId)
+        public List<CardDetailsViewModel> GetByUserId(string UserId)
         {
             return _cardDetailsRepo.GetByUserId(UserId);
         }

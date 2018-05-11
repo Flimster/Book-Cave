@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using BookCave.Models.ViewModels;
 using BookCave.Models.InputModel;
 using System.Linq;
+using System;
 
 namespace BookCave.Services
 {
@@ -56,6 +57,14 @@ namespace BookCave.Services
             return _bookRepo.GetList();
         }
 
+        public BookViewModel GetBook(int id)
+        {
+            BookViewModel book = (from Bo in _bookRepo.GetList()
+                        where Bo.Id == id
+                        select Bo).SingleOrDefault();
+            return book;
+        }
+
         public void DeleteBook(int Id)
         {
             
@@ -87,6 +96,14 @@ namespace BookCave.Services
                      where Bo.Discount != 0
                      select Bo).ToList();
             return books;
+        }
+
+        public List<BookViewModel> Recommended()
+        {
+          var books = _bookRepo.GetList();
+          books = books.OrderBy(Bo => Guid.NewGuid()).Take(5).ToList();
+          //list = list.OrderBy(emp => Guid.NewGuid()).ToList();
+          return books;
         }
     }
 }

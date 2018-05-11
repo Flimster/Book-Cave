@@ -17,14 +17,13 @@ namespace BookCave.Services
             _db = new DataContext();
         }
 
-        public List<ShippingAddressViewModel> GetList()
+        public List<ShippingAddressViewModel> GetByAddressId(int addressId)
         {
-            return _shippingAddressRepo.GetList();
+            return _shippingAddressRepo.GetByAddressId(addressId);
         }
-
-        public List<ShippingAddressViewModel> GetByUserId(string UserId)
+        public List<ShippingAddressViewModel> GetByUserId(string userId)
         {
-            return _shippingAddressRepo.GetByUserId(UserId);
+            return _shippingAddressRepo.GetByUserId(userId);
         }
     }
 }

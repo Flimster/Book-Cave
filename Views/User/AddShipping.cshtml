@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Add shipping";
+}
+
+@model BookCave.Models.InputModels.ShippingAddressInputModel
+
+<div>
+	<form method="post">
+		<div>
+			<table class="table-condensed">
+				<tr>
+					<td><label asp-for="Country">Country</label></td>
+					<td><input type="text" class="form-control" asp-for="Country"></td>
+					<td><span asp-validation-for="Country"></span></td>
+				</tr>
+				<tr>
+					<td><label asp-for="StateOrProvince">StateOrProvince</label></td>
+					<td><input type="email" class="form-control" asp-for="StateOrProvince"></td>
+					<td><span asp-validation-for="StateOrProvince"></span></td>
+				</tr>
+				<tr>
+					<td><label asp-for="Zip">ZIP</label></td>
+					<td><input type="text" class="form-control" asp-for="Zip"></td>
+					<td><span asp-validation-for="Zip"></span></td>
+				</tr>
+				<tr>
+					<td><label asp-for="StreetAddress">Street Address</label></td>
+					<td><input type="text" class="form-control" asp-for="StreetAddress"></td>
+					<td><span asp-validation-for="StreetAddress"></span></td>
+				</tr>
+				<tr>
+					<td><label asp-for="City">City</label></td>
+					<td><input type="text" asp-for="City"></td>
+					<td><span asp-validation-for="City"></span></td>
+				</tr>
+			</table>
+			<input type="submit" class="btn btn-primary" value="Save">
+		</div>	
+	</form>
+</div>
