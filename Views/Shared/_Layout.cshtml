@@ -50,9 +50,9 @@
                 <div class="col-sm-1"></div>
 
 
-                <div class="col-sm-5">
+                <div class="col-sm-6">
 
-                    <ul class="nav navbar-nav col-sm-3" id="mega-dropdown-container">
+                    <ul class="nav navbar-nav col-sm-2" id="mega-dropdown-container">
                         <button id="shop-by-replacement" class="lower-nav-link-hover">Shop by<span class="glyphicon glyphicon-chevron-down pull-right" id="mega-menu-arrow"></span></button>
                         <li class="dropdown mega-dropdown  lower-nav-link-hover" id="mega-dropdown-btn">
                             <ul class="dropdown-menu mega-dropdown-menu col-sm-8 dropdown-menu-width-override" id="mega-dropdown-menu">
@@ -103,15 +103,19 @@
                             </ul>
                         </li>
                     </ul>
-                    <div class="navbar-header col-sm-3 lower-nav-link-hover">
+                    <div class="navbar-header col-sm-2 lower-nav-link-hover">
                         <a asp-controller="Book" asp-action="Discount" class="nav-item" id="discount-link">On Sale</a>
                     </div>
-                    <div class="navbar-header col-sm-3 lower-nav-link-hover">
+                    <div class="navbar-header col-sm-2 lower-nav-link-hover">
                         <a asp-controller="Book" asp-action="Top10" class="nav-item" id="top-10-link">Top 10</a>
                     </div>
+                    <div class="navbar-header col-sm-3 lower-nav-link-hover">
+                        <a asp-controller="Search" asp-action="Index" class="nav-item" id="catalogue-link">Catalogue</a>
+                    </div>
+                    <div class="col-sm-3"></div>
                 </div>
 
-                <div class="col-sm-4"></div>
+                <div class="col-sm-5"></div>
 
                 <div class="col-sm-1" id="shopping-cart-effects">
                     <a id="shopping-icon-link" asp-controller="CheckOut" asp-action="Index">
