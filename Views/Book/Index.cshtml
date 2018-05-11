@@ -135,4 +135,13 @@
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi asperiores culpa possimus dolores harum nulla natus repudiandae, error nisi! Aspernatur numquam iste sed non quis enim vitae rerum quia labore!
       </div>
     </div>
+    @foreach (var review in Model.Reviews)
+    {
+    	<div class="book-review col-sm-12">
+      		<hr>
+      		<div>
+        		@review.Text
+      		</div>
+    </div>
+    }
 </div>
