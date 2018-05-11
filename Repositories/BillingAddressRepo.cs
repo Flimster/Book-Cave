@@ -14,25 +14,6 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-
-        public List<BillingAddressViewModel> GetList()
-        {
-            var billingAddresses = (from B in _db.BillingAddress
-                        select new BillingAddressViewModel
-                        {
-                            Id = B.Id,
-                            Country = 
-                                (from C in _db.Countries
-                                where B.CountryId == C.Id
-                                select C.Name).FirstOrDefault(),
-                            StateOrProvince = B.StateOrProvince,
-                            City = B.City,
-                            Zip = B.Zip
-                        }).ToList();
-            
-            return billingAddresses;
-        }
-
         public List<BillingAddressViewModel> GetByUserId(string UserId)
         {
             var billingAddresses = 

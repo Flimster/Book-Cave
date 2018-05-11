@@ -17,12 +17,6 @@ namespace BookCave.Services
             _billingAddressRepo = new BillingAddressRepo();
             _db = new DataContext();
         }
-
-        public List<BillingAddressViewModel> GetList()
-        {
-            return _billingAddressRepo.GetList();
-        }
-
         public void Write(BillingAddressViewModel address)
         {
             _billingAddressRepo.Write(address);

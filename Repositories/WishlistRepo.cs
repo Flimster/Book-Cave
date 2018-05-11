@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Book_Cave.Models.ViewModels;
+using BookCave.Models.ViewModels;
 using BookCave.Data;
 using System.Linq;
-using BookCave.Models.ViewModels;
 
 namespace BookCave.Repositories
 {
@@ -15,7 +14,7 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-         public List<WishlistViewModel> GetById(string Id)
+         public List<WishlistViewModel> GetByUserId(string Id)
         {
             var Whishlist = 
                 (from W in _db.UsersWishlists
