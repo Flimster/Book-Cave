@@ -23,6 +23,7 @@ namespace BookCave.Controllers
         private readonly CardDetailsService _cardService;
         private readonly UserManager<AspNetUsers> _userManager;
         private static CheckoutViewModel _model;
+        private readonly OrdersService _orderService;
 
         public CheckOutController(IHttpContextAccessor httpContextAccessor, UserManager<AspNetUsers> userManager)
         {
@@ -33,6 +34,7 @@ namespace BookCave.Controllers
             _billingService = new BillingAddressService();
             _cardService = new CardDetailsService();
             _userManager = userManager;
+            _orderService = new OrdersService();
         }
 
         [HttpPost]
@@ -143,9 +145,13 @@ namespace BookCave.Controllers
         }
 
         [Authorize(Roles = "Admin,Customer")]
-        public IActionResult Confirm()
+        public async Task<IActionResult> Confirm()
         {
-          return View();
+            _orderService.Write();
+
+            var user = await _userManager.GetUserAsync(User);
+            ViewBag.Name = user.Name;
+            return View();
         }
     }
 }

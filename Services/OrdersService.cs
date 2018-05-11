@@ -10,7 +10,6 @@ namespace BookCave.Services
     public class OrdersService
     {
         private OrderRepo _orderRepo;
-        private OrderBooksRepo _orderBooksRepo;
         private DataContext _db;
 
         public OrdersService()
@@ -30,9 +29,9 @@ namespace BookCave.Services
             return _orderRepo.GetByUserId(Id);
         }
 
-        public void WriteOrdersBooks(OrdersBooks ordersBooks)
+        public void WriteOrdersBooks(string id, Orders order)
         {
-            _orderBooksRepo.Write(ordersBooks);
+            _orderRepo.Write(order);
         }
     }
 }

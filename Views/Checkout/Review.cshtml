@@ -89,7 +89,8 @@
         </div>
 
         <div class="book-opt col-sm-2">
-          <h4>$@book.Price</h4>
+          <h4 style="display: inline;">$@((1 - book.Discount) * book.Price)</h4>
+          <h5 style="text-decoration: line-through; display: inline;">$@book.Price</h5>
           <h5>Quantity: @book.NumOfBooks</h5>
         </div>
       </div>  
