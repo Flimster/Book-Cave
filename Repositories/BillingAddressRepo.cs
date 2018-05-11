@@ -8,11 +8,15 @@ namespace BookCave.Repositories
 {
     public class BillingAddressRepo
     {
+        private UserBillingAddresses _userBillingAddresses;
+        private BillingAddressViewModel _billingAddressView;
         private DataContext _db;
 
         public BillingAddressRepo()
         {
             _db = new DataContext();
+            _userBillingAddresses = new UserBillingAddresses();
+            _billingAddressView = new BillingAddressViewModel();
         }
         public List<BillingAddressViewModel> GetByUserId(string userId)
         {
@@ -35,7 +39,7 @@ namespace BookCave.Repositories
             return billingAddresses;
         }
 
-        public List<BillingAddressViewModel> GetByAddressId(int addressId)
+        public BillingAddressViewModel GetByAddressId(int addressId)
         {
             var billingAddresses = 
                 (from UsBi in _db.UserBillingAddresses
@@ -47,18 +51,28 @@ namespace BookCave.Repositories
                     Country =
                         (from C in _db.Countries
                         where Bil.CountryId == C.Id
-                        select C.Name).FirstOrDefault(),
+                        select C.Name).SingleOrDefault(),
                     StateOrProvince = Bil.StateOrProvince,
                     City = Bil.City,
                     Zip = Bil.Zip,
                     StreetAddress = Bil.StreetAddress
-                }).ToList();
+                }).SingleOrDefault();
             return billingAddresses;
         }
 
-        public void Write(BillingAddressViewModel billingAddress)
+        public void WriteMiddleTable(string UserId, BillingAddressViewModel BillingAddress) {
+            var adr = GetByUserId(UserId).LastOrDefault();
+            _userBillingAddresses.AddressId = adr.Id;
+            _userBillingAddresses.AspNetUserId = UserId;
+            _db.Add(_userBillingAddresses);
+            _db.SaveChanges();
+        }
+
+        public void Write(string UserId, BillingAddressViewModel BillingAddress)
         {
-            _db.Add(billingAddress);
+            _userBillingAddresses.AddressId = BillingAddress.Id;   
+            _db.Add(BillingAddress);
+            WriteMiddleTable(UserId, BillingAddress);
             _db.SaveChanges();
         }
 
