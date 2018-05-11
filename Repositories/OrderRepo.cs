@@ -10,7 +10,6 @@ namespace BookCave.Repositories
     public class OrderRepo
     {
         private DataContext _db;
-        private UsersOrders _userOrders;
         private OrderBooksRepo _orderBooksRepo;
         private OrdersBooks _ordersBooks;
 
@@ -18,18 +17,17 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
             _orderBooksRepo = new OrderBooksRepo();
-            _userOrders = new UsersOrders();
             _ordersBooks = new OrdersBooks();
         }
 
-        public List<OrderViewModel> GetList()
+        /*public List<OrderViewModel> GetList()
         {
             var order = (from O in _db.Orders
                         select new OrderViewModel
                         { 
                             Id = O.Id,
                             User = 
-                                (from UsOr in _db.UsersOrders
+                                (from UsOr in _db.Orders
                                 join Us in _db.AspNetUsers on UsOr.AspNetUserId equals Us.Id
                                 where UsOr.OrderId == O.Id
                                 select Us.Name).SingleOrDefault(),
@@ -71,7 +69,7 @@ namespace BookCave.Repositories
                             }).ToList();
 
             return order;
-        }
+        }*/
         public List<OrderViewModel> GetByUserId(string Id)
         {
             var orderByUserId = 
@@ -133,7 +131,12 @@ namespace BookCave.Repositories
                                             Id = Ge.Id,
                                             Name = Ge.Name
                                         }).ToList()
-                                }).ToList()
+                                }).ToList(),
+                        Quantity =
+                            (from Ord in _db.Orders
+                            join OrBo in _db.OrdersBooks on Ord.Id equals OrBo.OrderId
+                            where Ord.AspNetUserId == Id
+                            select OrBo.Quantity).FirstOrDefault()
                     }).ToList();
             return orderByUserId;
         }
@@ -145,13 +148,10 @@ namespace BookCave.Repositories
 
             for(int i = 0; i < Books.Count; i++)
             {
-                for(int j = 0; j < Books[i].NumOfBooks; j++)
-                {
-                    _ordersBooks.BookId = Books[i].Id;
-                    _ordersBooks.OrderId = Order.Id;
-                    _orderBooksRepo.Write(_ordersBooks);
-                }
-                
+                _ordersBooks.BookId = Books[i].Id;
+                _ordersBooks.OrderId = Order.Id;
+                _ordersBooks.Quantity = Books[i].NumOfBooks;
+                _orderBooksRepo.Write(_ordersBooks);
             }
         }
 

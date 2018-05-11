@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using BookCave.Services;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
+using BookCave.Models.ViewModels;
 
 namespace BookCave.Controllers
 {
@@ -53,8 +54,24 @@ namespace BookCave.Controllers
 
         public IActionResult Discount()
         {
-          var books = _bookService.GetDiscount();
-          return View(books);
+            var books = _bookService.GetDiscount();
+            return View(books);
+        }
+
+        public IActionResult BookReview(int id)
+        {
+            var book = _bookService.GetBook(id);
+            return View(book);
+        }
+
+        [HttpPost]
+        public IActionResult CreateReview(int id, double rating, string comment)
+        {
+            Reviews review = new Reviews();
+            review.BookId = id;
+            review.Rating = rating;
+            review.Text = comment;
+            return RedirectToAction("Index", id);
         }
 
         public IActionResult Test()

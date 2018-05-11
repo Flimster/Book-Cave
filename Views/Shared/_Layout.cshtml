@@ -121,7 +121,7 @@
                     <a id="shopping-icon-link" asp-controller="CheckOut" asp-action="Index">
                       <div id="shopping-cart-icon-container">
                           <i class="fas fa-shopping-cart" id="shopping-cart-icon"></i>
-                          <h2 id="num-items-in-cart">0</h2>
+                          <h2 id="num-items-in-cart"> 0</h2>
                       </div>
                     </a>
                 </div>
@@ -226,32 +226,6 @@
                 $("#num-items-in-cart").html( getCookie("CartCount") );
             }) 
         });
-
-        //remove from cart
-     /*   $(".delete-from-cart").click(function() {
-            var bookId = $(".delete-from-cart").attr("name");
-
-            $.post(`/CheckOut/RemoveFromCart?id=${bookId}`,{}).done(function() {
-                $("#num-items-in-cart").html( getCookie("CartCount") );
-            }).done(function() {
-                location.reload();
-            });
-        });
-    */
-
-        //Edit cart
-     /*   $(".update-cart").click(function() {
-            var bookId = 0;
-            var quantity = 0;
-
-            $.post(`/CheckOut/EditCart?qty=${quantity}&id=${bookId}`,{}).done(function() {
-                $("#num-items-in-cart").html( getCookie("CartCount") );
-            }).done(function() {
-                location.reload();
-            });
-        });
-    */
-
     
 
     function getCookie(cname) {
@@ -271,65 +245,11 @@
     }
 
     });
-
-
-/*
-        $( window ).ready(function() {
-                var idArr = (JSON.parse(localStorage.getItem("storage")));
-                if(idArr != null) {
-                    $("#num-items-in-cart").html(idArr.length);
-                }
-            
-
-            $(".cart").click(function() {
-            var Id = $(".book-title").attr("id");
-            console.log(Id);
-            let idArr = new Array();
-            let tmpArr = new Array();
-            tmpArr = (JSON.parse(localStorage.getItem("storage")));
-            if(tmpArr == null) {
-                idArr.push(Id);
-            } else {
-                idArr = (JSON.parse(localStorage.getItem("storage")));
-                idArr.push(Id);
-            }
-            localStorage.setItem("storage", JSON.stringify(idArr))
-            console.log(idArr);
-            $("#num-items-in-cart").html(idArr.length);
-            });
-
-            $(".#shopping-cart-icon").click(function() {
-                idArr = (JSON.parse(localStorage.getItem("storage")));
-                console.log(idArr);
-                
-                //$.post( "Checkout/Index", idArr );
-
-                
-                $.ajax({
-                    type: "POST",
-                    url: 'CheckOut/Index',
-                    data: JSON.stringify(idArr),
-                    dataType: "html",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (resp) {
-                        console.log(resp);
-                        //document.open();
-                        //document.write(resp);
-                        //document.close();
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
-                
-
-
-            });
-
-        });
-*/
         
     </script>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
 
 
     @RenderSection("Scripts", required: false)

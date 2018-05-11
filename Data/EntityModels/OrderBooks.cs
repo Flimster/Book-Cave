@@ -11,5 +11,6 @@ namespace BookCave.Data.EntityModels
         [ForeignKey("Books")]
         public int BookId { get; set; }
         public virtual Books Books { get; set; }
+        public int Quantity { get; set; }
     }
 }
