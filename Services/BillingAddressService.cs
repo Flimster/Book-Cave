@@ -33,9 +33,9 @@ namespace BookCave.Services
             _billingAddressRepo.Edit(addressId, address);
         }
 
-        public List<BillingAddressViewModel> GetByUserId(string Id)
+        public List<BillingAddressViewModel> GetByUserId(string userId)
         {
-            return _billingAddressRepo.GetByUserId(Id);
+            return _billingAddressRepo.GetByUserId(userId);
         }
     }
 }

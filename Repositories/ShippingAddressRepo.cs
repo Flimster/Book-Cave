@@ -16,23 +16,6 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<ShippingAddressViewModel> GetList()
-        {
-            var shippingAddress = (from S in _db.ShippingAddresses
-                        select new ShippingAddressViewModel
-                        {
-                            Id = S.Id,
-                            Country = 
-                                (from C in _db.Countries
-                                where S.Id == C.Id
-                                select C.Name).FirstOrDefault(),
-                            StateOrProvince = S.StateOrProvince,
-                            City = S.City,
-                        }).ToList();
-            
-            return shippingAddress;
-        }
-
         public List<ShippingAddressViewModel> GetByUserId(string UserId)
         {
             var shippingAddresses = 

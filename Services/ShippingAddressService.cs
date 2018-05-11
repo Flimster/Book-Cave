@@ -16,15 +16,9 @@ namespace BookCave.Services
             _shippingAddressRepo = new ShippingAddressRepo();
             _db = new DataContext();
         }
-
-        public List<ShippingAddressViewModel> GetList()
+        public List<ShippingAddressViewModel> GetByUserId(string userId)
         {
-            return _shippingAddressRepo.GetList();
-        }
-
-        public List<ShippingAddressViewModel> GetByUserId(string UserId)
-        {
-            return _shippingAddressRepo.GetByUserId(UserId);
+            return _shippingAddressRepo.GetByUserId(userId);
         }
     }
 }
