@@ -1,0 +1,67 @@
+@model BookCave.Models.ViewModels.BookViewModel
+
+<head>
+  <link rel="stylesheet" href="~/css/Book/BookReview.css">
+</head>
+
+<div class="container">
+  <div class="review-page col-sm-10 col-sm-offset-1">
+    <div class="row">
+      <div class="book-img col-sm-3">
+        <img src=@Model.Image alt=@Model.Title>
+      </div>
+      <div class="book-details col-sm-9">
+        <h3>@Model.Title</h3>
+        <p>
+          @foreach(var author in Model.Authors)
+          {
+            if(author == Model.Authors[Model.Authors.Count() - 1])
+            {
+              @author.Name @Html.Raw(". ")
+            }
+            else
+            {
+                @author.Name @Html.Raw(", ")
+            }
+          }
+        </p>
+        <p>
+          @foreach(var genre in Model.Genre)
+          {
+            if(genre == Model.Genre[Model.Genre.Count() - 1])
+            {
+              @genre.Name @Html.Raw(". ")
+            }
+            else
+            {
+                @genre.Name @Html.Raw(", ")
+            }
+          }
+        </p>
+
+        <div class="rating">
+          Rating: @Model.Rating
+          @for(int i = 0; i < (int)Model.Rating; i++)
+          {
+            
+            <i class="fas fa-star"></i>
+          }
+        </div>
+
+        <div class="book-descriptions">
+          <p>
+            @Model.Description
+          </p>
+        </div>
+
+        <div class="review form-group">
+          <label for="rating">Rating</label>
+          <input type="number" class="form-control" id="rating">
+          <label for="comment">Comment</label>
+          <textarea class="form-control" id="comment"></textarea>  
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

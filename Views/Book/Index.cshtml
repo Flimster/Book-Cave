@@ -116,7 +116,9 @@
       <h3>Reviews</h3>
     </div>
     <div class="col-sm-2">
-      <button class="btn-addReview btn btn-default">Write review</button>
+      <a asp-controller="Book" asp-action="BookReview" asp-route-id=@Model.Id>
+        <button class="btn-addReview btn btn-default">Write review</button>
+      </a>
     </div>
   </div>
 
