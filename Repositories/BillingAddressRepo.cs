@@ -60,7 +60,7 @@ namespace BookCave.Repositories
             return billingAddresses;
         }
 
-        public void WriteMiddleTable(string UserId, BillingAddressViewModel BillingAddress) {
+        public void WriteMiddleTable(string UserId, BillingAddresses BillingAddress) {
             var adr = GetByUserId(UserId).LastOrDefault();
             _userBillingAddresses.AddressId = adr.Id;
             _userBillingAddresses.AspNetUserId = UserId;
@@ -68,7 +68,7 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void Write(string UserId, BillingAddressViewModel BillingAddress)
+        public void Write(string UserId, BillingAddresses BillingAddress)
         {
             _userBillingAddresses.AddressId = BillingAddress.Id;   
             _db.Add(BillingAddress);
@@ -76,7 +76,7 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void Remove(BillingAddressViewModel billingAddress)
+        public void Remove(BillingAddresses billingAddress)
         {
             _db.Remove(billingAddress);
             _db.SaveChanges();
