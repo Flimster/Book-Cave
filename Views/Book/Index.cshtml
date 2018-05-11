@@ -40,12 +40,14 @@
       }
     </p>
 
-    <div class="rating">
-      <div class="star-outer">
-        <div class="star-inner"></div>
+     <div class="rating">
+        Rating: @Model.Rating
+        @for(int i = 0; i < (int)Model.Rating; i++)
+        {
+          
+          <i class="fas fa-star"></i>
+        }
       </div>
-      @Model.Rating
-    </div>
 
     <div class="book-descriptions">
       <p>
