@@ -49,7 +49,8 @@ namespace BookCave.Services
             var bookId = _bookRepo.Write(book);
             
             //Format && Author
-            //_authorRepo.WriteAuthor(bookView.Authors);
+            _authorRepo.WriteList(bookView.Authors);
+            _formatsRepo.Write(bookView.Formats);
         }
         
         public List<BookViewModel> GetList()

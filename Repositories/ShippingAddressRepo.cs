@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
 using System.Linq;
-using Book_Cave.Models.ViewModels;
 using BookCave.Models.ViewModels;
+
 
 namespace BookCave.Repositories
 {
@@ -16,40 +16,44 @@ namespace BookCave.Repositories
             _db = new DataContext();
         }
 
-        public List<ShippingAddressViewModel> GetList()
-        {
-            var shippingAddress = (from S in _db.ShippingAddresses
-                        select new ShippingAddressViewModel
-                        {
-                            Id = S.Id,
-                            Country = 
-                                (from C in _db.Countries
-                                where S.Id == C.Id
-                                select C.Name).FirstOrDefault(),
-                            StateOrProvince = S.StateOrProvince,
-                            City = S.City,
-                        }).ToList();
-            
-            return shippingAddress;
-        }
-
         public List<ShippingAddressViewModel> GetByUserId(string UserId)
         {
             var shippingAddresses = 
-                (from UsBi in _db.UserBillingAddresses
-                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
+                (from UsBi in _db.UsersShippingAddresses
+                join Shi in _db.ShippingAddresses on UsBi.AddressId equals Shi.Id
                 where UsBi.AspNetUserId == UserId
                 select new ShippingAddressViewModel
                 {
-                    Id = Bil.Id,
+                    Id = Shi.Id,
                     Country =
                         (from C in _db.Countries
-                        where Bil.CountryId == C.Id
+                        where Shi.CountryId == C.Id
                         select C.Name).FirstOrDefault(),
-                    StateOrProvince = Bil.StateOrProvince,
-                    City = Bil.City,
-                    Zip = Bil.Zip,
-                    StreetAddress = Bil.StreetAddress
+                    StateOrProvince = Shi.StateOrProvince,
+                    City = Shi.City,
+                    Zip = Shi.Zip,
+                    StreetAddress = Shi.StreetAddress
+                }).ToList();
+            return shippingAddresses;
+        }
+
+        public List<ShippingAddressViewModel> GetByAddressId(int addressId)
+        {
+            var shippingAddresses = 
+                (from UsBi in _db.UsersShippingAddresses
+                join Shi in _db.ShippingAddresses on UsBi.AddressId equals Shi.Id
+                where UsBi.AddressId== addressId
+                select new ShippingAddressViewModel
+                {
+                    Id = Shi.Id,
+                    Country =
+                        (from C in _db.Countries
+                        where Shi.CountryId == C.Id
+                        select C.Name).FirstOrDefault(),
+                    StateOrProvince = Shi.StateOrProvince,
+                    City = Shi.City,
+                    Zip = Shi.Zip,
+                    StreetAddress = Shi.StreetAddress
                 }).ToList();
             return shippingAddresses;
         }
@@ -78,9 +82,9 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void Remove(ShippingAddresses addr)
+        public void Remove(ShippingAddresses shippingAddress)
         {
-            _db.Remove(addr);
+            _db.Remove(shippingAddress);
             _db.SaveChanges();
         }
     }

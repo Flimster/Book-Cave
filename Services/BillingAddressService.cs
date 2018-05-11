@@ -17,25 +17,24 @@ namespace BookCave.Services
             _billingAddressRepo = new BillingAddressRepo();
             _db = new DataContext();
         }
-
-        public List<BillingAddressViewModel> GetList()
+        public void Write(BillingAddressViewModel billingAddress)
         {
-            return _billingAddressRepo.GetList();
+            _billingAddressRepo.Write(billingAddress);
         }
 
-        public void Write(BillingAddressViewModel address)
+        public void Edit(int addressId, BillingAddresses billingAddress)
         {
-            _billingAddressRepo.Write(address);
+            _billingAddressRepo.Edit(addressId, billingAddress);
         }
 
-        public void Edit(int addressId, BillingAddresses address)
+        public List<BillingAddressViewModel> GetByUserId(string userId)
         {
-            _billingAddressRepo.Edit(addressId, address);
+            return _billingAddressRepo.GetByUserId(userId);
         }
 
-        public List<BillingAddressViewModel> GetByUserId(string Id)
+        public List<BillingAddressViewModel> GetByAddressId(int addressId)
         {
-            return _billingAddressRepo.GetByUserId(Id);
+            return _billingAddressRepo.GetByAddressId(addressId);
         }
     }
 }

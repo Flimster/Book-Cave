@@ -16,13 +16,13 @@ namespace BookCave.Repositories
 
         public List<Genres> GetList()
         {
-            var genre = (from G in _db.Genres
-                        select new Genres
-                        {
-                            Id = G.Id,
-                            Name = G.Name
-                        }).ToList();
-            
+            var genre = 
+                (from G in _db.Genres
+                select new Genres
+                {
+                    Id = G.Id,
+                    Name = G.Name
+                }).ToList();
             return genre;
         }
 

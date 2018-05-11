@@ -16,13 +16,13 @@ namespace BookCave.Repositories
 
         public List<Authors> GetList()
         {
-            var authors = (from A in _db.Authors
-                        select new Authors
-                        {
-                            Id = A.Id,
-                            Name = A.Name,
-                        }).ToList();
-            
+            var authors = 
+                (from A in _db.Authors
+                select new Authors
+                {
+                    Id = A.Id,
+                    Name = A.Name,
+                }).ToList();
             return authors;
         }
 
