@@ -57,6 +57,14 @@ namespace BookCave.Services
             return _bookRepo.GetList();
         }
 
+        public BookViewModel GetBook(int id)
+        {
+            BookViewModel book = (from Bo in _bookRepo.GetList()
+                        where Bo.Id == id
+                        select Bo).SingleOrDefault();
+            return book;
+        }
+
         public void DeleteBook(int Id)
         {
             
