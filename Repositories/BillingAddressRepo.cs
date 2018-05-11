@@ -41,26 +41,26 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void Remove(BillingAddressViewModel address)
+        public void Remove(BillingAddressViewModel billingAddress)
         {
-            _db.Remove(address);
+            _db.Remove(billingAddress);
             _db.SaveChanges();
         }
 
-        public void Edit(int addressId, BillingAddresses address)
+        public void Edit(int addressId, BillingAddresses billingAddress)
         {
-            var billingAddress =
+            var address =
                 from Bil in _db.BillingAddress
                 where Bil.Id == addressId
                 select Bil;
 
-                foreach(BillingAddresses bil in billingAddress)
+                foreach(BillingAddresses bil in address)
                 {
-                    bil.City = address.City;
-                    bil.Zip = address.Zip;
-                    bil.CountryId = address.CountryId;
-                    bil.StateOrProvince = address.StateOrProvince;
-                    bil.StreetAddress = address.StreetAddress;
+                    bil.City = billingAddress.City;
+                    bil.Zip = billingAddress.Zip;
+                    bil.CountryId = billingAddress.CountryId;
+                    bil.StateOrProvince = billingAddress.StateOrProvince;
+                    bil.StreetAddress = billingAddress.StreetAddress;
                 }
                 _db.SaveChanges();
         }
