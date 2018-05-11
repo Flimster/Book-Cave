@@ -16,13 +16,13 @@ namespace Book_Cave.Repositories
 
         public List<Languages> GetList()
         {
-            var language = (from L in _db.Genres
-                        select new Languages
-                        {
-                            Id = L.Id,
-                            Name = L.Name
-                        }).ToList();
-            
+            var language = 
+                (from L in _db.Genres
+                select new Languages
+                {
+                    Id = L.Id,
+                    Name = L.Name
+                }).ToList();
             return language;
         }
 

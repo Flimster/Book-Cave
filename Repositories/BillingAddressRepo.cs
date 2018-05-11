@@ -14,12 +14,33 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-        public List<BillingAddressViewModel> GetByUserId(string UserId)
+        public List<BillingAddressViewModel> GetByUserId(string userId)
         {
             var billingAddresses = 
                 (from UsBi in _db.UserBillingAddresses
                 join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
-                where UsBi.AspNetUserId == UserId
+                where UsBi.AspNetUserId == userId
+                select new BillingAddressViewModel
+                {
+                    Id = Bil.Id,
+                    Country =
+                        (from C in _db.Countries
+                        where Bil.CountryId == C.Id
+                        select C.Name).FirstOrDefault(),
+                    StateOrProvince = Bil.StateOrProvince,
+                    City = Bil.City,
+                    Zip = Bil.Zip,
+                    StreetAddress = Bil.StreetAddress
+                }).ToList();
+            return billingAddresses;
+        }
+
+        public List<BillingAddressViewModel> GetByAddressId(int addressId)
+        {
+            var billingAddresses = 
+                (from UsBi in _db.UserBillingAddresses
+                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
+                where UsBi.AddressId == addressId
                 select new BillingAddressViewModel
                 {
                     Id = Bil.Id,
@@ -41,26 +62,26 @@ namespace BookCave.Repositories
             _db.SaveChanges();
         }
 
-        public void Remove(BillingAddressViewModel address)
+        public void Remove(BillingAddressViewModel billingAddress)
         {
-            _db.Remove(address);
+            _db.Remove(billingAddress);
             _db.SaveChanges();
         }
 
-        public void Edit(int addressId, BillingAddresses address)
+        public void Edit(int addressId, BillingAddresses billingAddress)
         {
-            var billingAddress =
+            var address =
                 from Bil in _db.BillingAddress
                 where Bil.Id == addressId
                 select Bil;
 
-                foreach(BillingAddresses bil in billingAddress)
+                foreach(BillingAddresses bil in address)
                 {
-                    bil.City = address.City;
-                    bil.Zip = address.Zip;
-                    bil.CountryId = address.CountryId;
-                    bil.StateOrProvince = address.StateOrProvince;
-                    bil.StreetAddress = address.StreetAddress;
+                    bil.City = billingAddress.City;
+                    bil.Zip = billingAddress.Zip;
+                    bil.CountryId = billingAddress.CountryId;
+                    bil.StateOrProvince = billingAddress.StateOrProvince;
+                    bil.StreetAddress = billingAddress.StreetAddress;
                 }
                 _db.SaveChanges();
         }
