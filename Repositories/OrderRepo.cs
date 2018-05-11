@@ -142,16 +142,20 @@ namespace BookCave.Repositories
             return orderByUserId;
         }
 
-        public void Write(string UserId, Orders Order, List<BookViewModel> Books)
+        public void Write(string UserId, Orders Order, List<OrderBookViewModel> Books)
         {
             _db.Add(Order);
             _db.SaveChanges();
 
-            for(int i = 0; i > Books.Count; i++)
+            for(int i = 0; i < Books.Count; i++)
             {
-                _ordersBooks.BookId = Books[i].Id;
-                _ordersBooks.OrderId = Order.Id;
-                _orderBooksRepo.Write(_ordersBooks);
+                for(int j = 0; j < Books[i].NumOfBooks; j++)
+                {
+                    _ordersBooks.BookId = Books[i].Id;
+                    _ordersBooks.OrderId = Order.Id;
+                    _orderBooksRepo.Write(_ordersBooks);
+                }
+                
             }
             _userOrders.OrderId = Order.Id;
             _userOrders.AspNetUserId = UserId;

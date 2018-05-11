@@ -147,11 +147,17 @@ namespace BookCave.Controllers
         [Authorize(Roles = "Admin,Customer")]
         public async Task<IActionResult> Confirm()
         {
-            _orderService.Write();
-
             var user = await _userManager.GetUserAsync(User);
-            ViewBag.Name = user.Name;
-            return View();
+            _orderService.WriteOrdersBooks(user.Id, _model);
+            _cookieService.ClearCart();
+
+            return RedirectToAction("Confirmed", user.Name);
+        }
+
+        public IActionResult Confirmed(string name)
+        {
+            ViewBag.Name = name;
+            return View("Confirm");
         }
     }
 }
