@@ -18,14 +18,14 @@ namespace BookCave.Repositories
          public List<WishlistViewModel> GetById(string Id)
         {
             var Whishlist = 
-                (from W in _db.Wishlists
+                (from W in _db.UsersWishlists
                 select new WishlistViewModel
                 {
-                    AspNetUsersId = W.AspNetUsersId,
+                    AspNetUsersId = W.AspNetUserId,
                     Book = 
-                        (from Wi in _db.Wishlists
+                        (from Wi in _db.UsersWishlists
                         join B in _db.Books on Wi.BookId equals B.Id
-                        where Wi.AspNetUsersId == Id
+                        where Wi.AspNetUserId == Id
                         select new BookViewModel
                             {
                                 Id = B.Id,
@@ -39,7 +39,7 @@ namespace BookCave.Repositories
                                 ReleaseYear = B.ReleaseYear,
                                 Rating = B.Rating,
                                 StockCount = B.StockCount,
-                                FormatsId = B.FormatsId,
+                                FormatId = B.FormatId,
                                 Discount = B.Discount,
                                 Languages = 
                                     (from BoLa in _db.BooksLanguages

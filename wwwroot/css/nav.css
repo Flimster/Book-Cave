@@ -289,3 +289,13 @@ i.fas {
   width: 100% !important;
   text-align: left !important;
 }
+
+.created-by-li a:link, .created-by-li a:hover, .created-by-li a:visited, .created-by-li a:active {
+  color: rgb(197, 197, 197);
+  margin-top: 2px;
+  text-decoration: none;
+}
+
+.created-by-ul {
+  list-style-type: none;
+}

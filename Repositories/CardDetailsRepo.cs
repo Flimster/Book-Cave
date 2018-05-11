@@ -14,11 +14,10 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
         }
-
-        public List<CardDetailsViewModel> GetList()
-        {
+        public List<CardDetailsView> GetList()
+        { 
             var cardDetails = (from C in _db.CardDetails
-                        select new CardDetailsViewModel
+                        select new CardDetailsView
                         {
                             Id = C.Id,
                             Name = C.Name,
@@ -30,25 +29,25 @@ namespace BookCave.Repositories
             return cardDetails;
         }
 
-        public void Write(CardDetailsViewModel card)
+        public void Write(CardDetailsView card)
         {
             _db.Add(card);
             _db.SaveChanges();
         }
 
-        public void Remove(CardDetailsViewModel card)
+        public void Remove(CardDetailsView card)
         {
             _db.Remove(card);
             _db.SaveChanges();
         }
 
-        public List<CardDetailsViewModel> GetByUserId(string UserId)
+        public List<CardDetailsView> GetByUserId(string UserId)
         {
             var cardDetails = 
                 (from C in _db.CardDetails
                 join UsCa in _db.UsersCards on C.Id equals UsCa.CardId
-                where UserId == UsCa.AspNetUsersId
-                select new CardDetailsViewModel
+                where UserId == UsCa.AspNetUserId
+                select new CardDetailsView
                 {
                     Id = C.Id,
                     Name = C.Name,

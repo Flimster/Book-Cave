@@ -58,7 +58,7 @@ namespace BookCave.Services
         public SearchViewModel FilterByFormat(SearchViewModel searchResults)
         {
             searchResults.BookList = (from Bo in searchResults.BookList
-                                      where Bo.FormatsId == searchResults.Format
+                                      where Bo.FormatId == searchResults.Format
                                       select Bo).ToList();
             return searchResults;
         }

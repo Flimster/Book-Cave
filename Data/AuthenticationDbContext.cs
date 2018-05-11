@@ -29,11 +29,11 @@ namespace BookCave.Data
         public DbSet<ReadBooks> ReadBooks {get;set;}
         public DbSet<Reviews> Reviews {get; set;}
         public DbSet<ShippingAddresses> ShippingAddresses { get; set; }
+        public DbSet<UsersBookRating> UsersBookRating {get;set;}
         public DbSet<UserBillingAddresses> UserBillingAddresses { get; set; }
         public DbSet<UsersCards> UsersCards { get; set; }
-        public DbSet<UsersReviews> UsersReviews { get; set; }
         public DbSet<UsersShippingAddresses> UsersShippingAddresses {get;set;}
-        public DbSet<Wishlists> Wishlists {get;set;}
+        public DbSet<UsersWishlists> UsersWishlists {get;set;}
         public AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options) : base(options) {}
 
 

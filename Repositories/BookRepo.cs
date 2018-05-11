@@ -31,7 +31,7 @@ namespace BookCave.Repositories
                             ReleaseYear = B.ReleaseYear,
                             Rating = B.Rating,
                             StockCount = B.StockCount,
-                            FormatsId = B.FormatsId,
+                            FormatId = B.FormatId,
                             Discount = B.Discount,
                             Languages = 
                                 (from BoLa in _db.BooksLanguages

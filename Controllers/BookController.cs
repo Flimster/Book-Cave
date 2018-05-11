@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using BookCave.Services;
 using BookCave.Data;
+using BookCave.Data.EntityModels;
 
 namespace BookCave.Controllers
 {
@@ -16,6 +17,7 @@ namespace BookCave.Controllers
         private readonly FeedbackService _feedbackService;
         private readonly OrdersService _ordersService;
         private readonly BillingAddressService _billingAddressService;
+        private readonly ReviewsService _reviewsService;
         public BookController()
         {
             _bookService = new BookService();
@@ -24,6 +26,8 @@ namespace BookCave.Controllers
             _ordersService = new OrdersService();
             _billingAddressService = new BillingAddressService();
             _cardDetailsService = new CardDetailsService();
+            _ordersService = new OrdersService();
+            _reviewsService = new ReviewsService();
             _db = new DataContext();
         }
 
@@ -59,8 +63,9 @@ namespace BookCave.Controllers
             //var aspNetUsers = _aspNetUsersService.GetById("25a13905-92e4-4a72-a707-5b761313650e");
             //var billing = _billingAddressService.GetList();
             //var card = _cardDetailsService.GetList();
-            var order = _ordersService.GetByUserId("25a13905-92e4-4a72-a707-5b761313650e");
-            return View(order);
+            //var order = _ordersService.GetByUserId("25a13905-92e4-4a72-a707-5b761313650e");
+
+            return View(_reviewsService.GetByUserId("8e252996-4d12-48fb-be5f-23fb7c2cc3e4"));
         }
     }
 }

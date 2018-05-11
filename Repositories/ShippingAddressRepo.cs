@@ -38,7 +38,7 @@ namespace BookCave.Repositories
             var shippingAddresses = 
                 (from UsBi in _db.UserBillingAddresses
                 join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
-                where UsBi.AspNetUsersId == UserId
+                where UsBi.AspNetUserId == UserId
                 select new ShippingAddressViewModel
                 {
                     Id = Bil.Id,
@@ -52,6 +52,24 @@ namespace BookCave.Repositories
                     StreetAddress = Bil.StreetAddress
                 }).ToList();
             return shippingAddresses;
+        }
+
+        public void Edit(int addressId, ShippingAddresses address)
+        {
+            var shippingAddress =
+                from Bil in _db.ShippingAddresses
+                where Bil.Id == addressId
+                select Bil;
+
+                foreach(ShippingAddresses ship in shippingAddress)
+                {
+                    ship.City = address.City;
+                    ship.Zip = address.Zip;
+                    ship.CountryId = address.CountryId;
+                    ship.StateOrProvince = address.StateOrProvince;
+                    ship.StreetAddress = address.StreetAddress;
+                }
+                _db.SaveChanges();
         }
 
         public void Write(ShippingAddresses shippingAddress)
