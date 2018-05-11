@@ -53,7 +53,7 @@ namespace BookCave.Controllers
           if(format != 0)
           {
             searchResults.Format = format;
-            searchResults = _searchService.FilterByFormat(searchResults);
+            //searchResults = _searchService.FilterByFormat(searchResults);
           }
 
           return View(searchResults);

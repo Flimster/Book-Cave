@@ -13,6 +13,5 @@ namespace BookCave.Models.ViewModels
 		public bool Status { get; set; }
 		public double Price { get; set; }
 		public List<BookViewModel> BookList { get; set; }
-		public int Quantity { get; set; }
 	}
 }

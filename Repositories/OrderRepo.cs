@@ -52,7 +52,6 @@ namespace BookCave.Repositories
                                     ReleaseYear = B.ReleaseYear,
                                     Rating = B.Rating,
                                     StockCount = B.StockCount,
-                                    FormatId = B.FormatId,
                                     Discount = B.Discount,
                                     Languages = 
                                         (from BoLa in _db.BooksLanguages
@@ -80,13 +79,9 @@ namespace BookCave.Repositories
                                         {
                                             Id = Ge.Id,
                                             Name = Ge.Name
-                                        }).ToList()
+                                        }).ToList(),
                                 }).ToList(),
-                       /* Quantity =
-                            (from Ord in _db.Orders
-                            join OrBo in _db.OrdersBooks on Ord.Id equals OrBo.OrderId
-                            where Ord.AspNetUserId == Id
-                            select OrBo.Quantity).FirstOrDefault()*/
+
                     }).ToList();
             return orderByUserId;
         }

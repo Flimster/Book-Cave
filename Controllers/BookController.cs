@@ -5,6 +5,10 @@ using BookCave.Services;
 using BookCave.Data;
 using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
+using System;
 
 namespace BookCave.Controllers
 {
@@ -19,7 +23,10 @@ namespace BookCave.Controllers
         private readonly OrdersService _ordersService;
         private readonly BillingAddressService _billingAddressService;
         private readonly ReviewsService _reviewsService;
-        public BookController()
+        private readonly UserManager<AspNetUsers> _userManager;
+
+        private static string _id;
+        public BookController(UserManager<AspNetUsers> userManager)
         {
             _bookService = new BookService();
             _feedbackService = new FeedbackService();
@@ -30,6 +37,7 @@ namespace BookCave.Controllers
             _ordersService = new OrdersService();
             _reviewsService = new ReviewsService();
             _db = new DataContext();
+            _userManager = userManager;
         }
 
         public IActionResult Index(int id)
@@ -43,7 +51,6 @@ namespace BookCave.Controllers
             book.Reviews = _reviewsService.GetByBookId(id);
             return View(book);
           }
-
         }
 
         public IActionResult Top10()
@@ -64,14 +71,29 @@ namespace BookCave.Controllers
             return View(book);
         }
 
+        public string CheckUser()
+        {
+            var _ClaimsPrincipal = new ClaimsPrincipal(User);
+            var userId = _userManager.GetUserId(_ClaimsPrincipal);
+
+            return userId;
+        }
+
         [HttpPost]
         public IActionResult CreateReview(int id, double rating, string comment)
         {
+            var userId = CheckUser();
             Reviews review = new Reviews();
             review.BookId = id;
             review.Rating = rating;
             review.Text = comment;
-            return RedirectToAction("Index", id);
+            review.AspNetUserId = userId;
+            review.Date = DateTime.Now;
+            
+            _reviewsService.Write(review);
+            var book = _bookService.GetBook(id);
+            book.Reviews = _reviewsService.GetByBookId(id);
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Test()

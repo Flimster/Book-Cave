@@ -54,13 +54,14 @@ namespace BookCave.Services
             searchResults.BookList = searchResults.BookList.Where(Bo => Bo.Languages.Any(La => La.Id == searchResults.Language)).ToList();
             return searchResults;
         }
-
+/* 
         public SearchViewModel FilterByFormat(SearchViewModel searchResults)
         {
             searchResults.BookList = (from Bo in searchResults.BookList
-                                      where Bo.FormatId == searchResults.Format
+                                      where Bo.Format == searchResults.Format
                                       select Bo).ToList();
             return searchResults;
         }
+        */
     }
 }
