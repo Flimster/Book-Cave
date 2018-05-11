@@ -80,11 +80,11 @@
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 #logout, #logout:hover, #logout:active {
-    font-size: 20px;
+    font-size: 18px;
     text-decoration: none;
     color: #fff;
 }
