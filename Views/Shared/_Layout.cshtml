@@ -54,30 +54,30 @@
 
                 <div class="col-sm-5">
 
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown mega-dropdown">
-                            <a id="mega-menu-link" href="#" class="dropdown-toggle" data-toggle="dropdown">Shop by<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
-                            <ul class="dropdown-menu mega-dropdown-menu col-sm-8 dropdown-menu-width-override">
+                    <ul class="nav navbar-nav col-sm-3" id="mega-dropdown-container">
+                        <button id="shop-by-replacement" class="lower-nav-link-hover">Shop by<span class="glyphicon glyphicon-chevron-down pull-right" id="mega-menu-arrow"></span></button>
+                        <li class="dropdown mega-dropdown  lower-nav-link-hover" id="mega-dropdown-btn">
+                            <ul class="dropdown-menu mega-dropdown-menu col-sm-8 dropdown-menu-width-override" id="mega-dropdown-menu">
                                 <li class="col-sm-4 vertical-line-right">
                                     <ul>
-                                        <li class="dropdown-header">Genre</li>
+                                        <li class="dropdown-header mega-item">Genre</li>
                                         <form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="1">Horror</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="1">Horror</button>
                                         </form>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="2">Sci fi</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="2">Sci fi</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="3">Romance</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="3">Romance</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="4">Thriller</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="4">Thriller</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="5">Comedy</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="5">Comedy</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="genre" value="6">Education</button>
+                                          <button class="btn btn-link mega-item" name="genre" value="6">Education</button>
                                         </form></li>
                                     </ul>
                                 </li>
@@ -86,30 +86,30 @@
                                     <ul>
                                         <li class="dropdown-header">Authors</li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="author" value="1">J.K Rowling</button>
+                                          <button class="btn btn-link mega-item" name="author" value="1">J.K Rowling</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="author" value="2">Stephen King</button>
+                                          <button class="btn btn-link mega-item" name="author" value="2">Stephen King</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="author" value="3">Imany</button>
+                                          <button class="btn btn-link mega-item" name="author" value="3">Imany</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="author" value="4">Ginger Malfoy</button>
+                                          <button class="btn btn-link mega-item" name="author" value="4">Ginger Malfoy</button>
                                         </form></li>
                                         <li><form asp-controller="Search" asp-action="Index">
-                                          <button class="btn btn-link" name="author" value="5">Sambrina Chichi</button>
+                                          <button class="btn btn-link mega-item" name="author" value="5">Sambrina Chichi</button>
                                         </form></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                    <div class="navbar-header">
-                        <a asp-controller="Book" asp-action="Discount" class="sett2">Discounts</a>
+                    <div class="navbar-header col-sm-3 lower-nav-link-hover">
+                        <a asp-controller="Book" asp-action="Discount" class="nav-item" id="discount-link">On Sale</a>
                     </div>
-                    <div class="navbar-header">
-                        <a asp-controller="Book" asp-action="Top10" class="sett2">Top 10</a>
+                    <div class="navbar-header col-sm-3 lower-nav-link-hover">
+                        <a asp-controller="Book" asp-action="Top10" class="nav-item" id="top-10-link">Top 10</a>
                     </div>
                 </div>
 

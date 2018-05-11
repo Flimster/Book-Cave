@@ -70,6 +70,11 @@
     background-color: #183a0c;
     cursor: pointer;
 }
+
+#login-btn-container:active, #account-container:active {
+    background-color: #15310b;
+    cursor: pointer;
+}
   
 #login, #account-shortcut {
     color: white;

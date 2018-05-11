@@ -2,7 +2,9 @@ $(document).on('click', '.mega-dropdown', function(e) {
     e.stopPropagation();
 })
 
-$("#mega-menu-arrow").click(function() {
-    $("#mega-menu-arrow span").toggleClass("glyphicon-chevron-down");
-    $("#mega-menu-arrow span").toggleClass("glyphicon-chevron-up");
-});
+$("#shop-by-replacement").click(function() {
+    $("#mega-dropdown-menu").toggleClass("show-or-hide");
+    $("#shop-by-replacement").toggleClass("lower-nav-active");
+    $("#mega-menu-arrow").toggleClass("glyphicon-chevron-down");
+    $("#mega-menu-arrow").toggleClass("glyphicon-chevron-up");
+})
