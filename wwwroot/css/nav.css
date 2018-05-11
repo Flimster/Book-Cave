@@ -15,7 +15,7 @@ body {
 }
 
 .dropdown-menu-width-override {
-  min-width: 710px;
+  min-width: 400px;
 }
 
 .navbar-fixed-top {
