@@ -70,7 +70,7 @@ namespace BookCave.Data.EntityModels
                 return View();
             }
 
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
             if(result.Succeeded)
             {
                 return RedirectToAction("Index", "Home");
