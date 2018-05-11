@@ -305,6 +305,7 @@ i.fas {
   color: rgb(197, 197, 197);
   margin-top: 2px;
   text-decoration: none;
+  cursor: default;
 }
 
 .created-by-ul {
