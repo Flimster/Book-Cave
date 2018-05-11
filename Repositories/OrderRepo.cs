@@ -102,7 +102,10 @@ namespace BookCave.Repositories
                                     ReleaseYear = B.ReleaseYear,
                                     Rating = B.Rating,
                                     StockCount = B.StockCount,
-                                    FormatId = B.FormatId,
+                                    Format = 
+                                        (from Fo in _db.Formats
+                                        where Fo.Id == B.FormatId
+                                        select Fo).SingleOrDefault(),
                                     Discount = B.Discount,
                                     Languages = 
                                         (from BoLa in _db.BooksLanguages

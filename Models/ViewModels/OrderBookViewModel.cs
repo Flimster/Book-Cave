@@ -19,7 +19,7 @@ namespace BookCave.Models.ViewModels
         public int ReleaseYear { get; set; }
         public double Rating { get; set; }
         public int StockCount { get; set; }
-        public int FormatId { get; set; }
+        public string Format { get; set; }
         public double Discount { get; set; }
         public int NumOfBooks { get; set; }
     }
