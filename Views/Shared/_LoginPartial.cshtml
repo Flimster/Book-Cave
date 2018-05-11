@@ -17,7 +17,7 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <div class="col-sm-6" id="login-account-container">
-        <button asp-controller="User" asp-action="MyProfile" id="account-shortcut">Account</button>
+        <a asp-controller="User" asp-action="MyProfile" id="account-shortcut">Account</a>
     </div>
     <div class="col-sm-6" id="logout-btn-container">
         <form asp-action="LogOut" asp-controller="Account" method="post">
