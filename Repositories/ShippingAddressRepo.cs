@@ -19,9 +19,8 @@ namespace BookCave.Repositories
         public List<ShippingAddressViewModel> GetByUserId(string UserId)
         {
             var shippingAddresses = 
-                (from UsBi in _db.UsersShippingAddresses
-                join Shi in _db.ShippingAddresses on UsBi.AddressId equals Shi.Id
-                where UsBi.AspNetUserId == UserId
+                (from Shi in _db.ShippingAddresses
+                where Shi.AspNetUserId == UserId
                 select new ShippingAddressViewModel
                 {
                     Id = Shi.Id,
@@ -41,9 +40,8 @@ namespace BookCave.Repositories
         public ShippingAddressViewModel GetByAddressId(int addressId)
         {
             var shippingAddresses = 
-                (from UsBi in _db.UsersShippingAddresses
-                join Shi in _db.ShippingAddresses on UsBi.AddressId equals Shi.Id
-                where UsBi.AddressId== addressId
+                (from Shi in _db.ShippingAddresses
+                where Shi.Id == addressId
                 select new ShippingAddressViewModel
                 {
                     Id = Shi.Id,
