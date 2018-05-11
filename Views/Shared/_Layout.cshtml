@@ -41,9 +41,7 @@
                     </form>
                 </div >
 
-                <div class="col-sm-1"></div>
-
-                <div class="col-sm-1 nav-height-control">
+                <div class="col-sm-2 nav-height-control">
                     @await Html.PartialAsync("_LoginPartial")
                 </div>
             </div>
@@ -60,7 +58,7 @@
                             <ul class="dropdown-menu mega-dropdown-menu col-sm-8 dropdown-menu-width-override" id="mega-dropdown-menu">
                                 <li class="col-sm-4 vertical-line-right">
                                     <ul>
-                                        <li class="dropdown-header mega-item">Genre</li>
+                                        <li class="dropdown-header">Genre</li>
                                         <form asp-controller="Search" asp-action="Index">
                                           <button class="btn btn-link mega-item" name="genre" value="1">Horror</button>
                                         </form>
@@ -115,7 +113,7 @@
 
                 <div class="col-sm-4"></div>
 
-                <div class="col-sm-1" >
+                <div class="col-sm-1" id="shopping-cart-effects">
                     <a id="shopping-icon-link" asp-controller="CheckOut" asp-action="Index">
                       <div id="shopping-cart-icon-container">
                           <i class="fas fa-shopping-cart" id="shopping-cart-icon"></i>

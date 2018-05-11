@@ -207,20 +207,30 @@ html, body {
 #shopping-cart-icon-container {
   display: table;
   height: 100%;
-  width: 100%;
   height: 50px;
 }
 
 #shopping-cart-icon-container:hover {
-  background-color: #6e706e;
-  cursor: pointer;
   height:50px;
 }
 
 #shopping-cart-icon-container:active {
+  height:50px;
+}
+
+#shopping-cart-effects {
+  width: calc(8% - 10px) !important;
+  padding-right: 15px;
+}
+
+#shopping-cart-effects:hover {
+  background-color: #6e706e;
+  cursor: pointer;
+}
+
+#shopping-cart-effects:active {
   background-color: #686868;
   cursor: pointer;
-  height:50px;
 }
 
 #num-items-in-cart {
@@ -288,6 +298,7 @@ i.fas {
 .mega-item {
   width: 100% !important;
   text-align: left !important;
+  color: #333333 !important;
 }
 
 .created-by-li a:link, .created-by-li a:hover, .created-by-li a:visited, .created-by-li a:active {

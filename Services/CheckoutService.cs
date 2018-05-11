@@ -55,7 +55,7 @@ namespace BookCave.Services
                     ReleaseYear = b.ReleaseYear,
                     Rating = b.Rating,
                     StockCount = b.StockCount,
-                    FormatsId = b.FormatsId,
+                    FormatId = b.FormatId,
                     Discount = b.Discount,
                 });
             }
