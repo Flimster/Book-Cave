@@ -33,6 +33,11 @@ namespace BookCave.Services
             _reviewRepo.Write(review);
         }
 
+        public List<ReviewViewModel> GetByBookId(int bookId)
+        {
+            return _reviewRepo.GetByBookId(bookId);
+        }
+
         public void Remove(Reviews review)
         {
             _reviewRepo.Remove(review);

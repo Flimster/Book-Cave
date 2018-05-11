@@ -1,4 +1,4 @@
-@model BookCave.Models.ViewModels.OrderViewModel
+@model BookCave.Models.ViewModels.CartViewModel
 
 <head>
   <link rel="stylesheet" href="~/css/Checkout/Cart.css">
@@ -11,7 +11,7 @@
 
   <div class="order-details col-sm-10 col-sm-offset-1">
     <div class="col-sm-3">
-      <h4>Total Price: $@Model.TotalPrice</h4>
+      <h4>Total Price: $@Model.Price</h4>
     </div>
     
     <div class="order-checkout col-sm-2 col-sm-offset-7">
@@ -30,27 +30,85 @@
         </div>
 
         <div class="book-details col-sm-8">
-          <a asp-controller="Book" asp-action="Index" asp-route-d=@book.Id><h4>@book.Title</h4></a>
-          @book.Author <br>
-          @book.Genre
+            <a asp-controller="Book" asp-action="Index" asp-route-id=@book.Id><h4>@book.Title</h4></a>
+            @foreach(var au in book.Authors)
+            {
+              if(au == book.Authors[book.Authors.Count() - 1])
+              {
+                @au.Name @Html.Raw(". ")
+              }
+              else
+              {
+                  @au.Name @Html.Raw(", ")
+              }
+            }
+            <br>
+          
+            @foreach(var la in book.Languages)
+            {
+              if(la == book.Languages[book.Languages.Count() - 1])
+              {
+                @la.Name @Html.Raw(". ")
+              }
+              else
+              {
+                  @la.Name @Html.Raw(", ")
+              }
+            }
+            <br>
+
+            @foreach(var ge in book.Genre)
+            {
+              if(ge == book.Genre[book.Genre.Count() - 1])
+              {
+                @ge.Name @Html.Raw(". ")
+              }
+              else
+              {
+                  @ge.Name @Html.Raw(", ")
+              }
+            }
+          
         </div>
 
         <div class="book-opt col-sm-2">
-          <h4>$@book.Price</h4>
+
+          <div style="display: inline">
+            @if(book.Discount == 0)
+            {
+              <h4>$@book.Price</h4>
+            }
+            else
+            {
+              <h4 style="display: inline">$@(book.Price * 1 - book.Discount)</h4>
+              <h5 style="text-decoration: line-through;display: inline;">$@book.Price</h5>
+            }
+          </div>
+
+
+
+          
           <div class="book-stock">
             <strong>
               In stock
             </strong>
           </div>
-          <div class="input-group input-group-sm input-group-inline">
-            <label for="quant">Quantity</label><br>
-            <input class="input-control" type="number" name="quant" id="quant">
-          </div>
+          <form asp-action="EditCart" asp-controller="CheckOut">
+            <div class="input-group input-group-sm input-group-inline">
+              <label for="quant">Quantity</label><br>
+              <input class="form-control" type="number" name="qty" value="@book.NumOfBooks">
+              <button class="btn btn-link" name="id" value="@book.Id">Update item</button>
+            </div>
+          </form>
           <div>
-            <a asp-controller="#" asp-action="#" asp-route-d=@book.Id>Delete</a>
+          <form asp-action="RemoveFromCart" asp-controller="CheckOut">
+            <button class="btn btn-link delete-from-cart" name="id" value="@book.Id">Delete</button>
+          </form>
           </div>
         </div>
-      </div>  
+      </div>
+
+      <hr>
     }
   </div>
 </div>

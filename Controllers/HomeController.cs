@@ -31,23 +31,15 @@ namespace BookCave.Controllers
             var books = _bookService.Recommended();
             //_cookieService.InitializeCookie();
             //_cookieService.AddToCartCookie(2, "2323");
+            //_cookieService.RemoveFromCartCookie(2323);
+            _cookieService.InitializeCookie();
 
             return View(books);
         }
 
         public IActionResult Error()
         {
-            /*var exceptionFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-
-            if(exceptionFeature != null)
-            {
-                string path = exceptionFeature.Path;
-                Exception exception = exceptionFeature.Error;
-
-                //TODO: Write to databse
-            }
-
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });*/
+            
             return View("Error");
         }
 
