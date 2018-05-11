@@ -10,7 +10,6 @@ namespace BookCave.Repositories
     public class OrderRepo
     {
         private DataContext _db;
-        private UsersOrders _userOrders;
         private OrderBooksRepo _orderBooksRepo;
         private OrdersBooks _ordersBooks;
 
@@ -18,7 +17,6 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
             _orderBooksRepo = new OrderBooksRepo();
-            _userOrders = new UsersOrders();
             _ordersBooks = new OrdersBooks();
         }
 

@@ -12,5 +12,6 @@ namespace BookCave.Models.ViewModels
         public CardDetailsViewModel SelectedCard { get; set; }
         public int CurrentStatus { get; set; }
         public CartViewModel Order { get; set; }
+        public string AspNetUserId { get; set; }
     }
 }

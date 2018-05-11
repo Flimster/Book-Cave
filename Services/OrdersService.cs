@@ -40,6 +40,7 @@ namespace BookCave.Services
                 ShippingAddressId = model.SelectedShipping.Id,
                 BillingAddressId = model.SelectedBilling.Id,
                 CardDetailsId = model.SelectedCard.Id,
+                AspNetUserId = id,
             };
 
             _orderRepo.Write(id, order, model.Order.BookList);
