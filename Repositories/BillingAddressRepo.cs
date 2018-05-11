@@ -27,6 +27,7 @@ namespace BookCave.Repositories
                 select new BillingAddressViewModel
                 {
                     Id = Bil.Id,
+                    AspNetUserId = Bil.AspNetUserId,
                     Country =
                         (from C in _db.Countries
                         where Bil.CountryId == C.Id
@@ -61,24 +62,8 @@ namespace BookCave.Repositories
             return billingAddresses;
         }
 
-        public void WriteMiddleTable(string UserId, BillingAddresses BillingAddress) {
-            var adr = 
-                (from Bil in _db.BillingAddress
-                //where UsBi.AspNetUserId == userId
-                select new BillingAddressViewModel
-                {
-                    Id = Bil.Id,
-                    Country =
-                        (from C in _db.Countries
-                        where Bil.CountryId == C.Id
-                        select C.Name).FirstOrDefault(),
-                    StateOrProvince = Bil.StateOrProvince,
-                    City = Bil.City,
-                    Zip = Bil.Zip,
-                    StreetAddress = Bil.StreetAddress
-                } ).ToList().OrderBy(q => q.Id).LastOrDefault();
-
-            _userBillingAddresses.AddressId = adr.Id;
+        public void WriteMiddleTable(string UserId, int BillingAddress) {
+            _userBillingAddresses.AddressId = BillingAddress;
             _userBillingAddresses.AspNetUserId = UserId;
             _db.Add(_userBillingAddresses);
             _db.SaveChanges();
@@ -86,10 +71,10 @@ namespace BookCave.Repositories
 
         public void Write(string UserId, BillingAddresses BillingAddress)
         {
-            var a = _db.Add(BillingAddress);
+            int Number;
+            _db.Add(BillingAddress);
             _db.SaveChanges();
-            //_userBillingAddresses.AddressId = BillingAddress.Id;   
-            WriteMiddleTable(UserId, BillingAddress);
+            Number = BillingAddress.Id;
         }
 
         public void Remove(BillingAddresses billingAddress)

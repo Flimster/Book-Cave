@@ -25,6 +25,7 @@ namespace BookCave.Repositories
                 select new ShippingAddressViewModel
                 {
                     Id = Shi.Id,
+                    AspNetUserId = Shi.AspNetUserId,
                     Country =
                         (from C in _db.Countries
                         where Shi.CountryId == C.Id
@@ -46,6 +47,7 @@ namespace BookCave.Repositories
                 select new ShippingAddressViewModel
                 {
                     Id = Shi.Id,
+                    AspNetUserId = Shi.AspNetUserId,
                     Country =
                         (from C in _db.Countries
                         where Shi.CountryId == C.Id

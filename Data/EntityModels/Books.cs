@@ -21,6 +21,5 @@ namespace BookCave.Data.EntityModels
 		public string Image {get;set;}
 		public string Publisher { get; set; }
 		public double Discount {get; set;}
-
 	}
 }

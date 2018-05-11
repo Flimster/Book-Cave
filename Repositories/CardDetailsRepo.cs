@@ -35,6 +35,7 @@ namespace BookCave.Repositories
                 select new CardDetailsViewModel
                 {
                     Id = C.Id,
+                    AspNetUserId = C.AspNetUserId,
                     Name = C.Name,
                     CardNumber = C.CardNumber,
                     Cvc = C.Cvc,
@@ -52,6 +53,7 @@ namespace BookCave.Repositories
                 select new CardDetailsViewModel
                 {
                     Id = C.Id,
+                    AspNetUserId = C.AspNetUserId,
                     Name = C.Name,
                     CardNumber = C.CardNumber,
                     Cvc = C.Cvc,

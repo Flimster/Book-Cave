@@ -34,7 +34,7 @@ namespace BookCave.Services
         {
             _user = new AspNetUsers
             {
-                Image = "~/Images/DefaultProfileImage.png",
+                //Image = "~/Images/DefaultProfileImage.png",
                 BooksId = 1,
                 AuthorsId = 1,
                 RegistrationDate = DateTime.Now,
