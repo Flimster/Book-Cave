@@ -130,13 +130,13 @@ namespace BookCave.Repositories
                                         {
                                             Id = Ge.Id,
                                             Name = Ge.Name
-                                        }).ToList()
+                                        }).ToList(),
+                                    Quantity =
+                                        (from BoOr in _db.OrdersBooks
+                                        join Ord in _db.Orders on BoOr.OrderId equals Ord.Id
+                                        where Ord.AspNetUserId == Id
+                                        select BoOr.Quantity).SingleOrDefault()
                                 }).ToList(),
-                        Quantity =
-                            (from Ord in _db.Orders
-                            join OrBo in _db.OrdersBooks on Ord.Id equals OrBo.OrderId
-                            where Ord.AspNetUserId == Id
-                            select OrBo.Quantity).FirstOrDefault()
                     }).ToList();
             return orderByUserId;
         }
