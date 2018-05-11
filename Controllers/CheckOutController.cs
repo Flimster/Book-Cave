@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using BookCave.Data.EntityModels;
 using BookCave.Models.ViewModels;
 using BookCave.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCave.Controllers
@@ -12,13 +16,21 @@ namespace BookCave.Controllers
     {
         private readonly CheckoutService _checkoutService;
         private readonly CookieService _cookieService;
-        private readonly IHttpContextAccessor _httpContextAccessor;  
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ShippingAddressService _shippingServicee;
+        private readonly BillingAddressService _billingService;
+        private readonly CardDetailsService _cardService;
+        private readonly UserManager<AspNetUsers> _userManager;
 
-        public CheckOutController(IHttpContextAccessor httpContextAccessor)
+        public CheckOutController(IHttpContextAccessor httpContextAccessor, UserManager<AspNetUsers> userManager)
         {
             _httpContextAccessor = httpContextAccessor;
             _checkoutService = new CheckoutService(httpContextAccessor);
             _cookieService = new CookieService(_httpContextAccessor);
+            _shippingServicee = new ShippingAddressService();
+            _billingService = new BillingAddressService();
+            _cardService = new CardDetailsService();
+            _userManager = userManager;
         }
 
         [HttpPost]
@@ -48,9 +60,44 @@ namespace BookCave.Controllers
           return RedirectToAction("Index");
         }
 
+        [HttpGet]
         public IActionResult Shipping()
         {
-          return View();
+          var _claimsPrincipal = new ClaimsPrincipal(User);
+
+          var id = _userManager.GetUserId(_claimsPrincipal);
+          var shippingAddresses = _shippingServicee.GetByUserId(id);
+          var billingAddresses = _billingService.GetList();
+          var cards = _cardService.GetByUserId(id);
+          var model = new CheckoutViewModel()
+          {
+              CurrentStatus = 0,
+              ShippingAddresses = shippingAddresses,
+              BillingAddresses = billingAddresses,
+              Cards = cards,
+          };
+          return View(model);
+        }
+
+        //if user selects a shipping address
+        [HttpPost]
+        public IActionResult ShippingAsync(int addrId)
+        {
+          var _claimsPrincipal = new ClaimsPrincipal(User);
+          var id = _userManager.GetUserId(_claimsPrincipal);
+
+          var shippingAddresses = _shippingServicee.GetList();
+          var billingAddresses = _billingService.GetList();
+          var cards = _cardService.GetByUserId(id);
+          var model = new CheckoutViewModel()
+          {
+              CurrentStatus = 0,
+              ShippingAddresses = shippingAddresses,
+              BillingAddresses = billingAddresses,
+              Cards = cards,
+              //SelectedShipping = shippingAddresses,
+          };
+          return View(model);
         }
 
         public IActionResult Billing()

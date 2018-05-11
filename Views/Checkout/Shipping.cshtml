@@ -1,4 +1,4 @@
-@model BookCave.Models.ViewModels.OrderViewModel
+@model BookCave.Models.ViewModels.CheckoutViewModel
 
 <head>
     <link rel="stylesheet" href="~/css/Checkout/ShipBillCard.css">
@@ -14,59 +14,83 @@
       <table class="table table-sm">
         <tr><th>Shipping address</th></tr>
         
-        <tr><td>Country: </td></tr>
-        <tr><td>State: </td></tr>
-        <tr><td>Zip: </td></tr>
-        <tr><td>Address: </td></tr>
-        <tr><td>Other: </td></tr>
-
-        <th>Billing address</th></tr>
-        <tr><td>Country: </td></tr>
-        <tr><td>State: </td></tr>
-        <tr><td>Zip: </td></tr>
-        <tr><td>Address: </td></tr>
-        <tr><td>Other: </td></tr>
-
+        @if(Model.SelectedShipping == null)
+        {
+          <tr><td>Country: </td></tr>
+          <tr><td>State: </td></tr>
+          <tr><td>Zip: </td></tr>
+          <tr><td>City: </td></tr>
+          <tr><td>Address: </td></tr>
+        }
+        else
+        {
+          <tr><td>Country: @Model.SelectedShipping.Country</td></tr>
+          <tr><td>State: @Model.SelectedShipping.StateOrProvince</td></tr>
+          <tr><td>Zip: @Model.SelectedShipping.Zip</td></tr>
+          <tr><td>City: @Model.SelectedShipping.City</td></tr>
+          <tr><td>Address: @Model.SelectedShipping.StreetAddress</td></tr>
+        }
+        
+        <tr><th>Billing address</th></tr>
+        @if(Model.SelectedBilling == null)
+        {
+          <tr><td>Country: </td></tr>
+          <tr><td>State: </td></tr>
+          <tr><td>Zip: </td></tr>
+          <tr><td>City: </td></tr>
+          <tr><td>Address: </td></tr>
+        }
+        else
+        {
+          <tr><td>Country: @Model.SelectedBilling.Country</td></tr>
+          <tr><td>State: @Model.SelectedBilling.StateOrProvince</td></tr>
+          <tr><td>Zip: @Model.SelectedBilling.Zip</td></tr>
+          <tr><td>City: @Model.SelectedBilling.City</td></tr>
+          <tr><td>Address: @Model.SelectedBilling.StreetAddress</td></tr>
+        }
+        
         <tr><th>Payment</th></tr>
-        <tr><td>Country: </td></tr>
-        <tr><td>State: </td></tr>
-        <tr><td>Zip: </td></tr>
-        <tr><td>Address: </td></tr>
-        <tr><td>Other: </td></tr>
+        @if(Model.SelectedCard == null)
+        {
+          <tr><td>Cardholder:</td></tr>
+          <tr><td>Card number: </td></tr>
+          <tr><td>Expiration date: </td></tr>
+        }
+        else
+        {
+          <tr><td>Cardholder: @Model.SelectedCard.Name</td></tr>
+          <tr><td>Card number: **** **** **** **** 
+          for(int i = 7; i < 12; i++)
+          {
+            Model.SelectedCard.Number[i]
+          }
+          </td></tr>
+          <tr><td>Expiration date: @Model.SelectedCard.ExpirationDate</td></tr>
+        }
       </table>
     </div>
 
     <div class="shipping-stored col-sm-9">
-      <div class="shipping-item col-sm-4">
-        <div class="shipping-item-info">
-          Country: <br>
-          State: <br>
-          Zip: <br>
-          Address: <br>
-          Other: 
+      
+      @if(Model.ShippingAddresses != null)
+      {
+        foreach(var s in Model.ShippingAddresses)
+        {
+        <div class="shipping-item col-sm-4">
+          <div class="shipping-item-info">
+            Country: @s.Country<br>
+            State: @s.StateOrProvince<br>
+            Zip: @s.Zip<br>
+            City: @s.City<br> 
+            Address: @s.StreetAddress<br>
+          </div>
         </div>
-      </div>
+        }
+      }
+      else
+      {
 
-      <div class="shipping-item col-sm-4">
-        <div class="shipping-item-info">
-          Country: <br>
-          State: <br>
-          Zip: <br>
-          Address: <br>
-          Other: 
-        </div>
-      </div>
-
-      <div class="shipping-item col-sm-4">
-        <div class="shipping-item-info">
-          Country: <br>
-          State: <br>
-          Zip: <br>
-          Address: <br>
-          Other: 
-        </div>
-      </div>
-    </div>
+      }
 
   </div>
 

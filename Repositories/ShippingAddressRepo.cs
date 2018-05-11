@@ -36,8 +36,8 @@ namespace BookCave.Repositories
         public List<ShippingAddressViewModel> GetByUserId(string UserId)
         {
             var shippingAddresses = 
-                (from UsBi in _db.UserBillingAddresses
-                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
+                (from UsBi in _db.UsersShippingAddresses
+                join Bil in _db.ShippingAddresses on UsBi.AddressId equals Bil.Id
                 where UsBi.AspNetUserId == UserId
                 select new ShippingAddressViewModel
                 {
