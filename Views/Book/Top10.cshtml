@@ -16,11 +16,16 @@
   {
     <div class="top10-item row">
       <div class="top10-img col-sm-3">
-        <img src=@book.Image alt=@book.Title>
+        <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id">
+          <img src=@book.Image alt=@book.Title>
+        </a>
       </div>
 
       <div class="book-details col-sm-8">
-        <h3 class="book-title" id=@book.Id>@counter. @book.Title</h3>
+        <h3 class="book-title" id=@book.Id>@counter. 
+          <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id">@book.Title </a>
+        </h3>
+
         <p>
           @foreach(var author in book.Authors)
           {
@@ -49,8 +54,13 @@
         </p>
 
         <div class="rating">
-          Rating: @book.Rating
-        </div>
+        Rating: @book.Rating
+        @for(int i = 0; i < (int)book.Rating; i++)
+        {
+          
+          <i class="fas fa-star"></i>
+        }
+      </div>
         <br>
         <div class="book-descriptions">
           <p>
