@@ -163,5 +163,15 @@ namespace BookCave.Services
             return cookieData;
         }
         
+        public void ClearCart()
+        {
+            var cartCookie = InitializeCookie();
+            var cookieData = JsonConvert.DeserializeObject<List<CartDataModel>>(_httpContextAccessor.HttpContext.Request.Cookies["Cart"]);
+            var cookieCount = JsonConvert.DeserializeObject<int>(_httpContextAccessor.HttpContext.Request.Cookies["CartCount"]);
+            
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("Cart", "", cartCookie);
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("CartCount", "0", cartCookie);
+            InitializeCookie();
+        }
     }
 }

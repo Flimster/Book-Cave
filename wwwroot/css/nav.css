@@ -15,7 +15,7 @@ body {
 }
 
 .dropdown-menu-width-override {
-  min-width: 400px;
+  min-width: 710px;
 }
 
 .navbar-fixed-top {
@@ -185,6 +185,7 @@ div > form > input {
 #wrapper {
   min-height: 100%;
   height: auto !important;
+  
   height: 100%;
   /* Negative indent footer by its height */
   margin: 0 auto -100px;
@@ -256,7 +257,7 @@ i.fas {
   text-decoration: none;
 }
 
-#discount-link, #top-10-link, #catalogue-link, #mega-menu-link {
+#discount-link, #top-10-link, #mega-menu-link {
   padding-top: 13px;
   padding-bottom: 1px;
   margin: 0px;
@@ -305,7 +306,6 @@ i.fas {
   color: rgb(197, 197, 197);
   margin-top: 2px;
   text-decoration: none;
-  cursor: default;
 }
 
 .created-by-ul {

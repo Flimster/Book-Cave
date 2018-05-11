@@ -49,13 +49,13 @@ namespace BookCave.Repositories
             return cardDetails;
         }
 
-        public void Write(CardDetailsViewModel card)
+        public void Write(CardDetails card)
         {
             _db.Add(card);
             _db.SaveChanges();
         }
 
-        public void Remove(CardDetailsViewModel card)
+        public void Remove(CardDetails card)
         {
             _db.Remove(card);
             _db.SaveChanges();

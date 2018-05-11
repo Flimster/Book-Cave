@@ -9,6 +9,7 @@
 .search-results {
   margin-left: 10px;
   background-color: white;
+  width: 72%;
 }
 
 .search-filters input {

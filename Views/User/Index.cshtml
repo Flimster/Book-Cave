@@ -5,7 +5,7 @@
 @model BookCave.Models.ViewModels.ProfileViewModel
 
 
-<div id="user-main-box" class="col-lg-12">
+<div id="user-main-box" class="col-lg-10 col-lg-offset-1">
 	<div  id="panel-box" class="panel col-lg-2">
 		<div id="panel-profile" class="panel-body panel-selected">Profile</div>
 		<div id="panel-orders" class="panel-body">Orders</div>
@@ -14,6 +14,8 @@
 		<div id="panel-settings" class="panel-body">Settings</div>
 		<div id="panel-payment-shipping" class="panel-body">Payment and shipping</div>
 	</div>
+
+
 
 	<div id="profile" class="col-lg-10 main-box">
 		<div id="image-container" class="col-lg-12">
@@ -45,6 +47,7 @@
 			<div class="col-lg-5"></div>
 		</div>
 	</div>
+
 
 
 	<div id="orders" class="col-lg-10 is-hidden main-box">
@@ -98,61 +101,123 @@
 				}
 		}
 	</div>
+
+
+
 	<div id="wishlist" class="col-lg-10 is-hidden main-box">
-		@foreach (var book in Model.BookShelf)
-		{
-			<div class="col-lg-12 space">
-				<div class="col-lg-4">
-					<img src="@book.Image" alt="no image found" class="order-image">
-				</div>
-				<div class="col-lg-6">
-					@book.Title
-					<br>
-					<br>
-					<i>
-					@foreach (var genre in book.Genre)
-					{
-						@genre.Name @Html.Raw(" ")
-					}
-					</i>
-					<br>
-					<br>
-					<strong>
-					@foreach (var author in book.Authors)
-					{
-						@author.Name @Html.Raw(" ")
-					}
-					</strong>
-				</div>
-				<div class="col-lg-2">
-					$ @book.Price
-				</div>
-			</div>
-		}
+    @foreach(var book in Model.BookShelf)
+    {
+      <div class="book-item row">
+        <div class="book-img col-sm-3">
+          <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id">
+            <img src=@book.Image alt=@book.Title>
+          </a>
+        </div>
+
+        <div class="book-details col-sm-9">
+          <h3 class="book-title" id=@book.Id> 
+            <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id">@book.Title </a>
+          </h3>
+
+          <p>
+            @foreach(var author in book.Authors)
+            {
+              if(author == book.Authors[book.Authors.Count() - 1])
+              {
+                @author.Name @Html.Raw(". ")
+              }
+              else
+              {
+                  @author.Name @Html.Raw(", ")
+              }
+            }
+          </p>
+          <p>
+            @foreach(var genre in book.Genre)
+            {
+              if(genre == book.Genre[book.Genre.Count() - 1])
+              {
+                @genre.Name @Html.Raw(". ")
+              }
+              else
+              {
+                  @genre.Name @Html.Raw(", ")
+              }
+            }
+          </p>
+
+          <div class="rating">
+            Rating: @book.Rating
+            @for(int i = 0; i < (int)book.Rating; i++)
+            {
+              
+              <i class="fas fa-star"></i>
+            }
+          </div>
+        </div>
+        <br>
+        <div class="book-descriptions">
+          <p>
+            @book.Description
+          </p>
+        </div>
+      </div>
+    }
 	</div>
+
+
+
 	<div id="bookshelf" class="col-lg-10 is-hidden main-box">
-		@foreach (var book in Model.BookShelf)
+		@{int bsCounter = 0;}
+    <div class="bookshelf-row row">
+    @foreach (var book in Model.BookShelf)
 		{
-			<div class="col-lg-12">
-				<div class="col-lg-6">
-					<img src="@book.Image" alt="no image found">
-				</div>
-				<div class="col-lg-6">
-					@book.Title
-					<br>
-					@foreach (var genre in book.Genre)
-					{
-						@genre.Name @Html.Raw(" ")
-					}
-					<br>
-					@foreach (var author in book.Authors)
-					{
-						@author.Name @Html.Raw(" ")
-					}
-				</div>
-			</div>
+      if (bsCounter != 0 && bsCounter % 4 == 0)
+      {
+          @:</div>
+          @:<div class="bookshelf-row row">
+      }
+
+			<div class="book-item col-sm-3">
+        <div class="item-img">
+          <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><img src=@book.Image alt=@book.Title class="img-responsive center-block"></a>
+        </div>
+        <a asp-controller="Book" asp-action="Index" asp-route-id="@book.Id"><p class="title">@book.Title</p></a>
+        <p class="author">
+          @foreach(var author in book.Authors)
+          {
+            @author.Name
+            if(author == book.Authors[book.Authors.Count() - 1])
+            {
+              @Html.Raw(". ")
+            }
+            else
+            {
+              @Html.Raw(", ")
+            }
+          }
+        </p>
+        <p class="genre">
+          @foreach(var genre in book.Genre)
+          {
+            if(genre == book.Genre[book.Genre.Count() - 1])
+            {
+              @genre.Name @Html.Raw(". ")
+            }
+            else
+            {
+              @genre.Name @Html.Raw(", ")
+            }
+          }
+        </p>
+      </div>
+      bsCounter++;
 		}
+    </div>
 	</div>
+
+
+
 	<div id="settings" class="col-lg-10 is-hidden main-box">
 		<div class="col-lg-12">
 			<h3>Notifications</h3>
@@ -162,8 +227,10 @@
 				</label>
 			</form>
 		</div>
-
 	</div>
+
+
+
 	<div id="payment-shipping" class="col-lg-10 is-hidden main-box">
 		<h1>Payment methods</h1>
 		<div class="col-lg-12">
@@ -239,6 +306,4 @@
 			}
 		</div>
 	</div>
-
-	
 </div>

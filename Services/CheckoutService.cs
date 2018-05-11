@@ -9,13 +9,13 @@ namespace BookCave.Services
     public class CheckoutService
     {
         private readonly BookService _bookService;
-        private readonly CookieService _cookieServie;
+        private readonly CookieService _cookieService;
         private readonly IHttpContextAccessor _httpContextAccessor;  
 
         public CheckoutService(IHttpContextAccessor httpContextAccessor)
         {
             _bookService = new BookService();
-            _cookieServie = new CookieService(httpContextAccessor);
+            _cookieService = new CookieService(httpContextAccessor);
         }
 
         public List<BookViewModel> GetItemsInCart(List<CartDataModel> Ids)
@@ -26,13 +26,18 @@ namespace BookCave.Services
             return cartItems;
         }
 
-        public CartViewModel GetCartViewModel(List<BookViewModel> books, List<CartDataModel> cartArr)
+        public CartViewModel GetCartViewModel()
         {
+            var cartArr = _cookieService.GetCart();
+            var books = GetItemsInCart(cartArr);
+
             var totalPrice = 0.0;
+            var fullPrice = 0.0;
             var t = 0;
             foreach(var b in books)
             {
                 totalPrice += b.Price * cartArr[t].Quantity * (1 - b.Discount);
+                fullPrice += b.Price * cartArr[t].Quantity;
                 t++;
             }
 
@@ -68,7 +73,7 @@ namespace BookCave.Services
             var order = new CartViewModel() {
                 BookList = orderBookList,
                 Price = totalPrice,
-
+                FullPrice = fullPrice,
             };
             return order;
         }

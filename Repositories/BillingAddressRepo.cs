@@ -8,14 +8,12 @@ namespace BookCave.Repositories
 {
     public class BillingAddressRepo
     {
-        private UserBillingAddresses _userBillingAddresses;
         private BillingAddressViewModel _billingAddressView;
         private DataContext _db;
 
         public BillingAddressRepo()
         {
             _db = new DataContext();
-            _userBillingAddresses = new UserBillingAddresses();
             _billingAddressView = new BillingAddressViewModel();
         }
         public BillingAddressViewModel GetByAddressId(int addressId)
@@ -39,6 +37,7 @@ namespace BookCave.Repositories
             return billingAddresses;
         }
 
+
         public List<BillingAddressViewModel> GetByUserId(string userId)
         {
             var billingAddresses = 
@@ -59,14 +58,6 @@ namespace BookCave.Repositories
 
             return billingAddresses;
         }
-
-        public void WriteMiddleTable(string UserId, int BillingAddress) {
-            _userBillingAddresses.AddressId = BillingAddress;
-            _userBillingAddresses.AspNetUserId = UserId;
-            _db.Add(_userBillingAddresses);
-            _db.SaveChanges();
-        }
-
         public void Write(BillingAddresses BillingAddress)
         {
             _db.Add(BillingAddress);

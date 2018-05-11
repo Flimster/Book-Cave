@@ -4,19 +4,19 @@ using BookCave.Models.ViewModels;
 using BookCave.Repositories;
 using System.Linq;
 using BookCave.Data.EntityModels;
+using System;
 
 namespace BookCave.Services
 {
     public class OrdersService
     {
         private OrderRepo _orderRepo;
-        private OrderBooksRepo _orderBooksRepo;
         private DataContext _db;
 
         public OrdersService()
         {
             _orderRepo = new OrderRepo();
-            _orderBooksRepo = new OrderBooksRepo();
+            //_orderBooksRepo = new OrderBooksRepo();
             _db = new DataContext();
         }
 
@@ -30,9 +30,20 @@ namespace BookCave.Services
             return _orderRepo.GetByUserId(Id);
         }
 
-        public void WriteOrdersBooks(OrdersBooks ordersBooks)
+        public void WriteOrdersBooks(string id, CheckoutViewModel model)
         {
-            _orderBooksRepo.Write(ordersBooks);
+            var order = new Orders
+            {
+                Date = DateTime.Now,
+                Status = false,
+                Price = model.Order.Price,
+                ShippingAddressId = model.SelectedShipping.Id,
+                BillingAddressId = model.SelectedBilling.Id,
+                CardDetailsId = model.SelectedCard.Id,
+            };
+
+            _orderRepo.Write(id, order, model.Order.BookList);
+
         }
     }
 }

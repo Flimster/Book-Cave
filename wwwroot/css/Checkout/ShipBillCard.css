@@ -19,8 +19,31 @@ table, .table th, .table td {
 .shipping-item-info {
   background-color: white;
   padding: 10px;
+  margin-bottom: 25px;
 }
 
 .order-overview {
   background-color: white;
+}
+
+#add-item {
+  font-size: 60px;
+  text-align: center;
+  display:inline-block;
+  text-align: center;
+  vertical-align: bottom;
+  margin: 28px 52px;
+}
+
+#add-item-container {
+  height: 143px;
+  width: 190px;
+}
+
+#confirm-purchase {
+  margin-top: 3px;
+}
+
+#price-container {
+  padding-top: 10px;
 }

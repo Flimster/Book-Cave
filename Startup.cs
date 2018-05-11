@@ -88,10 +88,11 @@ namespace BookCave
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                //app.UseExceptionHandler("/Home/Error404");
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/Error404");
             }
 
             app.UseStaticFiles();
@@ -102,7 +103,14 @@ namespace BookCave
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+              /*  
+                routes.MapRoute(
+                    "404-PageNotFound",
+                    "{*url}",
+                    new { controller = "Home", action = "Error404" }
+                    );*/
             });
+
         }
     }
 }
