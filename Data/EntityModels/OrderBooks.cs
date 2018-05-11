@@ -5,11 +5,11 @@ namespace BookCave.Data.EntityModels
     public class OrdersBooks
     {
         public int Id { get; set; }
-        [ForeignKey("Order")]
+        [ForeignKey("Orders")]
         public int OrderId { get; set; }
-        public virtual Orders Order { get; set; }
-        [ForeignKey("Book")]
+        public virtual Orders Orders { get; set; }
+        [ForeignKey("Books")]
         public int BookId { get; set; }
-        public virtual Books Book { get; set; }
+        public virtual Books Books { get; set; }
     }
 }

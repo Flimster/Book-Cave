@@ -24,7 +24,7 @@ namespace BookCave.Repositories
                             Id = O.Id,
                             User = 
                                 (from UsOr in _db.UsersOrders
-                                join Us in _db.AspNetUsers on UsOr.AspNetUsersId equals Us.Id
+                                join Us in _db.AspNetUsers on UsOr.AspNetUserId equals Us.Id
                                 where UsOr.OrderId == O.Id
                                 select Us.Name).SingleOrDefault(),
                             Date = O.Date,
@@ -71,14 +71,14 @@ namespace BookCave.Repositories
             var orderByUserId = 
                     (from UsOr in _db.UsersOrders
                     join Ord in _db.Orders on UsOr.OrderId equals Ord.Id
-                    where UsOr.AspNetUsersId == Id 
+                    where UsOr.AspNetUserId == Id 
                     select new OrderViewModel
                     { 
                         Id = Ord.Id,
                         User = 
                             (from UsOr in _db.UsersOrders
-                            join Usr in _db.AspNetUsers on UsOr.AspNetUsersId equals Usr.Id
-                            where UsOr.AspNetUsersId == Id
+                            join Usr in _db.AspNetUsers on UsOr.AspNetUserId equals Usr.Id
+                            where UsOr.AspNetUserId == Id
                             select Usr.Name).FirstOrDefault(),
                         Date = Ord.Date,
                         Status = Ord.Status,
@@ -100,7 +100,7 @@ namespace BookCave.Repositories
                                     ReleaseYear = B.ReleaseYear,
                                     Rating = B.Rating,
                                     StockCount = B.StockCount,
-                                    FormatsId = B.FormatsId,
+                                    FormatId = B.FormatId,
                                     Discount = B.Discount,
                                     Languages = 
                                         (from BoLa in _db.BooksLanguages

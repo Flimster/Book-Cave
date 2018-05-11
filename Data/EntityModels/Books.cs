@@ -16,7 +16,7 @@ namespace BookCave.Data.EntityModels
 		public int StockCount { get; set; }
 		public bool Visibility { get; set; }
 		[ForeignKey("Formats")]
-		public  int FormatsId { get; set; }
+		public  int FormatId { get; set; }
 		public Formats Formats { get; set; }
 		public string Image {get;set;}
 		public string Publisher { get; set; }

@@ -9,10 +9,10 @@ namespace BookCave.Data.EntityModels
     {
         public string Image { get; set; }
         public string Name { get; set; }
-        [ForeignKey("Book")]
+        [ForeignKey("Books")]
         public int BooksId { get; set; }
         public virtual Books Books { get; set; }
-        [ForeignKey("Author")]
+        [ForeignKey("Authors")]
         public int AuthorsId { get; set; }
         public virtual Authors Authors { get; set; }
         public DateTime RegistrationDate { get; set; }

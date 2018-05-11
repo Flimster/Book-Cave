@@ -15,10 +15,10 @@ namespace BookCave.Data.EntityModels
         public bool Status { get; set; }
         public double Price { get; set; }
         [ForeignKey("ShippingAddresses")]
-        public int ShippingAddressesId { get; set; }
+        public int ShippingAddressId { get; set; }
         public virtual ShippingAddresses ShippingAddresses { get; set; }
         [ForeignKey("BillingAddresses")]
-        public int BillingAddressesId { get; set; }
+        public int BillingAddressId { get; set; }
         public virtual BillingAddresses BillingAddresses { get; set; }
         [ForeignKey("CardDetails")]
         public int CardDetailsId { get; set; }

@@ -26,9 +26,8 @@ namespace BookCave.Data
         public DbSet<ShippingAddresses> ShippingAddresses { get; set; }
         public DbSet<UserBillingAddresses> UserBillingAddresses { get; set; }
         public DbSet<UsersCards> UsersCards { get; set; }
-        public DbSet<UsersReviews> UsersReviews { get; set; }
         public DbSet<UsersShippingAddresses> UsersShippingAddresses {get;set;}
-        public DbSet<Wishlists> Wishlists {get;set;}
+        public DbSet<UsersWishlists> UsersWishlists {get;set;}
                 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
         {

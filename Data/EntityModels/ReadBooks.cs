@@ -10,10 +10,10 @@ namespace BookCave.Data.EntityModels
     {
         public int Id { get; set; }
          [ForeignKey("AspNetUsers")]
-        public string AspNetUsersId { get; set; }
+        public string AspNetUserId { get; set; }
         public virtual AspNetUsers AspNetUsers { get; set; }
         [ForeignKey("Books")]
-        public int BooksId { get; set; }
+        public int BookId { get; set; }
         public virtual Books Books {get;set;}
     }
 }
