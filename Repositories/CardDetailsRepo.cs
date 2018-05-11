@@ -46,7 +46,7 @@ namespace BookCave.Repositories
             var cardDetails = 
                 (from C in _db.CardDetails
                 join UsCa in _db.UsersCards on C.Id equals UsCa.CardId
-                where UserId == UsCa.AspNetUsersId
+                where UserId == UsCa.AspNetUserId
                 select new CardDetailsView
                 {
                     Id = C.Id,

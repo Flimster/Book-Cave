@@ -38,7 +38,7 @@ namespace BookCave.Repositories
             var billingAddresses = 
                 (from UsBi in _db.UserBillingAddresses
                 join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
-                where UsBi.AspNetUsersId == UserId
+                where UsBi.AspNetUserId == UserId
                 select new BillingAddressViewModel
                 {
                     Id = Bil.Id,

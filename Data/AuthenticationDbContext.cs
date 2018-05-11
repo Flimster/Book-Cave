@@ -32,9 +32,8 @@ namespace BookCave.Data
         public DbSet<UsersBookRating> UsersBookRating {get;set;}
         public DbSet<UserBillingAddresses> UserBillingAddresses { get; set; }
         public DbSet<UsersCards> UsersCards { get; set; }
-        public DbSet<UsersReviews> UsersReviews { get; set; }
         public DbSet<UsersShippingAddresses> UsersShippingAddresses {get;set;}
-        public DbSet<Wishlists> Wishlists {get;set;}
+        public DbSet<UsersWishlists> UsersWishlists {get;set;}
         public AuthenticationDbContext(DbContextOptions<AuthenticationDbContext> options) : base(options) {}
 
 

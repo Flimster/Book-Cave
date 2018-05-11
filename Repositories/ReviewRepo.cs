@@ -26,8 +26,8 @@ namespace BookCave.Repositories
                         Id = R.Id,
                         UserName = 
                             (from Us in _db.AspNetUsers
-                            join Re in _db.Reviews on Us.Id equals Re.AspNetUsersId
-                            where R.AspNetUsersId == Us.Id
+                            join Re in _db.Reviews on Us.Id equals Re.AspNetUserId
+                            where R.AspNetUserId == Us.Id
                             select Us.Name).SingleOrDefault(),
                         Book = 
                             (from Re in _db.Reviews
@@ -47,21 +47,19 @@ namespace BookCave.Repositories
         public List<ReviewViewModel> GetByUserId(string userId)
         {
             var userReviews =
-                (from UsRv in _db.UsersReviews
-                join Rev in _db.Reviews on UsRv.ReviewId equals Rev.Id
-                where UsRv.AspNetUsersId == userId
+                (from Rev in _db.Reviews
+                where Rev.AspNetUserId == userId
                 select new ReviewViewModel
                 {
                     Id = Rev.Id,
                     UserName =
                         (from Usr in _db.AspNetUsers
                         where Usr.Id == userId
-                        select Usr.Name).SingleOrDefault(),
+                        select Usr.Name).FirstOrDefault(),
                     Book =
                         (from Bok in _db.Books
-                        join BkRe in _db.UsersReviews on Rev.Id equals BkRe.ReviewId
-                        where BkRe.AspNetUsersId == userId
-                        select Bok.Title).SingleOrDefault(),
+                        join RevB in _db.Reviews on Bok.Id equals RevB.BookId
+                        select Bok.Title).FirstOrDefault(),
                     Text = Rev.Text,
                     Rating = Rev.Rating,
                     Date = Rev.Date,

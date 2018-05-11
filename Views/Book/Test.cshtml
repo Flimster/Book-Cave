@@ -1,5 +1,16 @@
-@model List<BookCave.Models.ViewModels.OrderViewModel>
+@model List<BookCave.Models.ViewModels.ReviewViewModel>
 
 <h1>Hi</h1>
 
-@foreach(a in Model)
+@foreach(var a in Model)
+{
+    <p>@a.Id</p>
+    <p>@a.UserName</p>
+    <p>@a.Book</p>
+    <p>@a.Text</p>
+    <p>@a.Rating</p>
+    <p>@a.Date</p>
+    <p>@a.PositiveScore</p>
+    <p>@a.NegativeScore</p>
+    <p>@a.Edited</p>
+}

@@ -12,9 +12,10 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180511091120_3NF_Conversion11")]
+    partial class _3NF_Conversion11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -352,7 +353,7 @@ namespace BookCave.Migrations
 
                     b.Property<string>("City");
 
-                    b.Property<int>("CountryId");
+                    b.Property<int?>("CountryId");
 
                     b.Property<string>("StateOrProvince");
 
@@ -803,8 +804,7 @@ namespace BookCave.Migrations
                 {
                     b.HasOne("BookCave.Data.EntityModels.Countries", "Countries")
                         .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CountryId");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UserBillingAddresses", b =>
