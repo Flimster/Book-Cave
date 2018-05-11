@@ -58,11 +58,26 @@ namespace BookCave.Repositories
                     StreetAddress = Bil.StreetAddress
                 } ).ToList();
 
-            return billingAddresses.OrderBy(q => q.Id).ToList();
+            return billingAddresses;
         }
 
         public void WriteMiddleTable(string UserId, BillingAddresses BillingAddress) {
-            var adr = GetByUserId(UserId).FirstOrDefault();
+            var adr = 
+                (from Bil in _db.BillingAddress
+                //where UsBi.AspNetUserId == userId
+                select new BillingAddressViewModel
+                {
+                    Id = Bil.Id,
+                    Country =
+                        (from C in _db.Countries
+                        where Bil.CountryId == C.Id
+                        select C.Name).FirstOrDefault(),
+                    StateOrProvince = Bil.StateOrProvince,
+                    City = Bil.City,
+                    Zip = Bil.Zip,
+                    StreetAddress = Bil.StreetAddress
+                } ).ToList().OrderBy(q => q.Id).LastOrDefault();
+
             _userBillingAddresses.AddressId = adr.Id;
             _userBillingAddresses.AspNetUserId = UserId;
             _db.Add(_userBillingAddresses);
@@ -71,8 +86,9 @@ namespace BookCave.Repositories
 
         public void Write(string UserId, BillingAddresses BillingAddress)
         {
-            _db.Add(BillingAddress);
-            _userBillingAddresses.AddressId = BillingAddress.Id;   
+            var a = _db.Add(BillingAddress);
+            
+            //_userBillingAddresses.AddressId = BillingAddress.Id;   
             WriteMiddleTable(UserId, BillingAddress);
             _db.SaveChanges();
         }
