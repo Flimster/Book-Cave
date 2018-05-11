@@ -9,7 +9,6 @@ namespace BookCave.Repositories
     public class BookReadRepo
     {
         private DataContext _db;
-
         public BookReadRepo()
         {
             _db = new DataContext();
