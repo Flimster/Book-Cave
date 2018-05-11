@@ -102,7 +102,10 @@ namespace BookCave.Repositories
                                     ReleaseYear = B.ReleaseYear,
                                     Rating = B.Rating,
                                     StockCount = B.StockCount,
-                                    FormatId = B.FormatId,
+                                    Format = 
+                                        (from Fo in _db.Formats
+                                        where Fo.Id == B.FormatId
+                                        select Fo).SingleOrDefault(),
                                     Discount = B.Discount,
                                     Languages = 
                                         (from BoLa in _db.BooksLanguages
@@ -130,14 +133,20 @@ namespace BookCave.Repositories
                                         {
                                             Id = Ge.Id,
                                             Name = Ge.Name
-                                        }).ToList()
-                                }).ToList()
+                                        }).ToList(),
+                                    Quantity =
+                                        (from BoOr in _db.OrdersBooks
+                                        join Ord in _db.Orders on BoOr.OrderId equals Ord.Id
+                                        where Ord.AspNetUserId == Id
+                                        select BoOr.Quantity).SingleOrDefault()
+                                }).ToList(),
                     }).ToList();
             return orderByUserId;
         }
 
         public void Write(string UserId, Orders Order, List<OrderBookViewModel> Books)
         {
+            Order.AspNetUserId = UserId;
             _db.Add(Order);
             _db.SaveChanges();
 

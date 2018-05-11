@@ -16,8 +16,6 @@ namespace BookCave.Models.InputModels
         public string BookTitle { get; set; }
         [Required (ErrorMessage = "An author is required")]
         public string Author { get; set; }
-        [Required (ErrorMessage = "Image is required")]
-        //[RegularExpression(@"\w(.png|.jpeg)\b", ErrorMessage="Image must end with  jpeg or png file")]
         public string Image { get; set; }
     }
 }
