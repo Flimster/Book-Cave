@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using BookCave.Models.ViewModels;
 
-namespace Book_Cave.Models.ViewModels
+namespace BookCave.Models.ViewModels
 {
     public class WishlistViewModel
     {
