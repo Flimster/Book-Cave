@@ -166,6 +166,28 @@
 	</div>
 	<div id="payment-shipping" class="col-lg-10 is-hidden main-box">
 		<h1>Payment methods</h1>
+		<div class="col-lg-12">
+			@foreach (var card in Model.PaymentMethods)
+			{
+				<div class="col-lg-2 address-box">
+					@card.Name
+					<br>
+					@card.CardNumber
+					<br>
+					@card.Cvc
+					<br>
+					@card.ExpirationDate.Month @Html.Raw("/") @card.ExpirationDate.Year
+				</div>
+			}
+			@if (Model.PaymentMethods.Count != 6)
+			{
+				<div class="col-lg-2">
+					<a asp-controller="User" asp-action="AddCard" class="btn btn-primary">
+						Add card
+					</a>
+				</div>
+			}
+		</div>
 		<h1>Billing addresss</h1>
 		<div class="col-lg-12">
 			@foreach (var billing in Model.BillingAddresses)
@@ -180,6 +202,14 @@
 					@billing.Zip
 					<br>
 					@billing.StreetAddress
+				</div>
+			}
+			@if (Model.BillingAddresses.Count != 6)
+			{
+				<div class="col-lg-2">
+					<a asp-controller="User" asp-action="AddBilling" class="btn btn-primary">
+						Add address
+					</a>
 				</div>
 			}
 		</div>
@@ -202,7 +232,9 @@
 			@if (Model.ShippingAddresses.Count != 6)
 			{
 				<div class="col-lg-2">
-					<a asp-controller="User" asp-action="AddShipping"></a>
+					<a asp-controller="User" asp-action="AddShipping" class="btn btn-primary">
+						Add address
+					</a>
 				</div>
 			}
 		</div>

@@ -71,7 +71,6 @@
     </div>
 
     <div class="shipping-stored col-sm-9">
-      
       @if(Model.ShippingAddresses != null)
       {
         foreach(var s in Model.ShippingAddresses)
@@ -83,14 +82,19 @@
             Zip: @s.Zip<br>
             City: @s.City<br> 
             Address: @s.StreetAddress<br>
+            <form asp-action="Shipping" asp-controller="CheckOut">
+              <button class="btn btn-primary btn-xs" value="@s.Id" name="id">Select</button>
+            </form>
           </div>
         </div>
+        
         }
       }
-      else
-      {
-
-      }
+      <div class="shipping-item col-sm-4">
+        <div class="shipping-item-info" id="add-item-container">
+          <i class="fas fa-plus" id="add-item"></i>
+        </div>
+      </div>
 
   </div>
 

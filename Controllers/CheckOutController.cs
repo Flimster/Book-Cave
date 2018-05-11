@@ -81,21 +81,19 @@ namespace BookCave.Controllers
 
         //if user selects a shipping address
         [HttpPost]
-        public IActionResult ShippingAsync(int addrId)
+        public IActionResult Shipping(int addrId)
         {
           var _claimsPrincipal = new ClaimsPrincipal(User);
           var id = _userManager.GetUserId(_claimsPrincipal);
+          
+          var shippingAddresses = _shippingServicee.GetByUserId(id);
+          var selectedShipping = _shippingServicee.GetByAddressId(addrId);
 
-          var shippingAddresses = _shippingServicee.GetList();
-          var billingAddresses = _billingService.GetList();
-          var cards = _cardService.GetByUserId(id);
           var model = new CheckoutViewModel()
           {
               CurrentStatus = 0,
               ShippingAddresses = shippingAddresses,
-              BillingAddresses = billingAddresses,
-              Cards = cards,
-              //SelectedShipping = shippingAddresses,
+              SelectedShipping = selectedShipping,
           };
           return View(model);
         }

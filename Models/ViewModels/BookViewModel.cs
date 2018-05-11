@@ -23,5 +23,6 @@ namespace BookCave.Models.ViewModels
       public int StockCount { get; set; }
       public int FormatId { get; set; }
       public double Discount { get; set; }
+      public List<ReviewViewModel> Reviews {get; set;}
     }
 }

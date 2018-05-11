@@ -70,6 +70,32 @@ namespace BookCave.Repositories
             return userReviews;
         }
 
+        public List<ReviewViewModel> GetByBookId(int bookId)
+        {
+            var bookReviews =
+                (from Rev in _db.Reviews
+                where Rev.BookId == bookId
+                select new ReviewViewModel
+                {
+                    Id = Rev.Id,
+                    UserName =
+                        (from Usr in _db.AspNetUsers
+                        where Usr.Id == Rev.AspNetUserId
+                        select Usr.Name).FirstOrDefault(),
+                    Book =
+                        (from Bok in _db.Books
+                        join RevB in _db.Reviews on Bok.Id equals bookId
+                        select Bok.Title).FirstOrDefault(),
+                    Text = Rev.Text,
+                    Rating = Rev.Rating,
+                    Date = Rev.Date,
+                    PositiveScore = Rev.PositiveScore,
+                    NegativeScore = Rev.NegativeScore,
+                    Edited = Rev.Edited
+                }).ToList();
+            return bookReviews;
+        }
+
         public void Write(Reviews review)
         {
             _db.Add(review);
