@@ -23,5 +23,8 @@ namespace BookCave.Data.EntityModels
         [ForeignKey("CardDetails")]
         public int CardDetailsId { get; set; }
         public virtual CardDetails CardDetails { get; set; } 
+        [ForeignKey("AspNetUsers")]
+        public string AspNetUserId { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
     }
 }

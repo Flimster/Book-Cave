@@ -11,8 +11,6 @@ namespace BookCave.Services
         private BookRepo _bookRepo;
         private OrderRepo _orderRepo;
         private ReviewRepo _reviewRepo;
-        private AuthorRepo _authorRepo;
-        private GenreRepo _genreRepo;
         private DataContext _db;
 
          public FeedbackService()
