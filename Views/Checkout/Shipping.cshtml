@@ -32,41 +32,17 @@
         }
         
         <tr><th>Billing address</th></tr>
-        @if(Model.SelectedBilling == null)
-        {
-          <tr><td>Country: </td></tr>
-          <tr><td>State: </td></tr>
-          <tr><td>Zip: </td></tr>
-          <tr><td>City: </td></tr>
-          <tr><td>Address: </td></tr>
-        }
-        else
-        {
-          <tr><td>Country: @Model.SelectedBilling.Country</td></tr>
-          <tr><td>State: @Model.SelectedBilling.StateOrProvince</td></tr>
-          <tr><td>Zip: @Model.SelectedBilling.Zip</td></tr>
-          <tr><td>City: @Model.SelectedBilling.City</td></tr>
-          <tr><td>Address: @Model.SelectedBilling.StreetAddress</td></tr>
-        }
+        <tr><td>Country: </td></tr>
+        <tr><td>State: </td></tr>
+        <tr><td>Zip: </td></tr>
+        <tr><td>City: </td></tr>
+        <tr><td>Address: </td></tr>
         
         <tr><th>Payment</th></tr>
-        @if(Model.SelectedCard == null)
-        {
-          <tr><td>Cardholder:</td></tr>
-          <tr><td>Card number: </td></tr>
-          <tr><td>Expiration date: </td></tr>
-        }
-        else
-        {
-          <tr><td>Cardholder: @Model.SelectedCard.Name</td></tr>
-          <tr><td>Card number: **** **** **** **** 
-          for(int i = 7; i < 12; i++)
-          {
-            Model.SelectedCard.Number[i]
-          }
-          </td></tr>
-          <tr><td>Expiration date: @Model.SelectedCard.ExpirationDate</td></tr>
-        }
+        <tr><td>Cardholder:</td></tr>
+        <tr><td>Card number: </td></tr>
+        <tr><td>Expiration date: </td></tr>
+        
       </table>
     </div>
 
@@ -83,7 +59,7 @@
             City: @s.City<br> 
             Address: @s.StreetAddress<br>
             <form asp-action="Shipping" asp-controller="CheckOut">
-              <button class="btn btn-primary btn-xs" value="@s.Id" name="id">Select</button>
+              <button class="btn btn-primary btn-xs" value="@s.Id" name="addrId">Select</button>
             </form>
           </div>
         </div>
@@ -103,7 +79,15 @@
       <a asp-action="Index"><button class="btn btn-primary">Back</button></a>
     </div>
     <div class="col-sm-2 col-sm-offset-8">
-      <a asp-action="Billing"><button class="btn btn-primary">Continue</button></a>
+      @if(Model.SelectedShipping == null)
+      {
+        <a><button class="btn btn-primary disabled">Continue</button></a>
+      }
+      else
+      {
+        <a asp-action="Billing"><button class="btn btn-primary">Continue</button></a>
+      }
+      
     </div>
   </div>
 </div>

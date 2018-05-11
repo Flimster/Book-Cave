@@ -39,3 +39,11 @@ table, .table th, .table td {
   height: 143px;
   width: 190px;
 }
+
+#confirm-purchase {
+  margin-top: 3px;
+}
+
+#price-container {
+  padding-top: 10px;
+}

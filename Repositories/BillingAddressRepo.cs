@@ -35,7 +35,7 @@ namespace BookCave.Repositories
             return billingAddresses;
         }
 
-        public List<BillingAddressViewModel> GetByAddressId(int addressId)
+        public BillingAddressViewModel GetByAddressId(int addressId)
         {
             var billingAddresses = 
                 (from UsBi in _db.UserBillingAddresses
@@ -52,7 +52,7 @@ namespace BookCave.Repositories
                     City = Bil.City,
                     Zip = Bil.Zip,
                     StreetAddress = Bil.StreetAddress
-                }).ToList();
+                }).SingleOrDefault();
             return billingAddresses;
         }
 

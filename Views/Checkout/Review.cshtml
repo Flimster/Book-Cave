@@ -1,5 +1,4 @@
-
-@model BookCave.Models.ViewModels.OrderViewModel
+@model BookCave.Models.ViewModels.CheckoutViewModel
 
 <head>
     <link rel="stylesheet" href="~/css/Checkout/ShipBillCard.css">
@@ -15,41 +14,45 @@
     <div class="table-container col-sm-3">
       <table class="table table-sm">
         <tr><th>Shipping address</th></tr>
-        <tr><td>Country: </td></tr>
-        <tr><td>State: </td></tr>
-        <tr><td>Zip: </td></tr>
-        <tr><td>Address: </td></tr>
-        <tr><td>Other: </td></tr>
+        <tr><td>Country: @Model.SelectedShipping.Country</td></tr>
+        <tr><td>State: @Model.SelectedShipping.StateOrProvince</td></tr>
+        <tr><td>Zip: @Model.SelectedShipping.Zip</td></tr>
+        <tr><td>City: @Model.SelectedShipping.City</td></tr>
+        <tr><td>Address: @Model.SelectedShipping.StreetAddress</td></tr>
 
         <th>Billing address</th></tr>
-        <tr><td>Country: </td></tr>
-        <tr><td>State: </td></tr>
-        <tr><td>Zip: </td></tr>
-        <tr><td>Address: </td></tr>
-        <tr><td>Other: </td></tr>
+        <tr><td>Country: @Model.SelectedBilling.Country</td></tr>
+        <tr><td>State: @Model.SelectedBilling.StateOrProvince</td></tr>
+        <tr><td>Zip: @Model.SelectedBilling.Zip</td></tr>
+        <tr><td>City: @Model.SelectedBilling.City</td></tr>
+        <tr><td>Address: @Model.SelectedBilling.StreetAddress</td></tr>
 
         <tr><th>Payment</th></tr>
-        <tr><td>Country: </td></tr>
-        <tr><td>State: </td></tr>
-        <tr><td>Zip: </td></tr>
-        <tr><td>Address: </td></tr>
-        <tr><td>Other: </td></tr>
+        <tr><td>Cardholder: @Model.SelectedCard.Name</td></tr>
+          <tr><td>Card number: 
+          @for(int i = 8; i < 12; i++)
+          {
+            @Model.SelectedCard.CardNumber[i];
+          }
+          </td></tr>
+          <tr><td>Expiration date: @Model.SelectedCard.ExpirationDate.Month/@Model.SelectedCard.ExpirationDate.Year</td></tr>
       </table>
     </div>
 
     <div class="order-overview col-sm-9">
-      <div class="col-sm-5">
-      <h4>Total Price: $@Model.TotalPrice</h4>
+      <div class="col-sm-5" id="price-container">
+      <h4 style="display: inline">$@(Model.Order.Price)</h4>
+      <h5 style="text-decoration: line-through;display: inline;">$@Model.Order.FullPrice</h5>
     </div>
     
     <div class="order-checkout col-sm-2 col-sm-offset-5">
-      <a asp-action="Confirm"><button class="btn btn-primary">Confirm</button></a>
+      <a asp-action="Confirm"><button class="btn btn-primary" id="confirm-purchase">Confirm</button></a>
     </div>
     <hr>
   </div>
 
   <div class="order col-sm-9">
-    @foreach(var book in Model.BookList)
+    @foreach(var book in Model.Order.BookList)
     {
       <div class="order-book col-sm-12">
 
@@ -59,20 +62,50 @@
 
         <div class="book-details col-sm-8">
           <a asp-controller="Book" asp-action="Index" asp-route-d=@book.Id><h4>@book.Title</h4></a>
-          @book.Author <br>
-          @book.Genre
+          @foreach(var author in book.Authors)
+          {
+            if(author == book.Authors[book.Authors.Count() - 1])
+              {
+                @author.Name @Html.Raw(". ")
+              }
+              else
+              {
+                @author.Name @Html.Raw(", ")
+              } 
+          }
+          <br>
+
+          @foreach(var genre in book.Genre)
+          {
+            if(genre == book.Genre[book.Genre.Count() - 1])
+              {
+                @genre.Name @Html.Raw(". ")
+              }
+              else
+              {
+                @genre.Name @Html.Raw(", ")
+              }
+          }
         </div>
 
         <div class="book-opt col-sm-2">
           <h4>$@book.Price</h4>
+          <h5>Quantity: @book.NumOfBooks</h5>
         </div>
       </div>  
     }
   </div>
 
-  <div class="col-sm-2 col-sm-offset-10">
-    <H4>Total Price: @Model.TotalPrice</H4>
-      <a asp-action="Confirm"><button class="btn btn-primary">Confirm</button></a>
+    <div class="col-sm-4 col-sm-offset-8">
+      <H5 style="text-decoration: line-through;">Price: $@Model.Order.FullPrice</H5>
+      <H4 style="color: red;">Price with discount: $@Model.Order.Price</H4>
+    </div>
+    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-2">
+      <a asp-action="Card" class="bottomleft"><button class="btn btn-primary">Back</button></a>
+    </div>
+    <div class="col-sm-2 col-sm-offset-8">
+        <a asp-action="Confirm"><button class="btn btn-primary">Confirm</button></a>
+    </div>
   </div>
-
 </div>
