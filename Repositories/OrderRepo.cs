@@ -20,14 +20,14 @@ namespace BookCave.Repositories
             _ordersBooks = new OrdersBooks();
         }
 
-        public List<OrderViewModel> GetList()
+        /*public List<OrderViewModel> GetList()
         {
             var order = (from O in _db.Orders
                         select new OrderViewModel
                         { 
                             Id = O.Id,
                             User = 
-                                (from UsOr in _db.UsersOrders
+                                (from UsOr in _db.Orders
                                 join Us in _db.AspNetUsers on UsOr.AspNetUserId equals Us.Id
                                 where UsOr.OrderId == O.Id
                                 select Us.Name).SingleOrDefault(),
@@ -69,7 +69,7 @@ namespace BookCave.Repositories
                             }).ToList();
 
             return order;
-        }
+        }*/
         public List<OrderViewModel> GetByUserId(string Id)
         {
             var orderByUserId = 
@@ -145,8 +145,8 @@ namespace BookCave.Repositories
             {
                 _ordersBooks.BookId = Books[i].Id;
                 _ordersBooks.OrderId = Order.Id;
+                _ordersBooks.Quantity = Books[i].NumOfBooks;
                 _orderBooksRepo.Write(_ordersBooks);
-                
             }
         }
 

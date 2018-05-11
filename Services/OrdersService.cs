@@ -16,15 +16,8 @@ namespace BookCave.Services
         public OrdersService()
         {
             _orderRepo = new OrderRepo();
-            //_orderBooksRepo = new OrderBooksRepo();
             _db = new DataContext();
         }
-
-        public List<OrderViewModel> GetList()
-        {
-            return _orderRepo.GetList();
-        }
-
         public List<OrderViewModel> GetByUserId(string Id)
         {
             return _orderRepo.GetByUserId(Id);
