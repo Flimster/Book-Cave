@@ -17,13 +17,13 @@ namespace BookCave.Repositories
 
         public List<Countries> GetList()
         {
-            var country = (from C in _db.Countries
-                        select new Countries
-                        {
-                            Id = C.Id,
-                            Name = C.Name
-                        }).ToList();
-            
+            var country = 
+                (from C in _db.Countries
+                select new Countries
+                {
+                    Id = C.Id,
+                    Name = C.Name
+                }).ToList();
             return country;
         }
 

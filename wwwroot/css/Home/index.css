@@ -39,6 +39,7 @@ hr {
 
 .error {
   background-color: white; 
+  padding: 15px;
 }
 
 .error-text {

@@ -16,13 +16,13 @@ namespace BookCave.Repositories
 
         public List<Formats> GetList()
         {
-            var format = (from F in _db.Formats
-                        select new Formats
-                        {
-                            Id = F.Id,
-                            Name = F.Name,
-                        }).ToList();
-            
+            var format = 
+                (from F in _db.Formats
+                select new Formats
+                {
+                    Id = F.Id,
+                    Name = F.Name,
+                }).ToList();     
             return format;
         }
 
