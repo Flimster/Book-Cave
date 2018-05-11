@@ -4,6 +4,7 @@ using BookCave.Data.EntityModels;
 using System.Linq;
 using BookCave.Models.ViewModels;
 
+
 namespace BookCave.Repositories
 {
     public class ShippingAddressRepo
@@ -18,20 +19,20 @@ namespace BookCave.Repositories
         public List<ShippingAddressViewModel> GetByUserId(string UserId)
         {
             var shippingAddresses = 
-                (from UsBi in _db.UserBillingAddresses
-                join Bil in _db.BillingAddress on UsBi.AddressId equals Bil.Id
+                (from UsBi in _db.UsersShippingAddresses
+                join Shi in _db.ShippingAddresses on UsBi.AddressId equals Shi.Id
                 where UsBi.AspNetUserId == UserId
                 select new ShippingAddressViewModel
                 {
-                    Id = Bil.Id,
+                    Id = Shi.Id,
                     Country =
                         (from C in _db.Countries
-                        where Bil.CountryId == C.Id
+                        where Shi.CountryId == C.Id
                         select C.Name).FirstOrDefault(),
-                    StateOrProvince = Bil.StateOrProvince,
-                    City = Bil.City,
-                    Zip = Bil.Zip,
-                    StreetAddress = Bil.StreetAddress
+                    StateOrProvince = Shi.StateOrProvince,
+                    City = Shi.City,
+                    Zip = Shi.Zip,
+                    StreetAddress = Shi.StreetAddress
                 }).ToList();
             return shippingAddresses;
         }
