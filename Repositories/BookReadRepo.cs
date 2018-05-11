@@ -1,24 +1,25 @@
-using BookCave.Data;
-using BookCave.Data.EntityModels;
 using System.Collections.Generic;
-using System.Linq;
-using BookCave.Repositories;
+using BookCave.Data;
 using BookCave.Models.ViewModels;
+using System.Linq;
+using BookCave.Data.EntityModels;
 
 namespace BookCave.Repositories
 {
-    public class BookRepo
+    public class BookReadRepo
     {
         private DataContext _db;
-        
-        public BookRepo()
+
+        public BookReadRepo()
         {
             _db = new DataContext();
         }
-        public List<BookViewModel> GetList()
+        public List<BookViewModel> GetByUserId(string userId)
         {
-            var Books = 
-                (from B in _db.Books
+            var readBooks =
+                (from UsRe in _db.ReadBooks
+                join B in _db.Books on UsRe.BookId equals B.Id
+                where UsRe.AspNetUserId == userId
                 select new BookViewModel
                 {
                     Id = B.Id,
@@ -62,18 +63,17 @@ namespace BookCave.Repositories
                             Name = Ge.Name
                         }).ToList()
                 }).ToList();
-            return Books;
+            return readBooks;
         }
-        public int Write(Books book)
+        public void Write(ReadBooks readBooks)
         {
-            _db.Add(book);
-            _db.SaveChanges();           
-            return book.Id;
+            _db.Add(readBooks);
+            _db.SaveChanges();
         }
 
-        public void Remove(Books book)
+        public void Remove(ReadBooks readBooks)
         {
-            _db.Remove(book);
+            _db.Remove(readBooks);
             _db.SaveChanges();
         }
     }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BookCave.Models.ViewModels;
 using BookCave.Data;
 using System.Linq;
+using BookCave.Data.EntityModels;
 
 namespace BookCave.Repositories
 {
@@ -70,6 +71,18 @@ namespace BookCave.Repositories
                             }).ToList()
                 }).ToList();
             return Whishlist;
+        }
+
+        public void Write(UsersWishlists usersWishlists)
+        {
+            _db.Add(usersWishlists);
+            _db.SaveChanges();
+        }
+
+        public void Remove(UsersWishlists usersWishlists)
+        {
+            _db.Remove(usersWishlists);
+            _db.SaveChanges();
         }
     }
 }
