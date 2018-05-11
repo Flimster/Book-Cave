@@ -35,8 +35,9 @@ namespace BookCave.Repositories
                     City = Bil.City,
                     Zip = Bil.Zip,
                     StreetAddress = Bil.StreetAddress
-                }).ToList();
-            return billingAddresses;
+                } ).ToList();
+                
+            return billingAddresses.OrderBy(q => q.Id).ToList();
         }
 
         public BillingAddressViewModel GetByAddressId(int addressId)
