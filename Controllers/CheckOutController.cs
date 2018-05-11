@@ -96,6 +96,11 @@ namespace BookCave.Controllers
 
             _model.BillingAddresses = _billingService.GetByUserId(id);
 
+            if(_model.SelectedShipping == null)
+            {
+                return RedirectToAction("shipping");
+            }
+
           return View(_model);
         }
 
@@ -107,6 +112,11 @@ namespace BookCave.Controllers
             var id = _userManager.GetUserId(_claimsPrincipal);
 
             _model.SelectedBilling = _billingService.GetByAddressId(addrId);
+
+            if(_model.SelectedShipping == null)
+            {
+                return RedirectToAction("shipping");
+            }
             
             return View(_model);
         }
@@ -120,6 +130,15 @@ namespace BookCave.Controllers
 
             _model.Cards = _cardService.GetByUserId(id);
 
+            if(_model.SelectedShipping == null)
+            {
+                return RedirectToAction("shipping");
+            }
+            else if(_model.SelectedBilling == null)
+            {
+                return RedirectToAction("Billing");
+            }
+
             return View(_model);
         }
 
@@ -132,6 +151,15 @@ namespace BookCave.Controllers
 
             _model.SelectedCard = _cardService.GetByCardId(cardId);
 
+            if(_model.SelectedShipping == null)
+            {
+                return RedirectToAction("shipping");
+            }
+            else if(_model.SelectedBilling == null)
+            {
+                return RedirectToAction("Billing");
+            }
+
             return View(_model);
         }
 
@@ -140,6 +168,18 @@ namespace BookCave.Controllers
         {
             _model.Order = _checkoutService.GetCartViewModel();
             
+            if(_model.SelectedShipping == null)
+            {
+                return RedirectToAction("shipping");
+            }
+            else if(_model.SelectedBilling == null)
+            {
+                return RedirectToAction("Billing");
+            }
+            else if(_model.SelectedCard == null)
+            {
+                return RedirectToAction("Card");
+            }
 
             return View(_model);
         }
@@ -150,6 +190,19 @@ namespace BookCave.Controllers
             var user = await _userManager.GetUserAsync(User);
             _orderService.WriteOrdersBooks(user.Id, _model);
             _cookieService.ClearCart();
+
+            if(_model.SelectedShipping == null)
+            {
+                return RedirectToAction("shipping");
+            }
+            else if(_model.SelectedBilling == null)
+            {
+                return RedirectToAction("Billing");
+            }
+            else if(_model.SelectedCard == null)
+            {
+                return RedirectToAction("Card");
+            }
 
             return RedirectToAction("Confirmed", user.Name);
         }

@@ -10,8 +10,6 @@ namespace BookCave.Repositories
     public class OrderRepo
     {
         private DataContext _db;
-        private UserOrdersRepo _userOrdersRepo;
-        private UsersOrders _userOrders;
         private OrderBooksRepo _orderBooksRepo;
         private OrdersBooks _ordersBooks;
 
@@ -19,19 +17,17 @@ namespace BookCave.Repositories
         {
             _db = new DataContext();
             _orderBooksRepo = new OrderBooksRepo();
-            _userOrdersRepo = new UserOrdersRepo();
-            _userOrders = new UsersOrders();
             _ordersBooks = new OrdersBooks();
         }
 
-        public List<OrderViewModel> GetList()
+        /*public List<OrderViewModel> GetList()
         {
             var order = (from O in _db.Orders
                         select new OrderViewModel
                         { 
                             Id = O.Id,
                             User = 
-                                (from UsOr in _db.UsersOrders
+                                (from UsOr in _db.Orders
                                 join Us in _db.AspNetUsers on UsOr.AspNetUserId equals Us.Id
                                 where UsOr.OrderId == O.Id
                                 select Us.Name).SingleOrDefault(),
@@ -73,28 +69,26 @@ namespace BookCave.Repositories
                             }).ToList();
 
             return order;
-        }
+        }*/
         public List<OrderViewModel> GetByUserId(string Id)
         {
             var orderByUserId = 
-                    (from UsOr in _db.UsersOrders
-                    join Ord in _db.Orders on UsOr.OrderId equals Ord.Id
-                    where UsOr.AspNetUserId == Id 
+                    (from Or in _db.Orders
+                    where Or.AspNetUserId == Id 
                     select new OrderViewModel
                     { 
-                        Id = Ord.Id,
+                        Id = Or.Id,
                         User = 
-                            (from UsOr in _db.UsersOrders
-                            join Usr in _db.AspNetUsers on UsOr.AspNetUserId equals Usr.Id
-                            where UsOr.AspNetUserId == Id
-                            select Usr.Name).FirstOrDefault(),
-                        Date = Ord.Date,
-                        Status = Ord.Status,
-                        Price = Ord.Price,
+                            (from Us in _db.AspNetUsers
+                            where Or.AspNetUserId == Id
+                            select Us.Name).FirstOrDefault(),
+                        Date = Or.Date,
+                        Status = Or.Status,
+                        Price = Or.Price,
                         BookList = 
                                 (from OrBo in _db.OrdersBooks
                                 join B in _db.Books on OrBo.BookId equals B.Id
-                                where OrBo.OrderId == Ord.Id
+                                where OrBo.OrderId == Or.Id
                                 select new BookViewModel
                                 {
                                     Id = B.Id,
@@ -149,17 +143,11 @@ namespace BookCave.Repositories
 
             for(int i = 0; i < Books.Count; i++)
             {
-                for(int j = 0; j < Books[i].NumOfBooks; j++)
-                {
-                    _ordersBooks.BookId = Books[i].Id;
-                    _ordersBooks.OrderId = Order.Id;
-                    _orderBooksRepo.Write(_ordersBooks);
-                }
-                
+                _ordersBooks.BookId = Books[i].Id;
+                _ordersBooks.OrderId = Order.Id;
+                _ordersBooks.Quantity = Books[i].NumOfBooks;
+                _orderBooksRepo.Write(_ordersBooks);
             }
-            _userOrders.OrderId = Order.Id;
-            _userOrders.AspNetUserId = UserId;
-            _userOrdersRepo.Write(_userOrders);
         }
 
         public void Remove(Orders Order)

@@ -12,9 +12,10 @@ using System;
 namespace BookCave.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    partial class AuthenticationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180511204925_3NF_Conversion14")]
+    partial class _3NF_Conversion14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,8 +283,6 @@ namespace BookCave.Migrations
 
                     b.Property<int>("OrderId");
 
-                    b.Property<int>("Quantity");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
@@ -383,6 +382,24 @@ namespace BookCave.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("ShippingAddresses");
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.UsersOrders", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AspNetUserId");
+
+                    b.Property<int>("OrderId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AspNetUserId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("UsersOrders");
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UsersWishlists", b =>
@@ -751,6 +768,18 @@ namespace BookCave.Migrations
                     b.HasOne("BookCave.Data.EntityModels.Countries", "Countries")
                         .WithMany()
                         .HasForeignKey("CountryId");
+                });
+
+            modelBuilder.Entity("BookCave.Data.EntityModels.UsersOrders", b =>
+                {
+                    b.HasOne("BookCave.Data.EntityModels.AspNetUsers", "AspNetUsers")
+                        .WithMany()
+                        .HasForeignKey("AspNetUserId");
+
+                    b.HasOne("BookCave.Data.EntityModels.Orders", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BookCave.Data.EntityModels.UsersWishlists", b =>
