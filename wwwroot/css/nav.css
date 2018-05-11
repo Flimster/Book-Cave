@@ -15,7 +15,7 @@ body {
 }
 
 .dropdown-menu-width-override {
-  min-width: 710px;
+  min-width: 400px;
 }
 
 .navbar-fixed-top {
@@ -257,7 +257,7 @@ i.fas {
   text-decoration: none;
 }
 
-#discount-link, #top-10-link, #mega-menu-link {
+#discount-link, #top-10-link, #catalogue-link, #mega-menu-link {
   padding-top: 13px;
   padding-bottom: 1px;
   margin: 0px;
@@ -306,6 +306,7 @@ i.fas {
   color: rgb(197, 197, 197);
   margin-top: 2px;
   text-decoration: none;
+  cursor: default;
 }
 
 .created-by-ul {

@@ -39,6 +39,7 @@ namespace BookCave.Controllers
           else
           {
             var book = _bookService.GetBook(id);
+            book.Reviews = _reviewsService.GetByBookId(id);
             return View(book);
           }
 

@@ -53,11 +53,40 @@ hr {
   width: 100%
 }
 
-div .book-all-reviews {
-  background-color: white;
-  margin-top: 10px;
+.review-header {
+  padding-left: 10px;
+  padding-right: 15px;
+}
+
+.btn-addReview {
+  margin-top: 15px;
 }
 
 div .book-review {
-  margin: 10px auto;
+  margin: 10px 0px;;
+  background-color: white;
+  
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.review-section {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.vote-btn {
+  margin-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.review-userName {
+  margin-top: 10px;
+  padding-left: 0px;
+}
+
+.review-score {
+  margin-top: 10px;
 }

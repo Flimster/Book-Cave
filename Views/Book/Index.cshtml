@@ -4,7 +4,6 @@
 <head>
   <link rel="stylesheet" href="~/css/Book/BookDetails.css">
 </head>
-
 <div class="book-item col-sm-8 col-sm-offset-1">
   
   <div class="book-img col-sm-4">
@@ -82,7 +81,7 @@
       <h3 class="price">@Model.Price</h3>
     }
 
-    <label for="book-qty">Quntity:</label>
+    <label for="book-qty">Quantity:</label>
     <input class="form-control input-sm" type="number" id="book-qty" value="1">
 
     <hr>
@@ -111,37 +110,43 @@
     <li>Publisher: @Model.Publisher</li>
   </ul>
 </div>
-
-<div class="book-all-reviews col-sm-10 col-sm-offset-1">
+<div class="review-section container col-sm-10 col-sm-offset-1">
+  <div class="row review-header">
     <div class="col-sm-10">
       <h3>Reviews</h3>
     </div>
     <div class="col-sm-2">
-      <button class="btn">Write review</button>
+      <button class="btn-addReview btn btn-default">Write review</button>
     </div>
+  </div>
 
-    <div class="book-review col-sm-12">
+  @foreach (var review in Model.Reviews)
+  {
+    <div class="book-review row">
+      @{int score = review.PositiveScore - review.NegativeScore;}
+      <div class="review-userName col-sm-8">
+        <strong>@review.UserName </strong>
+          @for(int i = 0; i < (int)review.Rating; i++)
+          {
+            <i class="fas fa-star"></i>
+          }
+      </div>
+
+      <div class="review-score col-sm-2">
+        <span>Review score: @score</span>
+      </div>
+
+      <div class="vote-btn col-sm-1">
+        <button class="btn btn-xs btn-success" type="button">Upvote</button>
+      </div>
+
+      <div class="vote-btn col-sm-1">
+        <button class="btn btn-xs btn-danger" type="button">Upvote</button>
+      </div>
       <hr>
       <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro quaerat placeat eius, corporis nesciunt magnam quod. Magnam repudiandae saepe eveniet libero beatae voluptate minima magni. Corrupti neque animi repellendus error?
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi asperiores culpa possimus dolores harum nulla natus repudiandae, error nisi! Aspernatur numquam iste sed non quis enim vitae rerum quia labore!
+        @review.Text
       </div>
     </div>
-
-    <div class="book-review col-sm-12">
-      <hr>
-      <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro quaerat placeat eius, corporis nesciunt magnam quod. Magnam repudiandae saepe eveniet libero beatae voluptate minima magni. Corrupti neque animi repellendus error?
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi asperiores culpa possimus dolores harum nulla natus repudiandae, error nisi! Aspernatur numquam iste sed non quis enim vitae rerum quia labore!
-      </div>
-    </div>
-    @foreach (var review in Model.Reviews)
-    {
-    	<div class="book-review col-sm-12">
-      		<hr>
-      		<div>
-        		@review.Text
-      		</div>
-    </div>
-    }
+  }
 </div>
